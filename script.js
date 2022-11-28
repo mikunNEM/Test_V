@@ -456,8 +456,8 @@ function handleSSS() {
      const div = mosaicInfo.divisibility; // 可分性
   
       
-     var enc = 0; 
-     if (enc === 0){                                　　　　　//メッセージが平文の場合
+     const enc = "0"; 
+     if (enc === "0"){                                　　　　　//メッセージが平文の場合
     　 const tx = symbol.TransferTransaction.create(        // トランザクションを生成
        symbol.Deadline.create(EPOCH),
        symbol.Address.createFromRawAddress(addr),
@@ -472,7 +472,7 @@ function handleSSS() {
        symbol.UInt64.fromUint(20000)          // MaxFee 設定 (0.02 XYM)
       )
      }else                               
-        if (enc === 1){                       //メッセージが暗号の場合
+        if (enc === "1"){                       //メッセージが暗号の場合
           const tx = symbol.TransferTransaction.create(        // トランザクションを生成
           symbol.Deadline.create(EPOCH),
           symbol.Address.createFromRawAddress(addr),
@@ -486,8 +486,8 @@ function handleSSS() {
            NET_TYPE,
            symbol.UInt64.fromUint(20000)          // MaxFee 設定 (0.02 XYM)
           )
-                      
-     }
+                        
+      }
     
     
    window.SSS.setTransaction(tx);               // SSSにトランザクションを登録        
