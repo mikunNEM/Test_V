@@ -456,7 +456,9 @@ function handleSSS() {
      const div = mosaicInfo.divisibility; // 可分性
   
       
-     const enc = "0"; 
+     const enc = "0";
+     
+      console.log("enc=",enc);
      if (enc === "0"){                                　　　　　//メッセージが平文の場合
     　 const tx = symbol.TransferTransaction.create(        // トランザクションを生成
        symbol.Deadline.create(EPOCH),
