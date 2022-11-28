@@ -486,7 +486,7 @@ function handleSSS() {
            symbol.encryptMessage.create(message),
            NET_TYPE,
            symbol.UInt64.fromUint(20000)          // MaxFee 設定 (0.02 XYM)
-               consolo.log("　ここだよ ");
+               console.log("　ここだよ ");
           )
                         
       }
