@@ -458,7 +458,6 @@ function handleSSS() {
       
      const enc = "0";
      
-      console.log("enc=",enc);
      if (enc === "0"){                                　　　　　//メッセージが平文の場合
     　 const tx = symbol.TransferTransaction.create(        // トランザクションを生成
        symbol.Deadline.create(EPOCH),
@@ -487,6 +486,7 @@ function handleSSS() {
            symbol.encryptMessage.create(message),
            NET_TYPE,
            symbol.UInt64.fromUint(20000)          // MaxFee 設定 (0.02 XYM)
+               consolo.log("　ここだよ ");
           )
                         
       }
