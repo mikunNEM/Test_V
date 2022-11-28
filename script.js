@@ -455,20 +455,41 @@ function handleSSS() {
      mosaicInfo = await mosaicHttp.getMosaic(new symbol.MosaicId(mosaic_ID)).toPromise();// 可分性の情報を取得する 
      const div = mosaicInfo.divisibility; // 可分性
   
-    const tx = symbol.TransferTransaction.create(        // トランザクションを生成
-     symbol.Deadline.create(EPOCH),
-     symbol.Address.createFromRawAddress(addr),
-     [
-       new symbol.Mosaic(
-         new symbol.MosaicId(mosaic_ID),
-         symbol.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
-       )
-     ],
-     symbol.PlainMessage.create(message),
-     NET_TYPE,
-     symbol.UInt64.fromUint(20000)
-    )
       
+     var enc = 0; 
+     if (enc === 0){                                　　　　　//メッセージが平文の場合
+    　 const tx = symbol.TransferTransaction.create(        // トランザクションを生成
+       symbol.Deadline.create(EPOCH),
+       symbol.Address.createFromRawAddress(addr),
+       [
+           new symbol.Mosaic(
+           new symbol.MosaicId(mosaic_ID),
+           symbol.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
+         )
+       ],
+       symbol.PlainMessage.create(message),
+       NET_TYPE,
+       symbol.UInt64.fromUint(20000)          // MaxFee 設定 (0.02 XYM)
+      )
+     }else                               
+        if (enc === 1){                       //メッセージが暗号の場合
+          const tx = symbol.TransferTransaction.create(        // トランザクションを生成
+          symbol.Deadline.create(EPOCH),
+          symbol.Address.createFromRawAddress(addr),
+          [  
+              new symbol.Mosaic(
+              new symbol.MosaicId(mosaic_ID),
+              symbol.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
+            )
+           ],
+           symbol.encryptMessage.create(message),
+           NET_TYPE,
+           symbol.UInt64.fromUint(20000)          // MaxFee 設定 (0.02 XYM)
+          )
+                      
+     }
+    
+    
    window.SSS.setTransaction(tx);               // SSSにトランザクションを登録        
    window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
     console.log('signedTx', signedTx);
