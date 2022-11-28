@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');  /* フォントのインポート */
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');   /* フォントのインポート */
+
+body {
+   /* background: rgb(190, 34, 211); */
+  background-image:url("https://data.comsa.io/user/b32ed69c-7a42-490d-83f1-3494875a69cc/asset/4dea6d31-3b1d-4f3f-b4a7-405b34c5014a.png");
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.SSS_link {
+        background: rgb(255, 255, 255,0.8);
+        font-size: 20px;
+        padding: 0px 50px 0px 50px;
+        text-align: right;
+}
+
+/* ポップアップ */
+.popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: .6s;
+}
+.popup.is-show {
+  opacity: 1;
+  visibility: visible;
+}
+.popup-inner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 80%;
+  max-width: 600px;
+  padding: 50px;
+  background-color: #fff;
+  z-index: 2;
+}
+.popup-inner img {
+  width: 100%;
+}
+.bg-black {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.8);
+  z-index: 1;
+  cursor: pointer;
+}
+/********************************************/
+
+h1 {
+  color:rgb(205, 0, 255);
+  font-size: 4rem;
+  font-weight: bold;
+  text-align: right;
+  margin: 50px 80px 0px auto;
+  font-family: 'Sacramento', cursive;
+}
+
+h2 {
+  color:rgb(205, 0, 255);
+  font-size: 3rem;
+  font-family: 'Itim', cursive;
+  margin: 10px 0px 30px 30px;
+}
+
+h3 {
+  font-size: 40px;
+  font-family: 'Itim', cursive;
+  /*display: flex;
+  justify-content: flex-end;*/
+  text-align: right;
+  margin: 0px 80px 10px auto;
+}
+
+.left {
+  width: 700px;
+  position: fixed;
+}
+
+.right {
+  overflow: auto;
+}
+
+.account-card {
+  background: rgb(255, 255, 255,0.8);
+  border-radius: 16px;
+  margin: 0px 16px 16px 16px;
+  padding: 18px;
+}
+
+.sender-card {
+  background: rgb(255, 255, 255,0.8);
+  border-radius: 16px;
+  margin: 16px;
+  padding: 36px;
+  color: #2f4f4f;
+}
+
+#button-haichi{
+  text-align: right;
+} 
+
+.button-sign{
+  font-size: 20px;  
+  width:100px;height:50px; 
+  background:rgb(205, 0, 255); 
+  color:rgb(255,255,255); 
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.tx-card {
+  background: rgb(255, 255, 255,0.8);
+  border-radius: 16px;
+  width: 600px;
+  margin-left: 750px;
+  padding: 32px;
+}
+
+.textfiled-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px;
+}
+
+.textfiled {
+  width: 400px;                     // 左の白い背景の大きさ
+}
+
+#wallet-addr {
+  font-size: 24px;                 // ウォレットアドレスの文字サイズ
+}
+
+#wallet-xym {
+  text-align: right;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+#wallet-transactions{
+  margin: 30px;
+}
+
+.container {
+  font-size: 24px;
+  margin: 20px 20px 20px 0px;
+}
+
+.wrapper {
+ /* display: flex;
+  justify-content: space-between;*/
+  margin: 50px 50px auto 50px;
+}
