@@ -483,7 +483,7 @@ function handleSSS() {
               symbol.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
             )
            ],
-           symbol.encryptMessage.create(message),
+           symbol.encryptedMessage.create(message),
            NET_TYPE,
            symbol.UInt64.fromUint(20000),          // MaxFee 設定 (0.02 XYM)
                console.log("　ここだよ "),
