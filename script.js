@@ -451,6 +451,9 @@ function handleSSS() {
             transactionHttp = transactionHttp_T;
         }
      
+     
+     
+     
  (async() => {  
      mosaicInfo = await mosaicHttp.getMosaic(new symbol.MosaicId(mosaic_ID)).toPromise();// 可分性の情報を取得する 
      const div = mosaicInfo.divisibility; // 可分性
@@ -483,7 +486,7 @@ function handleSSS() {
               symbol.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
             )
            ],
-           symbol.encryptedMessage.create(message),
+           symbol.encryptedMessage.create(message,symbol.Address.createFromRawAddress(addr),),  ////////////////////////////////////////////////////////////
            NET_TYPE,
            symbol.UInt64.fromUint(20000),          // MaxFee 設定 (0.02 XYM)
                console.log("　ここだよ "),
