@@ -486,7 +486,7 @@ function handleSSS() {
         if (enc === "1"){                       //メッセージが暗号の場合
              
              const pubkey = window.SSS.activePublicKey;
-             window.SSS.setEncriptionMessage(message, pubkey);
+             window.SSS.setMessage(message, pubkey);
              window.SSS.requestSignEncription().then((message) => {
                console.log({ message });
              });   
