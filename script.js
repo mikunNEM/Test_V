@@ -491,7 +491,7 @@ function handleSSS() {
               symbol.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
             )
            ],
-           symbol.encryptedMessage.create(message),  ////////////////////////////////////////////////////////////
+           symbol.PlainMessage.create(message),  ////////////////////////////////////////////////////////////
            NET_TYPE,
            symbol.UInt64.fromUint(20000),          // MaxFee 設定 (0.02 XYM)             
           )
