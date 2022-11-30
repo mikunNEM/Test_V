@@ -460,11 +460,11 @@ function handleSSS() {
      const div = mosaicInfo.divisibility; // 可分性
   
       
- /*    const enc = "1";
+   const enc = "1";
      
      if (enc === "0"){                                　　　　　//メッセージが平文の場合
           
-         console.log("平文だよ"); */
+         console.log("平文だよ");
     　 const tx = symbol.TransferTransaction.create(        // トランザクションを生成
        symbol.Deadline.create(EPOCH),
        symbol.Address.createFromRawAddress(addr),
@@ -479,24 +479,24 @@ function handleSSS() {
        symbol.UInt64.fromUint(20000)          // MaxFee 設定 (0.02 XYM)
       )
       console.log("tx=",tx);
-  /*    
+    
      }else                               
         if (enc === "1"){                       //メッセージが暗号の場合
           const tx = symbol.TransferTransaction.create(        // トランザクションを生成
-          symbol.Deadline.create(EPOCH),
-          symbol.Address.createFromRawAddress(addr),
-          [  
-            new symbol.Mosaic(
-              new symbol.MosaicId(mosaic_ID),
-              symbol.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
-            )
-           ],
-           symbol.PlainMessage.create(message),  ////////////////////////////////////////////////////////////
-           NET_TYPE,
-           symbol.UInt64.fromUint(20000),          // MaxFee 設定 (0.02 XYM)             
-          )
-          console.log("暗号だよ tx=",tx);                        
-    } */
+       symbol.Deadline.create(EPOCH),
+       symbol.Address.createFromRawAddress(addr),
+       [
+         new symbol.Mosaic(
+           new symbol.MosaicId(mosaic_ID),
+           symbol.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
+         )
+       ],
+       symbol.PlainMessage.create(message),
+       NET_TYPE,
+       symbol.UInt64.fromUint(20000)          // MaxFee 設定 (0.02 XYM)
+      )
+      console.log("暗号だよ。tx=",tx);                      
+    }
   
       window.SSS.setTransaction(tx);               // SSSにトランザクションを登録        
       window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
