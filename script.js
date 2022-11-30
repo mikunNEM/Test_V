@@ -463,6 +463,8 @@ function handleSSS() {
      const enc = "0";
      
      if (enc === "0"){                                　　　　　//メッセージが平文の場合
+          
+         console.log("平文だよ"); 
     　 const tx = symbol.TransferTransaction.create(        // トランザクションを生成
        symbol.Deadline.create(EPOCH),
        symbol.Address.createFromRawAddress(addr),
@@ -490,7 +492,7 @@ function handleSSS() {
            symbol.encryptedMessage.create(message),  ////////////////////////////////////////////////////////////
            NET_TYPE,
            symbol.UInt64.fromUint(20000),          // MaxFee 設定 (0.02 XYM)
-               console.log("　ここだよ "),
+               console.log("暗号だよ "),
           )
                         
       }
