@@ -452,7 +452,7 @@ function handleSSS() {
         }
      
      console.log("transactionHttp=",transactionHttp);
-     consolo.log("accountHttp=",accountHttp);
+     console.log("accountHttp=",accountHttp);
      
      
  (async() => {  
