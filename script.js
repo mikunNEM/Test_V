@@ -478,6 +478,8 @@ function handleSSS() {
        NET_TYPE,
        symbol.UInt64.fromUint(20000)          // MaxFee 設定 (0.02 XYM)
       )
+      console.log("tx=",tx);
+      
      }else                               
         if (enc === "1"){                       //メッセージが暗号の場合
           const tx = symbol.TransferTransaction.create(        // トランザクションを生成
