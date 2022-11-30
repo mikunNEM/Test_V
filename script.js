@@ -481,7 +481,7 @@ function handleSSS() {
           window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
           console.log('signedTx', signedTx);
           transactionHttp.announce(signedTx);
-           
+          })
      }else
         if (enc === "1"){                       //メッセージが暗号の場合
           const tx = symbol.TransferTransaction.create(        // トランザクションを生成
@@ -503,9 +503,9 @@ function handleSSS() {
       window.SSS.setTransaction(tx);               // SSSにトランザクションを登録        
       window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
     console.log('signedTx', signedTx);
-    transactionHttp.announce(signedTx);
-    }    
-   })      
+    transactionHttp.announce(signedTx);    
+   })
+  }
  })(); // async()  
     
 }
