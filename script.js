@@ -1,3 +1,4 @@
+import { getActiveAccountToken } from "sss-module"; // SSS-module 
 const symbol = require('/node_modules/symbol-sdk');
 
 //const GENERATION_HASH = '57F7DA205008026C776CB6AED843393F04CD458E0AA2D9F1D5F31A402072B2D6';
@@ -486,7 +487,7 @@ function handleSSS() {
               symbol.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
             )
            ],
-           symbol.encryptedMessage.create(message,symbol.Address.createFromRawAddress(addr),),  ////////////////////////////////////////////////////////////
+           symbol.encryptedMessage.create(message),  ////////////////////////////////////////////////////////////
            NET_TYPE,
            symbol.UInt64.fromUint(20000),          // MaxFee 設定 (0.02 XYM)
                console.log("　ここだよ "),
