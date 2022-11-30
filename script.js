@@ -484,6 +484,13 @@ function handleSSS() {
           }) 
      }else
         if (enc === "1"){                       //メッセージが暗号の場合
+             
+             const pubkey = window.SSS.activePublicKey;
+             window.SSS.setEncriptionMessage(message, pubkey);
+             window.SSS.requestSignEncription().then((message) => {
+               console.log({ message });
+             });   
+             
           const tx = symbol.TransferTransaction.create(        // トランザクションを生成
           symbol.Deadline.create(EPOCH),
           symbol.Address.createFromRawAddress(addr),
@@ -498,13 +505,7 @@ function handleSSS() {
           symbol.UInt64.fromUint(20000)          // MaxFee 設定 (0.02 XYM)    
          )
              console.log("暗号だよ。tx=",tx); 
-             window.SSS.setTransaction(tx);               // SSSにトランザクションを登録
-             const pubkey =  "CEAAE51C6D294AEFC1A3C84FEFE9D60B0CE815DBC66567211A41B7DE2DC164B8"
-             window.SSS.setEncriptionMessage(message, pubkey);
-             window.SSS.requestSignEncription().then((msg) => {
-               console.log({ msg });
-             });
-             
+             window.SSS.setTransaction(tx);               // SSSにトランザクションを登録           
              window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
              console.log('signedTx', signedTx);
              transactionHttp.announce(signedTx);    
