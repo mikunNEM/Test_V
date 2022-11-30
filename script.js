@@ -460,14 +460,14 @@ function handleSSS() {
      const div = mosaicInfo.divisibility; // 可分性
   
       
-     const enc = "1";
+     const enc = "0";
      
      if (enc === "0"){                                　　　　　//メッセージが平文の場合
     　 const tx = symbol.TransferTransaction.create(        // トランザクションを生成
        symbol.Deadline.create(EPOCH),
        symbol.Address.createFromRawAddress(addr),
        [
-           new symbol.Mosaic(
+         new symbol.Mosaic(
            new symbol.MosaicId(mosaic_ID),
            symbol.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
          )
@@ -482,7 +482,7 @@ function handleSSS() {
           symbol.Deadline.create(EPOCH),
           symbol.Address.createFromRawAddress(addr),
           [  
-              new symbol.Mosaic(
+            new symbol.Mosaic(
               new symbol.MosaicId(mosaic_ID),
               symbol.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
             )
