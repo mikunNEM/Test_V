@@ -462,7 +462,7 @@ function handleSSS() {
       
      const enc = "0";
      
-     if (enc === "0"){                                　　　　　//メッセージが平文の場合
+     if (enc === "1"){                                　　　　　//メッセージが平文の場合
           
          console.log("平文だよ"); 
     　 const tx = symbol.TransferTransaction.create(        // トランザクションを生成
@@ -496,11 +496,10 @@ function handleSSS() {
            symbol.UInt64.fromUint(20000),          // MaxFee 設定 (0.02 XYM)             
           )
           console.log("暗号だよ ");                        
-      }
-    
-    
-   window.SSS.setTransaction(tx);               // SSSにトランザクションを登録        
-   window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
+    }
+  
+      window.SSS.setTransaction(tx);               // SSSにトランザクションを登録        
+      window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
     console.log('signedTx', signedTx);
     transactionHttp.announce(signedTx);
         
