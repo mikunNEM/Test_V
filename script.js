@@ -1,4 +1,3 @@
-import { getActiveAccountToken } from "sss-module"; // SSS-module 
 const symbol = require('/node_modules/symbol-sdk');
 
 //const GENERATION_HASH = '57F7DA205008026C776CB6AED843393F04CD458E0AA2D9F1D5F31A402072B2D6';
