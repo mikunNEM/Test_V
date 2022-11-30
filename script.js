@@ -495,7 +495,7 @@ function handleSSS() {
        symbol.UInt64.fromUint(20000)          // MaxFee 設定 (0.02 XYM)
       )
       console.log("暗号だよ。tx=",tx);
-    }
+    
       
       window.SSS.setTransaction(tx);               // SSSにトランザクションを登録        
       window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
