@@ -460,9 +460,9 @@ function handleSSS() {
      const div = mosaicInfo.divisibility; // 可分性
   
       
-     const enc = "0";
+     const enc = "1";
      
-     if (enc === "1"){                                　　　　　//メッセージが平文の場合
+     if (enc === "0"){                                　　　　　//メッセージが平文の場合
           
          console.log("平文だよ"); 
     　 const tx = symbol.TransferTransaction.create(        // トランザクションを生成
