@@ -459,8 +459,9 @@ function handleSSS() {
  (async() => {  
      mosaicInfo = await mosaicHttp.getMosaic(new symbol.MosaicId(mosaic_ID)).toPromise();// 可分性の情報を取得する 
      const div = mosaicInfo.divisibility; // 可分性
-
-     accountInfo = await accountHttp.getAccountInfo(addr).toPromise();  //　送信先アドレスの公開鍵を取得する
+　　　
+     alice = symbol.Address.createFromRawAddress(addr);                           //アドレスクラスの生成
+     accountInfo = await accountHttp.getAccountInfo(alice.address).toPromise();  //　送信先アドレスの公開鍵を取得する
      console.log("pubkey=",accountInfo.publicKey); 
      
      if (enc === "0"){                      //////////////// メッセージが平文の場合 ////////////////////////////////////
