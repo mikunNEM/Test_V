@@ -488,6 +488,7 @@ function handleSSS() {
              const pubkey = "9F79DA25513FBB55DC646EA3C2C958335D9905608572ED7DEBB514932FB34586";
              window.SSS.setMessage(message, pubkey);
              window.SSS.requestSignEncription().then((msg) => {
+                 setTimeout(() => {
                    console.log({ msg });
                    const tx = symbol.TransferTransaction.create(        // トランザクションを生成
                    symbol.Deadline.create(EPOCH),
@@ -507,7 +508,8 @@ function handleSSS() {
                    window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求                   
                    console.log('signedTx', signedTx);
                    transactionHttp.announce(signedTx);    
-                   }) 
+                   })
+                 }, 1000)      
              });               
       }     
   })(); // async()  
