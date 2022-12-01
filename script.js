@@ -511,7 +511,7 @@ function handleSSS() {
              console.log('signedTx', signedTx);
              transactionHttp.announce(signedTx);    
              })
-       },5000)   
+       },8000)   
       }     
   })(); // async()  
     
