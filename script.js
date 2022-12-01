@@ -96,7 +96,8 @@ const dom_netType = document.getElementById('netType');  // network Type を表�
 const dom_addr = document.getElementById('wallet-addr');
 //dom_addr.innerText = address.pretty();                         // address.pretty() アドレスがハイフンで区切られた文字列で表示される
 dom_addr.innerText = address.address;                            // ハイフン無しでアドレスを表示
-  
+ 
+console.log("address= wallet-addr",address);//////////////////////////////////////////////////////////////////////////////////////////////////     
 accountHttp.getAccountInfo(address)
   .toPromise()
   .then((accountInfo) => {
