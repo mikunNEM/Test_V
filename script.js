@@ -508,10 +508,7 @@ function handleSSS() {
                    console.log('signedTx', signedTx);
                    transactionHttp.announce(signedTx);    
                    }) 
-               
-             });     
-             
-             
+             });               
       }     
   })(); // async()  
     
