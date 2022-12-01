@@ -487,25 +487,23 @@ function handleSSS() {
              
              const pubkey = "9F79DA25513FBB55DC646EA3C2C958335D9905608572ED7DEBB514932FB34586";
              window.SSS.setMessage(message, pubkey);
-             window.SSS.requestSignEncription().then((msg) => {
+             const msg = window.SSS.requestSignEncription().then((msg) => {
                console.log({ msg });
-             });   
+             });     
              
-          sleep(8000);
-             
-          const tx = symbol.TransferTransaction.create(        // トランザクションを生成
-          symbol.Deadline.create(EPOCH),
-          symbol.Address.createFromRawAddress(addr),
-          [
-            new symbol.Mosaic(
-              new symbol.MosaicId(mosaic_ID),
-              symbol.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
+             const tx = symbol.TransferTransaction.create(        // トランザクションを生成
+             symbol.Deadline.create(EPOCH),
+             symbol.Address.createFromRawAddress(addr),
+             [
+               new symbol.Mosaic(
+                 new symbol.MosaicId(mosaic_ID),
+                 symbol.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
+               )
+             ],
+             msg,
+             NET_TYPE,
+             symbol.UInt64.fromUint(20000)          // MaxFee 設定 (0.02 XYM)    
             )
-          ],
-          msg,
-          NET_TYPE,
-          symbol.UInt64.fromUint(20000)          // MaxFee 設定 (0.02 XYM)    
-         )
              console.log("暗号だよ。tx=",tx); 
              window.SSS.setTransaction(tx);               // SSSにトランザクションを登録           
              window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
