@@ -506,7 +506,7 @@ function handleSSS() {
                    ],
                    msg,
                    NET_TYPE,
-                   symbol.UInt64.fromUint(300000)          // MaxFee 設定 (0.3 XYM)   
+                   symbol.UInt64.fromUint(100000)          // MaxFee 設定 (0.1 XYM)   
                    )
                    window.SSS.setTransaction(tx);               // SSSにトランザクションを登録
                    window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求                   
