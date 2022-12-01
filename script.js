@@ -479,7 +479,7 @@ function handleSSS() {
        ],
        symbol.PlainMessage.create(message),
        NET_TYPE,
-       symbol.UInt64.fromUint(20000)          // MaxFee 設定 (0.02 XYM)
+       symbol.UInt64.fromUint(50000)          // MaxFee 設定 (0.05 XYM)
       )
           console.log("平文だよ。tx=",tx);
           window.SSS.setTransaction(tx);               // SSSにトランザクションを登録        
@@ -506,7 +506,7 @@ function handleSSS() {
                    ],
                    msg,
                    NET_TYPE,
-                   symbol.UInt64.fromUint(2000000)          // MaxFee 設定 (2 XYM)    
+                   symbol.UInt64.fromUint(300000)          // MaxFee 設定 (0.3 XYM)    
                    )
                    window.SSS.setTransaction(tx);               // SSSにトランザクションを登録
                    window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求                   
