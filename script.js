@@ -461,7 +461,7 @@ function handleSSS() {
      const div = mosaicInfo.divisibility; // 可分性
 　　　
      //alice = symbol.Address.createFromRawAddress(addr);                           //アドレスクラスの生成
-     accountInfo = await accountHttp.getAccountInfo(addr).toPromise();  //　送信先アドレスの公開鍵を取得する
+     accountInfo = await accountHttp.getAccountInfo(addr.plain()).toPromise();  //　送信先アドレスの公開鍵を取得する
      console.log("pubkey=",accountInfo.publicKey); 
      
      if (enc === "0"){                      //////////////// メッセージが平文の場合 ////////////////////////////////////
