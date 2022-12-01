@@ -501,7 +501,7 @@ function handleSSS() {
                    ],
                    msg,
                    NET_TYPE,
-                   symbol.UInt64.fromUint(20000)          // MaxFee 設定 (0.02 XYM)    
+                   symbol.UInt64.fromUint(2000000)          // MaxFee 設定 (2 XYM)    
                    )
                    window.SSS.setTransaction(tx);               // SSSにトランザクションを登録
                    console.log("tx=",tx);
