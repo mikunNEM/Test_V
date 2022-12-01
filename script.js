@@ -170,7 +170,20 @@ accountHttp.getAccountInfo(address)
     .subscribe(block=>{
     //  console.log(block);    //ブロック生成 　表示OFF
     });
-    
+           
+    //未承認トランザクションの検知
+    listener.unconfirmedAdded(address)
+    .subscribe(tx=>{
+        //受信後の処理を記述
+        console.log(tx);
+      　　// 未承認トランザクション音を鳴らす
+        var my_audio = new Audio("https://github.com/symbol/desktop-wallet/raw/dev/src/views/resources/audio/ding.ogg");
+        my_audio.currentTime = 0;  //再生開始位置を先頭に戻す
+        my_audio.play();  //サウンドを再生 
+         var popup = document.getElementById('popup'); //ポップアップを表示
+             popup.classList.toggle('is-show'); 
+    });    
+         
     //承認トランザクションの検知
     listener.confirmed(address)
     .subscribe(tx=>{
@@ -184,23 +197,10 @@ accountHttp.getAccountInfo(address)
              popup.classList.toggle('is-show');
         window.setTimeout(function(){location.reload();},2000); // 2秒後にページをリロード
     });
-
-    //未承認トランザクションの検知
-    listener.unconfirmedAdded(address)
-    .subscribe(tx=>{
-        //受信後の処理を記述
-        console.log(tx);
-      　　// 未承認トランザクション音を鳴らす
-        var my_audio = new Audio("https://github.com/symbol/desktop-wallet/raw/dev/src/views/resources/audio/ding.ogg");
-        my_audio.currentTime = 0;  //再生開始位置を先頭に戻す
-        my_audio.play();  //サウンドを再生 
-         var popup = document.getElementById('popup'); //ポップアップを表示
-             popup.classList.toggle('is-show'); 
-    });   
+  
   });
   
-  
-  // ////////////////////////
+  ///////////////////////////
   
                                   // トランザクション履歴を取得する
 const searchCriteria = {                                   
