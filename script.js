@@ -18,7 +18,7 @@ const nsRepo_M = repositoryFactory_M.createNamespaceRepository();
 //TEST_NET の場合
 
 const EPOCH_T = 1667250467;
-const NODE_URL_T = 'https://mikun-testnet.tk:3001';
+const NODE_URL_T = 'https://mikun-testnet2.tk:3001';
 const NET_TYPE_T = symbol.NetworkType.TEST_NET;
 const XYM_ID_T = '72C0212E67A08BCE';
 
