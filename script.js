@@ -436,8 +436,7 @@ function handleSSS() {
   const addr = document.getElementById('form-addr').value;
   const mosaic_ID = document.getElementById('form-mosaic_ID').value;
   const amount = document.getElementById('form-amount').value;
-  const messageX = document.getElementById('form-message').value;
-  let message;   
+  const message = document.getElementById('form-message').value;   
      
      if (addr.charAt(0) === 'N'){  // MAINNET の場合 
          EPOCH = EPOCH_M; 
@@ -473,7 +472,7 @@ function handleSSS() {
            symbol.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
          )
        ],
-       symbol.PlainMessage.create(messageX),
+       symbol.PlainMessage.create(message),
        NET_TYPE,
        symbol.UInt64.fromUint(20000)          // MaxFee 設定 (0.02 XYM)
       )
@@ -487,11 +486,11 @@ function handleSSS() {
         if (enc === "1"){                ////////////// メッセージが暗号の場合 /////////////////////////////////////////////////
              
              const pubkey = "9F79DA25513FBB55DC646EA3C2C958335D9905608572ED7DEBB514932FB34586";
-             window.SSS.setMessage(messageX, pubkey);
-             window.SSS.requestSignEncription().then((messageX) => {
-               console.log({ messageX });
+             window.SSS.setMessage(message, pubkey);
+             window.SSS.requestSignEncription().then((msg) => {
+               console.log({ msg });
              });   
-             console.log("enc ? message=",message);
+             console.log("enc ? message=",msg);
              
           const tx = symbol.TransferTransaction.create(        // トランザクションを生成
           symbol.Deadline.create(EPOCH),
@@ -502,7 +501,7 @@ function handleSSS() {
               symbol.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
             )
           ],
-          message,
+          msg,
           NET_TYPE,
           symbol.UInt64.fromUint(20000)          // MaxFee 設定 (0.02 XYM)    
          )
