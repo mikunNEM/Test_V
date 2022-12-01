@@ -436,7 +436,8 @@ function handleSSS() {
   const addr = document.getElementById('form-addr').value;
   const mosaic_ID = document.getElementById('form-mosaic_ID').value;
   const amount = document.getElementById('form-amount').value;
-  const message = document.getElementById('form-message').value;   
+  const message = document.getElementById('form-message').value;
+  const enc = document.getElementById('form-enc').value;
      
      if (addr.charAt(0) === 'N'){  // MAINNET の場合 
          EPOCH = EPOCH_M; 
@@ -458,9 +459,7 @@ function handleSSS() {
  (async() => {  
      mosaicInfo = await mosaicHttp.getMosaic(new symbol.MosaicId(mosaic_ID)).toPromise();// 可分性の情報を取得する 
      const div = mosaicInfo.divisibility; // 可分性
-  
-      
-   const enc = "1";
+
      
      if (enc === "0"){                      //////////////// メッセージが平文の場合 ////////////////////////////////////
     　 const tx = symbol.TransferTransaction.create(        // トランザクションを生成
