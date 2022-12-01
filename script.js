@@ -437,7 +437,8 @@ function handleSSS() {
   const mosaic_ID = document.getElementById('form-mosaic_ID').value;
   const amount = document.getElementById('form-amount').value;
   const messageX = document.getElementById('form-message').value;
-  const message;   
+  let message;   
+     
      if (addr.charAt(0) === 'N'){  // MAINNET の場合 
          EPOCH = EPOCH_M; 
          // XYM_ID = XYM_ID_M;
