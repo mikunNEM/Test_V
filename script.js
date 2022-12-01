@@ -509,7 +509,6 @@ function handleSSS() {
                    symbol.UInt64.fromUint(2000000)          // MaxFee 設定 (2 XYM)    
                    )
                    window.SSS.setTransaction(tx);               // SSSにトランザクションを登録
-                   console.log("tx=",tx);
                    window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求                   
                    console.log('signedTx', signedTx);
                    transactionHttp.announce(signedTx);    
