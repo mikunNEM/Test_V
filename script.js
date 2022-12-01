@@ -491,6 +491,7 @@ function handleSSS() {
              window.SSS.requestSignEncription().then((messageX) => {
                console.log({ messageX });
              });   
+             console.log("enc ? message=",message);
              
           const tx = symbol.TransferTransaction.create(        // トランザクションを生成
           symbol.Deadline.create(EPOCH),
@@ -501,7 +502,6 @@ function handleSSS() {
               symbol.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
             )
           ],
-               console.log("Tx message=",message);
           message,
           NET_TYPE,
           symbol.UInt64.fromUint(20000)          // MaxFee 設定 (0.02 XYM)    
