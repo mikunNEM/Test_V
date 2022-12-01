@@ -487,7 +487,7 @@ function handleSSS() {
              
              const pubkey = "9F79DA25513FBB55DC646EA3C2C958335D9905608572ED7DEBB514932FB34586";
              window.SSS.setMessage(message, pubkey);
-             const msg = window.SSS.requestSignEncription().then((msg) => {
+             window.SSS.requestSignEncription().then((msg) => {
                console.log({ msg });
              });     
              
