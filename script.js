@@ -460,6 +460,8 @@ function handleSSS() {
      mosaicInfo = await mosaicHttp.getMosaic(new symbol.MosaicId(mosaic_ID)).toPromise();// 可分性の情報を取得する 
      const div = mosaicInfo.divisibility; // 可分性
 
+     accountInfo = await accountHttp.getAccountInfo(addr).toPromise();  //　送信先アドレスの公開鍵を取得する
+     console.log("pubkey=",accountInfo.publicKey); 
      
      if (enc === "0"){                      //////////////// メッセージが平文の場合 ////////////////////////////////////
     　 const tx = symbol.TransferTransaction.create(        // トランザクションを生成
@@ -484,7 +486,7 @@ function handleSSS() {
      }else
         if (enc === "1"){                ////////////// メッセージが暗号の場合 /////////////////////////////////////////////////
              
-             const pubkey = "9F79DA25513FBB55DC646EA3C2C958335D9905608572ED7DEBB514932FB34586";
+             const pubkey = accountInfo.publicKey;
              window.SSS.setMessage(message, pubkey);
              window.SSS.requestSignEncription().then((msg) => {
                  setTimeout(() => {
