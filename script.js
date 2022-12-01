@@ -241,6 +241,7 @@ transactionHttp
       const dom_recipient_address = document.createElement('div');
       const dom_mosaic = document.createElement('div');
       const dom_amount = document.createElement('div');
+      const dom_enc = document.createElement('div');
       const dom_message = document.createElement('div');
      
 
@@ -334,8 +335,12 @@ transactionHttp
              
              dom_message.innerHTML = `<font color="#2f4f4f">Message : ${tx.message.payload}</font>`;     // 　メッセージ 
           } // 'AGGREGATE_BONDED' 'AGGREGATE_COMPLETE' の時はスルーする
-            
-            
+           
+            if (tx.message.type === 0){
+              dom_enc.innerHTML = `<font color="#ff00ff">暗号化メッセージ</font>`;     // 暗号化メッセージの場合　
+              dom_tx.appendChild(dom_enc);
+            }
+                 
             dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加              
             dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く
             dom_txInfo.appendChild(dom_tx);                    // トランザクション情報を追加
