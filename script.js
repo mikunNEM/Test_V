@@ -491,6 +491,7 @@ function handleSSS() {
                console.log({ msg });
              });   
              
+       setTimeout(() => {      
           const tx = symbol.TransferTransaction.create(        // トランザクションを生成
           symbol.Deadline.create(EPOCH),
           symbol.Address.createFromRawAddress(addr),
@@ -509,8 +510,9 @@ function handleSSS() {
              window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
              console.log('signedTx', signedTx);
              transactionHttp.announce(signedTx);    
-             })             
-       }     
+             })
+       },5000)   
+      }     
   })(); // async()  
     
 }
