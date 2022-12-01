@@ -218,6 +218,8 @@ console.log(searchCriteria);    //////////////////
   
 console.log("transactionHttp=");/////////////////
 console.log(transactionHttp);   //////////////////
+     
+     console.log("symbol.Account=" ,symbol.Account);
 
 transactionHttp
   .search(searchCriteria)
