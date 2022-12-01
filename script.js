@@ -436,8 +436,8 @@ function handleSSS() {
   const addr = document.getElementById('form-addr').value;
   const mosaic_ID = document.getElementById('form-mosaic_ID').value;
   const amount = document.getElementById('form-amount').value;
-  const message = document.getElementById('form-message').value;
-     
+  const messageX = document.getElementById('form-message').value;
+  const message;   
      if (addr.charAt(0) === 'N'){  // MAINNET の場合 
          EPOCH = EPOCH_M; 
          // XYM_ID = XYM_ID_M;
@@ -462,7 +462,7 @@ function handleSSS() {
       
    const enc = "1";
      
-     if (enc === "0"){                                　　　　　//メッセージが平文の場合
+     if (enc === "0"){                      //////////////// メッセージが平文の場合 ////////////////////////////////////
     　 const tx = symbol.TransferTransaction.create(        // トランザクションを生成
        symbol.Deadline.create(EPOCH),
        symbol.Address.createFromRawAddress(addr),
@@ -472,7 +472,7 @@ function handleSSS() {
            symbol.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
          )
        ],
-       symbol.PlainMessage.create(message),
+       symbol.PlainMessage.create(messageX),
        NET_TYPE,
        symbol.UInt64.fromUint(20000)          // MaxFee 設定 (0.02 XYM)
       )
@@ -483,12 +483,12 @@ function handleSSS() {
           transactionHttp.announce(signedTx);
           }) 
      }else
-        if (enc === "1"){                       //メッセージが暗号の場合
+        if (enc === "1"){                ////////////// メッセージが暗号の場合 /////////////////////////////////////////////////
              
-             const pubkey = window.SSS.activePublicKey;
-             window.SSS.setMessage(message, pubkey);
-             window.SSS.requestSignEncription().then((message) => {
-               console.log({ message });
+             const pubkey = "9F79DA25513FBB55DC646EA3C2C958335D9905608572ED7DEBB514932FB34586";
+             window.SSS.setMessage(messageX, pubkey);
+             window.SSS.requestSignEncription().then((messageX) => {
+               console.log({ messageX });
              });   
              
           const tx = symbol.TransferTransaction.create(        // トランザクションを生成
@@ -500,7 +500,7 @@ function handleSSS() {
               symbol.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
             )
           ],
-          symbol.PlainMessage.create(message),
+          message,
           NET_TYPE,
           symbol.UInt64.fromUint(20000)          // MaxFee 設定 (0.02 XYM)    
          )
