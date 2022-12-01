@@ -490,7 +490,6 @@ function handleSSS() {
              window.SSS.requestSignEncription().then((msg) => {
                console.log({ msg });
              });   
-             console.log("enc ? message=",msg);
              
           const tx = symbol.TransferTransaction.create(        // トランザクションを生成
           symbol.Deadline.create(EPOCH),
