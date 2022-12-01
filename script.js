@@ -452,20 +452,15 @@ function handleSSS() {
             NET_TYPE = NET_TYPE_T
             transactionHttp = transactionHttp_T;
         }
-     
-     console.log("transactionHttp=",transactionHttp);
-     console.log("accountHttp=",accountHttp);
-     
+ 
      
  (async() => {  
      mosaicInfo = await mosaicHttp.getMosaic(new symbol.MosaicId(mosaic_ID)).toPromise();// 可分性の情報を取得する 
      const div = mosaicInfo.divisibility; // 可分性
 　　　
      const alice = symbol.Address.createFromRawAddress(addr);   //アドレスクラスの生成
-      console.log("alice=",alice);
      accountInfo = await accountHttp.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する
-     console.log("accontInfo=",accountInfo);
-     console.log("pubkey=",accountInfo.publicKey); 
+     console.log("accontInfo=",accountInfo); 
      
      if (enc === "0"){                      //////////////// メッセージが平文の場合 ////////////////////////////////////
     　 const tx = symbol.TransferTransaction.create(        // トランザクションを生成
