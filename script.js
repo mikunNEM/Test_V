@@ -261,7 +261,7 @@ transactionHttp
       
       
       
-      　　　//console.log("timestamp=");                                                ///////////　　  　timestamp to Date 　　　　　　　//////////
+      　　　//console.log("timestamp="); //////////////////////////////////　　  　timestamp to Date 　　　　　/////////////////////////
       　　　const timestamp = EPOCH + (parseInt(tx.transactionInfo.timestamp.toHex(), 16)/1000);   /////////////// Unit64 を 16進数に　変換したあと10進数に変換　
       　　　const date = new Date(timestamp * 1000);
       　　　//console.log(date.getTime());
@@ -280,7 +280,8 @@ transactionHttp
      　　　 console.log(ymdhms);
       
      　　　 dom_date.innerHTML = `<font color="#7E00FF"><p style="text-align: right">${ymdhms}</p></font>`;    //　日付  右寄せ
-      
+      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         
      　　　 dom_tx.appendChild(dom_date);                     //　dom_date　をdom_txに追加
         
            dom_tx.appendChild(dom_txType);                    // dom_txType をdom_txに追加 
@@ -289,6 +290,7 @@ transactionHttp
       
  
         if (tx.type !== 16961 && tx.type !== 16705){ // 'AGGREGATE_BONDED' 'AGGREGATE_COMPLETE' の時はスルーする
+             
            dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${tx.recipientAddress.address}</font>`; //  文字列の結合　宛先
            dom_tx.appendChild(dom_recipient_address);         // dom_recipient_address をdom_txに追加
             
@@ -299,7 +301,7 @@ transactionHttp
                (async() => {
                   const mosaicNames = await nsRepo.getMosaicsNames([new symbol.MosaicId(tx.mosaics[0].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
           
-                  mosaicInfo = await mosaicHttp.getMosaic(tx.mosaics[0].id.id).toPromise();// 可分性の情報を取得する
+                  mosaicInfo = await mosaicHttp.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する
           
                   const div = mosaicInfo.divisibility; // 可分性
       
