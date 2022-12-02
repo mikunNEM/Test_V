@@ -340,10 +340,9 @@ transactionHttp
                console.log("i=",i);
            }  //モザイクの数だけ繰り返す
              
-             dom_message.innerHTML = `<font color="#2f4f4f">Message : ${tx.message.payload}</font>`;     // 　メッセージ 
+             dom_message.innerHTML = `<font color="#2f4f4f">Message :</br>${tx.message.payload}</font>`;     // 　メッセージ 
           } // 'AGGREGATE_BONDED' 'AGGREGATE_COMPLETE' の時はスルーする
                                                   
-                                          console.log("message payload=",tx.message.payload);
          
             if (tx.message.type === 1){
               dom_enc.innerHTML = `<font color="#ff00ff">暗号化メッセージ</font>`;     // 暗号化メッセージの場合　
