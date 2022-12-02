@@ -299,11 +299,11 @@ transactionHttp
           for(let i=0; i<tx.mosaics.length; i++){  //モザイクの数だけ繰り返す
             if (tx.mosaics.length !== 0){ //モザイクが空でない(モザイク有りの場合)
                (async() => {
-                  const mosaicNames = await nsRepo.getMosaicsNames([new symbol.MosaicId(tx.mosaics[0].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
+                  let mosaicNames = await nsRepo.getMosaicsNames([new symbol.MosaicId(tx.mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
           
                   mosaicInfo = await mosaicHttp.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する
           
-                  const div = mosaicInfo.divisibility; // 可分性
+                  let div = mosaicInfo.divisibility; // 可分性
       
                  if(tx.signer.address.address === address.address) {  // 送信アドレスとウォレットのアドレスが同じかどうかで絵文字の表示と色を変える
                      if ([mosaicNames][0][0].names.length !==0){  // ネームスペースがある場合
