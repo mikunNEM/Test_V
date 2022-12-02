@@ -149,6 +149,7 @@ h3 {
 
 #wallet-transactions{
   margin: 30px;
+  word-wrap: break-word;
 }
 
 .container {
