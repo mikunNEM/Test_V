@@ -334,8 +334,8 @@ transactionHttp
                 dom_tx.appendChild(dom_mosaic);                    // dom_mosaic をdom_txに追加 
                 dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
                
-               console.log("dom_mosaic=",dom_mosaic)
-               console.log("dom_amount",dom_amount)
+               console.log("dom_mosaic=",dom_mosaic.innerHTML);
+               console.log("dom_amount",dom_amount.innerHTML);
                console.log("i=",i);
            }  //モザイクの数だけ繰り返す
              
