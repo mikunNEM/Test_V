@@ -340,7 +340,7 @@ transactionHttp
                console.log("i=",i);
            }  //モザイクの数だけ繰り返す
              
-             dom_message.innerHTML = `<font color="#2f4f4f">Message :</br>${tx.message.payload}</font>`;     // 　メッセージ 
+             dom_message.innerHTML = `<font color="#2f4f4f">Message :</font></br><font color="#4169e1">${tx.message.payload}</font>`;     // 　メッセージ 
           } // 'AGGREGATE_BONDED' 'AGGREGATE_COMPLETE' の時はスルーする
                                                   
          
