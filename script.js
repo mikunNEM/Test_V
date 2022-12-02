@@ -320,8 +320,8 @@ transactionHttp
                      }
                          dom_amount.innerHTML = `<font color="#008000"><big><strong>💰➡️😊 :<big><strong> ${(parseInt(tx.mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong></font>`;     // 　数量            
                  }
-               console.log("dom_mosaic=",dom_mosaic.innerHTML);
-               console.log("dom_amount",dom_amount.innerHTML);
+               console.log("dom_mosaic=",dom_mosaic);
+               console.log("dom_amount",dom_amount);
                     
                })(); // async()
             }else { //モザイクが空の場合
