@@ -448,6 +448,7 @@ function handleSSS() {
   const amount = document.getElementById('form-amount').value;
   const message = document.getElementById('form-message').value;
   const enc = document.getElementById('form-enc').value;
+  const maxfee = document.getElementById('form-maxfee').value;
      
      if (addr.charAt(0) === 'N'){  // MAINNET の場合 
          EPOCH = EPOCH_M; 
@@ -483,7 +484,7 @@ function handleSSS() {
        ],
        symbol.PlainMessage.create(message),
        NET_TYPE,
-       symbol.UInt64.fromUint(50000)          // MaxFee 設定 (0.05 XYM)
+       symbol.UInt64.fromUint(1000000*Number(maxfee))          // MaxFee 設定 (0.05 XYM)
       )
           console.log("平文だよ。tx=",tx);
           window.SSS.setTransaction(tx);               // SSSにトランザクションを登録        
@@ -510,7 +511,7 @@ function handleSSS() {
                    ],
                    msg,
                    NET_TYPE,
-                   symbol.UInt64.fromUint(100000)          // MaxFee 設定 (0.1 XYM)   
+                   symbol.UInt64.fromUint(1000000*Number(maxfee))          // MaxFee 設定  
                    )
                    window.SSS.setTransaction(tx);               // SSSにトランザクションを登録
                    window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求                   
