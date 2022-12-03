@@ -291,7 +291,7 @@ transactionHttp
  
         if (tx.type !== 16961 && tx.type !== 16705){ // 'AGGREGATE_BONDED' 'AGGREGATE_COMPLETE' の時はスルーする
              
-           dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${tx.recipientAddress.address}</br></font>`; //  文字列の結合　   宛先
+           dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${tx.recipientAddress.address}</font>`; //  文字列の結合　   宛先
            dom_tx.appendChild(dom_recipient_address);         // dom_recipient_address をdom_txに追加
             
           console.log('モザイク数=',tx.mosaics.length);
@@ -340,15 +340,18 @@ transactionHttp
                console.log("i=",i);
            }  //モザイクの数だけ繰り返す
              
-             dom_message.innerHTML = `<font color="#2f4f4f">< Message ></font><font color="#4169e1"></br>${tx.message.payload}</font>`;     // 　メッセージ 
+             if (tx.message.type === 1){
+                 dom_enc.innerHTML = `<font color="#ff00ff"><strong>暗号化メッセージ</strong></font>`;     // 暗号化メッセージの場合　
+                 dom_tx.appendChild(dom_enc);
+              
+                 dom_message.innerHTML = `<font color="#ff00ff">< Message ></font><font color="#4169e1"></br>${tx.message.payload}</font>`;     // 　メッセージ    
+            }else{
+                 dom_message.innerHTML = `<font color="#2f4f4f">< Message ></font><font color="#4169e1"></br>${tx.message.payload}</font>`;     // 　メッセージ  
+               }
+                         
           } // 'AGGREGATE_BONDED' 'AGGREGATE_COMPLETE' の時はスルーする
                                                   
-         
-            if (tx.message.type === 1){
-              dom_enc.innerHTML = `<font color="#ff00ff"><strong>暗号化メッセージ</strong></font>`;     // 暗号化メッセージの場合　
-              dom_tx.appendChild(dom_enc);
-            }
-                 
+                         
             dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加              
             dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く
             dom_txInfo.appendChild(dom_tx);                    // トランザクション情報を追加
