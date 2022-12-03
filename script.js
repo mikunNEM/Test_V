@@ -291,7 +291,7 @@ transactionHttp
  
         if (tx.type !== 16961 && tx.type !== 16705){ // 'AGGREGATE_BONDED' 'AGGREGATE_COMPLETE' の時はスルーする
              
-           dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${tx.recipientAddress.address}</font>`; //  文字列の結合　宛先
+           dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${tx.recipientAddress.address}</br></font>`; //  文字列の結合　宛先
            dom_tx.appendChild(dom_recipient_address);         // dom_recipient_address をdom_txに追加
             
           console.log('モザイク数=',tx.mosaics.length);
@@ -340,12 +340,12 @@ transactionHttp
                console.log("i=",i);
            }  //モザイクの数だけ繰り返す
              
-             dom_message.innerHTML = `<font color="#2f4f4f">< Message ></font></br><font color="#4169e1">${tx.message.payload}</font>`;     // 　メッセージ 
+             dom_message.innerHTML = `<font color="#2f4f4f"></br>< Message ></font></br><font color="#4169e1">${tx.message.payload}</font>`;     // 　メッセージ 
           } // 'AGGREGATE_BONDED' 'AGGREGATE_COMPLETE' の時はスルーする
                                                   
          
             if (tx.message.type === 1){
-              dom_enc.innerHTML = `</br><font color="#ff00ff"><bold>暗号化メッセージ</bold></font>`;     // 暗号化メッセージの場合　
+              dom_enc.innerHTML = `</br><font color="#ff00ff"><strong>暗号化メッセージ</strong></font>`;     // 暗号化メッセージの場合　
               dom_tx.appendChild(dom_enc);
             }
                  
