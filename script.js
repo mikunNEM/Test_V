@@ -345,7 +345,7 @@ transactionHttp
                                                   
          
             if (tx.message.type === 1){
-              dom_enc.innerHTML = `</br><font color="#ff00ff"><strong>暗号化メッセージ</strong></font>`;     // 暗号化メッセージの場合　
+              dom_enc.innerHTML = `<font color="#ff00ff"><strong>暗号化メッセージ</strong></font>`;     // 暗号化メッセージの場合　
               dom_tx.appendChild(dom_enc);
             }
                  
