@@ -162,3 +162,7 @@ h3 {
   justify-content: space-between;
   margin: 50px 50px auto 50px;
 }
+
+hr {
+  border-top: 2px solid skyblue;
+}
