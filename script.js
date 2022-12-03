@@ -341,12 +341,12 @@ transactionHttp
            }  //モザイクの数だけ繰り返す
              
              if (tx.message.type === 1){
-                 dom_enc.innerHTML = `<font color="#ff00ff"><strong>暗号化メッセージ</strong></font>`;     // 暗号化メッセージの場合　
+                 dom_enc.innerHTML = `<font color="#ff00ff"><strong></br>暗号化メッセージ</strong></font>`;     // 暗号化メッセージの場合　
                  dom_tx.appendChild(dom_enc);
               
                  dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br>${tx.message.payload}</font>`;     // 　メッセージ    
-            }else{
-                 dom_message.innerHTML = `<font color="#2f4f4f">< Plain Message ></font><font color="#4169e1"></br>${tx.message.payload}</font>`;     // 　メッセージ  
+            }else{          // 平文の場合
+                 dom_message.innerHTML = `<font color="#2f4f4f"></br>< Plain Message ></font><font color="#4169e1"></br>${tx.message.payload}</font>`;     // 　メッセージ  
                }
                          
           } // 'AGGREGATE_BONDED' 'AGGREGATE_COMPLETE' の時はスルーする
