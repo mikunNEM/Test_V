@@ -291,7 +291,7 @@ transactionHttp
  
         if (tx.type !== 16961 && tx.type !== 16705){ // 'AGGREGATE_BONDED' 'AGGREGATE_COMPLETE' の時はスルーする
              
-           dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${tx.recipientAddress.address}</br></font>`; //  文字列の結合　宛先
+           dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${tx.recipientAddress.address}</font>`; //  文字列の結合　宛先
            dom_tx.appendChild(dom_recipient_address);         // dom_recipient_address をdom_txに追加
             
           console.log('モザイク数=',tx.mosaics.length);
