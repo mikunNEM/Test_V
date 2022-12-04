@@ -303,7 +303,8 @@ transactionHttp
           
                     console.log(mosaicNames);
                   mosaicInfo = await mosaicHttp.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する
-          
+              
+                setTimeout(() => {    
                   let div = mosaicInfo.divisibility; // 可分性
       
                  if(tx.signer.address.address === address.address) {  // signerとウォレットのアドレスが同じかどうかで絵文字の表示と色を変える
@@ -322,7 +323,7 @@ transactionHttp
                          dom_amount.innerHTML = `<font color="#008000" size="+1">💰➡️😊 :<i><big><strong> ${(parseInt(tx.mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;     // 　数量            
                  }
               
-                    
+                }, 1000) // setTimeout    
                })(); // async()
             }else { //モザイクが空の場合
                if(tx.signer.address.address === address.address) {  // 送信アドレスとウォレットのアドレスが同じかどうかで絵文字の表示と色を変える
