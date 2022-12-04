@@ -338,7 +338,7 @@ transactionHttp
                
                 if (i === 1 || i === 2){
                      console.log("i=０以外の時水平線")
-                   dom_tx.appendChild(document.createElement('hr2'));  // 水平線を引く
+                   dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く
                 }
                
                console.log("i=",i);
