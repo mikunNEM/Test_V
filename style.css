@@ -167,6 +167,6 @@ hr {
   border-top: 2px solid skyblue;
 }
 
-hr2 {
+.hr2 {
  border-top: 3px dashed orange;
 }
