@@ -337,6 +337,7 @@ transactionHttp
                 dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
                
                 if (i !== 0){
+                     console.log("i=０以外の時水平線")
                    dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く
                 }
                
