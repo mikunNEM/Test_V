@@ -168,5 +168,5 @@ hr {
 }
 
 hr2 {
- border:1px dashed $primary-color;
+ border-top: 2px dashed skyblue;
 }
