@@ -208,7 +208,7 @@ const searchCriteria = {
   group: symbol.TransactionGroup.Confirmed,
   address,
   pageNumber: 1,
-  pageSize: 10,
+  pageSize: 3,
   order: symbol.Order.Desc,
   embedded: true,
 };
