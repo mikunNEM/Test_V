@@ -302,11 +302,10 @@ transactionHttp
                   let mosaicNames = await nsRepo.getMosaicsNames([new symbol.MosaicId(tx.mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
           
                     console.log(mosaicNames);
-                  mosaicInfo = await mosaicHttp.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する
-              
-                setTimeout(() => {    
+                  mosaicInfo = await mosaicHttp.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する      
+                  
                   let div = mosaicInfo.divisibility; // 可分性
-      
+                setTimeout(() => {  
                  if(tx.signer.address.address === address.address) {  // signerとウォレットのアドレスが同じかどうかで絵文字の表示と色を変える
                      if ([mosaicNames][0][0].names.length !==0){  // ネームスペースがある場合
                          dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic :　<big><strong>${[mosaicNames][0][0].names[0].name}</strong></big>　<small>(${tx.mosaics[i].id.id.toHex()})</small></font>`; 
