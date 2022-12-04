@@ -306,6 +306,7 @@ transactionHttp
                   
                   let div = mosaicInfo.divisibility; // 可分性
                  
+                 console.log("i=",i);   
                  if(tx.signer.address.address === address.address) {  // signerとウォレットのアドレスが同じかどうかで絵文字の表示と色を変える
                      if ([mosaicNames][0][0].names.length !==0){  // ネームスペースがある場合
                          dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic :　<big><strong>${[mosaicNames][0][0].names[0].name}</strong></big>　<small>(${tx.mosaics[i].id.id.toHex()})</small></font>`; 
@@ -344,7 +345,7 @@ transactionHttp
                    dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く
              //   }
                
-               console.log("i=",i);
+               
            }  //モザイクの数だけ繰り返す
              
              if (tx.message.type === 1){
