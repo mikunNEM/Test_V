@@ -97,7 +97,18 @@ const dom_addr = document.getElementById('wallet-addr');
 //dom_addr.innerText = address.pretty();                         // address.pretty() アドレスがハイフンで区切られた文字列で表示される
 dom_addr.innerText = address.address;                            // ハイフン無しでアドレスを表示
  
-console.log("address= wallet-addr",address);//////////////////////////////////////////////////////////////////////////////////////////////////     
+console.log("address= wallet-addr",address);//////////////////////////////////////////////////////////////////////////////////////////////////  
+     
+const dom_explorer = document.getElementById('explorer');  // Wallet 右上のExplorerリンク
+if (NET_TYPE === NET_TYPE_T){     
+    dom_explorer.innerHTML = `<a href="https://testnet.symbol.fyi/${address.address}" target="_blank" rel="noopener noreferrer">Explorer</a>`; 
+   }else
+      if (NET_TYPE = NET_TYPE_M){
+         dom_explorer.innerHTML = `<a href="https://symbol.fyi/${address.address}" target="_blank" rel="noopener noreferrer">Explorer</a>`;      
+      }
+     
+     
+     
 accountHttp.getAccountInfo(address)
   .toPromise()
   .then((accountInfo) => {
