@@ -166,3 +166,7 @@ h3 {
 hr {
   border-top: 2px solid skyblue;
 }
+
+ {
+ border:1px dashed $primary-color;
+}
