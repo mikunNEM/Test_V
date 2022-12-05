@@ -311,7 +311,7 @@ transactionHttp
                console.log("i=",i); 
             if (tx.mosaics.length !== 0){ //モザイクが空でない(モザイク有りの場合)                 
                (async() => {
-                  let mosaicNames[i] = await nsRepo.getMosaicsNames([new symbol.MosaicId(tx.mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
+                  let mosaicNames = await nsRepo.getMosaicsNames([new symbol.MosaicId(tx.mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
           
                     //console.log(mosaicNames);
                   mosaicInfo = await mosaicHttp.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する      
@@ -336,7 +336,7 @@ transactionHttp
                          dom_amount.innerHTML = `<font color="#008000" size="+1">💰➡️😊 :<i><big><strong> ${(parseInt(tx.mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;     // 　数量                                 
                  }
                 
-                        console.log("モザイクネーム",[mosaicNames][][0].names[0].name)/////////////////////////////// 
+                        console.log("モザイクネーム",[mosaicNames][0][0].names[0].name)/////////////////////////////// 
                         console.log("ネーム無し, ID のみ",tx.mosaics[i].id.id.toHex())////////////////////////////////////
                     
                })(); // async()
