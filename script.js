@@ -251,8 +251,8 @@ transactionHttp
       const dom_hash = document.createElement('div');
       const dom_signer_address = document.createElement('div');
       const dom_recipient_address = document.createElement('div');
-      let dom_mosaic = document.createElement('div');
-      let dom_amount = document.createElement('div');
+      const dom_mosaic = document.createElement('div');
+      const dom_amount = document.createElement('div');
       const dom_enc = document.createElement('div');
       const dom_message = document.createElement('div');
      
@@ -338,6 +338,7 @@ transactionHttp
                 
                         console.log([mosaicNames][0][0].names[0].name);  /////////////////////////////// 
                         console.log("ネーム無し, ID のみ",tx.mosaics[i].id.id.toHex());  ////////////////////////////////////
+                        console.log((parseInt(tx.mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 }));
                     
                })(); // async()
             }else{   //モザイクが空の場合
