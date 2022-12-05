@@ -251,8 +251,8 @@ transactionHttp
       const dom_hash = document.createElement('div');
       const dom_signer_address = document.createElement('div');
       const dom_recipient_address = document.createElement('div');
-      const dom_mosaic = document.createElement('div');
-      const dom_amount = document.createElement('div');
+      let dom_mosaic = document.createElement('div');
+      let dom_amount = document.createElement('div');
       const dom_enc = document.createElement('div');
       const dom_message = document.createElement('div');
      
