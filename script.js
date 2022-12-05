@@ -305,14 +305,13 @@ transactionHttp
            dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${tx.recipientAddress.address}</font>`; //  文字列の結合　   宛先
            dom_tx.appendChild(dom_recipient_address);         // dom_recipient_address をdom_txに追加
             
-          console.log('モザイク数=',tx.mosaics.length);
+          console.log('モザイク数=',tx.mosaics.length);  //////////////////////////////////////////////
      
           for(let i=0; i<tx.mosaics.length; i++){  //モザイクの数だけ繰り返す
                console.log("i=",i); 
-               console.log("mosaic.length=",tx.mosaics.length);
             if (tx.mosaics.length !== 0){ //モザイクが空でない(モザイク有りの場合)                 
                (async() => {
-                  let mosaicNames = await nsRepo.getMosaicsNames([new symbol.MosaicId(tx.mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
+                  let mosaicNames[i] = await nsRepo.getMosaicsNames([new symbol.MosaicId(tx.mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
           
                     //console.log(mosaicNames);
                   mosaicInfo = await mosaicHttp.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する      
