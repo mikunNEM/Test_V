@@ -342,6 +342,7 @@ transactionHttp
                 
                })(); // async()
             }else { //モザイクが空の場合
+                 console.log("モザイクが空だよ")
                if(tx.signer.address.address === address.address) {  // 送信アドレスとウォレットのアドレスが同じかどうかで絵文字の表示と色を変える
                   dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic : No mosaic</font>`;     // No mosaic
                   dom_amount.innerHTML = `<font color="#FF0000">💁‍♀️➡️💰 : </font>`;     // 　数量      
