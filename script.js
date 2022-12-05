@@ -338,7 +338,7 @@ transactionHttp
                      }
                          dom_amount.innerHTML = `<font color="#008000" size="+1">💰➡️😊 :<i><big><strong> ${(parseInt(tx.mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;     // 　数量          
                         
-                 } 
+                 }
                 
                })(); // async()
             }else
@@ -353,7 +353,7 @@ transactionHttp
                    }   
                }
                
-            }
+            
                 dom_tx.appendChild(dom_mosaic);                    // dom_mosaic をdom_txに追加 
                 dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
                     
