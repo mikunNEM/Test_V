@@ -336,8 +336,8 @@ transactionHttp
                          dom_amount.innerHTML = `<font color="#008000" size="+1">💰➡️😊 :<i><big><strong> ${(parseInt(tx.mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;     // 　数量                                 
                  }
                 
-                        console.log([mosaicNames][0][0].names[0].name);  /////////////////////////////// 
-                        console.log("ネーム無し, ID のみ",tx.mosaics[i].id.id.toHex());  ////////////////////////////////////
+                 
+                        console.log(`${[mosaicNames][0][0].names[0].name} ${tx.mosaics[i].id.id.toHex()}`);  ////////////////////////////////////
                         console.log((parseInt(tx.mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 }));
                     
                })(); // async()
