@@ -309,8 +309,8 @@ transactionHttp
      
           for(let i=0; i<tx.mosaics.length; i++){  //モザイクの数だけ繰り返す
                console.log("i=",i); 
-            if (tx.mosaics.length !== 0){ //モザイクが空でない(モザイク有りの場合)
-                 console.log("mosaic.length=",tx.mosaics.length)
+               console.log("mosaic.length=",tx.mosaics.length);
+            if (tx.mosaics.length !== 0){ //モザイクが空でない(モザイク有りの場合)                 
                (async() => {
                   let mosaicNames = await nsRepo.getMosaicsNames([new symbol.MosaicId(tx.mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
           
