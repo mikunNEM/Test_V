@@ -322,24 +322,23 @@ transactionHttp
                  if(tx.signer.address.address === address.address) {  // signerとウォレットのアドレスが同じかどうかで絵文字の表示と色を変える
                      if ([mosaicNames][0][0].names.length !==0){  // ネームスペースがある場合
                          dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic :　<big><strong>${[mosaicNames][0][0].names[0].name}</strong></big>　<small>(${tx.mosaics[i].id.id.toHex()})</small></font>`; 
-                         console.log([mosaicNames][0][0].names[0].name)///////////////////////////////
                      }else{   　　　　　　　　　　　　　　　　　　　　　 //　ネームスペースがない場合
                          dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic :　<small>(${tx.mosaics[i].id.id.toHex()})</small></font>`;
-                          console.log("Namespace無し",tx.mosaics[i].id.id.toHex())////////////////////////////////////
                      }    
                          dom_amount.innerHTML = `<font color="#FF0000" size="+1">💁‍♀️➡️💰 :<i><big><strong> ${(parseInt(tx.mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;     // 　数量               
                  }else{                                         //  signer とウォレットアドレスが違う場合
                      if ([mosaicNames][0][0].names.length !==0){ // ネームスペースがある場合
-                         console.log([mosaicNames][0][0].names[0].name)/////////////////////////////// 
+                         
                          dom_mosaic.innerHTML = `<font color="#008000">Mosaic :　<big><strong>${[mosaicNames][0][0].names[0].name}</strong></big>　<small>(${tx.mosaics[i].id.id.toHex()})</small></font>`; 
                      }else{ 　　　　　　　　　　　　　　　　　　　　　  // ネームスペースがない場合
-                         dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic :　<small>(${tx.mosaics[i].id.id.toHex()})</small></font>`;
-                          console.log("Namespace無し",tx.mosaics[i].id.id.toHex())////////////////////////////////////
+                         dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic :　<small>(${tx.mosaics[i].id.id.toHex()})</small></font>`;                        
                      }
-                         dom_amount.innerHTML = `<font color="#008000" size="+1">💰➡️😊 :<i><big><strong> ${(parseInt(tx.mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;     // 　数量          
-                        
+                         dom_amount.innerHTML = `<font color="#008000" size="+1">💰➡️😊 :<i><big><strong> ${(parseInt(tx.mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;     // 　数量                                 
                  }
                 
+                        console.log("モザイクネーム",[mosaicNames][][0].names[0].name)/////////////////////////////// 
+                        console.log("ネーム無し, ID のみ",tx.mosaics[i].id.id.toHex())////////////////////////////////////
+                    
                })(); // async()
             }else{   //モザイクが空の場合
                  console.log("モザイクが空だよ")
