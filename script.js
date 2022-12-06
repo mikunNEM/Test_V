@@ -177,13 +177,13 @@ accountHttp.getAccountInfo(address)
 
     //Websocketが切断される事なく、常時監視するために、ブロック生成(約30秒毎)の検知を行う
 
-    //ブロック生成の検知
+    // ブロック生成の検知  /////////////////////////////////////////////////////////////////
     listener.newBlock()
     .subscribe(block=>{
     //  console.log(block);    //ブロック生成 　表示OFF
     });
            
-    //未承認トランザクションの検知
+    // 未承認トランザクションの検知  ////////////////////////////////////////////////////////
     listener.unconfirmedAdded(address)
     .subscribe(tx=>{
         //受信後の処理を記述
@@ -196,7 +196,7 @@ accountHttp.getAccountInfo(address)
              popup.classList.toggle('is-show'); 
     });    
          
-    //承認トランザクションの検知
+    // 承認トランザクションの検知  //////////////////////////////////////////////////////////
     listener.confirmed(address)
     .subscribe(tx=>{
         //受信後の処理を記述
@@ -224,27 +224,21 @@ const searchCriteria = {
   embedded: true,
 };
 
-console.log("searchCriteria=");  //////////////////
-console.log(searchCriteria);    //////////////////
-  
-console.log("transactionHttp=");/////////////////
-console.log(transactionHttp);   //////////////////
+console.log("searchCriteria=",searchCriteria);  //////////////////
+console.log("transactionHttp=",transactionHttp);   //////////////////
      
 
 transactionHttp
   .search(searchCriteria)
   .toPromise()
   .then((txs) => {
-    console.log("txs=");         /////////////////
-    console.log(txs);           /////////////////
-    const dom_txInfo = document.getElementById('wallet-transactions');
+    console.log("txs=",txs);         /////////////////
+     
+    const dom_txInfo = document.getElementById('wallet-transactions'); 
+    console.log("dom_txInfo=",dom_txInfo); ////////////////
     
-    console.log("dom_txInfo="); ////////////////
-    console.log(dom_txInfo);    ////////////////
-    
-    for (let tx of txs.data) {   //    txをループ処理
-      console.log("tx=");      ////////////////////
-      console.log(tx);
+    for (let tx of txs.data) {   ///////////////    tx を pageSize の回数繰り返す ///////////////////
+      console.log("tx=",tx);      ////////////////////
       const dom_tx = document.createElement('div');
       const dom_date = document.createElement('div');
       const dom_txType = document.createElement('div');
