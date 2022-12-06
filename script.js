@@ -324,7 +324,7 @@ transactionHttp
                          dom_amount.innerHTML = `<font color="#008000" size="+1">💰➡️😊 :<i><big><strong> ${(parseInt(tx.mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;     // 　数量                                 
                  }
 
-                     console.log("日付チェック",ymdhms);
+                     console.log(ymdhms);
                       
                        if ([mosaicNames][0][0].names.length !==0){ //　　チェック用
                           console.log(`${[mosaicNames][0][0].names[0].name} ${tx.mosaics[i].id.id.toHex()}`);  ////////////////////////////////////
