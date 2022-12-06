@@ -294,7 +294,8 @@ transactionHttp
             
           console.log('モザイク数=',tx.mosaics.length);  //////////////////////////////////////////////
      
-          for(let i=0; i<tx.mosaics.length; i++){  //モザイクの数だけ繰り返す
+////          for(let i=0; i<tx.mosaics.length; i++){  //モザイクの数だけ繰り返す
+               let i=0; //////////////
                console.log("i=",i); 
             if (tx.mosaics.length !== 0){ //モザイクが空でない(モザイク有りの場合)                 
                (async() => {
@@ -349,7 +350,7 @@ transactionHttp
                 dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
                     
                
-           }  //モザイクの数だけ繰り返す
+//           }  //モザイクの数だけ繰り返す
              
              if (tx.message.type === 1){
                  dom_enc.innerHTML = `<font color="#ff00ff"><strong></br>暗号化メッセージ</strong></font>`;     // 暗号化メッセージの場合　
