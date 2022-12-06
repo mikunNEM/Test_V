@@ -328,7 +328,7 @@ transactionHttp
                           console.log(`${[mosaicNames][0][0].names[0].name} ${tx.mosaics[i].id.id.toHex()}`);  ////////////////////////////////////
                        }else{
                           console.log(`${tx.mosaics[i].id.id.toHex()}`);  ////////////////////////////////////
-                       {     
+                       }     
                         console.log((parseInt(tx.mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 }));
                     
                })(); // async()
