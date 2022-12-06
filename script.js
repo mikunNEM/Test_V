@@ -45,8 +45,7 @@ setTimeout(() => {    //指定した時間後に一度だけ動作する
   
 const address = symbol.Address.createFromRawAddress(window.SSS.activeAddress);
   
-  console.log("activeAddress=");
-  console.log(address.address);
+  console.log("activeAddress=",address.address);
   
 const check_netType = address.address.charAt(0);     // 1文字目を抽出
 
@@ -78,11 +77,8 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
         
           console.log("TEST_NET");
       }
-       console.log("check_netType=");
-       console.log(check_netType);
-  
-       
-         
+       console.log("check_netType=",check_netType);
+     
 
 const dom_netType = document.getElementById('netType');  // network Type を表示　
      
@@ -112,11 +108,9 @@ if (NET_TYPE === NET_TYPE_T){
 accountHttp.getAccountInfo(address)
   .toPromise()
   .then((accountInfo) => {
-        console.log("accountInfo=")
-        console.log(accountInfo);
+        console.log("accountInfo=",accountInfo)
      
-      console.log("モザイクの配列の大きさ=");
-      console.log(accountInfo.mosaics.length);
+        console.log("モザイクの配列の大きさ=",accountInfo.mosaics.length);
      
           //select要素を取得する
           const selectMosaic = document.getElementById('form-mosaic_ID');
@@ -156,8 +150,7 @@ accountHttp.getAccountInfo(address)
            selectMosaic.appendChild(option1);      
            
       }
-      //console.log("mosaic_data=");
-      //console.log(mosaic_data);        
+      //console.log("mosaic_data=",mosaic_data);     
         
     })(); // async() 
   })
@@ -505,7 +498,6 @@ function handleSSS() {
        NET_TYPE,
        symbol.UInt64.fromUint(1000000*Number(maxfee))          // MaxFee 設定 (0.05 XYM)
       )
-          console.log("平文だよ。tx=",tx);
           window.SSS.setTransaction(tx);               // SSSにトランザクションを登録        
           window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
           console.log('signedTx', signedTx);
