@@ -293,24 +293,7 @@ transactionHttp
             
           console.log('モザイク数=',tx.mosaics.length);  //////////////////////////////////////////////
           console.log(tx.mosaics.length !== 0);
-             
-             
-             
-             if (tx.mosaics.length === 0){   // モザイクが空の場合  //////////////　モザイクがある場合はこの if 文はスルーされる
-                  const dom_mosaic = document.createElement('div');
-              　　 const dom_amount = document.createElement('div');
                   
-                   if(tx.signer.address.address === address.address) {  // 送信アドレスとウォレットのアドレスが同じ場合
-                       dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic : No mosaic</font>`;     // No mosaic
-                       dom_amount.innerHTML = `<font color="#FF0000">💁‍♀️➡️💰 : </font>`;     // 　数量
-                   }else{          //  signer とウォレットアドレスが違う場合
-         　            　 dom_mosaic.innerHTML = `<font color="#008000">Mosaic : No mosaic</font>`;     // No mosaic
-                         dom_amount.innerHTML = `<font color="#008000">💰➡️😊 : </font>`;     // 　数量        
-                   } 
-                  　dom_tx.appendChild(dom_mosaic);                    // dom_mosaic をdom_txに追加 
-                　　dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
-             } /////////////////////////////////////////////////////////////////////////////////////////////////////
-             
           /////////// モザイクが空ではない場合   /////////////////　　モザイクが空の場合はこの for 文はスルーされる  //////////
           for(let i=0; i<tx.mosaics.length; i++){  //モザイクの数だけ繰り返す
                const dom_mosaic = document.createElement('div');
@@ -346,9 +329,24 @@ transactionHttp
                
                 dom_tx.appendChild(dom_mosaic);                    // dom_mosaic をdom_txに追加 
                 dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
-                    
-               
+                                   
           }  //モザイクの数だけ繰り返す
+             
+             if (tx.mosaics.length === 0){   // モザイクが空の場合  //////////////　モザイクがある場合はこの if 文はスルーされる
+                  const dom_mosaic = document.createElement('div');
+              　　 const dom_amount = document.createElement('div');
+                  
+                   if(tx.signer.address.address === address.address) {  // 送信アドレスとウォレットのアドレスが同じ場合
+                       dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic : No mosaic</font>`;     // No mosaic
+                       dom_amount.innerHTML = `<font color="#FF0000">💁‍♀️➡️💰 : </font>`;     // 　数量
+                   }else{          //  signer とウォレットアドレスが違う場合
+         　            　 dom_mosaic.innerHTML = `<font color="#008000">Mosaic : No mosaic</font>`;     // No mosaic
+                         dom_amount.innerHTML = `<font color="#008000">💰➡️😊 : </font>`;     // 　数量        
+                   } 
+                  　dom_tx.appendChild(dom_mosaic);                    // dom_mosaic をdom_txに追加 
+                　　dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
+             } /////////////////////////////////////////////////////////////////////////////////////////////////////
+             
              
              if (tx.message.type === 1){
                  dom_enc.innerHTML = `<font color="#ff00ff"><strong></br>暗号化メッセージ</strong></font>`;     // 暗号化メッセージの場合　
