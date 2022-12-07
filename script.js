@@ -292,14 +292,14 @@ transactionHttp
            dom_tx.appendChild(dom_recipient_address);         // dom_recipient_address をdom_txに追加
             
           console.log('モザイク数=',tx.mosaics.length);  //////////////////////////////////////////////
-     
+          console.log(tx.mosaics.length !== 0);
+             
           for(let i=0; i<tx.mosaics.length; i++){  //モザイクの数だけ繰り返す
                const dom_mosaic = document.createElement('div');
                const dom_amount = document.createElement('div');
                
                console.log("i=",i); 
-          (async() => {
-               console.log(tx.mosaics.length !== 0);
+          (async() => {               
             if (tx.mosaics.length !== 0){ //モザイクが空でない(モザイク有りの場合)                 
                
                   let mosaicNames = await nsRepo.getMosaicsNames([new symbol.MosaicId(tx.mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
