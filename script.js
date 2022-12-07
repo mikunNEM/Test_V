@@ -308,7 +308,7 @@ transactionHttp
                   
                   let div = mosaicInfo.divisibility; // 可分性
                              
-                       if(tx.recipientAddress.address.address !== address.address) {  // 受け取りアドレスとウォレットのアドレスが違う場合　
+                       if(tx.recipientAddress.address !== address.address) {  // 受け取りアドレスとウォレットのアドレスが違う場合　
                       
                           if ([mosaicNames][0][0].names.length !==0){  // ネームスペースがある場合
                               dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic :　<big><strong>${[mosaicNames][0][0].names[0].name}</strong></big></font>`; 
@@ -336,7 +336,7 @@ transactionHttp
                   const dom_mosaic = document.createElement('div');
               　　 const dom_amount = document.createElement('div');
                   
-                   if(tx.recipientAddress.address.address !== address.address) {  // 受け取りアドレスとウォレットのアドレスが違う場合
+                   if(tx.recipientAddress.address !== address.address) {  // 受け取りアドレスとウォレットのアドレスが違う場合
                        dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic : No mosaic</font>`;     // No mosaic
                        dom_amount.innerHTML = `<font color="#FF0000">💁‍♀️➡️💰 : </font>`;     // 　数量
                    }else{          //  signer とウォレットアドレスが違う場合
