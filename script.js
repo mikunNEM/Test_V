@@ -212,7 +212,7 @@ const searchCriteria = {
   group: symbol.TransactionGroup.Confirmed,
   address,
   pageNumber: 1,
-  pageSize: 50,
+  pageSize: 10,
   order: symbol.Order.Desc,
   embedded: true,
 };
