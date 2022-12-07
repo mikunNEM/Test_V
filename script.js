@@ -328,14 +328,14 @@ transactionHttp
                  }
               })(); // async()    
             }else{
-                 console.log("モザイクが空だよーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー")
-                   if(tx.signer.address.address === address.address) {  // 送信アドレスとウォレットのアドレスが同じかどうかで絵文字の表示と色を変える
-                       dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic : No mosaic</font>`;     // No mosaic
-                       dom_amount.innerHTML = `<font color="#FF0000">💁‍♀️➡️💰 : </font>`;     // 　数量
-                   }else{
-         　           　dom_mosaic.innerHTML = `<font color="#008000">Mosaic : No mosaic</font>`;     // No mosaic
-                       dom_amount.innerHTML = `<font color="#008000">💰➡️😊 : </font>`;     // 　数量        
-                   }   
+                 console.log("モザイクが空だよーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー");
+               //    if(tx.signer.address.address === address.address) {  // 送信アドレスとウォレットのアドレスが同じかどうかで絵文字の表示と色を変える
+               //        dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic : No mosaic</font>`;     // No mosaic
+               //        dom_amount.innerHTML = `<font color="#FF0000">💁‍♀️➡️💰 : </font>`;     // 　数量
+               //    }else{
+         　    //       　dom_mosaic.innerHTML = `<font color="#008000">Mosaic : No mosaic</font>`;     // No mosaic
+               //        dom_amount.innerHTML = `<font color="#008000">💰➡️😊 : </font>`;     // 　数量        
+               //    }   
              }
 
                 dom_tx.appendChild(dom_mosaic);                    // dom_mosaic をdom_txに追加 
