@@ -308,7 +308,7 @@ transactionHttp
                   mosaicInfo = await mosaicHttp.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する      
                   
                   let div = mosaicInfo.divisibility; // 可分性
-               })(); // async()               
+                             
                  if(tx.signer.address.address === address.address) {  // signerとウォレットのアドレスが同じかどうかで絵文字の表示と色を変える
                       
                      if ([mosaicNames][0][0].names.length !==0){  // ネームスペースがある場合
@@ -326,7 +326,7 @@ transactionHttp
                      }
                          dom_amount.innerHTML = `<font color="#008000" size="+1">💰➡️😊 :　<i><big><strong> ${(parseInt(tx.mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;    // 　数量
                  }
-                 
+              })(); // async()    
             }else{
                  console.log("モザイクが空だよーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー")
                    if(tx.signer.address.address === address.address) {  // 送信アドレスとウォレットのアドレスが同じかどうかで絵文字の表示と色を変える
@@ -337,8 +337,6 @@ transactionHttp
                        dom_amount.innerHTML = `<font color="#008000">💰➡️😊 : </font>`;     // 　数量        
                    }   
              }
-               
-           
 
                 dom_tx.appendChild(dom_mosaic);                    // dom_mosaic をdom_txに追加 
                 dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
