@@ -327,10 +327,13 @@ transactionHttp
                          dom_amount.innerHTML = `<font color="#008000" size="+1">💰➡️😊 :　<i><big><strong> ${(parseInt(tx.mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;    // 　数量
                  }
                     console.log("ここまでは大丈夫？")
-              })(); // async()    
+                 
             }else{
                  console.log("モザイクが空だよーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー");
             }
+               
+           })(); // async() 
+             
                //    if(tx.signer.address.address === address.address) {  // 送信アドレスとウォレットのアドレスが同じかどうかで絵文字の表示と色を変える
                //        dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic : No mosaic</font>`;     // No mosaic
                //        dom_amount.innerHTML = `<font color="#FF0000">💁‍♀️➡️💰 : </font>`;     // 　数量
