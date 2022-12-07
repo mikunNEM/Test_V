@@ -365,7 +365,7 @@ transactionHttp
             dom_txInfo.appendChild(dom_tx);                    // トランザクション情報を追加
     }    //    tx をループ処理
   })
-}, 500)
+}, 1000)
 
 
 // Transaction Type を返す関数
@@ -532,7 +532,7 @@ function handleSSS() {
                    console.log('signedTx', signedTx);
                    transactionHttp.announce(signedTx);    
                    })
-                 }, 500)      
+                 }, 1000)      
              });               
       }     
   })(); // async()  
