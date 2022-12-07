@@ -318,7 +318,7 @@ transactionHttp
                      }    
                          dom_amount.innerHTML = `<font color="#FF0000" size="+1">💁‍♀️➡️💰 :　<i><big><strong> ${(parseInt(tx.mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;     // 　数量               
                  }else{                                         //  signer とウォレットアドレスが違う場合
-                      
+                   
                      if ([mosaicNames][0][0].names.length !==0){ // ネームスペースがある場合                         
                          dom_mosaic.innerHTML = `<font color="#008000">Mosaic :　<big><strong>${[mosaicNames][0][0].names[0].name}</strong></big></font>`; 
                      }else{ 　　　　　　　　　　　　　　　　　　　　　  // ネームスペースがない場合
@@ -328,7 +328,8 @@ transactionHttp
                  }
                     
                
-            }else{   //モザイクが空の場合
+            }else  
+               if (tx.mosaics.length === 0){  // モザイクが空の場合
                  console.log("モザイクが空だよーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー")
                    if(tx.signer.address.address === address.address) {  // 送信アドレスとウォレットのアドレスが同じかどうかで絵文字の表示と色を変える
                        dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic : No mosaic</font>`;     // No mosaic
