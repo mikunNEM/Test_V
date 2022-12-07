@@ -350,7 +350,7 @@ transactionHttp
               
                  dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br>${tx.message.payload}</font>`;     // 　メッセージ    
             }else{          // 平文の場合
-                 dom_message.innerHTML = `<font color="#2f4f4f"></br>< Message ></font><font color="#4169e1"></br>${tx.message.payload}</font>`;     // 　メッセージ  
+                 dom_message.innerHTML = `<font color="#4169e1"></br>< Message ></br>${tx.message.payload}</font>`;     // 　メッセージ  
                }
                          
           } // 'AGGREGATE_BONDED' 'AGGREGATE_COMPLETE' の時はスルーする
