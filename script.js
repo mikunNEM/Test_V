@@ -212,7 +212,7 @@ const searchCriteria = {
   group: symbol.TransactionGroup.Confirmed,
   address,
   pageNumber: 1,
-  pageSize: 10,
+  pageSize: 50,
   order: symbol.Order.Desc,
   embedded: true,
 };
@@ -367,7 +367,7 @@ transactionHttp
             dom_txInfo.appendChild(dom_tx);                    // トランザクション情報を追加
     }    //    tx をループ処理
   })
-}, 1000)
+}, 500)
 
 
 // Transaction Type を返す関数
@@ -534,7 +534,7 @@ function handleSSS() {
                    console.log('signedTx', signedTx);
                    transactionHttp.announce(signedTx);    
                    })
-                 }, 1000)      
+                 }, 500)      
              });               
       }     
   })(); // async()  
