@@ -332,7 +332,7 @@ transactionHttp
                                    
           }  //モザイクの数だけ繰り返す
              
-             if (tx.mosaics.length === 0){   // モザイクが空の場合  //////////////　モザイクがある場合はこの if 文はスルーされる
+/*             if (tx.mosaics.length === 0){   // モザイクが空の場合  //////////////　モザイクがある場合はこの if 文はスルーされる
                   const dom_mosaic = document.createElement('div');
               　　 const dom_amount = document.createElement('div');
                   
@@ -345,7 +345,7 @@ transactionHttp
                    } 
                   　dom_tx.appendChild(dom_mosaic);                    // dom_mosaic をdom_txに追加 
                 　　dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
-             } /////////////////////////////////////////////////////////////////////////////////////////////////////
+             } /////////////////////////////////////////////////////////////////////////////////////////////////////    */
              
              
              if (tx.message.type === 1){
