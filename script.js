@@ -299,6 +299,7 @@ transactionHttp
                
                console.log("i=",i); 
           (async() => {
+               console.log(tx.mosaics.length !== 0);
             if (tx.mosaics.length !== 0){ //モザイクが空でない(モザイク有りの場合)                 
                
                   let mosaicNames = await nsRepo.getMosaicsNames([new symbol.MosaicId(tx.mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
