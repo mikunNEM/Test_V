@@ -1,5 +1,5 @@
 const dom_version = document.getElementById('version'); 
-dom_version.innerTEXT = "v1.0.0";
+dom_version.innerText = 'v1.0.0';
 
 const symbol = require('/node_modules/symbol-sdk');
 
