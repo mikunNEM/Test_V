@@ -541,12 +541,12 @@ function handleSSS() {
 // ポップアップのセッティング処理
 function popupSetting(){
   let popup = document.getElementById('popup');
-     console.log("popup=",popup);
+     //console.log("popup=",popup);
   if(!popup) return;
 
   let bgBlack = document.getElementById('bg-black');
-      console.log("bgBlack=",bgBlack);
-  //let closeBtn = document.getElementById('close-btn');
+      //console.log("bgBlack=",bgBlack);
+      //let closeBtn = document.getElementById('close-btn');
   let showBtn = document.getElementById('show-btn');
      console.log("showBtn=",showBtn);
 
@@ -558,10 +558,10 @@ function popupSetting(){
   // ポップアップ処理
   function popUp(elem){
     if(!elem) return;
-      console.log("elem=",elem);
+      //console.log("elem=",elem);
     elem.addEventListener('click', function(){
       popup.classList.toggle('is-show');
-      console.log("popup=",popup);
+      //console.log("popup=",popup);
     });
   }
 }
