@@ -1,5 +1,5 @@
 const dom_version = document.getElementById('version'); 
-dom_version.innerText = 'v1.0.0 | Powered by SYMBOL BlockChain'; 
+dom_version.innerText = 'v1.0.0　|　Powered by SYMBOL'; 
 
 const symbol = require('/node_modules/symbol-sdk');
 
