@@ -169,7 +169,7 @@ hr {
 
 #version {
  color:rgb(205, 0, 255); 
- text-align: right;
+ /*text-align: right;*/
  font-size: 24px;
- margin: 0px 16px 0px auto;
+ margin: 0px auto 0px 16px;
 }
