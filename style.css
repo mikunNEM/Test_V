@@ -160,7 +160,7 @@ h3 {
 .wrapper {
  display: flex;
   justify-content: space-between;
-  margin: 50px 50px auto 50px;
+  margin: 25px 50px auto 50px;
 }
 
 hr {
