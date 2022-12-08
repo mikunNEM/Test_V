@@ -297,8 +297,6 @@ transactionHttp
           for(let i=0; i<tx.mosaics.length; i++){  //モザイクの数だけ繰り返す
                const dom_mosaic = document.createElement('div');
                const dom_amount = document.createElement('div');
-               
-               console.log("i=",i);
           
                (async() => {
                   let mosaicNames = await nsRepo.getMosaicsNames([new symbol.MosaicId(tx.mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
