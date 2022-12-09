@@ -101,7 +101,7 @@ h3 {
 .sender-card {
   background: rgb(255, 255, 255,0.8);
   border-radius: 16px;
-  margin: 16px;
+  margin: 16px 16px 0px 16px;
   padding: 32px 36px 36px 36px;
   color: #2f4f4f;
 }
