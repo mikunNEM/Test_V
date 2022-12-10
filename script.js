@@ -203,26 +203,17 @@ accountHttp.getAccountInfo(address)
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   
                                   // トランザクション履歴を取得する
-/*const searchCriteria = {                                   
+const searchCriteria = {                                   
   group: sym.TransactionGroup.Confirmed,
   address,
   pageNumber: 1,
   pageSize: 50,
   order: sym.Order.Desc,
   embedded: true,
-};*/
+};
 
-  const searchCriteria = {
-  group: sym.TransactionGroup.Confirmed,
-  address,
-  signerPublicKey: "A675E9E2C69BEE81685D0592DBA8ABED3FC5A4029DFF0F7242992B9145232BAC",
-  pageNumber: 1,
-  pageSize: 10,
-  order: sym.Order.Desc,
-  embedded: true,
-};   
-     
-     
+ 
+         
 console.log("searchCriteria=",searchCriteria);  //////////////////
 console.log("transactionHttp=",transactionHttp);   //////////////////
      
