@@ -1,7 +1,7 @@
 const dom_version = document.getElementById('version'); 
 dom_version.innerText = 'v1.0.0　|　Powered by SYMBOL'; 
 
-const symbol = require('/node_modules/symbol-sdk');
+const sym = require('/node_modules/symbol-sdk');
 
 //const GENERATION_HASH = '57F7DA205008026C776CB6AED843393F04CD458E0AA2D9F1D5F31A402072B2D6';
 
@@ -9,10 +9,10 @@ const symbol = require('/node_modules/symbol-sdk');
 
 const EPOCH_M = 1615853185;
 const NODE_URL_M = 'https://symbol-mikun.net:3001';
-const NET_TYPE_M = symbol.NetworkType.MAIN_NET;
+const NET_TYPE_M = sym.NetworkType.MAIN_NET;
 const XYM_ID_M = '6BED913FA20223F8'; 
 
-const repositoryFactory_M = new symbol.RepositoryFactoryHttp(NODE_URL_M);       // RepositoryFactoryはSymbol-SDKで提供されるアカウントやモザイク等の機能を提供するRepositoryを作成するためのもの
+const repositoryFactory_M = new sym.RepositoryFactoryHttp(NODE_URL_M);       // RepositoryFactoryはSymbol-SDKで提供されるアカウントやモザイク等の機能を提供するRepositoryを作成するためのもの
 const accountHttp_M = repositoryFactory_M.createAccountRepository();
 const transactionHttp_M = repositoryFactory_M.createTransactionRepository();
 const mosaicHttp_M = repositoryFactory_M.createMosaicRepository();
@@ -22,10 +22,10 @@ const nsRepo_M = repositoryFactory_M.createNamespaceRepository();
 
 const EPOCH_T = 1667250467;
 const NODE_URL_T = 'https://mikun-testnet2.tk:3001';
-const NET_TYPE_T = symbol.NetworkType.TEST_NET;
+const NET_TYPE_T = sym.NetworkType.TEST_NET;
 const XYM_ID_T = '72C0212E67A08BCE';
 
-const repositoryFactory_T = new symbol.RepositoryFactoryHttp(NODE_URL_T);       // RepositoryFactoryはSymbol-SDKで提供されるアカウントやモザイク等の機能を提供するRepositoryを作成するためのもの
+const repositoryFactory_T = new sym.RepositoryFactoryHttp(NODE_URL_T);       // RepositoryFactoryはSymbol-SDKで提供されるアカウントやモザイク等の機能を提供するRepositoryを作成するためのもの
 const accountHttp_T = repositoryFactory_T.createAccountRepository();
 const transactionHttp_T = repositoryFactory_T.createTransactionRepository();
 const mosaicHttp_T = repositoryFactory_T.createMosaicRepository();
@@ -46,7 +46,7 @@ let nsRepo;
 
 setTimeout(() => {    //指定した時間後に一度だけ動作する
   
-const address = symbol.Address.createFromRawAddress(window.SSS.activeAddress);
+const address = sym.Address.createFromRawAddress(window.SSS.activeAddress);
   
   console.log("activeAddress=",address.address);
   
@@ -128,7 +128,7 @@ accountHttp.getAccountInfo(address)
            const option1 = document.createElement('option');
            
            const mosaic_dataX = {};
-           const mosaicNamesA = await nsRepo.getMosaicsNames([new symbol.MosaicId(m.id.id.toHex())]).toPromise(); //モザイクIDからネームスペースを取り出す
+           const mosaicNamesA = await nsRepo.getMosaicsNames([new sym.MosaicId(m.id.id.toHex())]).toPromise(); //モザイクIDからネームスペースを取り出す
          if ([mosaicNamesA][0][0].names.length !== 0) {  //  ネームスペースがある場合
         
             //mosaic_dataX.id = m.id.id.toHex();  // モザイクデータチェック用
@@ -166,7 +166,7 @@ accountHttp.getAccountInfo(address)
  // nsRepo = repositoryFactory.createNamespaceRepository();
   
   wsEndpoint = NODE_URL.replace('http', 'ws') + "/ws";
-  listener = new symbol.Listener(wsEndpoint,nsRepo,WebSocket);
+  listener = new sym.Listener(wsEndpoint,nsRepo,WebSocket);
   
   
   listener.open().then(() => {
@@ -212,15 +212,15 @@ accountHttp.getAccountInfo(address)
   
                                   // トランザクション履歴を取得する
 const searchCriteria = {                                   
-  group: symbol.TransactionGroup.Confirmed,
+  group: sym.TransactionGroup.Confirmed,
   address,
   pageNumber: 1,
   pageSize: 50,
-  order: symbol.Order.Desc,
+  order: sym.Order.Desc,
   embedded: true,
 };
 
-  const searchCriteria: TransactionSearchCriteria = {
+/*  const searchCriteria: TransactionSearchCriteria = {
   group: TransactionGroup.Confirmed,
   signerPublicKey: "A675E9E2C69BEE81685D0592DBA8ABED3FC5A4029DFF0F7242992B9145232BAC",
   type: [TransactionType.TRANSFER],
@@ -228,7 +228,7 @@ const searchCriteria = {
   pageSize: 10,
   order: Order.Desc,
   embedded: true,
-};
+};   */
      
      
 console.log("searchCriteria=",searchCriteria);  //////////////////
@@ -313,7 +313,7 @@ transactionHttp
                const dom_amount = document.createElement('div');
           
                (async() => {
-                  let mosaicNames = await nsRepo.getMosaicsNames([new symbol.MosaicId(tx.mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
+                  let mosaicNames = await nsRepo.getMosaicsNames([new sym.MosaicId(tx.mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
      
                   mosaicInfo = await mosaicHttp.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する      
                   
@@ -491,22 +491,22 @@ function handleSSS() {
  
      
  (async() => {  
-     mosaicInfo = await mosaicHttp.getMosaic(new symbol.MosaicId(mosaic_ID)).toPromise();// 可分性の情報を取得する 
+     mosaicInfo = await mosaicHttp.getMosaic(new sym.MosaicId(mosaic_ID)).toPromise();// 可分性の情報を取得する 
      const div = mosaicInfo.divisibility; // 可分性
 　　　   
      if (enc === "0"){                      //////////////// メッセージが平文の場合 ////////////////////////////////////
-    　 const tx = symbol.TransferTransaction.create(        // トランザクションを生成
-       symbol.Deadline.create(EPOCH),
-       symbol.Address.createFromRawAddress(addr),
+    　 const tx = sym.TransferTransaction.create(        // トランザクションを生成
+       sym.Deadline.create(EPOCH),
+       sym.Address.createFromRawAddress(addr),
        [
-         new symbol.Mosaic(
-           new symbol.MosaicId(mosaic_ID),
-           symbol.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
+         new sym.Mosaic(
+           new sym.MosaicId(mosaic_ID),
+           sym.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
          )
        ],
-       symbol.PlainMessage.create(message),
+       sym.PlainMessage.create(message),
        NET_TYPE,
-       symbol.UInt64.fromUint(1000000*Number(maxfee))          // MaxFee 設定
+       sym.UInt64.fromUint(1000000*Number(maxfee))          // MaxFee 設定
       )
           window.SSS.setTransaction(tx);               // SSSにトランザクションを登録        
           window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
@@ -515,7 +515,7 @@ function handleSSS() {
           }) 
      }else
         if (enc === "1"){                ////////////// メッセージが暗号の場合 /////////////////////////////////////////////////
-             const alice = symbol.Address.createFromRawAddress(addr);   //アドレスクラスの生成
+             const alice = sym.Address.createFromRawAddress(addr);   //アドレスクラスの生成
              accountInfo = await accountHttp.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する
              console.log("accontInfo=",accountInfo);
              
@@ -524,18 +524,18 @@ function handleSSS() {
              window.SSS.requestSignEncription().then((msg) => {
                  setTimeout(() => {
                    console.log({ msg });
-                   const tx = symbol.TransferTransaction.create(        // トランザクションを生成
-                   symbol.Deadline.create(EPOCH),
-                   symbol.Address.createFromRawAddress(addr),
+                   const tx = sym.TransferTransaction.create(        // トランザクションを生成
+                   sym.Deadline.create(EPOCH),
+                   sym.Address.createFromRawAddress(addr),
                    [
-                     new symbol.Mosaic(
-                       new symbol.MosaicId(mosaic_ID),
-                       symbol.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
+                     new sym.Mosaic(
+                       new sym.MosaicId(mosaic_ID),
+                       sym.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
                      )
                    ],
                    msg,
                    NET_TYPE,
-                   symbol.UInt64.fromUint(1000000*Number(maxfee))          // MaxFee 設定  
+                   sym.UInt64.fromUint(1000000*Number(maxfee))          // MaxFee 設定  
                    )
                    window.SSS.setTransaction(tx);               // SSSにトランザクションを登録
                    window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求                   
