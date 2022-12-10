@@ -131,29 +131,21 @@ accountHttp.getAccountInfo(address)
            const mosaicNamesA = await nsRepo.getMosaicsNames([new sym.MosaicId(m.id.id.toHex())]).toPromise(); //モザイクIDからネームスペースを取り出す
          if ([mosaicNamesA][0][0].names.length !== 0) {  //  ネームスペースがある場合
         
-            //mosaic_dataX.id = m.id.id.toHex();  // モザイクデータチェック用
             option1.value =   m.id.id.toHex();  // セレクトボックスvalue
-            //mosaic_dataX.name = [mosaicNamesA][0][0].names[0].name;  // モザイクデータチェック用
             option1.textContent = `${[mosaicNamesA][0][0].names[0].name} : ${(parseInt(m.amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })}`;  // セレクトボックスtext
-            //mosaic_data.push(mosaic_dataX);  // モザイクデータチェック用
-              
+                       
          }else{   //ネームスペースがない場合
               
-               //mosaic_dataX.id = m.id.toHex();   // モザイクデータチェック用
                option1.value =   m.id.id.toHex();  // セレクトボックスvalue
-               //mosaic_dataX.name = "";           // モザイクデータチェック用
-               option1.textContent = `${m.id.id.toHex()} : ${(parseInt(m.amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })}`; // セレクトボックスtext
-               //mosaic_data.push(mosaic_dataX);  // モザイクデータチェック用         
+               option1.textContent = `${m.id.id.toHex()} : ${(parseInt(m.amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })}`; // セレクトボックスtext        
          }             
         if (m.id.id.toHex() === XYM_ID) {
            const dom_xym = document.getElementById('wallet-xym')
            dom_xym.innerHTML = `<i>XYM Balance : ${(parseInt(m.amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })}</i>`
         }
            //select要素にoption要素を追加する
-           selectMosaic.appendChild(option1);      
-           
-      }
-      //console.log("mosaic_data=",mosaic_data);     
+           selectMosaic.appendChild(option1);                 
+      }    
         
     })(); // async() 
   })
@@ -211,16 +203,16 @@ accountHttp.getAccountInfo(address)
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   
                                   // トランザクション履歴を取得する
-const searchCriteria = {                                   
+/*const searchCriteria = {                                   
   group: sym.TransactionGroup.Confirmed,
   address,
   pageNumber: 1,
   pageSize: 50,
   order: sym.Order.Desc,
   embedded: true,
-};
+};*/
 
-/*  const searchCriteria: TransactionSearchCriteria = {
+  const searchCriteria: TransactionSearchCriteria = {
   group: TransactionGroup.Confirmed,
   signerPublicKey: "A675E9E2C69BEE81685D0592DBA8ABED3FC5A4029DFF0F7242992B9145232BAC",
   type: [TransactionType.TRANSFER],
@@ -228,7 +220,7 @@ const searchCriteria = {
   pageSize: 10,
   order: Order.Desc,
   embedded: true,
-};   */
+};   
      
      
 console.log("searchCriteria=",searchCriteria);  //////////////////
@@ -272,10 +264,9 @@ transactionHttp
       
       
       
-      　　　//console.log("timestamp="); //////////////////////////////////　　  　timestamp to Date 　　　　　/////////////////////////
+      　　　////////////////////////////////////////////　　  　timestamp to Date 　　　　　/////////////////////////
       　　　const timestamp = EPOCH + (parseInt(tx.transactionInfo.timestamp.toHex(), 16)/1000);   /////////////// Unit64 を 16進数に　変換したあと10進数に変換　
       　　　const date = new Date(timestamp * 1000);
-      　　　//console.log(date.getTime());
       
      　　　 const yyyy = `${date.getFullYear()}`;
       　　　// .slice(-2)で文字列中の末尾の2文字を取得する
@@ -554,27 +545,21 @@ function handleSSS() {
 // ポップアップのセッティング処理
 function popupSetting(){
   let popup = document.getElementById('popup');
-     //console.log("popup=",popup);
   if(!popup) return;
 
   let bgBlack = document.getElementById('bg-black');
-      //console.log("bgBlack=",bgBlack);
-      //let closeBtn = document.getElementById('close-btn');
   let showBtn = document.getElementById('show-btn');
      console.log("showBtn=",showBtn);
 
   // ポップアップ
   popUp(bgBlack);
-  //popUp(closeBtn);
   popUp(showBtn);
 
   // ポップアップ処理
   function popUp(elem){
     if(!elem) return;
-      //console.log("elem=",elem);
     elem.addEventListener('click', function(){
       popup.classList.toggle('is-show');
-      //console.log("popup=",popup);
     });
   }
 }
