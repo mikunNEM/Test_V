@@ -216,7 +216,6 @@ accountHttp.getAccountInfo(address)
   group: sym.TransactionGroup.Confirmed,
   address,
   signerPublicKey: "A675E9E2C69BEE81685D0592DBA8ABED3FC5A4029DFF0F7242992B9145232BAC",
-  type: [TransactionType.TRANSFER],
   pageNumber: 1,
   pageSize: 10,
   order: sym.Order.Desc,
