@@ -246,7 +246,7 @@ transactionHttp
       dom_signer_address.innerHTML = `<font color="#2f4f4f">From : ${tx.signer.address.address}</font>`;    //  文字列の結合　送信者
       
           
-      　　　////////////////////////////////////////////　　  　timestamp to Date 　　　　　/////////////////////////
+      ////////////////////////////////////////////　　  　timestamp to Date 　　　　　/////////////////////////
       　　　const timestamp = EPOCH + (parseInt(tx.transactionInfo.timestamp.toHex(), 16)/1000);   /////////////// Unit64 を 16進数に　変換したあと10進数に変換　
       　　　const date = new Date(timestamp * 1000);
       
