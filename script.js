@@ -113,7 +113,7 @@ accountHttp.getAccountInfo(address)
   .then((accountInfo) => {
         console.log("accountInfo=",accountInfo)
      
-        console.log("モザイクの配列の大きさ=",accountInfo.mosaics.length);
+        console.log("モザイク保有数=",accountInfo.mosaics.length);
      
           //select要素を取得する
           const selectMosaic = document.getElementById('form-mosaic_ID');
