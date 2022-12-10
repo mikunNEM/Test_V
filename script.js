@@ -34,15 +34,12 @@ const nsRepo_T = repositoryFactory_T.createNamespaceRepository();
 let EPOCH;
 let NODE_URL;
 let NET_TYPE;
-let XYM_ID;
-     
+let XYM_ID;     
 let repositoryFactory;
 let accountHttp;
 let transactionHttp;
 let mosaicHttp;
 let nsRepo;
-
-
 
 setTimeout(() => {    //指定した時間後に一度だけ動作する
   
@@ -111,8 +108,7 @@ if (NET_TYPE === NET_TYPE_T){
 accountHttp.getAccountInfo(address)
   .toPromise()
   .then((accountInfo) => {
-        console.log("accountInfo=",accountInfo)
-     
+        console.log("accountInfo=",accountInfo)     
         console.log("モザイク保有数=",accountInfo.mosaics.length);
      
           //select要素を取得する
@@ -158,8 +154,7 @@ accountHttp.getAccountInfo(address)
  // nsRepo = repositoryFactory.createNamespaceRepository();
   
   wsEndpoint = NODE_URL.replace('http', 'ws') + "/ws";
-  listener = new sym.Listener(wsEndpoint,nsRepo,WebSocket);
-  
+  listener = new sym.Listener(wsEndpoint,nsRepo,WebSocket); 
   
   listener.open().then(() => {
 
@@ -211,12 +206,9 @@ const searchCriteria = {
   order: sym.Order.Desc,
   embedded: true,
 };
-
- 
          
 console.log("searchCriteria=",searchCriteria);  //////////////////
 console.log("transactionHttp=",transactionHttp);   //////////////////
-     
 
 transactionHttp
   .search(searchCriteria)
@@ -253,8 +245,7 @@ transactionHttp
          
       dom_signer_address.innerHTML = `<font color="#2f4f4f">From : ${tx.signer.address.address}</font>`;    //  文字列の結合　送信者
       
-      
-      
+          
       　　　////////////////////////////////////////////　　  　timestamp to Date 　　　　　/////////////////////////
       　　　const timestamp = EPOCH + (parseInt(tx.transactionInfo.timestamp.toHex(), 16)/1000);   /////////////// Unit64 を 16進数に　変換したあと10進数に変換　
       　　　const date = new Date(timestamp * 1000);
@@ -297,8 +288,7 @@ transactionHttp
                (async() => {
                   let mosaicNames = await nsRepo.getMosaicsNames([new sym.MosaicId(tx.mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
      
-                  mosaicInfo = await mosaicHttp.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する      
-                  
+                  mosaicInfo = await mosaicHttp.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する                     
                   let div = mosaicInfo.divisibility; // 可分性
                              
                        if(tx.recipientAddress.address !== address.address) {  // 受け取りアドレスとウォレットのアドレスが違う場合　
@@ -351,8 +341,7 @@ transactionHttp
                }
                          
           } // tx.type が 'TRANSFER' の場合
-                                                  
-                         
+                                                                          
             dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加              
             dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く
             dom_txInfo.appendChild(dom_tx);                    // トランザクション情報を追加
@@ -361,7 +350,8 @@ transactionHttp
 }, 1000)
 
 
-// Transaction Type を返す関数
+// Transaction Type を返す関数  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 function getTransactionType (type) { // https://symbol.github.io/symbol-sdk-typescript-javascript/1.0.3/enums/TransactionType.html
   switch(type){
   　case 16720:
@@ -447,7 +437,10 @@ function getTransactionType (type) { // https://symbol.github.io/symbol-sdk-type
   }
 }
 
-// handleSSS関数はトランザクションを作成し、window.SSS.setTransaction関数を実行しSSSにトランザクションを登録します。そしてwindow.SSS.requestSign関数を実行し、SSSを用いた署名をユーザ－に要求します。
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// handleSSS関数はトランザクションを作成し、window.SSS.setTransaction関数を実行しSSSにトランザクションを登録します。
+// そしてwindow.SSS.requestSign関数を実行し、SSSを用いた署名をユーザ－に要求します。
 
 function handleSSS() {      
   console.log('handle sss');
@@ -470,8 +463,7 @@ function handleSSS() {
             NET_TYPE = NET_TYPE_T
             transactionHttp = transactionHttp_T;
         }
- 
-     
+    
  (async() => {  
      mosaicInfo = await mosaicHttp.getMosaic(new sym.MosaicId(mosaic_ID)).toPromise();// 可分性の情報を取得する 
      const div = mosaicInfo.divisibility; // 可分性
