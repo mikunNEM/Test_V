@@ -219,7 +219,7 @@ accountHttp.getAccountInfo(address)
   type: [TransactionType.TRANSFER],
   pageNumber: 1,
   pageSize: 10,
-  order: Order.Desc,
+  order: sym.Order.Desc,
   embedded: true,
 };   
      
