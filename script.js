@@ -564,13 +564,13 @@ popupSetting();
 function selectboxChange(address,check_netType) {
 
 
-const page_num = document.getElementById('page_num');  // セレクトボックスから、Page No を取得
+const page_num = document.getElementById('page_num1');  // セレクトボックスから、Page No を取得
 
   
 const searchCriteria = {                                   
   group: sym.TransactionGroup.Confirmed,
   address,
-  pageNumber: page_num,
+  pageNumber: `${page_num}`,
   pageSize: 50,
   order: sym.Order.Desc,
   embedded: true,
