@@ -617,7 +617,7 @@ transactionHttp
   .then((txs) => {
     console.log("txs=",txs);         /////////////////
      
-    const dom_txInfo = document.getElementById('wallet-transactions'); 
+    let dom_txInfo = document.getElementById('wallet-transactions'); 
     dom_txInfo.remove();
     dom_txInfo = document.getElementById('wallet-transactions'); 
   
