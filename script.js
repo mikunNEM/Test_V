@@ -561,6 +561,8 @@ popupSetting();
 
 function selectboxChange(address,check_netType) {
 
+   console.log("address0=",address);
+  
 const page_num = document.getElementById('page_num1').value;  // セレクトボックスから、Page No を取得
   
 const searchCriteria = {                                   
