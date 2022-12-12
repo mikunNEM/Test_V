@@ -596,8 +596,6 @@ function selectboxChange() {
        console.log("check_netType=",check_netType);
  ///////////////////////////////////////////////////////////////////////////////////////////////
   
-   console.log("address0=",address);
-   console.log("check_netType",check_netType);
   
 const page_num = document.getElementById('page_num1').value;  // セレクトボックスから、Page No を取得
   
@@ -688,14 +686,12 @@ transactionHttp
                const dom_mosaic = document.createElement('div');
                const dom_amount = document.createElement('div');
           
-            console.log("address1=",address);
                (async() => {
                   let mosaicNames = await nsRepo.getMosaicsNames([new sym.MosaicId(tx.mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
      
                   mosaicInfo = await mosaicHttp.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する                     
                   let div = mosaicInfo.divisibility; // 可分性
                      
-                   console.log("address2=",address);
                        if(tx.recipientAddress.address !== address.address) {  // 受け取りアドレスとウォレットのアドレスが違う場合　
                       
                           if ([mosaicNames][0][0].names.length !==0){  // ネームスペースがある場合
