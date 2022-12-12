@@ -559,9 +559,7 @@ popupSetting();
   
                                   // トランザクション履歴を取得する
 
-function OnButtonClick() {
-  
-
+function selectboxChange() {
 
  const address = sym.Address.createFromRawAddress(window.SSS.activeAddress);
   
@@ -599,7 +597,7 @@ function OnButtonClick() {
  ///////////////////////////////////////////////////////////////////////////////////////////////
   
   
-//const page_num = document.getElementById('page_num1').value;  // セレクトボックスから、Page No を取得
+const page_num = document.getElementById('page_num1').value;  // セレクトボックスから、Page No を取得
   
 const searchCriteria = {                                   
   group: sym.TransactionGroup.Confirmed,
