@@ -561,8 +561,7 @@ popupSetting();
 
 function selectboxChange() {
   
-  var clone = dom_tx.cloneNode( false ); //
-  dom_tx.parentNode.replaceChild( clone , dom_tx ); 
+ window.location.reload();
 
  const address = sym.Address.createFromRawAddress(window.SSS.activeAddress);
   
