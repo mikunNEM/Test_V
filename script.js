@@ -559,9 +559,9 @@ popupSetting();
   
                                   // トランザクション履歴を取得する
 
-function selectboxChange() {
+function OnButtonClick() {
   
- window.location.reload();
+
 
  const address = sym.Address.createFromRawAddress(window.SSS.activeAddress);
   
