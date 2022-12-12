@@ -618,8 +618,10 @@ transactionHttp
     console.log("txs=",txs);         /////////////////
      
     const dom_txInfo = document.getElementById('wallet-transactions'); 
-    console.log("dom_txInfo=",dom_txInfo); ////////////////
-    
+    console.log("dom_txInfo1=",dom_txInfo); ////////////////
+    dom_txInfo.remove;
+    console.log("dom_txInfo2=",dom_txInfo);
+  
     for (let tx of txs.data) {   ///////////////    tx を pageSize の回数繰り返す ///////////////////
       console.log("tx=",tx);      ////////////////////
       const dom_tx = document.createElement('div');
