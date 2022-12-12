@@ -564,6 +564,7 @@ function selectboxChange(address,check_netType) {
 
 const page_num = document.getElementById('page_num1');  // セレクトボックスから、Page No を取得
 
+  console.log("page_num=",page_num);
   
 const searchCriteria = {                                   
   group: sym.TransactionGroup.Confirmed,
