@@ -559,8 +559,43 @@ popupSetting();
   
                                   // トランザクション履歴を取得する
 
-function selectboxChange(address,check_netType) {
+function selectboxChange() {
 
+ const address = sym.Address.createFromRawAddress(window.SSS.activeAddress);
+  
+  const check_netType = address.address.charAt(0);     // 1文字目を抽出
+
+   if (check_netType === 'N'){           //ネットワークの判別　 メインネット 
+       EPOCH = EPOCH_M;
+       NODE_URL = NODE_URL_M;
+       NET_TYPE = NET_TYPE_M;
+       XYM_ID = XYM_ID_M;
+     
+       repositoryFactory = repositoryFactory_M;
+       accountHttp = accountHttp_M;
+       transactionHttp = transactionHttp_M;
+       mosaicHttp = mosaicHttp_M;
+       nsRepo = nsRepo_M;
+       
+      console.log("MAIN_NET");
+   }else 
+      if (check_netType === 'T'){      // テストネット
+          EPOCH = EPOCH_T;
+          NODE_URL = NODE_URL_T;
+          NET_TYPE = NET_TYPE_T;
+          XYM_ID = XYM_ID_T;
+        
+          repositoryFactory = repositoryFactory_T;
+          accountHttp = accountHttp_T;
+          transactionHttp = transactionHttp_T;
+          mosaicHttp = mosaicHttp_T;
+          nsRepo = nsRepo_T;
+        
+          console.log("TEST_NET");
+      }
+       console.log("check_netType=",check_netType);
+ ///////////////////////////////////////////////////////////////////////////////////////////////
+  
    console.log("address0=",address);
    console.log("check_netType",check_netType);
   
