@@ -201,7 +201,7 @@ accountHttp.getAccountInfo(address)
 const searchCriteria = {                                   
   group: sym.TransactionGroup.Confirmed,
   address,
-  pageNumber: 1,
+  pageNumber: 2,
   pageSize: 50,
   order: sym.Order.Desc,
   embedded: true,
