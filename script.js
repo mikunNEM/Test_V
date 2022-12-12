@@ -561,7 +561,7 @@ popupSetting();
   
                                   // トランザクション履歴を取得する
 
-function selectboxChange() {
+function selectboxChange(address) {
 
 
 const page_num = document.getElementById('page_num');  // セレクトボックスから、Page No を取得
