@@ -198,10 +198,13 @@ accountHttp.getAccountInfo(address)
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   
                                   // トランザクション履歴を取得する
+  
+const page_num = 3;
+  
 const searchCriteria = {                                   
   group: sym.TransactionGroup.Confirmed,
   address,
-  pageNumber: 2,
+  pageNumber: page_num,
   pageSize: 50,
   order: sym.Order.Desc,
   embedded: true,
