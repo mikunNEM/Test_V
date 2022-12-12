@@ -562,6 +562,7 @@ popupSetting();
 function selectboxChange(address,check_netType) {
 
    console.log("address0=",address);
+   console.log("check_netType",check_netType);
   
 const page_num = document.getElementById('page_num1').value;  // セレクトボックスから、Page No を取得
   
