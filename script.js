@@ -620,7 +620,8 @@ transactionHttp
     const dom_txInfo = document.getElementById('wallet-transactions');
   
     if (dom_txInfo !== null){ // null じゃなければ削除
-      dom_txInfo.remove();
+       dom_txInfo.remove();
+       dom_txInfo = document.getElementById('wallet-transactions');
     }
   
     for (let tx of txs.data) {   ///////////////    tx を pageSize の回数繰り返す ///////////////////
