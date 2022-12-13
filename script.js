@@ -670,10 +670,9 @@ transactionHttp
      　　　 console.log(ymdhms);
       
      　　　 dom_date.innerHTML = `<font color="#7E00FF"><p style="text-align: right">${ymdhms}</p></font>`;    //　日付  右寄せ
-      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
          
-     　　　 dom_tx.appendChild(dom_date);                     //　dom_date　をdom_txに追加
-        
+     　　　 dom_tx.appendChild(dom_date);                     //　dom_date　をdom_txに追加        
            dom_tx.appendChild(dom_txType);                    // dom_txType をdom_txに追加 
            dom_tx.appendChild(dom_hash);                      // dom_hash をdom_txに追加
            dom_tx.appendChild(dom_signer_address);            // dom_signer_address をdom_txに追加  
@@ -750,12 +749,7 @@ transactionHttp
                                                                           
             dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加              
             dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く
-      
-          // if (dom_txInfo === null){
-          //    dom_txInfo = dom_tx;             //  null の場合先頭に代入する
-          // }else{
-               dom_txInfo.appendChild(dom_tx);        // トランザクション情報を追加
-          //  }
+            dom_txInfo.appendChild(dom_tx);        // トランザクション情報を追加
       
     }    //    tx をループ処理
   })
