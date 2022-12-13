@@ -751,7 +751,7 @@ transactionHttp
             dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く
       
            if (dom_txInfo === null){
-              dom_txInfo.prepend(dom_tx);             //  null の場合先頭に代入する
+              dom_txInfo = dom_tx;             //  null の場合先頭に代入する
            }else{
                dom_txInfo.appendChild(dom_tx);        // トランザクション情報を追加
            }
