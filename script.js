@@ -618,7 +618,7 @@ transactionHttp
     console.log("txs=",txs);         /////////////////
      
     const dom_txInfo = document.getElementById('wallet-transactions'); 
-    dom_txInfo.removeChild();
+    dom_txInfo.remove();
     //dom_txInfo = document.getElementById('wallet-transactions'); 
   
     for (let tx of txs.data) {   ///////////////    tx を pageSize の回数繰り返す ///////////////////
