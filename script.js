@@ -617,11 +617,12 @@ transactionHttp
   .then((txs) => {
     console.log("txs=",txs);         /////////////////
      
-    let dom_txInfo = document.getElementById('wallet-transactions');
+    const dom_txInfo = document.getElementById('wallet-transactions');
   
-    if (dom_txInfo !== null){ // null じゃなければ削除
-       dom_txInfo.remove();
-       dom_txInfo = document.getElementById('wallet-transactions');
+    if (dom_txInfo !== null){ // null じゃなければ子ノードを全て削除  
+       　while(dom_txInfo.firstChild){
+  　　　　node.removeChild(dom_txInfo.firstChild);
+　　　　　}
     }
   
     for (let tx of txs.data) {   ///////////////    tx を pageSize の回数繰り返す ///////////////////
