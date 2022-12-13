@@ -748,7 +748,13 @@ transactionHttp
                                                                           
             dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加              
             dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く
-            dom_txInfo.appendChild(dom_tx);                    // トランザクション情報を追加
+      
+           if (dom_txInfo === null){
+              dom_txInfo ??= dom_tx;        //  null の場合代入する
+           }else{
+               dom_txInfo.appendChild(dom_tx);                    // トランザクション情報を追加
+           }
+      
     }    //    tx をループ処理
   })
 }
