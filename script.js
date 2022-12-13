@@ -621,7 +621,7 @@ transactionHttp
   
     if (dom_txInfo !== null){ // null じゃなければ子ノードを全て削除  
        　while(dom_txInfo.firstChild){
-  　　　　node.removeChild(dom_txInfo.firstChild);
+  　　　　dom_txInfo.removeChild(dom_txInfo.firstChild);
 　　　　　}
     }
   
