@@ -44,6 +44,7 @@ let nsRepo;
 setTimeout(() => {    //指定した時間後に一度だけ動作する
   
     console.log(isAllowedSSS);
+    requestSSS;
 
   if (typeof window.SSS.activeAddress === "undefined") {
      console.log("Addressを読み込めません、SSSとのLinkを確認してください"); 
