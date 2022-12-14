@@ -534,7 +534,6 @@ function popupSetting(){
 
   let bgBlack = document.getElementById('bg-black');
   let showBtn = document.getElementById('show-btn');
-     console.log("showBtn=",showBtn);
 
   // ポップアップ
   popUp(bgBlack);
