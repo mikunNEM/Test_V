@@ -43,7 +43,11 @@ let nsRepo;
 
 setTimeout(() => {    //指定した時間後に一度だけ動作する
   
-    console.log(isAllowedSSS);
+if (isAllowedSSS){
+    console.log("連携されています。");
+}else{
+     console.log("連携されていません　XX");
+}
     console.log(requestSSS);
 
   if (typeof window.SSS.activeAddress === "undefined") {
