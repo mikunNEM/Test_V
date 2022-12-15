@@ -43,7 +43,7 @@ let nsRepo;
 
 setTimeout(() => {    //指定した時間後に一度だけ動作する
   
-    console.log(window.isAllowedSSS());
+    console.log("SSS連携=",window.isAllowedSSS());
     window.requestSSS();
   
 const address = sym.Address.createFromRawAddress(window.SSS.activeAddress);
