@@ -43,7 +43,7 @@ let nsRepo;
 
 setTimeout(() => {    //指定した時間後に一度だけ動作する
   
-    console.log("SSS連携=",window.isAllowedSSS());
+    console.log("SSSLink=",window.isAllowedSSS());
     window.requestSSS();    // SSSと連携されてない場合、右下にメッセージが出る
   
 const address = sym.Address.createFromRawAddress(window.SSS.activeAddress);
@@ -112,7 +112,7 @@ accountHttp.getAccountInfo(address)
   .toPromise()
   .then((accountInfo) => {
         console.log("accountInfo=",accountInfo)     
-        console.log("モザイク保有数=",accountInfo.mosaics.length);
+        console.log("Mosaics =",accountInfo.mosaics.length);
      
           //select要素を取得する
           const selectMosaic = document.getElementById('form-mosaic_ID');
