@@ -48,7 +48,7 @@ setTimeout(() => {    //指定した時間後に一度だけ動作する
 //}else{
 //     console.log("連携されていません　XX");
 //}
-    window.SSS.requestSSS;
+    window.SSS.requestSSS();
   
 const address = sym.Address.createFromRawAddress(window.SSS.activeAddress);
   
