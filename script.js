@@ -599,7 +599,7 @@ function selectboxChange() {
  ///////////////////////////////////////////////////////////////////////////////////////////////
   
   
-const page_num = document.getElementById('page_num1').value;  // セレクトボックスから、Page No を取得
+const page_num = document.getElementById('page_num2').value;  // セレクトボックスから、Page No を取得
   
 const searchCriteria = {                                   
   group: sym.TransactionGroup.Confirmed,
