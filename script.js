@@ -48,11 +48,7 @@ setTimeout(() => {    //指定した時間後に一度だけ動作する
 //}else{
 //     console.log("連携されていません　XX");
 //}
-    console.log(requestSSS);
-
-  if (typeof window.SSS.activeAddress === "undefined") {
-     console.log("Addressを読み込めません、SSSとのLinkを確認してください"); 
-  }
+    window.SSS.requestSSS;
   
 const address = sym.Address.createFromRawAddress(window.SSS.activeAddress);
   
