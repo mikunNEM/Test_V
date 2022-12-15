@@ -112,7 +112,7 @@ accountHttp.getAccountInfo(address)
   .toPromise()
   .then((accountInfo) => {
         console.log("accountInfo=",accountInfo)     
-        console.log("Mosaics =",accountInfo.mosaics.length);
+        console.log("account_Mosaics =",accountInfo.mosaics.length);
      
           //select要素を取得する
           const selectMosaic = document.getElementById('form-mosaic_ID');
@@ -283,7 +283,7 @@ transactionHttp
            dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${tx.recipientAddress.address}</font>`; //  文字列の結合　   宛先
            dom_tx.appendChild(dom_recipient_address);         // dom_recipient_address をdom_txに追加
             
-          console.log('モザイク数=',tx.mosaics.length);  //////////////////////////////////////////////
+          console.log('Tx_モザイク数=',tx.mosaics.length);  //////////////////////////////////////////////
                   
           /////////// モザイクが空ではない場合   /////////////////　　モザイクが空の場合はこの for 文はスルーされる  //////////
           for(let i=0; i<tx.mosaics.length; i++){  //モザイクの数だけ繰り返す
