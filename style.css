@@ -3,9 +3,9 @@
 
 body {
   /* background: rgb(190, 34, 211); */
-  /*background-image:url("https://data.comsa.io/user/b32ed69c-7a42-490d-83f1-3494875a69cc/asset/4dea6d31-3b1d-4f3f-b4a7-405b34c5014a.png");*/
+  background-image:url("https://data.comsa.io/user/b32ed69c-7a42-490d-83f1-3494875a69cc/asset/4dea6d31-3b1d-4f3f-b4a7-405b34c5014a.png");
   /*background-image:url("https://data.comsa.io/user/77e95fb3-a3fd-49fc-93ce-ab1dd15f147b/asset/3aa1159d-9051-4c34-ab79-5813be5ab8b4.jpg");*/
-  background-image:url("https://data.comsa.io/user/77e95fb3-a3fd-49fc-93ce-ab1dd15f147b/asset/f5963937-5425-40a5-90be-9dfd16a39e86.jpg");
+  /*background-image:url("https://data.comsa.io/user/77e95fb3-a3fd-49fc-93ce-ab1dd15f147b/asset/f5963937-5425-40a5-90be-9dfd16a39e86.jpg");*/
   background-size: cover;
   background-attachment: fixed;
 }
