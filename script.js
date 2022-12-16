@@ -1,5 +1,5 @@
 const dom_version = document.getElementById('version'); 
-dom_version.innerText = 'v1.0.1　|　Powered by SYMBOL'; 
+dom_version.innerText = 'v1.0.2　|　Powered by SYMBOL'; 
 
 const sym = require('/node_modules/symbol-sdk');
 
