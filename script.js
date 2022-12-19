@@ -14,7 +14,7 @@ const XYM_ID_M = '6BED913FA20223F8';
 
 const repo_M = new sym.RepositoryFactoryHttp(NODE_URL_M);       // RepositoryFactoryはSymbol-SDKで提供されるアカウントやモザイク等の機能を提供するRepositoryを作成するためのもの
 const accountRepo_M = repo_M.createAccountRepository();
-const transactionHttp_M = repo_M.createTransactionRepository();
+const txRepo_M = repo_M.createTransactionRepository();
 const mosaicHttp_M = repo_M.createMosaicRepository();
 const nsRepo_M = repo_M.createNamespaceRepository();
 
@@ -27,7 +27,7 @@ const XYM_ID_T = '72C0212E67A08BCE';
 
 const repo_T = new sym.RepositoryFactoryHttp(NODE_URL_T);       // RepositoryFactoryはSymbol-SDKで提供されるアカウントやモザイク等の機能を提供するRepositoryを作成するためのもの
 const accountRepo_T = repo_T.createAccountRepository();
-const transactionHttp_T = repo_T.createTransactionRepository();
+const txRepo_T = repo_T.createTransactionRepository();
 const mosaicHttp_T = repo_T.createMosaicRepository();
 const nsRepo_T = repo_T.createNamespaceRepository();
 
@@ -37,7 +37,7 @@ let NET_TYPE;
 let XYM_ID;     
 let repo;
 let accountRepo;
-let transactionHttp;
+let txRepo;
 let mosaicHttp;
 let nsRepo;
 
@@ -60,7 +60,7 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
      
        repo = repo_M;
        accountRepo = accountRepo_M;
-       transactionHttp = transactionHttp_M;
+       txRepo = txRepo_M;
        mosaicHttp = mosaicHttp_M;
        nsRepo = nsRepo_M;
        
@@ -74,7 +74,7 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
         
           repo = repo_T;
           accountRepo = accountRepo_T;
-          transactionHttp = transactionHttp_T;
+          txRepo = txRepo_T;
           mosaicHttp = mosaicHttp_T;
           nsRepo = nsRepo_T;
         
@@ -215,9 +215,9 @@ const searchCriteria = {
 };
          
 console.log("searchCriteria=",searchCriteria);  //////////////////
-console.log("transactionHttp=",transactionHttp);   //////////////////
+console.log("txRepo=",txRepo);   //////////////////
 
-transactionHttp
+txRepo
   .search(searchCriteria)
   .toPromise()
   .then((txs) => {
@@ -462,13 +462,13 @@ function handleSSS() {
          EPOCH = EPOCH_M; 
          // XYM_ID = XYM_ID_M;
          NET_TYPE = NET_TYPE_M;
-         transactionHttp = transactionHttp_M;
+         txRepo = txRepo_M;
      }else
         if (addr.charAt(0) === 'T'){ //TESTNET の場合
             EPOCH = EPOCH_T; 
             // XYM_ID = XYM_ID_T;
             NET_TYPE = NET_TYPE_T
-            transactionHttp = transactionHttp_T;
+            txRepo = txRepo_T;
         }
     
  (async() => {  
@@ -492,7 +492,7 @@ function handleSSS() {
           window.SSS.setTransaction(tx);               // SSSにトランザクションを登録        
           window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
           console.log('signedTx', signedTx);
-          transactionHttp.announce(signedTx);
+          txRepo.announce(signedTx);
           }) 
      }else
         if (enc === "1"){                ////////////// メッセージが暗号の場合 /////////////////////////////////////////////////
@@ -521,7 +521,7 @@ function handleSSS() {
                    window.SSS.setTransaction(tx);               // SSSにトランザクションを登録
                    window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求                   
                    console.log('signedTx', signedTx);
-                   transactionHttp.announce(signedTx);    
+                   txRepo.announce(signedTx);    
                    })
                  }, 1000)      
              });               
@@ -577,7 +577,7 @@ function selectboxChange() {
      
        repo = repo_M;
        accountRepo = accountRepo_M;
-       transactionHttp = transactionHttp_M;
+       txRepo = txRepo_M;
        mosaicHttp = mosaicHttp_M;
        nsRepo = nsRepo_M;
        
@@ -591,7 +591,7 @@ function selectboxChange() {
         
           repo = repo_T;
           accountRepo = accountRepo_T;
-          transactionHttp = transactionHttp_T;
+          txRepo = txRepo_T;
           mosaicHttp = mosaicHttp_T;
           nsRepo = nsRepo_T;
         
@@ -613,9 +613,9 @@ const searchCriteria = {
 };
          
 console.log("searchCriteria=",searchCriteria);  //////////////////
-console.log("transactionHttp=",transactionHttp);   //////////////////
+console.log("txRepo=",txRepo);   //////////////////
 
-transactionHttp
+txRepo
   .search(searchCriteria)
   .toPromise()
   .then((txs) => {
