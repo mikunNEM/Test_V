@@ -12,11 +12,11 @@ const NODE_URL_M = 'https://symbol-mikun.net:3001';
 const NET_TYPE_M = sym.NetworkType.MAIN_NET;
 const XYM_ID_M = '6BED913FA20223F8'; 
 
-const repositoryFactory_M = new sym.RepositoryFactoryHttp(NODE_URL_M);       // RepositoryFactoryはSymbol-SDKで提供されるアカウントやモザイク等の機能を提供するRepositoryを作成するためのもの
-const accountHttp_M = repositoryFactory_M.createAccountRepository();
-const transactionHttp_M = repositoryFactory_M.createTransactionRepository();
-const mosaicHttp_M = repositoryFactory_M.createMosaicRepository();
-const nsRepo_M = repositoryFactory_M.createNamespaceRepository();
+const repo_M = new sym.RepositoryFactoryHttp(NODE_URL_M);       // RepositoryFactoryはSymbol-SDKで提供されるアカウントやモザイク等の機能を提供するRepositoryを作成するためのもの
+const accountHttp_M = repo_M.createAccountRepository();
+const transactionHttp_M = repo_M.createTransactionRepository();
+const mosaicHttp_M = repo_M.createMosaicRepository();
+const nsRepo_M = repo_M.createNamespaceRepository();
 
 //TEST_NET の場合
 
@@ -25,17 +25,17 @@ const NODE_URL_T = 'https://mikun-testnet2.tk:3001';
 const NET_TYPE_T = sym.NetworkType.TEST_NET;
 const XYM_ID_T = '72C0212E67A08BCE';
 
-const repositoryFactory_T = new sym.RepositoryFactoryHttp(NODE_URL_T);       // RepositoryFactoryはSymbol-SDKで提供されるアカウントやモザイク等の機能を提供するRepositoryを作成するためのもの
-const accountHttp_T = repositoryFactory_T.createAccountRepository();
-const transactionHttp_T = repositoryFactory_T.createTransactionRepository();
-const mosaicHttp_T = repositoryFactory_T.createMosaicRepository();
-const nsRepo_T = repositoryFactory_T.createNamespaceRepository();
+const repo_T = new sym.RepositoryFactoryHttp(NODE_URL_T);       // RepositoryFactoryはSymbol-SDKで提供されるアカウントやモザイク等の機能を提供するRepositoryを作成するためのもの
+const accountHttp_T = repo_T.createAccountRepository();
+const transactionHttp_T = repo_T.createTransactionRepository();
+const mosaicHttp_T = repo_T.createMosaicRepository();
+const nsRepo_T = repo_T.createNamespaceRepository();
 
 let EPOCH;
 let NODE_URL;
 let NET_TYPE;
 let XYM_ID;     
-let repositoryFactory;
+let repo;
 let accountHttp;
 let transactionHttp;
 let mosaicHttp;
@@ -58,7 +58,7 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
        NET_TYPE = NET_TYPE_M;
        XYM_ID = XYM_ID_M;
      
-       repositoryFactory = repositoryFactory_M;
+       repo = repo_M;
        accountHttp = accountHttp_M;
        transactionHttp = transactionHttp_M;
        mosaicHttp = mosaicHttp_M;
@@ -72,7 +72,7 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
           NET_TYPE = NET_TYPE_T;
           XYM_ID = XYM_ID_T;
         
-          repositoryFactory = repositoryFactory_T;
+          repo = repo_T;
           accountHttp = accountHttp_T;
           transactionHttp = transactionHttp_T;
           mosaicHttp = mosaicHttp_T;
@@ -156,7 +156,7 @@ accountHttp.getAccountInfo(address)
     //////////////////////////////////////　リスナーでトランザクションを検知し、音を鳴らす //////////////////////////////////////////////////
   
  
- // nsRepo = repositoryFactory.createNamespaceRepository();
+ // nsRepo = repo.createNamespaceRepository();
   
   wsEndpoint = NODE_URL.replace('http', 'ws') + "/ws";
   listener = new sym.Listener(wsEndpoint,nsRepo,WebSocket); 
@@ -575,7 +575,7 @@ function selectboxChange() {
        NET_TYPE = NET_TYPE_M;
        XYM_ID = XYM_ID_M;
      
-       repositoryFactory = repositoryFactory_M;
+       repo = repo_M;
        accountHttp = accountHttp_M;
        transactionHttp = transactionHttp_M;
        mosaicHttp = mosaicHttp_M;
@@ -589,7 +589,7 @@ function selectboxChange() {
           NET_TYPE = NET_TYPE_T;
           XYM_ID = XYM_ID_T;
         
-          repositoryFactory = repositoryFactory_T;
+          repo = repo_T;
           accountHttp = accountHttp_T;
           transactionHttp = transactionHttp_T;
           mosaicHttp = mosaicHttp_T;
