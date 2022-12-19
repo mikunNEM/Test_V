@@ -576,7 +576,7 @@ function selectboxChange() {
        XYM_ID = XYM_ID_M;
      
        repo = repo_M;
-       accountHttp = accountHttp_M;
+       accountRepo = accountRepo_M;
        transactionHttp = transactionHttp_M;
        mosaicHttp = mosaicHttp_M;
        nsRepo = nsRepo_M;
@@ -590,7 +590,7 @@ function selectboxChange() {
           XYM_ID = XYM_ID_T;
         
           repo = repo_T;
-          accountHttp = accountHttp_T;
+          accountRepo = accountRepo_T;
           transactionHttp = transactionHttp_T;
           mosaicHttp = mosaicHttp_T;
           nsRepo = nsRepo_T;
