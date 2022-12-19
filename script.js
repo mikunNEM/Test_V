@@ -15,7 +15,7 @@ const XYM_ID_M = '6BED913FA20223F8';
 const repo_M = new sym.RepositoryFactoryHttp(NODE_URL_M);       // RepositoryFactoryはSymbol-SDKで提供されるアカウントやモザイク等の機能を提供するRepositoryを作成するためのもの
 const accountRepo_M = repo_M.createAccountRepository();
 const txRepo_M = repo_M.createTransactionRepository();
-const mosaicHttp_M = repo_M.createMosaicRepository();
+const mosaicRepo_M = repo_M.createMosaicRepository();
 const nsRepo_M = repo_M.createNamespaceRepository();
 
 //TEST_NET の場合
@@ -28,7 +28,7 @@ const XYM_ID_T = '72C0212E67A08BCE';
 const repo_T = new sym.RepositoryFactoryHttp(NODE_URL_T);       // RepositoryFactoryはSymbol-SDKで提供されるアカウントやモザイク等の機能を提供するRepositoryを作成するためのもの
 const accountRepo_T = repo_T.createAccountRepository();
 const txRepo_T = repo_T.createTransactionRepository();
-const mosaicHttp_T = repo_T.createMosaicRepository();
+const mosaicRepo_T = repo_T.createMosaicRepository();
 const nsRepo_T = repo_T.createNamespaceRepository();
 
 let EPOCH;
@@ -38,7 +38,7 @@ let XYM_ID;
 let repo;
 let accountRepo;
 let txRepo;
-let mosaicHttp;
+let mosaicRepo;
 let nsRepo;
 
 setTimeout(() => {    //指定した時間後に一度だけ動作する
@@ -61,7 +61,7 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
        repo = repo_M;
        accountRepo = accountRepo_M;
        txRepo = txRepo_M;
-       mosaicHttp = mosaicHttp_M;
+       mosaicRepo = mosaicRepo_M;
        nsRepo = nsRepo_M;
        
       console.log("MAIN_NET");
@@ -75,7 +75,7 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
           repo = repo_T;
           accountRepo = accountRepo_T;
           txRepo = txRepo_T;
-          mosaicHttp = mosaicHttp_T;
+          mosaicRepo = mosaicRepo_T;
           nsRepo = nsRepo_T;
         
           console.log("TEST_NET");
@@ -122,7 +122,7 @@ accountRepo.getAccountInfo(address)
     
       for (let m of accountInfo.mosaics) {  //accountInfo のモザイクの数だけ繰り返す
 	      
-           mosaicInfo = await mosaicHttp.getMosaic(m.id.id).toPromise();// 可分性の情報を取得する
+           mosaicInfo = await mosaicRepo.getMosaic(m.id.id).toPromise();// 可分性の情報を取得する
            const div = mosaicInfo.divisibility;
            //option要素を新しく作る
            const option1 = document.createElement('option');
@@ -295,7 +295,7 @@ txRepo
                (async() => {
                   let mosaicNames = await nsRepo.getMosaicsNames([new sym.MosaicId(tx.mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
      
-                  mosaicInfo = await mosaicHttp.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する                     
+                  mosaicInfo = await mosaicRepo.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する                     
                   let div = mosaicInfo.divisibility; // 可分性
                              
                        if(tx.recipientAddress.address !== address.address) {  // 受け取りアドレスとウォレットのアドレスが違う場合　
@@ -472,7 +472,7 @@ function handleSSS() {
         }
     
  (async() => {  
-     mosaicInfo = await mosaicHttp.getMosaic(new sym.MosaicId(mosaic_ID)).toPromise();// 可分性の情報を取得する 
+     mosaicInfo = await mosaicRepo.getMosaic(new sym.MosaicId(mosaic_ID)).toPromise();// 可分性の情報を取得する 
      const div = mosaicInfo.divisibility; // 可分性
 　　　   
      if (enc === "0"){                      //////////////// メッセージが平文の場合 ////////////////////////////////////
@@ -578,7 +578,7 @@ function selectboxChange() {
        repo = repo_M;
        accountRepo = accountRepo_M;
        txRepo = txRepo_M;
-       mosaicHttp = mosaicHttp_M;
+       mosaicRepo = mosaicRepo_M;
        nsRepo = nsRepo_M;
        
       console.log("MAIN_NET");
@@ -592,7 +592,7 @@ function selectboxChange() {
           repo = repo_T;
           accountRepo = accountRepo_T;
           txRepo = txRepo_T;
-          mosaicHttp = mosaicHttp_T;
+          mosaicRepo = mosaicRepo_T;
           nsRepo = nsRepo_T;
         
           console.log("TEST_NET");
@@ -697,7 +697,7 @@ txRepo
                (async() => {
                   let mosaicNames = await nsRepo.getMosaicsNames([new sym.MosaicId(tx.mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
      
-                  mosaicInfo = await mosaicHttp.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する                     
+                  mosaicInfo = await mosaicRepo.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する                     
                   let div = mosaicInfo.divisibility; // 可分性
                      
                        if(tx.recipientAddress.address !== address.address) {  // 受け取りアドレスとウォレットのアドレスが違う場合　
