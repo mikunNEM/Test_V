@@ -132,8 +132,8 @@ h3 {
 }
 
 .button-decrypted{
-  background: rgb(255,255,255);
-  color: #FF00FF;
+  background: #FF00FF;
+  color: rgb(255,255,255);
   border-radius: 8px;
   cursor: pointer;
 
@@ -180,17 +180,11 @@ ul{
 .decryption{
     display: flex;
     justify-content: space-between;
-    /* padding: 5px; */
-    /* border: 1px solid #999; */
-    /* background: #ebfdfc; */
 }
 
 .decryption>li{
-    /* border: 1px solid #999; */
-    /* padding: 10px 30px; */
     margin: 0;
     list-style: none;
-    /* background: #FFF; */
     text-align: center;
 }
 
