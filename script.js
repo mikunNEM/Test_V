@@ -781,6 +781,13 @@ fetch('https://nftdrive-explorer.info/black_list/',)
     });
 });
 
+
+for (let m of accountInfo.mosaics) {  //accountInfo のモザイクの数だけ繰り返す
+	
+	console.log("m=",m);
+}
+
+
 function nftdrive(mosaic){
 	mosaicRepo.getMosaic(mosaic.id)
 	.pipe(
