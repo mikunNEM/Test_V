@@ -121,7 +121,6 @@ accountHttp.getAccountInfo(address)
    (async() => { 
     
       for (let m of accountInfo.mosaics) {  //accountInfo のモザイクの数だけ繰り返す
-	      console.log("m=",m);
 	      
            mosaicInfo = await mosaicHttp.getMosaic(m.id.id).toPromise();// 可分性の情報を取得する
            const div = mosaicInfo.divisibility;
@@ -145,9 +144,10 @@ accountHttp.getAccountInfo(address)
            dom_xym.innerHTML = `<i>XYM Balance : ${(parseInt(m.amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })}</i>`
         }
            //select要素にoption要素を追加する
-           selectMosaic.appendChild(option1);                 
+           selectMosaic.appendChild(option1); 
+	      nftdrive(m);
       }    
-        
+	   
     })(); // async() 
   })
      
