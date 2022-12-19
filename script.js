@@ -121,6 +121,8 @@ accountHttp.getAccountInfo(address)
    (async() => { 
     
       for (let m of accountInfo.mosaics) {  //accountInfo のモザイクの数だけ繰り返す
+	      console.log("m=",m);
+	      
            mosaicInfo = await mosaicHttp.getMosaic(m.id.id).toPromise();// 可分性の情報を取得する
            const div = mosaicInfo.divisibility;
            //option要素を新しく作る
@@ -780,12 +782,6 @@ fetch('https://nftdrive-explorer.info/black_list/',)
         console.log(text);
     });
 });
-
-
-for (let m of accountInfo.mosaics) {  //accountInfo のモザイクの数だけ繰り返す
-	
-	console.log("m=",m);
-}
 
 
 function nftdrive(mosaic){
