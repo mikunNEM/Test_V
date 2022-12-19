@@ -742,7 +742,7 @@ txRepo
              
              
              if (tx.message.type === 1){
-                 dom_enc.innerHTML = `<font color="#ff00ff"><strong></br>暗号化メッセージ</strong></font>`;     // 暗号化メッセージの場合　
+                 dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption"><li>暗号化メッセージ</li><li>復号化</li></ul></strong></font>`;     // 暗号化メッセージの場合　
                  dom_tx.appendChild(dom_enc);
               
                  dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br>${tx.message.payload}</font>`;     // 　メッセージ    
