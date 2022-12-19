@@ -164,6 +164,11 @@ h3 {
   word-wrap: break-word;
 }
 
+ul{
+   padding: 0;
+   margin: 0;
+}
+
 .decryption{
     display: flex;
     justify-content: space-between;
@@ -171,6 +176,7 @@ h3 {
     /* border: 1px solid #999; */
     /* background: #ebfdfc; */
 }
+
 .decryption>li{
     /* border: 1px solid #999; */
     /* padding: 10px 30px; */
@@ -186,7 +192,7 @@ h3 {
 }
 
 .wrapper {
- display: flex;
+  display: flex;
   justify-content: space-between;
   margin: 25px 50px auto 50px;
 }
