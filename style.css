@@ -131,6 +131,14 @@ h3 {
   cursor: pointer;
 }
 
+.button-decrypted{
+  background: rgb(255,255,255);
+  color: #FF00FF;
+  border-radius: 8px;
+  cursor: pointer;
+
+}
+
 .tx-card {
   background: rgb(255, 255, 255,0.8);
   border-radius: 16px;
