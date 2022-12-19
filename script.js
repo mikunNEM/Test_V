@@ -227,6 +227,7 @@ txRepo
     const dom_txInfo = document.getElementById('wallet-transactions'); 
     console.log("dom_txInfo=",dom_txInfo); ////////////////
     
+    let t=0;
     for (let tx of txs.data) {   ///////////////    tx を pageSize の回数繰り返す ///////////////////
       console.log("tx=",tx);      ////////////////////
       const dom_tx = document.createElement('div');
@@ -341,7 +342,7 @@ txRepo
              
              if (tx.message.type === 1){
                  dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption"><li>暗号化メッセージ</li>
-		 <li><input type="button" value="復号化" onclick="OnButtonDecryption();" class="button-decrypted"/></li></ul></strong></font>`;     // 暗号化メッセージの場合
+		 <li><input type="button" value="復号化" onclick="OnButtonDecryption(tx,t);" class="button-decrypted"/></li></ul></strong></font>`;     // 暗号化メッセージの場合
 		     
                  dom_tx.appendChild(dom_enc);
               
@@ -355,6 +356,7 @@ txRepo
             dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加              
             dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く
             dom_txInfo.appendChild(dom_tx);                    // トランザクション情報を追加
+	    t=t+1;
     }    //    tx をループ処理
   })
 }, 1000)
@@ -770,10 +772,10 @@ txRepo
 
 
 
-function OnButtonDecryption(){
+function OnButtonDecryption(txs,t){
 	
     window.SSS.setEncryptedMessage(
-      tx.message.payload,
+      txs.data[t].message.payload,
       AccountInfo.publicKey
     )
     	
