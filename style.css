@@ -164,6 +164,22 @@ h3 {
   word-wrap: break-word;
 }
 
+.decryption{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    border: 1px solid #999;
+    background: #ebfdfc;
+}
+.decryption>li{
+    border: 1px solid #999;
+    padding: 10px 30px;
+    margin: 0;
+    list-style: none;
+    background: #FFF;
+    text-align: center;
+}
+
 .container {
   font-size: 24px;
   margin: 20px 20px 20px 0px;
