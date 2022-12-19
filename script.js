@@ -2,6 +2,7 @@ const dom_version = document.getElementById('version');
 dom_version.innerText = 'v1.0.2　|　Powered by SYMBOL'; 
 
 const sym = require('/node_modules/symbol-sdk');
+const op  = require("/node_modules/rxjs/operators");
 
 //const GENERATION_HASH = '57F7DA205008026C776CB6AED843393F04CD458E0AA2D9F1D5F31A402072B2D6';
 
