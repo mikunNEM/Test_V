@@ -777,7 +777,7 @@ function OnButtonDecryption(){
       AccountInfo.publicKey
     )
     	
-    window.SSS.requestSignDecription().then((data: string) => {
+    window.SSS.requestSignDecription().then((data) => {
       console.log(data)
     })
 	
