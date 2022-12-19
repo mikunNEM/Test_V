@@ -341,7 +341,7 @@ txRepo
              
              if (tx.message.type === 1){
                  dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption"><li>暗号化メッセージ</li>
-		 <li><input type="button" value="復号化" onclick="OnButtonClick();" class="button-decrypted"/></li></ul></strong></font>`;     // 暗号化メッセージの場合
+		 <li><input type="button" value="復号化" onclick="OnButtonDecryption();" class="button-decrypted"/></li></ul></strong></font>`;     // 暗号化メッセージの場合
 		     
                  dom_tx.appendChild(dom_enc);
               
@@ -745,7 +745,7 @@ txRepo
              
              if (tx.message.type === 1){
                  dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption"><li>暗号化メッセージ</li>
-		 <li><input type="button" value="復号化" onclick="OnButtonClick();" class="button-decrypted"/></li></ul></strong></font>`;     // 暗号化メッセージの場合　
+		 <li><input type="button" value="復号化" onclick="OnButtonDecryption();" class="button-decrypted"/></li></ul></strong></font>`;     // 暗号化メッセージの場合　
                  
 		 dom_tx.appendChild(dom_enc);
               
@@ -764,10 +764,29 @@ txRepo
   })
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                              // 暗号化メッセージを復号する //
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+function OnButtonDecryption(){
+	
+    window.SSS.setEncryptedMessage(
+      tx.message.payload,
+      AccountInfo.publicKey
+    )
+    	
+    window.SSS.requestSignDecription().then((data: string) => {
+      console.log(data)
+    })
+	
+}
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-                                              //  NFTをデコードして表示する  //
-
+                                              //  NFTをデコードして表示する //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
