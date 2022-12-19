@@ -756,3 +756,95 @@ transactionHttp
     }    //    tx をループ処理
   })
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                              //  NFTをデコードして表示する  //
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+function appendImg(src){          //   取得した画像をimgタグに挿入するfunctionを定義
+
+  (tag= document.createElement('img')).src = src;
+  document.getElementsByTagName('body')[0].appendChild(tag);
+}
+//////////////////////////////////////////////////////////////////////////////
+
+
+var nglist = [];
+fetch('https://nftdrive-explorer.info/black_list/',)
+.then((response) => {
+    return response.text().then(function(text) {
+        nglist = JSON.parse(text);      
+        console.log(text);
+    });
+});
+
+function nftdrive(mosaic){
+	mosaicRepo.getMosaic(mosaic.id)
+	.pipe(
+		op.filter(mo=>{
+			return !nglist.find(elem => elem[1] === mo.id.toHex())
+		})
+	)
+	.subscribe(async mo=>{
+
+		const ownerAddress = mo.ownerAddress;
+		const preTxes = await txRepo.search({
+			type:[
+				sym.TransactionType.TRANSFER,
+			],
+			address:ownerAddress,group:sym.TransactionGroup.Confirmed,pageSize:10,order:sym.Order.Asc
+		}).toPromise();
+
+		if(preTxes.data.find(tx => {
+			if(tx.message === undefined){
+				return false;
+			}else if(tx.message.payload==="Please note that this mosaic is an NFT."){
+				needSample = false;
+				return true;
+			}else{
+				return false;
+			}
+		})){
+
+			const tx = await txRepo.search({
+				type:[
+					sym.TransactionType.AGGREGATE_COMPLETE,
+					sym.TransactionType.AGGREGATE_BONDED,
+				],
+				address:ownerAddress,group:sym.TransactionGroup.Confirmed,pageSize:100
+			}).toPromise();
+
+			const aggTxes = [];
+			for (let idx = 0; idx < tx.data.length; idx++) {
+				const aggTx = await txRepo.getTransaction(tx.data[idx].transactionInfo.hash,sym.TransactionGroup.Confirmed).toPromise();
+
+				if(aggTx.innerTransactions.find(elem => elem.type === 16724)){
+					aggTxes.push(aggTx);
+				}
+			}
+
+			const sotedAggTxes = aggTxes.sort(function(a, b) {
+
+				if (Number(a.innerTransactions[0].message.payload) > Number(b.innerTransactions[0].message.payload)) {return 1;} else {return -1;}
+			})
+
+			let nftData = "";
+			let header = 15;
+			for (let aggTx of sotedAggTxes) {
+
+				for(let idx = 0 + header; idx < aggTx.innerTransactions.length;idx++){
+					nftData += aggTx.innerTransactions[idx].message.payload;
+				}
+				header = 1;
+			}
+
+			if(nftData.indexOf("data:image/") >= 0){
+				appendImg(nftData);
+			}
+		}
+	});
+}
+
