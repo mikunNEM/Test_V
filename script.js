@@ -13,7 +13,7 @@ const NET_TYPE_M = sym.NetworkType.MAIN_NET;
 const XYM_ID_M = '6BED913FA20223F8'; 
 
 const repo_M = new sym.RepositoryFactoryHttp(NODE_URL_M);       // RepositoryFactoryはSymbol-SDKで提供されるアカウントやモザイク等の機能を提供するRepositoryを作成するためのもの
-const accountHttp_M = repo_M.createAccountRepository();
+const accountRepo_M = repo_M.createAccountRepository();
 const transactionHttp_M = repo_M.createTransactionRepository();
 const mosaicHttp_M = repo_M.createMosaicRepository();
 const nsRepo_M = repo_M.createNamespaceRepository();
@@ -26,7 +26,7 @@ const NET_TYPE_T = sym.NetworkType.TEST_NET;
 const XYM_ID_T = '72C0212E67A08BCE';
 
 const repo_T = new sym.RepositoryFactoryHttp(NODE_URL_T);       // RepositoryFactoryはSymbol-SDKで提供されるアカウントやモザイク等の機能を提供するRepositoryを作成するためのもの
-const accountHttp_T = repo_T.createAccountRepository();
+const accountRepo_T = repo_T.createAccountRepository();
 const transactionHttp_T = repo_T.createTransactionRepository();
 const mosaicHttp_T = repo_T.createMosaicRepository();
 const nsRepo_T = repo_T.createNamespaceRepository();
@@ -36,7 +36,7 @@ let NODE_URL;
 let NET_TYPE;
 let XYM_ID;     
 let repo;
-let accountHttp;
+let accountRepo;
 let transactionHttp;
 let mosaicHttp;
 let nsRepo;
@@ -59,7 +59,7 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
        XYM_ID = XYM_ID_M;
      
        repo = repo_M;
-       accountHttp = accountHttp_M;
+       accountRepo = accountRepo_M;
        transactionHttp = transactionHttp_M;
        mosaicHttp = mosaicHttp_M;
        nsRepo = nsRepo_M;
@@ -73,7 +73,7 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
           XYM_ID = XYM_ID_T;
         
           repo = repo_T;
-          accountHttp = accountHttp_T;
+          accountRepo = accountRepo_T;
           transactionHttp = transactionHttp_T;
           mosaicHttp = mosaicHttp_T;
           nsRepo = nsRepo_T;
@@ -108,7 +108,7 @@ if (NET_TYPE === NET_TYPE_T){
      
      
      
-accountHttp.getAccountInfo(address)
+accountRepo.getAccountInfo(address)
   .toPromise()
   .then((accountInfo) => {
         console.log("accountInfo=",accountInfo)     
@@ -497,7 +497,7 @@ function handleSSS() {
      }else
         if (enc === "1"){                ////////////// メッセージが暗号の場合 /////////////////////////////////////////////////
              const alice = sym.Address.createFromRawAddress(addr);   //アドレスクラスの生成
-             accountInfo = await accountHttp.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する
+             accountInfo = await accountRepo.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する
              console.log("accontInfo=",accountInfo);
              
              const pubkey = accountInfo.publicKey;
