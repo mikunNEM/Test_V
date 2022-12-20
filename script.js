@@ -360,7 +360,7 @@ txRepo
 			 
 		 }else{    // 送信先アドレスと、ウォレットアドレスが同じ場合
 			 console.log("送信アドレスと送信元アドレスが同じ")
-			 const alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
+			 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
 		      　　PubKey = window.SSS.activePublicKey;
 		 }
 		       
