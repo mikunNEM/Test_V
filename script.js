@@ -379,7 +379,7 @@ txRepo
                    window.SSS.requestSignDecription().then((data) => {
                          console.log(data)               
                    })
-                  }, 500)
+                  }, 3000)
 		})(); // async()     
               
                  dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br><div id="enc_message">${tx.message.payload}</div></font>`;     // 　メッセージ    
