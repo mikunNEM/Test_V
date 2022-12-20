@@ -775,7 +775,8 @@ txRepo
 function OnButtonDecryption(){
 	
     window.SSS.setEncryptedMessage(
-      message.payload,
+      //message.payload,
+      "D1A8B70E2DAE277E3DE51D8A5FBECDBBCEDF9D63E33DAD813DBA5A8E127A7946206F7E77696116C69A3FEE0321740C58D6531BDF2106DF8CF4A0FFA06D11CB63D6757BD3EF81",
       window.SSS.activePublicKey
     )
     	
