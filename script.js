@@ -339,7 +339,7 @@ txRepo
                 　　dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
              } /////////////////////////////////////////////////////////////////////////////////////////////////////    
              
-             
+             const PubKey = "";
              if (tx.message.type === 1){
                (async() => {
                  dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption"><li>暗号化メッセージ</li>
@@ -347,13 +347,13 @@ txRepo
 		     
                  dom_tx.appendChild(dom_enc);
 		     
-		 if(tx.recipientAddress.address !== address.address) {    
-		    const PubKey = window.SSS.activePublicKey;
-		 }else{
-			 const alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
+		 if(tx.recipientAddress.address === address.address) {    // 送信先アドレスと、ウォレットアドレスが同じ場合
+		    　　PubKey = window.SSS.activePublicKey;
+		 }else{       // 送信先アドレスと、ウォレットアドレスが異なる場合
+			const alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
              　　　　　　　accountInfo = await accountRepo.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する
              
-           　　　　　　　  const PubKey = accountInfo.publicKey;
+           　　　　　　　  PubKey = accountInfo.publicKey;
 			 	 
 		 }	 	 
 		    
