@@ -347,13 +347,16 @@ txRepo
 		     
                  dom_tx.appendChild(dom_enc);
 		     
-		 if(tx.recipientAddress.address === address.address) {    // 送信先アドレスと、ウォレットアドレスが同じ場合
+		 if(tx.recipientAddress.address === tx.signer.address) {    // 送信先アドレスと、送信元アドレスが同じ場合
 		    　　PubKey = window.SSS.activePublicKey;
 		 }else{       // 送信先アドレスと、ウォレットアドレスが異なる場合
-			const alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
-             　　　　　　　accountInfo = await accountRepo.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する
+			 
+			 
+			 const alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
+             　　　　　　　
+			 accountInfo = await accountRepo.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する
              
-           　　　　　　　  PubKey = accountInfo.publicKey;
+           　　　　　　　   PubKey = accountInfo.publicKey;
 			 	 
 		 }	 	 
 		    
