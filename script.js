@@ -350,11 +350,11 @@ txRepo
 		 if (tx.recipientAddress.address !== tx.signer.address.address){    // 送信先アドレスと、送信元アドレスが異なる場合
 			if (tx.signer.address.address === address.address){
 				 console.log("signerとwallet addressが同じ時")
-				 let alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
+				 const alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
 			}else
                            if (tx.recipientAddress.address === address.address){ 
 				console.log("recipient とwallet addressが同じ時")
-			        let alice = sym.Address.createFromRawAddress(tx.signer.address.address);   //アドレスクラスの生成
+			        const alice = sym.Address.createFromRawAddress(tx.signer.address.address);   //アドレスクラスの生成
 			} 
 			 
 		 }else{    // 送信先アドレスと、ウォレットアドレスが同じ場合
