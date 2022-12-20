@@ -772,8 +772,8 @@ txRepo
 
 
  
-function OnButtonDecryption(this){
-	console.log("this=",this)
+function OnButtonDecryption(this.id){
+	console.log("this=",this.id)
 	
     window.SSS.setEncryptedMessage(
       txs.message.payload,
