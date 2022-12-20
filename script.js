@@ -772,18 +772,17 @@ txRepo
 
 
  
-function OnButtonDecryption(t){
-         console.log("tだよ",t)
+function OnButtonDecryption(this){
+	console.log("this=",this)
 	
     window.SSS.setEncryptedMessage(
-      txs.data[t].message.payload,
+      txs.message.payload,
       AccountInfo.publicKey
     )
     	
     window.SSS.requestSignDecription().then((data) => {
       console.log(data)
-    })
-	
+    })	
 }
 
 
