@@ -339,10 +339,11 @@ txRepo
                 　　dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
              } /////////////////////////////////////////////////////////////////////////////////////////////////////    
              
-             let PubKey;
-	     let alice;
+            
              if (tx.message.type === 1){
                (async() => {
+		  let PubKey;
+	          let alice;      
                  dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption"><li>暗号化メッセージ</li>
 		 <li><input type="button" value="復号化" onclick="OnButtonDecryption();" class="button-decrypted"/></li></ul></strong></font>`;     // 暗号化メッセージの場合
 		     
@@ -369,16 +370,15 @@ txRepo
 		       console.log("暗号化メッセージだよ",tx.message.payload)
 		       console.log("PubKeyだよ",PubKey)
 		       
-			 	 
+		  setTimeout(() => {	 	 
 		   window.SSS.setEncryptedMessage(      // メッセージを復号
                      tx.message.payload,
                      PubKey
                    )
                    window.SSS.requestSignDecription().then((data) => {
-                       setTimeout(() => { 
-                         console.log(data)
-                       }, 1000)
-                   })	  
+                         console.log(data)               
+                   })
+                  }, 1000)
 		})(); // async()     
               
                  dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br><div id="enc_message">${tx.message.payload}</div></font>`;     // 　メッセージ    
