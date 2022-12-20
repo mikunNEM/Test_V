@@ -370,15 +370,16 @@ txRepo
 		       console.log("暗号化メッセージだよ",tx.message.payload)
 		       console.log("PubKeyだよ",PubKey)
 		       
-		  setTimeout(() => {	 	 
+		  	 	 
 		   window.SSS.setEncryptedMessage(      // メッセージを復号
                      tx.message.payload,
                      PubKey
                    )
+		  setTimeout(() => {     
                    window.SSS.requestSignDecription().then((data) => {
                          console.log(data)               
                    })
-                  }, 1000)
+                  }, 2000)
 		})(); // async()     
               
                  dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br><div id="enc_message">${tx.message.payload}</div></font>`;     // 　メッセージ    
