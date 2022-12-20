@@ -348,12 +348,12 @@ txRepo
                  dom_tx.appendChild(dom_enc);
 		     
 		 if(tx.recipientAddress.address !== address.address) {    
-		    const Pubkey = window.SSS.activePublicKey;
+		    const PubKey = window.SSS.activePublicKey;
 		 }else{
 			 const alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
              　　　　　　　accountInfo = await accountRepo.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する
              
-           　　　　　　　  const pubkey = accountInfo.publicKey;
+           　　　　　　　  const pubKey = accountInfo.publicKey;
 			 	 
 		 }	 	 
 		    
