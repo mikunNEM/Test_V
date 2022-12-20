@@ -353,7 +353,7 @@ txRepo
 			 const alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
              　　　　　　　accountInfo = await accountRepo.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する
              
-           　　　　　　　  const pubKey = accountInfo.publicKey;
+           　　　　　　　  const PubKey = accountInfo.publicKey;
 			 	 
 		 }	 	 
 		    
