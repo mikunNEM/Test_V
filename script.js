@@ -342,7 +342,7 @@ txRepo
              
              if (tx.message.type === 1){
                  dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption"><li>暗号化メッセージ</li>
-		 <li><input type="button" value="復号化" onclick="OnButtonDecryption(t);" class="button-decrypted"/></li></ul></strong></font>`;     // 暗号化メッセージの場合
+		 <li><input type="button" value="復号化" onclick="OnButtonDecryption();" class="button-decrypted"/></li></ul></strong></font>`;     // 暗号化メッセージの場合
 		     
                  dom_tx.appendChild(dom_enc);
               
@@ -772,8 +772,7 @@ txRepo
 
 
  
-function OnButtonDecryption(this.id){
-	console.log("this=",this.id)
+function OnButtonDecryption(){
 	
     window.SSS.setEncryptedMessage(
       txs.message.payload,
