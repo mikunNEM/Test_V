@@ -339,10 +339,10 @@ txRepo
                 　　dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
              } /////////////////////////////////////////////////////////////////////////////////////////////////////    
              
-             const test="";
+             const test="てすとやで";
              if (tx.message.type === 1){
                  dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption"><li>暗号化メッセージ</li>
-		 <li><input type="button" value="復号化" onclick="OnButtonDecryption("test");" class="button-decrypted"/></li></ul></strong></font>`;     // 暗号化メッセージの場合
+		 <li><input type="button" value="復号化" onclick="OnButtonDecryption(test);" class="button-decrypted"/></li></ul></strong></font>`;     // 暗号化メッセージの場合
 		     
                  dom_tx.appendChild(dom_enc);
               
