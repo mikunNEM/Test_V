@@ -340,6 +340,7 @@ txRepo
              } /////////////////////////////////////////////////////////////////////////////////////////////////////    
              
              let PubKey;
+	     let alice;
              if (tx.message.type === 1){
                (async() => {
                  dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption"><li>暗号化メッセージ</li>
@@ -350,11 +351,11 @@ txRepo
 		 if (tx.recipientAddress.address !== tx.signer.address.address){    // 送信先アドレスと、送信元アドレスが異なる場合
 			if (tx.signer.address.address === address.address){
 				 console.log("signerとwallet addressが同じ時")
-				 const alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
+				 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
 			}else
                            if (tx.recipientAddress.address === address.address){ 
 				console.log("recipient とwallet addressが同じ時")
-			        const alice = sym.Address.createFromRawAddress(tx.signer.address.address);   //アドレスクラスの生成
+			        alice = sym.Address.createFromRawAddress(tx.signer.address.address);   //アドレスクラスの生成
 			} 
 			 
 		 }else{    // 送信先アドレスと、ウォレットアドレスが同じ場合
