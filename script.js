@@ -774,6 +774,8 @@ txRepo
  
 function OnButtonDecryption(){
 	
+     console.log("onclick-pubkeyだよ",AccountInfo.publicKey)
+	
     window.SSS.setEncryptedMessage(
       txs.message.payload,
       AccountInfo.publicKey
