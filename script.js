@@ -365,8 +365,9 @@ txRepo
 		 }
 		       
                          accountInfo = await accountRepo.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する             
-           　　　　　　　   PubKey = accountInfo.publicKey;	
-		       
+           　　　　　　　   PubKey = accountInfo.publicKey;
+		       console.log("暗号化メッセージだよ",tx.message.payload)
+		       console.log("PubKeyだよ",PubKey)
 			 	 
 		   window.SSS.setEncryptedMessage(      // メッセージを復号
                      tx.message.payload,
