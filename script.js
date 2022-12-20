@@ -347,20 +347,22 @@ txRepo
 		     
                  dom_tx.appendChild(dom_enc);
 		     
-		 if (tx.recipientAddress.address === tx.signer.address.address){    // 送信先アドレスと、送信元アドレスが同じ場合
-			 console.log("送信アドレスと送信元アドレスが同じ")
-		    　　PubKey = window.SSS.activePublicKey;
-		 }else    // 送信先アドレスと、ウォレットアドレスが異なる場合
-		if (tx.signer.address.address === address.address){
+		 if (tx.recipientAddress.address !== tx.signer.address.address){    // 送信先アドレスと、送信元アドレスが異なる場合
+			if (tx.signer.address.address === address.address){
 				 console.log("signerとwallet addressが同じ時")
 				 const alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
-             　　}else
-	            if (tx.recipientAddress.address === address.address){
-				     console.log("recipient とwallet addressが同じ時")
-			       const alice = sym.Address.createFromRawAddress(tx.signer.address.address);   //アドレスクラスの生成
-		}
-				    
-			 accountInfo = await accountRepo.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する
+			}else
+                           if (tx.recipientAddress.address === address.address){ 
+				console.log("recipient とwallet addressが同じ時")
+			        const alice = sym.Address.createFromRawAddress(tx.signer.address.address);   //アドレスクラスの生成
+			} 
+			 
+		 }else{    // 送信先アドレスと、ウォレットアドレスが同じ場合
+			  console.log("送信アドレスと送信元アドレスが同じ")
+		      　　PubKey = window.SSS.activePublicKey;
+		 }
+		       
+                         accountInfo = await accountRepo.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する
              
            　　　　　　　   PubKey = accountInfo.publicKey;			 	 
 		 	 	 
