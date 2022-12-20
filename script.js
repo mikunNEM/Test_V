@@ -13,7 +13,7 @@ const NODE_URL_M = 'https://symbol-mikun.net:3001';
 const NET_TYPE_M = sym.NetworkType.MAIN_NET;
 const XYM_ID_M = '6BED913FA20223F8'; 
 
-const repo_M = new sym.RepositoryFactoryHttp(NODE_URL_M);       // RepositoryFactoryはSymbol-SDKで提供されるアカウントやモザイク等の機能を提供するRepositoryを作成するためのもの
+const repo_M = new sym.RepositoryFactoryHttp(NODE_URL_M);      // RepositoryFactoryはSymbol-SDKで提供されるアカウントやモザイク等の機能を提供するRepositoryを作成するためのもの
 const accountRepo_M = repo_M.createAccountRepository();
 const txRepo_M = repo_M.createTransactionRepository();
 const mosaicRepo_M = repo_M.createMosaicRepository();
