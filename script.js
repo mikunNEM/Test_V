@@ -229,7 +229,7 @@ txRepo
     
     let t=0;
     for (let tx of txs.data) {   ///////////////    tx を pageSize の回数繰り返す ///////////////////
-      console.log("tx=",tx);      ////////////////////
+      console.log(`tx[${t}] =`,tx);      ////////////////////
       const dom_tx = document.createElement('div');
       const dom_date = document.createElement('div');
       const dom_txType = document.createElement('div');
