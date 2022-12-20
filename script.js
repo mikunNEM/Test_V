@@ -341,10 +341,30 @@ txRepo
              
              
              if (tx.message.type === 1){
+               (async() => {
                  dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption"><li>暗号化メッセージ</li>
 		 <li><input type="button" value="復号化" onclick="OnButtonDecryption();" class="button-decrypted"/></li></ul></strong></font>`;     // 暗号化メッセージの場合
 		     
                  dom_tx.appendChild(dom_enc);
+		     
+		 if(tx.recipientAddress.address !== address.address) {    
+		    const Pubkey = window.SSS.activePublicKey;
+		 }else{
+			 const alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
+             　　　　　　　accountInfo = await accountRepo.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する
+             
+           　　　　　　　  const pubkey = accountInfo.publicKey;
+			 	 
+		 }	 	 
+		    
+		   window.SSS.setEncryptedMessage(      // メッセージを復号
+                     tx.message.payload,
+                     PubKey
+                   )
+                   window.SSS.requestSignDecription().then((data) => {
+                         console.log(data)
+                   })	  
+		})(); // async()     
               
                  dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br><div id="enc_message">${tx.message.payload}</div></font>`;     // 　メッセージ    
             }else{          // 平文の場合
@@ -776,7 +796,7 @@ function OnButtonDecryption(){
 
     //const pubkey= window.SSS.activePublicKey;
 	
-    const message = document.getElementById('enc_message');
+    //const message = document.getElementById('enc_message');
     window.SSS.setEncryptedMessage(
       message,
       window.SSS.activePublicKey
