@@ -774,11 +774,11 @@ txRepo
  
 function OnButtonDecryption(){
 	
-     console.log("onclick-pubkeyだよ",AccountInfo.publicKey)
+     console.log("onclick-active-pubkeyだよ",window.SSS.activePublicKey)
 	
     window.SSS.setEncryptedMessage(
-      txs.message.payload,
-      AccountInfo.publicKey
+      message.payload,
+      window.SSS.activePublicKey
     )
     	
     window.SSS.requestSignDecription().then((data) => {
