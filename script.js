@@ -339,7 +339,7 @@ txRepo
                 　　dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
              } /////////////////////////////////////////////////////////////////////////////////////////////////////    
              
-             let PubKey = "";
+             let PubKey;
              if (tx.message.type === 1){
                (async() => {
                  dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption"><li>暗号化メッセージ</li>
@@ -358,7 +358,8 @@ txRepo
 			} 
 			 
 		 }else{    // 送信先アドレスと、ウォレットアドレスが同じ場合
-			  console.log("送信アドレスと送信元アドレスが同じ")
+			 console.log("送信アドレスと送信元アドレスが同じ")
+			 const alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
 		      　　PubKey = window.SSS.activePublicKey;
 		 }
 		       
