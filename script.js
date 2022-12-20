@@ -772,9 +772,7 @@ txRepo
 
 
  
-function OnButtonDecryption(test){
-	
-     console.log("onclick-testだよ",test)
+function OnButtonDecryption(){
 	
     window.SSS.setEncryptedMessage(
       message.payload,
