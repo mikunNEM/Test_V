@@ -1,5 +1,5 @@
 const dom_version = document.getElementById('version');
-dom_version.innerText = 'v1.0.2　|　Powered by SYMBOL'; 
+dom_version.innerText = 'v1.0.2　|　Powered by SYMBOL';
 
 const sym = require('/node_modules/symbol-sdk');
 const op  = require("/node_modules/rxjs/operators");
@@ -356,7 +356,7 @@ txRepo
             dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加              
             dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く
             dom_txInfo.appendChild(dom_tx);                    // トランザクション情報を追加
-	    t=t++;
+	    t = ++t;
     }    //    tx をループ処理
   })
 }, 1000)
