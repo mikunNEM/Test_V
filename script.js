@@ -343,9 +343,10 @@ txRepo
              if (tx.message.type === 1){
                (async() => {
 		  let PubKey;
-	          let alice;      
+	          let alice;
+                  let value1 = `復号化${t}`      
                  dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption"><li>暗号化メッセージ</li>
-		 <li><input type="button" value=`${t}` onclick="Onclick_Decryption();" class="button-decrypted"/></li></ul></strong></font>`;     // 暗号化メッセージの場合
+		 <li><input type="button" value= value1 onclick="Onclick_Decryption();" class="button-decrypted"/></li></ul></strong></font>`;     // 暗号化メッセージの場合
 		     
                  dom_tx.appendChild(dom_enc);
 		     
