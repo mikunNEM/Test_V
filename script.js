@@ -391,12 +391,11 @@ txRepo
                    })
                   }, 3000). */
 		})(); // async()     
-              
+              console.log("t asyncの外",t);
                  dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br><div id="enc_message">${tx.message.payload}</div></font>`;     // 　メッセージ    
             }else{          // 平文の場合
                  dom_message.innerHTML = `<font color="#4169e1"></br>< Message ></br>${tx.message.payload}</font>`;     // 　メッセージ  
-               }
-                         console.log("t TRANNSFERの場合",t);
+            }                        
           } // tx.type が 'TRANSFER' の場合
                                                                           
             dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加              
