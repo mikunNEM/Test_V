@@ -371,6 +371,7 @@ txRepo
 		       enc_message1.message = tx.message.payload;
 		       enc_message1.PubKey = PubKey;
 		       en[t] = enc_message1;
+		       console.log("%cenだよ",'color: blue',en);
 		       
 		/*  setTimeout(() => {	 	 
 		   window.SSS.setEncryptedMessage(      // メッセージを復号
@@ -396,7 +397,6 @@ txRepo
             dom_txInfo.appendChild(dom_tx);                    // トランザクション情報を追加
 	    t = ++t;
     }    //    tx をループ処理
-	console.log("%cenだよ",'color: blue',en);
   })
 }, 1000)
 
