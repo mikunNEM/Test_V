@@ -365,10 +365,10 @@ txRepo
 		       
                          accountInfo = await accountRepo.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する             
            　　　　　　　   PubKey = accountInfo.publicKey;
-		       console.log("%c暗号化メッセージだよ",'color: blue',tx.message.payload)
+		       console.log("%c暗号化メッセージだよ",'color: blue',txs.data[t].message.payload)
 		       console.log("%cPubKeyだよ",'color: green',PubKey)
 		       
-		       enc_message1.message = tx.message.payload;
+		       enc_message1.message = txs.data[t].message.payload;
 		       enc_message1.PubKey = PubKey;
 		       en[t] = enc_message1;
 		       console.log("%cenだよ",'color: red',en[t]);
