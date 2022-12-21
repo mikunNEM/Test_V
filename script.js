@@ -224,7 +224,6 @@ txRepo
     console.log("dom_txInfo=",dom_txInfo); ////////////////
     
     let t=0;
-   
     let en = [];
     
     for (let tx of txs.data) {   ///////////////    tx を pageSize の回数繰り返す ///////////////////
@@ -371,7 +370,7 @@ txRepo
 		       
 		       enc_message1.message = tx.message.payload;
 		       enc_message1.PubKey = PubKey;
-		       en = [{en},{enc_message1}];
+		       console.log("%cen_message1だよ",'color: red',enc_message1);
 		       
 		      // console.log("%cen[t]だよ",'color: red',en[t]);
 		       console.log("enだよ",en);
