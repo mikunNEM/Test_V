@@ -372,8 +372,8 @@ txRepo
 		       enc_message1.PubKey = PubKey;
 		       console.log("%cen_message1だよ",'color: red',enc_message1);
 		      
-		       console.log({en[t],enc_message1});
-		     
+		       console.log("en[t]だよ",en[t]);
+		     　console.count();
 		       en[t] = enc_message1; 
 		       
 		      // console.log("%cen[t]だよ",'color: red',en[t]);
