@@ -336,8 +336,8 @@ txRepo
                 　　dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
              } /////////////////////////////////////////////////////////////////////////////////////////////////////    
              
-             (async() => {
-             if (tx.message.type === 1){             
+             
+             if (tx.message.type === 1){   // メッセージが暗号文の時          
 		  let PubKey;
 	          let alice;
                   let enc_message1 = {};
@@ -361,10 +361,10 @@ txRepo
 			 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
 		      　　PubKey = window.SSS.activePublicKey;
 		 }
-		       
+		       (async() => {
                          accountInfo = await accountRepo.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する             
            　　　　　　　   PubKey = accountInfo.publicKey;
-		       
+		       })(); // async()
 		       console.log("%c暗号化メッセージだよ",'color: blue',tx.message.payload)
 		       console.log("%cPubKeyだよ",'color: green',PubKey)
 		       
@@ -392,12 +392,12 @@ txRepo
                   }, 3000). */
               
 		     
-              console.log("%ct asyncの中",'color: red',t);
+              console.log("%ct asyncの外",'color: red',t);
                  dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br><div id="enc_message">${tx.message.payload}</div></font>`;     // 　メッセージ    
             }else{          // 平文の場合
                  dom_message.innerHTML = `<font color="#4169e1"></br>< Message ></br>${tx.message.payload}</font>`;     // 　メッセージ  
             }
-	   })(); // async()
+	   
           } // tx.type が 'TRANSFER' の場合
                                                                           
             dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加              
