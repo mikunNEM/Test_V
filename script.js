@@ -313,7 +313,7 @@ txRepo
                            }
                            dom_amount.innerHTML = `<font color="#008000" size="+1">💰➡️😊 :　<i><big><strong> ${(parseInt(tx.mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;    // 　数量
                        }
-		       console.log("%ct モザイクが空では無い場合の処理　tだよ　",'color: red',t);
+		       console.log("%ci モザイクが空では無い場合の処理　iだよ　",'color: red',i);
                })(); // async() 
                
                 dom_tx.appendChild(dom_mosaic);                    // dom_mosaic をdom_txに追加 
