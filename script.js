@@ -365,20 +365,21 @@ txRepo
                          accountInfo = await accountRepo.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する             
            　　　　　　　   PubKey = accountInfo.publicKey;
 		       })(); // async()
-		       console.log("%c暗号化メッセージだよ",'color: blue',tx.message.payload)
-		       console.log("%cPubKeyだよ",'color: green',PubKey)
+		       //console.log("%c暗号化メッセージだよ",'color: blue',tx.message.payload)
+		       //console.log("%cPubKeyだよ",'color: green',PubKey)
 		       
 		       enc_message1.message = tx.message.payload;
 		       enc_message1.PubKey = PubKey;
 		       
-		     　console.count();
+		     　//console.count();
 		       en[t] = enc_message1; 
 		       console.log("%cen_message1だよ",'color: red',enc_message1);
-		       console.log("%cen[t]だよ",'color: red',en[t]);
+		       console.log("enだよ",en);
+		       //console.log("%cen[t]だよ",'color: red',en[t]);
 		       console.log("%c t = だよ",'color: red',t);
 		       
 		      // console.log("%cen[t]だよ",'color: red',en[t]);
-		       console.log("enだよ",en);
+		       
 		       
 		/*  setTimeout(() => {	 	 
 		   window.SSS.setEncryptedMessage(      // メッセージを復号
