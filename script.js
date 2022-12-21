@@ -361,7 +361,7 @@ txRepo
 			 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
 		      　　PubKey = window.SSS.activePublicKey;
 		 }
-		       (async() => {
+		       (async(alice) => {
                          accountInfo = await accountRepo.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する
            　　　　　　　   PubKey = accountInfo.publicKey;
 			       console.log("%ct asyncの中",'color: red',t);
