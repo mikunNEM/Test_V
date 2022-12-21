@@ -811,9 +811,6 @@ txRepo
  
 function Onclick_Decryption(){
 	
-	console.log("%cOnclick_Decryptionだよ",'color: red')
-        console.log("SSSだよ",SSS)
-	
     window.SSS.setEncryptedMessage(
       encryptedMessage.payload,
       alice.publicKey
