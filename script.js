@@ -390,8 +390,9 @@ txRepo
                          console.log(data)               
                    })
                   }, 3000). */
+              console.log("%ct asyncの中",'color: red',t);
 		})(); // async()     
-              console.log("t asyncの外",t);
+              console.log("%ct asyncの外",'color: red',t);
                  dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br><div id="enc_message">${tx.message.payload}</div></font>`;     // 　メッセージ    
             }else{          // 平文の場合
                  dom_message.innerHTML = `<font color="#4169e1"></br>< Message ></br>${tx.message.payload}</font>`;     // 　メッセージ  
