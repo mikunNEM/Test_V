@@ -225,7 +225,8 @@ txRepo
     
     let t=0;
     let enc_message1 = {};
-	
+    let en = new array(pageSize);
+    
     for (let tx of txs.data) {   ///////////////    tx を pageSize の回数繰り返す ///////////////////
       console.log(`tx[${t}] =`,tx);      ////////////////////
       const dom_tx = document.createElement('div');
@@ -367,8 +368,9 @@ txRepo
 		       console.log("%c暗号化メッセージだよ",'color: blue',tx.message.payload)
 		       console.log("%cPubKeyだよ",'color: green',PubKey)
 		       
-		       enc_message1[t].message = tx.message.payload;
-		       enc_message1[t].PubKey = PubKey;
+		       enc_message1.message = tx.message.payload;
+		       enc_message1.PubKey = PubKey;
+		       en[t] = enc_message1;
 		       
 		/*  setTimeout(() => {	 	 
 		   window.SSS.setEncryptedMessage(      // メッセージを復号
