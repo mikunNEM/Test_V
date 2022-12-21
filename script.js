@@ -367,8 +367,8 @@ txRepo
 		       console.log("%c暗号化メッセージだよ",'color: blue',tx.message.payload)
 		       console.log("%cPubKeyだよ",'color: green',PubKey)
 		       
-		       enc_message1(t).message = tx.message.payload;
-		       enc_message1(t).PubKey = PubKey;
+		       enc_message1[t].message = tx.message.payload;
+		       enc_message1[t].PubKey = PubKey;
 		       
 		/*  setTimeout(() => {	 	 
 		   window.SSS.setEncryptedMessage(      // メッセージを復号
