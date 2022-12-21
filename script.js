@@ -116,9 +116,8 @@ accountRepo.getAccountInfo(address)
         console.log("account_Mosaics =",accountInfo.mosaics.length);
      
           //select要素を取得する
-          const selectMosaic = document.getElementById('form-mosaic_ID');
- 
-          const mosaic_data = [];    
+          const selectMosaic = document.getElementById('form-mosaic_ID'); 
+             
    (async() => { 
     
       for (let m of accountInfo.mosaics) {  //accountInfo のモザイクの数だけ繰り返す
@@ -127,8 +126,7 @@ accountRepo.getAccountInfo(address)
            const div = mosaicInfo.divisibility;
            //option要素を新しく作る
            const option1 = document.createElement('option');
-           
-           const mosaic_dataX = {};
+          
            const mosaicNamesA = await nsRepo.getMosaicsNames([new sym.MosaicId(m.id.id.toHex())]).toPromise(); //モザイクIDからネームスペースを取り出す
          if ([mosaicNamesA][0][0].names.length !== 0) {  //  ネームスペースがある場合
         
@@ -228,7 +226,8 @@ txRepo
     console.log("dom_txInfo=",dom_txInfo); ////////////////
     
     let t=0;
-    let enc_message[50];
+    let enc_message = new Array(50);
+	
     for (let tx of txs.data) {   ///////////////    tx を pageSize の回数繰り返す ///////////////////
       console.log(`tx[${t}] =`,tx);      ////////////////////
       const dom_tx = document.createElement('div');
