@@ -225,7 +225,7 @@ txRepo
     
     let t=0;
     let enc_message1 = {};
-    let en = ;
+    let en = [];
     
     for (let tx of txs.data) {   ///////////////    tx を pageSize の回数繰り返す ///////////////////
       console.log(`tx[${t}] =`,tx);      ////////////////////
