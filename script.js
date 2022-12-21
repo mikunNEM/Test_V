@@ -224,7 +224,7 @@ txRepo
     console.log("dom_txInfo=",dom_txInfo); ////////////////
     
     let t=0;
-    let enc_message1 = {};
+   
     let en = [];
     
     for (let tx of txs.data) {   ///////////////    tx を pageSize の回数繰り返す ///////////////////
@@ -341,7 +341,7 @@ txRepo
                (async() => {
 		  let PubKey;
 	          let alice;
-              
+                  let enc_message1 = {};
                  dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption"><li>暗号化メッセージ</li>
 		 <li><input type="button" value= "復号化" onclick="Onclick_Decryption();" class="button-decrypted"/></li></ul></strong></font>`;     // 暗号化メッセージの場合
 		     
@@ -365,6 +365,7 @@ txRepo
 		       
                          accountInfo = await accountRepo.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する             
            　　　　　　　   PubKey = accountInfo.publicKey;
+		       
 		       console.log("%c暗号化メッセージだよ",'color: blue',tx.message.payload)
 		       console.log("%cPubKeyだよ",'color: green',PubKey)
 		       
