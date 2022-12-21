@@ -370,7 +370,7 @@ txRepo
 		       console.log("%c暗号化メッセージだよ",'color: blue',tx.message.payload)
 		       console.log("%cPubKeyだよ",'color: green',PubKey)
 		       
-		  setTimeout(() => {	 	 
+		/*  setTimeout(() => {	 	 
 		   window.SSS.setEncryptedMessage(      // メッセージを復号
                      tx.message.payload,
                      PubKey
@@ -379,7 +379,7 @@ txRepo
                    window.SSS.requestSignDecription().then((data) => {
                          console.log(data)               
                    })
-                  }, 3000)
+                  }, 3000). */
 		})(); // async()     
               
                  dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br><div id="enc_message">${tx.message.payload}</div></font>`;     // 　メッセージ    
@@ -811,6 +811,7 @@ txRepo
 function Onclick_Decryption(){
 	
 	console.log("%cOnclick_Decryptionだよ",'color: red')
+        console.log("SSSだよ",SSS)
 	
     window.SSS.setEncryptedMessage(
       encryptedMessage.payload,
