@@ -348,16 +348,16 @@ txRepo
 		     
 		 if (tx.recipientAddress.address !== tx.signer.address.address){    // 送信先アドレスと、送信元アドレスが異なる場合
 			if (tx.signer.address.address === address.address){
-				 console.log("signerとwallet addressが同じ時")
+				 console.log("%csignerとwallet addressが同じ時",'color: green')
 				 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
 			}else
                            if (tx.recipientAddress.address === address.address){ 
-				console.log("recipient とwallet addressが同じ時")
+				console.log("%crecipient とwallet addressが同じ時",'color: green')
 			        alice = sym.Address.createFromRawAddress(tx.signer.address.address);   //アドレスクラスの生成
 			} 
 			 
 		 }else{    // 送信先アドレスと、ウォレットアドレスが同じ場合
-			 console.log("送信アドレスと送信元アドレスが同じ")
+			 console.log("%c送信アドレスと送信元アドレスが同じ",'color: green')
 			 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
 		      　　PubKey = window.SSS.activePublicKey;
 		 }
