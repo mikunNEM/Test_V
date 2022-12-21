@@ -335,9 +335,8 @@ txRepo
                 　　dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
              } /////////////////////////////////////////////////////////////////////////////////////////////////////    
              
-            
-             if (tx.message.type === 1){
-               (async() => {
+             (async() => {
+             if (tx.message.type === 1){             
 		  let PubKey;
 	          let alice;
                   let enc_message1 = {};
@@ -390,13 +389,14 @@ txRepo
                          console.log(data)               
                    })
                   }, 3000). */
+              
+		     
               console.log("%ct asyncの中",'color: red',t);
-		})(); // async()     
-              console.log("%ct asyncの外",'color: red',t);
                  dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br><div id="enc_message">${tx.message.payload}</div></font>`;     // 　メッセージ    
             }else{          // 平文の場合
                  dom_message.innerHTML = `<font color="#4169e1"></br>< Message ></br>${tx.message.payload}</font>`;     // 　メッセージ  
-            }                        
+            }
+	   })(); // async()
           } // tx.type が 'TRANSFER' の場合
                                                                           
             dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加              
