@@ -228,6 +228,7 @@ txRepo
     console.log("dom_txInfo=",dom_txInfo); ////////////////
     
     let t=0;
+    let enc_message[50];
     for (let tx of txs.data) {   ///////////////    tx を pageSize の回数繰り返す ///////////////////
       console.log(`tx[${t}] =`,tx);      ////////////////////
       const dom_tx = document.createElement('div');
@@ -813,8 +814,8 @@ function Onclick_Decryption(){
 	
 	
     window.SSS.setEncryptedMessage(
-      encryptedMessage.payload,
-      alice.publicKey
+      encryptedMessage,
+      pubKey
     )
 	
     window.SSS.requestSignDecription().then((data) => {
