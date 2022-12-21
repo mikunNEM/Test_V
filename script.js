@@ -42,7 +42,7 @@ let txRepo;
 let mosaicRepo;
 let nsRepo;
 
-setTimeout(() => {    //指定した時間後に一度だけ動作する
+setTimeout(() => {  //////////////////  指定した時間後に実行する  ////////////////////////////////////////////////
   
     console.log("SSS_Link=",window.isAllowedSSS());
     window.requestSSS();    // SSSと連携されてない場合、右下にメッセージが出る
@@ -108,7 +108,8 @@ if (NET_TYPE === NET_TYPE_T){
       }
      
      
-     
+///////////////////////////////////////////////    アカウント情報を取得する     ////////////////////////////////////////////
+
 accountRepo.getAccountInfo(address)
   .toPromise()
   .then((accountInfo) => {
@@ -149,10 +150,8 @@ accountRepo.getAccountInfo(address)
 	   
     })(); // async() 
   })
-     
-               
- 
-    //////////////////////////////////////　リスナーでトランザクションを検知し、音を鳴らす //////////////////////////////////////////////////
+      
+//////////////////////////////////////　リスナーでトランザクションを検知し、音を鳴らす //////////////////////////////////////////////////
   
  
  // nsRepo = repo.createNamespaceRepository();
@@ -198,11 +197,10 @@ accountRepo.getAccountInfo(address)
     });
   
   });
-  
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  
-                                  // トランザクション履歴を取得する
 
+	
+//////////////////////////////////////  トランザクション履歴を取得する  //////////////////////////////////////////////////////////////////////////////
+                                
   
 const searchCriteria = {                                   
   group: sym.TransactionGroup.Confirmed,
@@ -243,12 +241,10 @@ txRepo
 
       dom_txType.innerHTML = `<p style="text-align: right; line-height:100%;&"><font color="#0000ff">< ${getTransactionType(tx.type)} ></font></p>`;        //　文字列の結合 　Tx タイプ
       
-    if (check_netType === 'N'){   // MAINNET の場合
-           // dom_hash.innerHTML = `<font color="#2f4f4f">Tx Hash : </font><a href="https://symbol.fyi/transactions/${tx.transactionInfo.hash}" target="_blank" rel="noopener noreferrer"><small>${tx.transactionInfo.hash}</small></a>`; //Tx hash
+    if (check_netType === 'N'){   // MAINNET の場合          
            dom_hash.innerHTML = `<p style="text-align: right; font-weight:bold; line-height:100%;&"><a href="https://symbol.fyi/transactions/${tx.transactionInfo.hash}" target="_blank" rel="noopener noreferrer"><i>⛓ Transaction Info ⛓</i></a></p>`; //Tx hash
     }else
-       if (check_netType === 'T'){ // TESTNET の場合
-           //dom_hash.innerHTML = `<font color="#2f4f4f">Tx Hash : </font><a href="https://testnet.symbol.fyi/transactions/${tx.transactionInfo.hash}" target="_blank" rel="noopener noreferrer"><small>${tx.transactionInfo.hash}</small></a>`; //Tx hash      
+       if (check_netType === 'T'){ // TESTNET の場合             
            dom_hash.innerHTML = `<p style="text-align: right; font-weight:bold; line-height:100%;&"><a href="https://testnet.symbol.fyi/transactions/${tx.transactionInfo.hash}" target="_blank" rel="noopener noreferrer"><i>⛓ Transaction Info ⛓</i></a></p>`; //Tx hash          
        }
          
