@@ -362,8 +362,9 @@ txRepo
 		      　　PubKey = window.SSS.activePublicKey;
 		 }
 		       (async() => {
-                         accountInfo = await accountRepo.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する             
+                         accountInfo = await accountRepo.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する
            　　　　　　　   PubKey = accountInfo.publicKey;
+			       console.log("%ct asyncの中",'color: red',t);
 		       })(); // async()
 		       //console.log("%c暗号化メッセージだよ",'color: blue',tx.message.payload)
 		       //console.log("%cPubKeyだよ",'color: green',PubKey)
@@ -390,10 +391,8 @@ txRepo
                    window.SSS.requestSignDecription().then((data) => {
                          console.log(data)               
                    })
-                  }, 3000). */
+                  }, 3000). */		     
               
-		     
-              console.log("%ct asyncの外",'color: red',t);
                  dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br><div id="enc_message">${tx.message.payload}</div></font>`;     // 　メッセージ    
             }else{          // 平文の場合
                  dom_message.innerHTML = `<font color="#4169e1"></br>< Message ></br>${tx.message.payload}</font>`;     // 　メッセージ  
