@@ -344,7 +344,8 @@ txRepo
                (async() => {
 		  let PubKey;
 	          let alice;
-                  let value1 = `復号化${t}`      
+                  let value1 = `復号化${t}` 
+		  console.log("%cvalue1だよ",'color: red',value1)
                  dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption"><li>暗号化メッセージ</li>
 		 <li><input type="button" value= value1 onclick="Onclick_Decryption();" class="button-decrypted"/></li></ul></strong></font>`;     // 暗号化メッセージの場合
 		     
