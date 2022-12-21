@@ -371,8 +371,8 @@ txRepo
 		       enc_message1.message = tx.message.payload;
 		       enc_message1.PubKey = PubKey;
 		       en[t] = enc_message1;
-		       console.log("%cenだよ",'color: red',en[t]);
-		       
+		       console.log("%cen[t]だよ",'color: red',en[t]);
+		       console.log("enだよ",en);
 		/*  setTimeout(() => {	 	 
 		   window.SSS.setEncryptedMessage(      // メッセージを復号
                      tx.message.payload,
