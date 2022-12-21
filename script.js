@@ -811,7 +811,6 @@ txRepo
  
 function Onclick_Decryption(){
 	
-	console.log("%c兄弟ノードだよ",'color: green',document.nextElementSibling);
 	
     window.SSS.setEncryptedMessage(
       encryptedMessage.payload,
