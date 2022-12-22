@@ -814,7 +814,8 @@ txRepo
 
  
 function Onclick_Decryption(PubKey,encryptedMessage){
-	
+    console.log("Pubkeyだよ",PubKey)
+    console.log("encryptedMessageだよ",encryptedMessage)
 	
     window.SSS.setEncryptedMessage(
       encryptedMessage,
