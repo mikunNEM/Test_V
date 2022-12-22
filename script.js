@@ -237,7 +237,7 @@ txRepo
       
       const dom_enc = document.createElement('div');
       const dom_message = document.createElement('div');
-     
+      const dom_PubKey = document.createElement('div');
 
       dom_txType.innerHTML = `<p style="text-align: right; line-height:100%;&"><font color="#0000ff">< ${getTransactionType(tx.type)} ></font></p>`;        //　文字列の結合 　Tx タイプ
       
@@ -373,27 +373,20 @@ txRepo
 		       en[t] = enc_message1; 
 		    
 		       console.table(en);
-		     		       
-		       
-		/*  setTimeout(() => {	 	 
-		   window.SSS.setEncryptedMessage(      // メッセージを復号
-                     tx.message.payload,
-                     PubKey
-                   )
-		       
-                   window.SSS.requestSignDecription().then((data) => {
-                         console.log(data)               
-                   })
-                  }, 3000). */		     
-              
-                 dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br><input type="button" id="${PubKey}" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div></font>`;     // 　メッセージ    
-            }else{          // 平文の場合
+		     
+		  dom_PubKey.innerHTML = `<font color="#ff00ff"></br>< PubKey ><div id="Pub">${PubKey}</div></font>`;    		       
+	         dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br><input type="button" id="Pub" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div></font>`;     // 　メッセージ    
+                
+		     
+　　　　　　　　　　dom_tx.appendChild(dom_PubKey);                    // 公開鍵を追加
+	     
+	     }else{          // 平文の場合
                  dom_message.innerHTML = `<font color="#4169e1"></br>< Message ></br>${tx.message.payload}</font>`;     // 　メッセージ  
             }
 	   
           } // tx.type が 'TRANSFER' の場合
                                                                           
-            dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加              
+            dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加
             dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く
             dom_txInfo.appendChild(dom_tx);                    // トランザクション情報を追加
 	    t = ++t;
