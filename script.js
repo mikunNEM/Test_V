@@ -861,6 +861,7 @@ function Onclick_Decryption(PubKey,encryptedMessage){
     window.SSS.requestSignDecription().then((data) => {
             console.log(data);
 	    alert(`${encryptedMessage}　--- >>　${data}`);
+	    swal(`${encryptedMessage}　--- >>　${data}`);
     })		
 }
 
