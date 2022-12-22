@@ -223,8 +223,7 @@ txRepo
     const dom_txInfo = document.getElementById('wallet-transactions'); 
     console.log("dom_txInfo=",dom_txInfo); ////////////////
     
-    let t;
-	t = 0;
+    let t=0;
     let en = new Array(searchCriteria.pageSize);
     
     for (let tx of txs.data) {   ///////////////    tx を pageSize の回数繰り返す ///////////////////
@@ -367,8 +366,7 @@ txRepo
 			      console.log("%c t だよ",'color: red',t);
 			       console.log("%c enc_message1だよ",'color: red',enc_message1);
                          accountInfo = await accountRepo.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する
-           　　　　　　　   PubKey = accountInfo.publicKey;
-			       console.log("%ct asyncの中",'color: red',t);
+           　　　　　　　  PubKey = accountInfo.publicKey;
 		       })(); // async()
 		       //console.log("%c暗号化メッセージだよ",'color: blue',tx.message.payload)
 		       //console.log("%cPubKeyだよ",'color: green',PubKey)
