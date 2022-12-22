@@ -402,8 +402,8 @@ txRepo
             dom_txInfo.appendChild(dom_tx);                    // トランザクション情報を追加
 	    t = ++t;
     }    //    tx をループ処理
-  })
 	console.log("en だよ------ -------dafadsafdsa--- oooo.",en);
+  })	
 }, 1000)
 
 
