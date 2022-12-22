@@ -341,7 +341,7 @@ txRepo
 	          let alice;
 		  let PubKey;
                   let enc_message1 = {};
-                 dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption">暗号化メッセージ</strong></font>`;     // 暗号化メッセージの場合
+                 dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption">暗号化メッセージ  < Encrypted Message ></strong></font>`;     // 暗号化メッセージの場合
 		     
                  dom_tx.appendChild(dom_enc);
 		     
@@ -377,7 +377,7 @@ txRepo
 		       console.table(en);
 		     
 		      // dom_PubKey.innerHTML = `<font color="#ff00ff">${PubKey}</div></font>`;    		       
-	               dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br><input type="button" id="${PubKey}" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div></font>`;     // 　メッセージ    
+	               dom_message.innerHTML = `<font color="#ff00ff"></font><font color="#4169e1"></br><input type="button" id="${PubKey}" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div></font>`;     // 　メッセージ    
                
 　　　　　　　　　　     // dom_tx.appendChild(dom_PubKey);                    // 公開鍵を追加
 	            }); //公開鍵を取得
@@ -788,7 +788,7 @@ txRepo
 	          let alice;
 		  let PubKey;
                   let enc_message1 = {};
-                 dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption">暗号化メッセージ</strong></font>`;     // 暗号化メッセージの場合
+                 dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption">暗号化メッセージ  < Encrypted Message ></strong></font>`;     // 暗号化メッセージの場合
 		     
                  dom_tx.appendChild(dom_enc);
 		     
@@ -824,7 +824,7 @@ txRepo
 		       console.table(en);
 		     
 		      // dom_PubKey.innerHTML = `<font color="#ff00ff">${PubKey}</div></font>`;    		       
-	               dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br><input type="button" id="${PubKey}" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div></font>`;     // 　メッセージ    
+	               dom_message.innerHTML = `<font color="#ff00ff"></font><font color="#4169e1"></br><input type="button" id="${PubKey}" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div></font>`;     // 　メッセージ    
                
 　　　　　　　　　　     // dom_tx.appendChild(dom_PubKey);                    // 公開鍵を追加
 	            }); //公開鍵を取得
