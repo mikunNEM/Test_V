@@ -349,22 +349,11 @@ txRepo
 			if (tx.signer.address.address === address.address){
 				 console.log("%csignerとwallet addressが同じ時",'color: blue')
 				 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
-				 accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => { //  アドレスから公開鍵を取得する
-				   setTimeout(() => {	 
-                                    PubKey = accountInfo.publicKey;
-			            console.log("%cぱぶきー　blue","color: blue",accountInfo.publicKey);
-		                   }, 3000) 
-		                 });
+				
 			}else
                            if (tx.recipientAddress.address === address.address){ 
 				console.log("%crecipient とwallet addressが同じ時",'color: blue')
-			        alice = sym.Address.createFromRawAddress(tx.signer.address.address);   //アドレスクラスの生成
-				accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => { //  アドレスから公開鍵を取得する
-		                   setTimeout(() => {			
-                                    PubKey = accountInfo.publicKey;
-			            console.log("%cぱぶきー　green","color: blue",accountInfo.publicKey);
-			           }, 3000) 
-		                });
+			        alice = sym.Address.createFromRawAddress(tx.signer.address.address);   //アドレスクラスの生成			
 			} 
 			 			 
 		 }else{    // 送信先アドレスと、ウォレットアドレスが同じ場合
@@ -373,7 +362,13 @@ txRepo
 		         PubKey = window.SSS.activePublicKey;
 			 console.log("%cぱぶきー　green","color: green",PubKey);
 		 }
-		           
+		       		     
+		    accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => { //  アドレスから公開鍵を取得する
+				   	 
+                                    PubKey = accountInfo.publicKey;
+			            console.log("%cぱぶきー　blue","color: blue",accountInfo.publicKey);
+		                   		     
+		     
 		       enc_message1.message = tx.message.payload;
 		       enc_message1.PubKey = PubKey;
 		     	      		       
@@ -385,7 +380,7 @@ txRepo
 	               dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br><input type="button" id="${PubKey}" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div></font>`;     // 　メッセージ    
                
 　　　　　　　　　　     // dom_tx.appendChild(dom_PubKey);                    // 公開鍵を追加
-	      
+	            }); //公開鍵を取得
 		     
 	     }else{          // 平文の場合
                  dom_message.innerHTML = `<font color="#4169e1"></br>< Message ></br>${tx.message.payload}</font>`;     // 　メッセージ  
