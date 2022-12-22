@@ -364,22 +364,20 @@ txRepo
 		           
 		 accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => { //  アドレスから公開鍵を取得する
 			       
-                             PubKey = accountInfo.publicKey;
-	         	     enc_message1.message = tx.message.payload;
-		             enc_message1.PubKey = PubKey;
-		     
-		  });
-		      		       
+                       PubKey = accountInfo.publicKey;
+	               enc_message1.message = tx.message.payload;
+		       enc_message1.PubKey = PubKey;
+		     	      		       
 		       en[t] = enc_message1; 
 		    
 		       console.table(en);
 		     
-		  dom_PubKey.innerHTML = `<font color="#ff00ff"></br>< PubKey ><div id="Pub">${PubKey}</div></font>`;    		       
-	         dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br><input type="button" id="Pub" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div></font>`;     // 　メッセージ    
+		       dom_PubKey.innerHTML = `<font color="#ff00ff"></br>< PubKey ><div id="Pub">${PubKey}</div></font>`;    		       
+	               dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br><input type="button" id="Pub" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div></font>`;     // 　メッセージ    
                 
+　　　　　　　　　　      dom_tx.appendChild(dom_PubKey);                    // 公開鍵を追加
+	      });
 		     
-　　　　　　　　　　dom_tx.appendChild(dom_PubKey);                    // 公開鍵を追加
-	     
 	     }else{          // 平文の場合
                  dom_message.innerHTML = `<font color="#4169e1"></br>< Message ></br>${tx.message.payload}</font>`;     // 　メッセージ  
             }
@@ -807,8 +805,8 @@ txRepo
 
  
 function Onclick_Decryption(PubKey,encryptedMessage){
-    console.log("Pubkeyだよ",PubKey)
-    console.log("encryptedMessageだよ",encryptedMessage)
+    console.log("%cPubkeyだよ","color: blue",PubKey)
+    console.log("%cencryptedMessageだよ","color: green",encryptedMessage)
 	
     window.SSS.setEncryptedMessage(
       encryptedMessage,
