@@ -349,17 +349,21 @@ txRepo
 			if (tx.signer.address.address === address.address){
 				 console.log("%csignerとwallet addressが同じ時",'color: blue')
 				 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
-				 accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => { //  アドレスから公開鍵を取得する			       
+				 accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => { //  アドレスから公開鍵を取得する
+				   setTimeout(() => {	 
                                     PubKey = accountInfo.publicKey;
 			            console.log("%cぱぶきー　blue","color: blue",accountInfo.publicKey);
+		                   }, 1000) 
 		                 });
 			}else
                            if (tx.recipientAddress.address === address.address){ 
 				console.log("%crecipient とwallet addressが同じ時",'color: blue')
 			        alice = sym.Address.createFromRawAddress(tx.signer.address.address);   //アドレスクラスの生成
-				accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => { //  アドレスから公開鍵を取得する			       
+				accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => { //  アドレスから公開鍵を取得する
+		                   setTimeout(() => {			
                                     PubKey = accountInfo.publicKey;
 			            console.log("%cぱぶきー　green","color: blue",accountInfo.publicKey);
+			           }, 1000) 
 		                });
 			} 
 			 			 
