@@ -365,7 +365,7 @@ txRepo
                               console.log("%c aliceだよ",'color: red',alice);
 			      console.log("%c t await 上だよ",'color: red',t);
                          accountInfo = await accountRepo.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する
-			   cosole.log("%c await 下 accountInfo ",'color: red',accounInfo);
+			   console.log("%c await 下 accountInfo ",'color: red',accounInfo);
            　　　　　　　  PubKey = accountInfo.publicKey;
 			       console.log("%c t await 下だよ",'color: red',t);
 		       })(); // async()
