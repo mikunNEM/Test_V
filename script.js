@@ -373,7 +373,7 @@ txRepo
 			           enc_message1.message = tx.message.payload;
 		                   enc_message1.PubKey = PubKey;
 		     
-		       }
+		       });
 		       
 		       
 		       
