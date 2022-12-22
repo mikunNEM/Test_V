@@ -339,7 +339,7 @@ txRepo
              
              if (tx.message.type === 1){   // メッセージが暗号文の時          
 	          let alice;
-		  let PubKey;
+		  let PubKey = "";
                   let enc_message1 = {};
                  dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption">暗号化メッセージ</strong></font>`;     // 暗号化メッセージの場合
 		     
