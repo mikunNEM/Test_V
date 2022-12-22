@@ -227,7 +227,7 @@ txRepo
     let en = new Array(searchCriteria.pageSize);
     
     for (let tx of txs.data) {   ///////////////    tx を pageSize の回数繰り返す ///////////////////
-      console.log(`tx[${t}] =`,tx);      ////////////////////
+      console.log(`%ctx[${t}] =`,"color: blue",tx);      ////////////////////
       const dom_tx = document.createElement('div');
       const dom_date = document.createElement('div');
       const dom_txType = document.createElement('div');
