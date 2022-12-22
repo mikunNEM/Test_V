@@ -372,7 +372,7 @@ txRepo
 		       enc_message1.message = tx.message.payload;
 		       enc_message1.PubKey = PubKey;
 		     	      		       
-		       en = enc_message1; 
+		       en[t] = enc_message1; 
 		    
 		       console.table(en);
 		     
