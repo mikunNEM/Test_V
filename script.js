@@ -339,7 +339,7 @@ txRepo
              
              if (tx.message.type === 1){   // メッセージが暗号文の時          
 	          let alice;
-		  let PubKey = "";
+		  let PubKey;
                   let enc_message1 = {};
                  dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption">暗号化メッセージ</strong></font>`;     // 暗号化メッセージの場合
 		     
@@ -347,17 +347,19 @@ txRepo
 		     
 		 if (tx.recipientAddress.address !== tx.signer.address.address){    // 送信先アドレスと、送信元アドレスが異なる場合
 			if (tx.signer.address.address === address.address){
-				 console.log("%csignerとwallet addressが同じ時",'color: green')
+				 console.log("%csignerとwallet addressが同じ時",'color: blue')
 				 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
 				 accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => { //  アドレスから公開鍵を取得する			       
                                     PubKey = accountInfo.publicKey;
+			            console.log("%cぱぶきー　blue","color: blue",accountInfo.publicKey);
 		                 });
 			}else
                            if (tx.recipientAddress.address === address.address){ 
-				console.log("%crecipient とwallet addressが同じ時",'color: green')
+				console.log("%crecipient とwallet addressが同じ時",'color: blue')
 			        alice = sym.Address.createFromRawAddress(tx.signer.address.address);   //アドレスクラスの生成
 				accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => { //  アドレスから公開鍵を取得する			       
                                     PubKey = accountInfo.publicKey;
+			            console.log("%cぱぶきー　green","color: blue",accountInfo.publicKey);
 		                });
 			} 
 			 			 
@@ -365,6 +367,7 @@ txRepo
 			 console.log("%c送信アドレスと送信元アドレスが同じ",'color: green')
 			 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
 		         PubKey = window.SSS.activePublicKey;
+			 console.log("%cぱぶきー　green","color: green",PubKey);
 		 }
 		           
 		       enc_message1.message = tx.message.payload;
