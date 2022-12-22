@@ -1,5 +1,5 @@
 const dom_version = document.getElementById('version');
-dom_version.innerText = 'v1.0.2　|　Powered by SYMBOL';
+dom_version.innerText = 'v1.0.3　|　Powered by SYMBOL';
 
 const sym = require('/node_modules/symbol-sdk');
 const op  = require("/node_modules/rxjs/operators");
@@ -347,17 +347,17 @@ txRepo
 		     
 		 if (tx.recipientAddress.address !== tx.signer.address.address){    // 送信先アドレスと、送信元アドレスが異なる場合
 			if (tx.signer.address.address === address.address){
-				 console.log("%csignerとwallet addressが同じ時",'color: blue')
+				 console.log("%csigner と wallet address が同じ時",'color: blue')
 				 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
 				
 			}else
                            if (tx.recipientAddress.address === address.address){ 
-				console.log("%crecipient とwallet addressが同じ時",'color: blue')
+				console.log("%crecipient と wallet address が同じ時",'color: blue')
 			        alice = sym.Address.createFromRawAddress(tx.signer.address.address);   //アドレスクラスの生成			
 			} 
 			 			 
 		 }else{    // 送信先アドレスと、ウォレットアドレスが同じ場合
-			 console.log("%c送信アドレスと送信元アドレスが同じ",'color: green')
+			 console.log("%c送信アドレス と 送信元アドレスが同じ",'color: green')
 			 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
 		         PubKey = window.SSS.activePublicKey;
 			 console.log("%cぱぶきー　green","color: green",PubKey);
@@ -365,21 +365,16 @@ txRepo
 		       		     
 		    accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => { //  アドレスから公開鍵を取得する
 				   	 
-                                    PubKey = accountInfo.publicKey;
-			            console.log("%cぱぶきー　blue","color: blue",accountInfo.publicKey);
-		                   		     
-		     
+                       PubKey = accountInfo.publicKey;
+	    
 		       enc_message1.message = tx.message.payload;
 		       enc_message1.PubKey = PubKey;
 		     	      		       
 		       en[t] = enc_message1; 
-		    
 		       console.table(en);
-		     
-		      // dom_PubKey.innerHTML = `<font color="#ff00ff">${PubKey}</div></font>`;    		       
+		       		       
 	               dom_message.innerHTML = `<input type="button" id="${PubKey}" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div>`;     // 　メッセージ    
                
-　　　　　　　　　　     // dom_tx.appendChild(dom_PubKey);                    // 公開鍵を追加
 	            }); //公開鍵を取得
 		     
 	     }else{          // 平文の場合
@@ -598,11 +593,8 @@ function popupSetting(){
 popupSetting();
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 /////////////////////// セレクトボックスの Page No を変更した時にトランザクション履歴を再読み込みする //////////////////////////////////////////////////////////////////
   
-                                  // トランザクション履歴を取得する
 
 function selectboxChange() {
 
@@ -639,10 +631,10 @@ function selectboxChange() {
           console.log("TEST_NET");
       }
        console.log("check_netType=",check_netType);
- ///////////////////////////////////////////////////////////////////////////////////////////////
+ 
   
   
-const page_num = document.getElementById('page_num1').value;  // セレクトボックスから、Page No を取得
+const page_num = document.getElementById('page_num1').value;  /////////  セレクトボックスから、Page No を取得  ///////////////////////
   
 const searchCriteria = {                                   
   group: sym.TransactionGroup.Confirmed,
@@ -807,27 +799,21 @@ txRepo
 			 console.log("%c送信アドレスと送信元アドレスが同じ",'color: green')
 			 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
 		         PubKey = window.SSS.activePublicKey;
-			 console.log("%cぱぶきー　green","color: green",PubKey);
 		 }
 		       		     
 		    accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => { //  アドレスから公開鍵を取得する
 				   	 
-                                    PubKey = accountInfo.publicKey;
-			            console.log("%cぱぶきー　blue","color: blue",accountInfo.publicKey);
-		                   		     
-		     
+                       PubKey = accountInfo.publicKey;
+		                   		     	     
 		       enc_message1.message = tx.message.payload;
 		       enc_message1.PubKey = PubKey;
 		     	      		       
 		       en[t] = enc_message1; 
-		    
 		       console.table(en);
-		     
-		      // dom_PubKey.innerHTML = `<font color="#ff00ff">${PubKey}</div></font>`;    		       
+		       		       
 	               dom_message.innerHTML = `<input type="button" id="${PubKey}" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div>`;     // 　メッセージ    
                
-　　　　　　　　　　     // dom_tx.appendChild(dom_PubKey);                    // 公開鍵を追加
-	            }); //公開鍵を取得
+	            }); //アドレスから公開鍵を取得する
 		     
 	     }else{          // 平文の場合
                  dom_message.innerHTML = `<font color="#4169e1"></br>< Message ></br>${tx.message.payload}</font>`;     // 　メッセージ  
