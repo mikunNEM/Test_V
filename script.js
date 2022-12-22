@@ -386,7 +386,7 @@ txRepo
                    })
                   }, 3000). */		     
               
-                 dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br><input type="button" id="enc_message" value="${tx.message.payload}" onclick="Onclick_Decryption();" class="button-decrypted"/></div></font>`;     // 　メッセージ    
+                 dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br><input type="button" id="${alice}" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div></font>`;     // 　メッセージ    
             }else{          // 平文の場合
                  dom_message.innerHTML = `<font color="#4169e1"></br>< Message ></br>${tx.message.payload}</font>`;     // 　メッセージ  
             }
@@ -813,12 +813,12 @@ txRepo
 
 
  
-function Onclick_Decryption(){
+function Onclick_Decryption(PubKey,encryptedMessage){
 	
 	
     window.SSS.setEncryptedMessage(
       encryptedMessage,
-      pubKey
+      PubKey
     )
 	
     window.SSS.requestSignDecription().then((data) => {
