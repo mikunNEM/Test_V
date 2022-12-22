@@ -854,13 +854,13 @@ function Onclick_Decryption(PubKey,encryptedMessage){
     console.log("%cencryptedMessageだよ","color: green",encryptedMessage)
 	
     window.SSS.setEncryptedMessage(
-      encryptedMessage,
-      PubKey
+            encryptedMessage,
+            PubKey
     )
-	
+		
     window.SSS.requestSignDecription().then((data) => {
-      console.log(data);
-	    alert(data);
+            console.log(data);
+	    alert(`${encryptedMessage}<br><br>${data}`);
     })		
 }
 
