@@ -371,10 +371,9 @@ txRepo
 		  });
 		      		       
 		       en[t] = enc_message1; 
-		       console.log("%cen_message1だよ",'color: red',enc_message1);
-		       console.log("enだよ",en);
-		     
-		       
+		    
+		       console.table("en",en);
+		     		       
 		       
 		/*  setTimeout(() => {	 	 
 		   window.SSS.setEncryptedMessage(      // メッセージを復号
