@@ -353,7 +353,7 @@ txRepo
 				   setTimeout(() => {	 
                                     PubKey = accountInfo.publicKey;
 			            console.log("%cぱぶきー　blue","color: blue",accountInfo.publicKey);
-		                   }, 1000) 
+		                   }, 3000) 
 		                 });
 			}else
                            if (tx.recipientAddress.address === address.address){ 
@@ -363,7 +363,7 @@ txRepo
 		                   setTimeout(() => {			
                                     PubKey = accountInfo.publicKey;
 			            console.log("%cぱぶきー　green","color: blue",accountInfo.publicKey);
-			           }, 1000) 
+			           }, 3000) 
 		                });
 			} 
 			 			 
