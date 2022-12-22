@@ -372,7 +372,7 @@ txRepo
 		       enc_message1.message = tx.message.payload;
 		       enc_message1.PubKey = PubKey;
 		     	      		       
-		       en[t] = enc_message1; 
+		       en = enc_message1; 
 		    
 		       console.table(en);
 		     
@@ -669,7 +669,10 @@ txRepo
   　　　　dom_txInfo.removeChild(dom_txInfo.firstChild);
 　　　　　}
     }
-  
+	
+    let t=0;
+    let en = new Array(searchCriteria.pageSize);
+	
     for (let tx of txs.data) {   ///////////////    tx を pageSize の回数繰り返す ///////////////////
       console.log("tx=",tx);      ////////////////////
       const dom_tx = document.createElement('div');
@@ -781,23 +784,61 @@ txRepo
              } /////////////////////////////////////////////////////////////////////////////////////////////////////    
              
              
-             if (tx.message.type === 1){
-                 dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption"><li>暗号化メッセージ</li>
-		 <li><input type="button" value="復号化" onclick="OnButtonDecryption();" class="button-decrypted"/></li></ul></strong></font>`;     // 暗号化メッセージの場合　
-                 
-		 dom_tx.appendChild(dom_enc);
-              
-                 dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br>${tx.message.payload}</font>`;     // 　メッセージ    
-            }else{          // 平文の場合
+             if (tx.message.type === 1){   // メッセージが暗号文の時          
+	          let alice;
+		  let PubKey;
+                  let enc_message1 = {};
+                 dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption">暗号化メッセージ</strong></font>`;     // 暗号化メッセージの場合
+		     
+                 dom_tx.appendChild(dom_enc);
+		     
+		 if (tx.recipientAddress.address !== tx.signer.address.address){    // 送信先アドレスと、送信元アドレスが異なる場合
+			if (tx.signer.address.address === address.address){
+				 console.log("%csignerとwallet addressが同じ時",'color: blue')
+				 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
+				
+			}else
+                           if (tx.recipientAddress.address === address.address){ 
+				console.log("%crecipient とwallet addressが同じ時",'color: blue')
+			        alice = sym.Address.createFromRawAddress(tx.signer.address.address);   //アドレスクラスの生成			
+			} 
+			 			 
+		 }else{    // 送信先アドレスと、ウォレットアドレスが同じ場合
+			 console.log("%c送信アドレスと送信元アドレスが同じ",'color: green')
+			 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
+		         PubKey = window.SSS.activePublicKey;
+			 console.log("%cぱぶきー　green","color: green",PubKey);
+		 }
+		       		     
+		    accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => { //  アドレスから公開鍵を取得する
+				   	 
+                                    PubKey = accountInfo.publicKey;
+			            console.log("%cぱぶきー　blue","color: blue",accountInfo.publicKey);
+		                   		     
+		     
+		       enc_message1.message = tx.message.payload;
+		       enc_message1.PubKey = PubKey;
+		     	      		       
+		       en[t] = enc_message1; 
+		    
+		       console.table(en);
+		     
+		      // dom_PubKey.innerHTML = `<font color="#ff00ff">${PubKey}</div></font>`;    		       
+	               dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br><input type="button" id="${PubKey}" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div></font>`;     // 　メッセージ    
+               
+　　　　　　　　　　     // dom_tx.appendChild(dom_PubKey);                    // 公開鍵を追加
+	            }); //公開鍵を取得
+		     
+	     }else{          // 平文の場合
                  dom_message.innerHTML = `<font color="#4169e1"></br>< Message ></br>${tx.message.payload}</font>`;     // 　メッセージ  
-               }
-                         
+            }
+	   
           } // tx.type が 'TRANSFER' の場合
                                                                           
-            dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加              
+            dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加
             dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く
-            dom_txInfo.appendChild(dom_tx);        // トランザクション情報を追加
-      
+            dom_txInfo.appendChild(dom_tx);                    // トランザクション情報を追加
+	    t = ++t;
     }    //    tx をループ処理
   })
 }
