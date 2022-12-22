@@ -341,8 +341,7 @@ txRepo
 		  let PubKey;
 	          let alice;
                   let enc_message1 = {};
-                 dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption"><li>暗号化メッセージ</li>
-		 <li><input type="button" value= "復号化" onclick="Onclick_Decryption();" class="button-decrypted"/></li></ul></strong></font>`;     // 暗号化メッセージの場合
+                 dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption">暗号化メッセージ</strong></font>`;     // 暗号化メッセージの場合
 		     
                  dom_tx.appendChild(dom_enc);
 		     
