@@ -361,28 +361,19 @@ txRepo
 			 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
 		      　　PubKey = window.SSS.activePublicKey;
 		 }
-		     /*  (async() => {   
-                         let accountInfo1 = await accountRepo.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する
-           　　　　　　　  PubKey = accountInfo1.publicKey;
-			       console.log("%c PubKey await 下だよ",'color: red',PubKey);
-		       })(); // async()  */
-                        
-		       accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => {
+		           
+		 accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => { //  アドレスから公開鍵を取得する
 			       
-			           PubKey = accountInfo.publicKey;
-			           enc_message1.message = tx.message.payload;
-		                   enc_message1.PubKey = PubKey;
+                             PubKey = accountInfo.publicKey;
+	         	     enc_message1.message = tx.message.payload;
+		             enc_message1.PubKey = PubKey;
 		     
-		       });
-		       
-		       
-		       
+		  });
+		      		       
 		       en[t] = enc_message1; 
 		       console.log("%cen_message1だよ",'color: red',enc_message1);
 		       console.log("enだよ",en);
-		       console.log("%c async の外　t = だよ",'color: red',t);
-		       
-		      // console.log("%cen[t]だよ",'color: red',en[t]);
+		     
 		       
 		       
 		/*  setTimeout(() => {	 	 
@@ -408,7 +399,6 @@ txRepo
             dom_txInfo.appendChild(dom_tx);                    // トランザクション情報を追加
 	    t = ++t;
     }    //    tx をループ処理
-	console.log("en だよ------ -------dafadsafdsa--- oooo.",en);
   })	
 }, 1000)
 
