@@ -377,7 +377,7 @@ txRepo
 		       console.table(en);
 		     
 		      // dom_PubKey.innerHTML = `<font color="#ff00ff">${PubKey}</div></font>`;    		       
-	               dom_message.innerHTML = `<font color="#ff00ff"></font><font color="#4169e1"></br><input type="button" id="${PubKey}" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div></font>`;     // 　メッセージ    
+	               dom_message.innerHTML = `<font color="#ff00ff"></font><font color="#4169e1"><input type="button" id="${PubKey}" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div></font>`;     // 　メッセージ    
                
 　　　　　　　　　　     // dom_tx.appendChild(dom_PubKey);                    // 公開鍵を追加
 	            }); //公開鍵を取得
@@ -824,7 +824,7 @@ txRepo
 		       console.table(en);
 		     
 		      // dom_PubKey.innerHTML = `<font color="#ff00ff">${PubKey}</div></font>`;    		       
-	               dom_message.innerHTML = `<font color="#ff00ff"></font><font color="#4169e1"></br><input type="button" id="${PubKey}" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div></font>`;     // 　メッセージ    
+	               dom_message.innerHTML = `<font color="#ff00ff"></font><font color="#4169e1"><input type="button" id="${PubKey}" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div></font>`;     // 　メッセージ    
                
 　　　　　　　　　　     // dom_tx.appendChild(dom_PubKey);                    // 公開鍵を追加
 	            }); //公開鍵を取得
