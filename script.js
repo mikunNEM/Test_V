@@ -371,10 +371,10 @@ txRepo
 		    
 		       console.table(en);
 		     
-		       dom_PubKey.innerHTML = `<font color="#ff00ff">< PubKey ><div id="Pub">${PubKey}</div></font>`;    		       
+		     //  dom_PubKey.innerHTML = `<font color="#ff00ff">< PubKey ><div id="Pub">${PubKey}</div></font>`;    		       
 	               dom_message.innerHTML = `<font color="#ff00ff">< Encrypted Message ></font><font color="#4169e1"></br><input type="button" id="${PubKey}" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div></font>`;     // 　メッセージ    
                
-　　　　　　　　　　      dom_tx.appendChild(dom_PubKey);                    // 公開鍵を追加
+　　　　　　　　　　     // dom_tx.appendChild(dom_PubKey);                    // 公開鍵を追加
 	      
 		     
 	     }else{          // 平文の場合
