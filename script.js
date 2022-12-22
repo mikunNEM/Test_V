@@ -338,7 +338,6 @@ txRepo
              
              
              if (tx.message.type === 1){   // メッセージが暗号文の時          
-		  let PubKey;
 	          let alice;
                   let enc_message1 = {};
                  dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption">暗号化メッセージ</strong></font>`;     // 暗号化メッセージの場合
@@ -358,11 +357,11 @@ txRepo
 		 }else{    // 送信先アドレスと、ウォレットアドレスが同じ場合
 			 console.log("%c送信アドレスと送信元アドレスが同じ",'color: green')
 			 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
-		      　　PubKey = window.SSS.activePublicKey;
+		         const PubKey = window.SSS.activePublicKey;
 		 }
 		           
 		 accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => { //  アドレスから公開鍵を取得する			       
-                       PubKey = accountInfo.publicKey;
+                       const PubKey = accountInfo.publicKey;
 		 });
 	               enc_message1.message = tx.message.payload;
 		       enc_message1.PubKey = PubKey;
