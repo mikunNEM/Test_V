@@ -860,8 +860,8 @@ function Onclick_Decryption(PubKey,encryptedMessage){
 		
     window.SSS.requestSignDecription().then((data) => {
             console.log(data);
-	    alert(`${encryptedMessage}　--- >>　${data}`);
-	    swal(`${encryptedMessage}　--- >>　${data}`);
+	    
+	    swal(`${encryptedMessage}　--- >>　${data}`); // ポップアップで表示
     })		
 }
 
@@ -870,7 +870,7 @@ function Onclick_Decryption(PubKey,encryptedMessage){
                                               //  NFTをデコードして表示する //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+/*
 function appendImg(src){          //   取得した画像をimgタグに挿入するfunctionを定義
 
   (tag= document.createElement('img')).src = src;
@@ -956,3 +956,4 @@ function nftdrive(mosaic){
 	});
 }
 
+*/
