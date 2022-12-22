@@ -341,7 +341,7 @@ txRepo
 	          let alice;
 		  let PubKey;
                   let enc_message1 = {};
-                 dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption">暗号化メッセージ  < Encrypted Message ></strong></font>`;     // 暗号化メッセージの場合
+                 dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption">暗号化メッセージ</strong>　< Encrypted Message ></font>`;     // 暗号化メッセージの場合
 		     
                  dom_tx.appendChild(dom_enc);
 		     
@@ -788,7 +788,7 @@ txRepo
 	          let alice;
 		  let PubKey;
                   let enc_message1 = {};
-                 dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption">暗号化メッセージ  < Encrypted Message ></strong></font>`;     // 暗号化メッセージの場合
+                 dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption">暗号化メッセージ</strong>　< Encrypted Message ></font>`;     // 暗号化メッセージの場合
 		     
                  dom_tx.appendChild(dom_enc);
 		     
