@@ -349,15 +349,18 @@ txRepo
 			if (tx.signer.address.address === address.address){
 				 console.log("%csignerとwallet addressが同じ時",'color: green')
 				 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
+				 accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => { //  アドレスから公開鍵を取得する			       
+                                    PubKey = accountInfo.publicKey;
+		                 });
 			}else
                            if (tx.recipientAddress.address === address.address){ 
 				console.log("%crecipient とwallet addressが同じ時",'color: green')
 			        alice = sym.Address.createFromRawAddress(tx.signer.address.address);   //アドレスクラスの生成
-			} 
-			 accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => { //  アドレスから公開鍵を取得する			       
+				accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => { //  アドレスから公開鍵を取得する			       
                                     PubKey = accountInfo.publicKey;
-		         });
-			 
+		                });
+			} 
+			 			 
 		 }else{    // 送信先アドレスと、ウォレットアドレスが同じ場合
 			 console.log("%c送信アドレスと送信元アドレスが同じ",'color: green')
 			 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
