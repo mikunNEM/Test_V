@@ -360,7 +360,6 @@ txRepo
 			 console.log("%c送信アドレス と 送信元アドレスが同じ",'color: green')
 			 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
 		         PubKey = window.SSS.activePublicKey;
-			 console.log("%cぱぶきー　green","color: green",PubKey);
 		 }
 		       		     
 		    accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => { //  アドレスから公開鍵を取得する
