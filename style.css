@@ -15,7 +15,8 @@
 
 body {
   /* background: rgb(190, 34, 211); */
-  background-image:url("https://data.comsa.io/user/b32ed69c-7a42-490d-83f1-3494875a69cc/asset/4dea6d31-3b1d-4f3f-b4a7-405b34c5014a.png");
+  /*background-image:url("https://data.comsa.io/user/b32ed69c-7a42-490d-83f1-3494875a69cc/asset/4dea6d31-3b1d-4f3f-b4a7-405b34c5014a.png");*/
+  background-image:src("./cyberpunk.jpg");
   background-size: cover;
   background-attachment: fixed;
 }
