@@ -7,29 +7,31 @@
   <meta http-equiv="content-type" charset="UTF-8">
   <!-- <meta name="viewport" content="width=device-width,initial-scale=1"> -->
   
-  <link rel="stylesheet" href="./css/BGimg_cyberpunk" type="text/css" media="all" id="switchCSS" />
+  <link rel="stylesheet" href="./css/BGimg_ventus.css" type="text/css" media="all" id="switchCSS" />
   <script src="js/jquery-3.6.3.min.js"></script>
   <script src="js/js.cookie.js"></script>
   <script>
     // CSSのURLを定義
-    var defaulturl= './css/BGimg_cyberpunk.css';
-    var blackurl= './css/BGimg_sea.css';
+    var defaulturl= './css/BGimg_ventus.css'
+    var cyberpunkurl= './css/BGimg_cyberpunk.css';
+    var seaurl= './css/BGimg_sea.css';
 // 画面表示時のCSSの読み込み設定
     $(document).ready(
         function() {
             if (!Cookies.get('cookieCSS')) {
                 // クッキー未登録であればデフォルト選択
-                    $("#selectCSS").val("default");
-            } else if (Cookies.get('cookieCSS') == 'default') {
+                    $("#selectCSS").val("ventus");
+            } else if (Cookies.get('cookieCSS') == 'ventus') {
                 // クッキーにデフォルト登録であればデフォルト選択
-                    $("#selectCSS").val("default");
+                    $("#selectCSS").val("ventus");
                 // defaultCSSを読み込む
                     $("#switchCSS").attr("href" , defaulturl);
-            } else if (Cookies.get('cookieCSS') == 'black') {
-                // クッキーブラック登録であればブラック選択
-                    $("#selectCSS").val("black");
-                // blackCSSを読み込み設定
-                    $("#switchCSS").attr("href" , blackurl);
+            } else if (Cookies.get('cookieCSS') == 'cyberpunk') {
+                    $("#selectCSS").val("cyberpunk");
+                    $("#switchCSS").attr("href" , cyberpunkurl);
+            } else if (Cookies.get('cookieCSS') == 'sea') {
+                    $("#selectCSS").val("sea");
+                    $("#switchCSS").attr("href" , seaurl);
             }
         }
     );
@@ -39,11 +41,13 @@
             // セレクトボックスのvalueを取得
                 var val = $(this).val();
             // valueによって読み込むCSSを変更する
-                if (val == "default") {
+                if (val == "ventus") {
                     cssurl = defaulturl;
-                } else if (val == "black") {
-                    cssurl = blackurl;
-                }
+                } else if (val == "cyberpunk") {
+                    cssurl = cyberpunkurl;
+                } else if  (val == "sea") {
+                     cssurl = seaurl;
+                }         
             // 選択結果をクッキーに登録する
                 Cookies.set('cookieCSS', val);
             // CSSを読み込む
@@ -55,7 +59,6 @@
 <body>
   
   
-  
   <div class="SSS_link">
        <a href="./Terms_of_use.html" target="_blank">利用規約</a>
        <a href="https://note.com/mikun_nem/n/n5c21f4af8930/" target="_blank">/ 使い方</a>
@@ -65,8 +68,9 @@
        <a href="https://github.com/mikunNEM/Ventus_Wallet" target="_blank">/ GitHub </a> 
        <a href="https://symbol-community.com" target="_blank">/ Symbol_Community_Web /</a>
          <select id="selectCSS">
-           <option value="default">CyberPunk</option>
-           <option value="black">Sea</option>
+           <option value="ventus">Ventus</option>
+           <option value="cyberpunk">CyberPunk</option>
+           <option value="sea">Sea</option>
 　       </select>
   </div> 
   
