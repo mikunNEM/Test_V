@@ -147,7 +147,7 @@ accountRepo.getAccountInfo(address)
            //select要素にoption要素を追加する
            selectMosaic.appendChild(option1);
 	      
-	       nftdrive(m);
+	     //  nftdrive(m);
       }    
 	   
     })(); // async() 
@@ -858,7 +858,7 @@ function Onclick_Decryption(PubKey,encryptedMessage){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                               //  NFTをデコードして表示する //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+/*
 
 function appendImg(src){          //   取得した画像をimgタグに挿入するfunctionを定義
 
@@ -946,4 +946,4 @@ function nftdrive(mosaic){
 	});
 }
 
-
+*/
