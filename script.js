@@ -33,7 +33,7 @@ const mosaicRepo_T = repo_T.createMosaicRepository();
 const nsRepo_T = repo_T.createNamespaceRepository();
 
 let EPOCH;
-let NODE_URL;
+let NODE;
 let NET_TYPE;
 let XYM_ID;     
 let repo;
@@ -55,7 +55,7 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
 
    if (check_netType === 'N'){           //ネットワークの判別　 メインネット 
        EPOCH = EPOCH_M;
-       NODE_URL = NODE_URL_M;
+       NODE = NODE_URL_M;
        NET_TYPE = NET_TYPE_M;
        XYM_ID = XYM_ID_M;
      
@@ -69,7 +69,7 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
    }else 
       if (check_netType === 'T'){      // テストネット
           EPOCH = EPOCH_T;
-          NODE_URL = NODE_URL_T;
+          NODE = NODE_URL_T;
           NET_TYPE = NET_TYPE_T;
           XYM_ID = XYM_ID_T;
         
@@ -158,7 +158,7 @@ accountRepo.getAccountInfo(address)
  
  // nsRepo = repo.createNamespaceRepository();
   
-  wsEndpoint = NODE_URL.replace('http', 'ws') + "/ws";
+  wsEndpoint = NODE.replace('http', 'ws') + "/ws";
   listener = new sym.Listener(wsEndpoint,nsRepo,WebSocket); 
   
   listener.open().then(() => {
@@ -605,7 +605,7 @@ function selectboxChange() {
 
    if (check_netType === 'N'){           //ネットワークの判別　 メインネット 
        EPOCH = EPOCH_M;
-       NODE_URL = NODE_URL_M;
+       NODE = NODE_URL_M;
        NET_TYPE = NET_TYPE_M;
        XYM_ID = XYM_ID_M;
      
@@ -619,7 +619,7 @@ function selectboxChange() {
    }else 
       if (check_netType === 'T'){      // テストネット
           EPOCH = EPOCH_T;
-          NODE_URL = NODE_URL_T;
+          NODE = NODE_URL_T;
           NET_TYPE = NET_TYPE_T;
           XYM_ID = XYM_ID_T;
         
