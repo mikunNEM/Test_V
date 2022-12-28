@@ -372,7 +372,7 @@ txRepo
 		       enc_message1.PubKey = PubKey;
 		     	      		       
 		       en[t] = enc_message1; 
-		       console.table(en);
+		      // console.table(en);
 		       		       
 	               dom_message.innerHTML = `<input type="button" id="${PubKey}" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div>`;     // 　メッセージ    
                
