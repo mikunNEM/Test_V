@@ -30,6 +30,12 @@
         text-align: right;
 }
 
+#selectCSS{
+  color: #007bff;
+  background-color: rgb(255, 255, 255,0.8);
+}
+
+
 /* ポップアップ */
 .popup {
   position: fixed;
