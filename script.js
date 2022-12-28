@@ -229,7 +229,7 @@ txRepo
     let en = new Array(searchCriteria.pageSize);
     
     for (let tx of txs.data) {   ///////////////    tx を pageSize の回数繰り返す ///////////////////
-      console.log(`%ctx[${t}] =`,"color: blue",tx);      ////////////////////
+     // console.log(`%ctx[${t}] =`,"color: blue",tx);      //　トランザクションを表示　//////////////////
       const dom_tx = document.createElement('div');
       const dom_date = document.createElement('div');
       const dom_txType = document.createElement('div');
@@ -349,17 +349,17 @@ txRepo
 		     
 		 if (tx.recipientAddress.address !== tx.signer.address.address){    // 送信先アドレスと、送信元アドレスが異なる場合
 			if (tx.signer.address.address === address.address){
-				 console.log("%csigner と wallet address が同じ時",'color: blue')
+                                //console.log("%csigner と wallet address が同じ時",'color: blue')
 				 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
 				
 			}else
                            if (tx.recipientAddress.address === address.address){ 
-				console.log("%crecipient と wallet address が同じ時",'color: blue')
+                                //console.log("%crecipient と wallet address が同じ時",'color: blue')
 			        alice = sym.Address.createFromRawAddress(tx.signer.address.address);   //アドレスクラスの生成			
 			} 
 			 			 
 		 }else{    // 送信先アドレスと、ウォレットアドレスが同じ場合
-			 console.log("%c送信アドレス と 送信元アドレスが同じ",'color: green')
+			 //console.log("%c送信アドレス と 送信元アドレスが同じ",'color: green')
 			 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
 		         PubKey = window.SSS.activePublicKey;
 		 }
