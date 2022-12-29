@@ -952,3 +952,12 @@ function nftdrive(mosaic){
 }
 
 */
+
+///////////////////////////////     速習Symbol 2.3事前準備　clog()   //////////////
+
+function clog(signedTx){
+    console.log(NODE + "/transactionStatus/" + signedTx.hash);
+    console.log(NODE + "/transactions/confirmed/" + signedTx.hash);
+    console.log("https://symbol.fyi/transactions/" + signedTx.hash);
+    console.log("https://testnet.symbol.fyi/transactions/" + signedTx.hash);
+}
