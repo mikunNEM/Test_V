@@ -713,7 +713,7 @@ txRepo
 
 　　　      const ymdhms = `${yyyy}-${MM}-${dd} ${HH}:${mm}:${ss}`;
       
-     　　　 console.log(ymdhms);
+     　　//　 console.log(ymdhms);  // 日付を表示
       
      　　　 dom_date.innerHTML = `<font color="#7E00FF"><p style="text-align: right">${ymdhms}</p></font>`;    //　日付  右寄せ
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -729,7 +729,7 @@ txRepo
            dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${tx.recipientAddress.address}</font>`; //  文字列の結合　   宛先
            dom_tx.appendChild(dom_recipient_address);         // dom_recipient_address をdom_txに追加
             
-          console.log('モザイク数=',tx.mosaics.length);  //////////////////////////////////////////////
+        //  console.log('モザイク数=',tx.mosaics.length);  //////////////////////////////////////////////
                   
           /////////// モザイクが空ではない場合   /////////////////　　モザイクが空の場合はこの for 文はスルーされる  //////////
           for(let i=0; i<tx.mosaics.length; i++){  //モザイクの数だけ繰り返す
@@ -792,17 +792,17 @@ txRepo
 		     
 		 if (tx.recipientAddress.address !== tx.signer.address.address){    // 送信先アドレスと、送信元アドレスが異なる場合
 			if (tx.signer.address.address === address.address){
-				 console.log("%csignerとwallet addressが同じ時",'color: blue')
+                                 //console.log("%csignerとwallet addressが同じ時",'color: blue')
 				 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
 				
 			}else
                            if (tx.recipientAddress.address === address.address){ 
-				console.log("%crecipient とwallet addressが同じ時",'color: blue')
+                                //console.log("%crecipient とwallet addressが同じ時",'color: blue')
 			        alice = sym.Address.createFromRawAddress(tx.signer.address.address);   //アドレスクラスの生成			
 			} 
 			 			 
 		 }else{    // 送信先アドレスと、ウォレットアドレスが同じ場合
-			 console.log("%c送信アドレスと送信元アドレスが同じ",'color: green')
+                         //console.log("%c送信アドレスと送信元アドレスが同じ",'color: green')
 			 alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
 		         PubKey = window.SSS.activePublicKey;
 		 }
@@ -815,7 +815,7 @@ txRepo
 		       enc_message1.PubKey = PubKey;
 		     	      		       
 		       en[t] = enc_message1; 
-		       console.table(en);
+		       //console.table(en);
 		       		       
 	               dom_message.innerHTML = `<input type="button" id="${PubKey}" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div>`;     // 　メッセージ    
                
