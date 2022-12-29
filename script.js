@@ -4,14 +4,13 @@ dom_version.innerText = 'v1.0.4　|　Powered by SYMBOL';
 const sym = require('/node_modules/symbol-sdk');
 const op  = require("/node_modules/rxjs/operators");
 
-//const GENERATION_HASH = '57F7DA205008026C776CB6AED843393F04CD458E0AA2D9F1D5F31A402072B2D6';
-
 //MAIN_NET の場合
 
 const EPOCH_M = 1615853185;
 const NODE_URL_M = 'https://symbol-mikun.net:3001';
 const NET_TYPE_M = sym.NetworkType.MAIN_NET;
-const XYM_ID_M = '6BED913FA20223F8'; 
+const XYM_ID_M = '6BED913FA20223F8';
+const GENERATION_HASH_M = '57F7DA205008026C776CB6AED843393F04CD458E0AA2D9F1D5F31A402072B2D6';
 
 const repo_M = new sym.RepositoryFactoryHttp(NODE_URL_M);      // RepositoryFactoryはSymbol-SDKで提供されるアカウントやモザイク等の機能を提供するRepositoryを作成するためのもの
 const accountRepo_M = repo_M.createAccountRepository();
@@ -25,6 +24,7 @@ const EPOCH_T = 1667250467;
 const NODE_URL_T = 'https://mikun-testnet2.tk:3001';
 const NET_TYPE_T = sym.NetworkType.TEST_NET;
 const XYM_ID_T = '72C0212E67A08BCE';
+const GENERATION_HASH_T = '49D6E1CE276A85B70EAFE52349AACCA389302E7A9754BCF1221E79494FC665A4';
 
 const repo_T = new sym.RepositoryFactoryHttp(NODE_URL_T);       // RepositoryFactoryはSymbol-SDKで提供されるアカウントやモザイク等の機能を提供するRepositoryを作成するためのもの
 const accountRepo_T = repo_T.createAccountRepository();
@@ -33,6 +33,7 @@ const mosaicRepo_T = repo_T.createMosaicRepository();
 const nsRepo_T = repo_T.createNamespaceRepository();
 
 let epochAdjustment;
+let generationHash;
 let NODE;
 let networkType;
 let XYM_ID;     
@@ -57,6 +58,7 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
        epochAdjustment = EPOCH_M;
        NODE = NODE_URL_M;
        networkType = NET_TYPE_M;
+       generationHash = GENERATION_HASH_M;
        XYM_ID = XYM_ID_M;
      
        repo = repo_M;
@@ -71,6 +73,7 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
           epochAdjustment = EPOCH_T;
           NODE = NODE_URL_T;
           networkType = NET_TYPE_T;
+	  generationHash = GENERATION_HASH_T;
           XYM_ID = XYM_ID_T;
         
           repo = repo_T;
@@ -603,10 +606,11 @@ function selectboxChange() {
   
   const check_netType = address.address.charAt(0);     // 1文字目を抽出
 
-   if (check_netType === 'N'){           //ネットワークの判別　 メインネット 
+ /*  if (check_netType === 'N'){           //ネットワークの判別　 メインネット 
        epochAdjustment = EPOCH_M;
        NODE = NODE_URL_M;
        networkType = NET_TYPE_M;
+       generationHash = GENERATION_HASH_M;
        XYM_ID = XYM_ID_M;
      
        repo = repo_M;
@@ -621,6 +625,7 @@ function selectboxChange() {
           epochAdjustment = EPOCH_T;
           NODE = NODE_URL_T;
           networkType = NET_TYPE_T;
+	  generationHash = GENERATION_HASH_T;
           XYM_ID = XYM_ID_T;
         
           repo = repo_T;
@@ -631,7 +636,7 @@ function selectboxChange() {
         
           console.log("TEST_NET");
       }
-       console.log("check_netType=",check_netType);
+       console.log("check_netType=",check_netType); */
  
   
   
