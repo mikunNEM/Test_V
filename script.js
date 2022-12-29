@@ -606,7 +606,7 @@ function selectboxChange() {
   
   const check_netType = address.address.charAt(0);     // 1文字目を抽出
 
- /*  if (check_netType === 'N'){           //ネットワークの判別　 メインネット 
+   if (check_netType === 'N'){           //ネットワークの判別　 メインネット 
        epochAdjustment = EPOCH_M;
        NODE = NODE_URL_M;
        networkType = NET_TYPE_M;
@@ -636,7 +636,7 @@ function selectboxChange() {
         
           console.log("TEST_NET");
       }
-       console.log("check_netType=",check_netType); */
+       console.log("check_netType=",check_netType);
  
   
   
