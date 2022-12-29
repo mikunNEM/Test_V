@@ -32,7 +32,7 @@ const txRepo_T = repo_T.createTransactionRepository();
 const mosaicRepo_T = repo_T.createMosaicRepository();
 const nsRepo_T = repo_T.createNamespaceRepository();
 
-let EPOCH;
+let epochAdjustment;
 let NODE;
 let networkType;
 let XYM_ID;     
@@ -54,7 +54,7 @@ const address = sym.Address.createFromRawAddress(window.SSS.activeAddress);
 const check_netType = address.address.charAt(0);     // 1文字目を抽出
 
    if (check_netType === 'N'){           //ネットワークの判別　 メインネット 
-       EPOCH = EPOCH_M;
+       epochAdjustment = EPOCH_M;
        NODE = NODE_URL_M;
        networkType = NET_TYPE_M;
        XYM_ID = XYM_ID_M;
@@ -68,7 +68,7 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
       console.log("MAIN_NET");
    }else 
       if (check_netType === 'T'){      // テストネット
-          EPOCH = EPOCH_T;
+          epochAdjustment = EPOCH_T;
           NODE = NODE_URL_T;
           networkType = NET_TYPE_T;
           XYM_ID = XYM_ID_T;
@@ -254,7 +254,7 @@ txRepo
       
           
       ////////////////////////////////////////////　　  　timestamp to Date 　　　　　/////////////////////////
-      　　　const timestamp = EPOCH + (parseInt(tx.transactionInfo.timestamp.toHex(), 16)/1000);   /////////////// Unit64 を 16進数に　変換したあと10進数に変換　
+      　　　const timestamp = epochAdjustment + (parseInt(tx.transactionInfo.timestamp.toHex(), 16)/1000);   /////////////// Unit64 を 16進数に　変換したあと10進数に変換　
       　　　const date = new Date(timestamp * 1000);
       
      　　　 const yyyy = `${date.getFullYear()}`;
@@ -496,13 +496,13 @@ function handleSSS() {
   const maxfee = document.getElementById('form-maxfee').value;
      
      if (addr.charAt(0) === 'N'){  // MAINNET の場合 
-         EPOCH = EPOCH_M; 
+         epochAdjustment = EPOCH_M; 
          // XYM_ID = XYM_ID_M;
          networkType = NET_TYPE_M;
          txRepo = txRepo_M;
      }else
         if (addr.charAt(0) === 'T'){ //TESTNET の場合
-            EPOCH = EPOCH_T; 
+            epochAdjustment = EPOCH_T; 
             // XYM_ID = XYM_ID_T;
             networkType = NET_TYPE_T
             txRepo = txRepo_T;
@@ -514,7 +514,7 @@ function handleSSS() {
 　　　   
      if (enc === "0"){                      //////////////// メッセージが平文の場合 ////////////////////////////////////
     　 const tx = sym.TransferTransaction.create(        // トランザクションを生成
-       sym.Deadline.create(EPOCH),
+       sym.Deadline.create(epochAdjustment),
        sym.Address.createFromRawAddress(addr),
        [
          new sym.Mosaic(
@@ -543,7 +543,7 @@ function handleSSS() {
                  setTimeout(() => {
                    console.log({ msg });
                    const tx = sym.TransferTransaction.create(        // トランザクションを生成
-                   sym.Deadline.create(EPOCH),
+                   sym.Deadline.create(epochAdjustment),
                    sym.Address.createFromRawAddress(addr),
                    [
                      new sym.Mosaic(
@@ -604,7 +604,7 @@ function selectboxChange() {
   const check_netType = address.address.charAt(0);     // 1文字目を抽出
 
    if (check_netType === 'N'){           //ネットワークの判別　 メインネット 
-       EPOCH = EPOCH_M;
+       epochAdjustment = EPOCH_M;
        NODE = NODE_URL_M;
        networkType = NET_TYPE_M;
        XYM_ID = XYM_ID_M;
@@ -618,7 +618,7 @@ function selectboxChange() {
       console.log("MAIN_NET");
    }else 
       if (check_netType === 'T'){      // テストネット
-          EPOCH = EPOCH_T;
+          epochAdjustment = EPOCH_T;
           NODE = NODE_URL_T;
           networkType = NET_TYPE_T;
           XYM_ID = XYM_ID_T;
@@ -694,7 +694,7 @@ txRepo
       
           
       ////////////////////////////////////////////　　  　timestamp to Date 　　　　　/////////////////////////
-      　　　const timestamp = EPOCH + (parseInt(tx.transactionInfo.timestamp.toHex(), 16)/1000);   /////////////// Unit64 を 16進数に　変換したあと10進数に変換　
+      　　　const timestamp = epochAdjustment + (parseInt(tx.transactionInfo.timestamp.toHex(), 16)/1000);   /////////////// Unit64 を 16進数に　変換したあと10進数に変換　
       　　　const date = new Date(timestamp * 1000);
       
      　　　 const yyyy = `${date.getFullYear()}`;
