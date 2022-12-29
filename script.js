@@ -34,7 +34,7 @@ const nsRepo_T = repo_T.createNamespaceRepository();
 
 let EPOCH;
 let NODE;
-let NET_TYPE;
+let networkType;
 let XYM_ID;     
 let repo;
 let accountRepo;
@@ -56,7 +56,7 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
    if (check_netType === 'N'){           //ネットワークの判別　 メインネット 
        EPOCH = EPOCH_M;
        NODE = NODE_URL_M;
-       NET_TYPE = NET_TYPE_M;
+       networkType = NET_TYPE_M;
        XYM_ID = XYM_ID_M;
      
        repo = repo_M;
@@ -70,7 +70,7 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
       if (check_netType === 'T'){      // テストネット
           EPOCH = EPOCH_T;
           NODE = NODE_URL_T;
-          NET_TYPE = NET_TYPE_T;
+          networkType = NET_TYPE_T;
           XYM_ID = XYM_ID_T;
         
           repo = repo_T;
@@ -86,10 +86,10 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
 
 const dom_netType = document.getElementById('netType');  // network Type を表示　
      
-  if (NET_TYPE === NET_TYPE_M){   
+  if (networkType === NET_TYPE_M){   
      dom_netType.innerHTML = '<font color="#ff00ff">< MAIN_NET ></font>'
   }else
-     if (NET_TYPE === NET_TYPE_T){
+     if (networkType === NET_TYPE_T){
         dom_netType.innerHTML = '<font color="ff8c00">< TEST_NET ></font>'
   }    
      
@@ -100,10 +100,10 @@ dom_addr.innerText = address.address;                            // ハイフン
 console.log("address= wallet-addr",address);//////////////////////////////////////////////////////////////////////////////////////////////////  
      
 const dom_explorer = document.getElementById('explorer');  // Wallet 右上のExplorerリンク
-if (NET_TYPE === NET_TYPE_T){     
+if (networkType === NET_TYPE_T){     
     dom_explorer.innerHTML = `<a href="https://testnet.symbol.fyi/accounts/${address.address}" target="_blank" rel="noopener noreferrer">/ Explorer </a>`; 
    }else
-      if (NET_TYPE = NET_TYPE_M){
+      if (networkType = NET_TYPE_M){
          dom_explorer.innerHTML = `<a href="https://symbol.fyi/accounts/${address.address}" target="_blank" rel="noopener noreferrer">/ Explorer </a>`;      
       }
      
@@ -498,13 +498,13 @@ function handleSSS() {
      if (addr.charAt(0) === 'N'){  // MAINNET の場合 
          EPOCH = EPOCH_M; 
          // XYM_ID = XYM_ID_M;
-         NET_TYPE = NET_TYPE_M;
+         networkType = NET_TYPE_M;
          txRepo = txRepo_M;
      }else
         if (addr.charAt(0) === 'T'){ //TESTNET の場合
             EPOCH = EPOCH_T; 
             // XYM_ID = XYM_ID_T;
-            NET_TYPE = NET_TYPE_T
+            networkType = NET_TYPE_T
             txRepo = txRepo_T;
         }
     
@@ -523,7 +523,7 @@ function handleSSS() {
          )
        ],
        sym.PlainMessage.create(message),
-       NET_TYPE,
+       networkType,
        sym.UInt64.fromUint(1000000*Number(maxfee))          // MaxFee 設定
       )
           window.SSS.setTransaction(tx);               // SSSにトランザクションを登録        
@@ -552,7 +552,7 @@ function handleSSS() {
                      )
                    ],
                    msg,
-                   NET_TYPE,
+                   networkType,
                    sym.UInt64.fromUint(1000000*Number(maxfee))          // MaxFee 設定  
                    )
                    window.SSS.setTransaction(tx);               // SSSにトランザクションを登録
@@ -606,7 +606,7 @@ function selectboxChange() {
    if (check_netType === 'N'){           //ネットワークの判別　 メインネット 
        EPOCH = EPOCH_M;
        NODE = NODE_URL_M;
-       NET_TYPE = NET_TYPE_M;
+       networkType = NET_TYPE_M;
        XYM_ID = XYM_ID_M;
      
        repo = repo_M;
@@ -620,7 +620,7 @@ function selectboxChange() {
       if (check_netType === 'T'){      // テストネット
           EPOCH = EPOCH_T;
           NODE = NODE_URL_T;
-          NET_TYPE = NET_TYPE_T;
+          networkType = NET_TYPE_T;
           XYM_ID = XYM_ID_T;
         
           repo = repo_T;
