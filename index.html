@@ -138,13 +138,13 @@
               const reader = new FileReader();
               input.addEventListener('change', (e) => {
                   const file = e.target.files[0];
+                  const address1 = [];
                   //ファイルの種類を絞る
                   if (file.type === 'text/csv') {
                      reader.onload = () => {
                        console.log(reader.result);
                      }
                      reader.readAsText(file);
-                     let address1 = [];
                      // 改行ごとに配列化
                      address1 = reader.result.split(/\r\n|\n/); 
                   }
