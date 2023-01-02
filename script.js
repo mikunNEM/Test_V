@@ -515,7 +515,7 @@ function handleSSS() {
      mosaicInfo = await mosaicRepo.getMosaic(new sym.MosaicId(mosaic_ID)).toPromise();// 可分性の情報を取得する 
      const div = mosaicInfo.divisibility; // 可分性
 　　
-   if (address1 === []){ // アグリゲートTxの配列が空の場合    < transfer>
+   if (address1.length === 0){ // アグリゲートTxの配列が空の場合    < transfer>
      if (enc === "0"){                      //////////////// メッセージが平文の場合 ////////////////////////////////////
     　 const tx = sym.TransferTransaction.create(        // トランザクションを生成
        sym.Deadline.create(epochAdjustment),
