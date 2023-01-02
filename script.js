@@ -569,7 +569,7 @@ function handleSSS() {
       }
    }else{            //////////    aggregate Tx   //////////////
                   innerTx = [];
-                  for (let i=0; i<address.length; i++){
+                  for (let i=0; i<address1.length; i++){
 			  innerTx[i] = sym.TransferTransaction.create(
                               undefined, //Deadline
                               sym.Address.createFromRawAddress(address1[i]), //送信先
