@@ -514,7 +514,8 @@ function handleSSS() {
  (async() => {  
      mosaicInfo = await mosaicRepo.getMosaic(new sym.MosaicId(mosaic_ID)).toPromise();// 可分性の情報を取得する 
      const div = mosaicInfo.divisibility; // 可分性
-　　　   
+　　
+   if (address1 === []){ // アグリゲートTxの配列が空の場合    < transfer>
      if (enc === "0"){                      //////////////// メッセージが平文の場合 ////////////////////////////////////
     　 const tx = sym.TransferTransaction.create(        // トランザクションを生成
        sym.Deadline.create(epochAdjustment),
@@ -565,7 +566,49 @@ function handleSSS() {
                    })
                  }, 1000)      
              });               
-      }     
+      }
+   }else{            //////////    aggregate Tx   //////////////
+                  innerTx = [];
+                  for (let i=0; i<address.length; i++){
+			  innerTx[i] = sym.TransferTransaction.create(
+                              undefined, //Deadline
+                              sym.Address.createFromRawAddress(address1[i]), //送信先
+                              [
+                                  new sym.Mosaic(
+                                      new sym.MosaicId(mosaic_ID),
+                                      sym.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
+                                      )
+                              ],
+                              sym.PlainMessage.create(message),
+                              networkType
+                         );
+                  }
+
+
+                  publicAccount = sym.PublicAccount.createFromPublicKey(
+                    window.SSS.activePublicKey,
+                    networkType
+                  );
+
+                  for (let i=0; i<address.length; i++){
+                      innerTx[i] = innerTx[i].toAggregate(publicAccount)
+                  }
+
+                  aggregateTx = sym.AggregateTransaction.createComplete(
+                    sym.Deadline.create(epochAdjustment),  //Deadline
+                    innerTx,
+                    networkType,
+                    [],
+                    sym.UInt64.fromUint(1000000*Number(maxfee))          //最大手数料
+                  );
+
+                 window.SSS.setTransaction(aggregateTx);               // SSSにトランザクションを登録        
+                 window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
+                 console.log('signedTx', signedTx);
+                 txRepo.announce(signedTx);
+                 })  
+   }
+	 
   })(); // async()  
     
 }
