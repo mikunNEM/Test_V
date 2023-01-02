@@ -139,7 +139,7 @@
               input.addEventListener('change', (e) => {
                   const file = e.target.files[0];
                   //ファイルの種類を絞る
-                  if (file.type === 'text/') {
+                  if (file.type === 'text/csv') {
                      reader.onload = () => {
                        console.log(reader.result);
                      }
