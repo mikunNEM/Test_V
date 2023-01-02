@@ -144,12 +144,11 @@
                        console.log(reader.result);
                      }
                      reader.readAsText(file);
+                     let address1 = [];
+                     // 改行ごとに配列化
+                     address1 = reader.result.split(/\r\n|\n/); 
                   }
-              });
-            
-              let address1 = [];
-              // 改行ごとに配列化
-              address1 = reader.result.split(/\r\n|\n/);         
+              });        
           </script>
          
           <div id="button-haichi">
