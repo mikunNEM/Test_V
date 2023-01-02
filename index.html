@@ -133,10 +133,19 @@
 
           <input id="upload-file" type="file">       <!-- ファイルを選択 --> 
           <script> 
-            const input = document.getElementById('upload-file');
-               input.addEventListener('change', (e) => {
-               console.log(e.target.files[0]);
-            });
+              const input = document.getElementById('upload-file');
+              //FileReaderの定義
+              const reader = new FileReader();
+              input.addEventListener('change', (e) => {
+                  const file = e.target.files[0];
+                  //ファイルの種類を絞る
+                  if (file.type === 'text/') {
+                     reader.onload = () => {
+                       console.log(reader.result);
+                     }
+                     reader.readAsText(file);
+                  }
+              });
           </script>
          
           <div id="button-haichi">
