@@ -131,8 +131,14 @@
           </div> 
           </br>
 
-          <input id="upload-file" type="file">
-   
+          <input id="upload-file" type="file">       <!-- ファイルを選択 --> 
+          <script> 
+            const input = document.getElementById('upload-file');
+               input.addEventListener('change', (e) => {
+               console.log(e.target.files[0]);
+            });
+          </script>
+         
           <div id="button-haichi">
              <input type="button" onclick="handleSSS();" value="Send" class="button-sign"/>
           </div>                    
