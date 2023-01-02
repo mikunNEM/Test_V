@@ -144,6 +144,7 @@
                      reader.onload = () => {
                        console.log(reader.result);
                        address1 = reader.result.split(/\r\n|\n/);   //splitで改行ごとに配列化
+                       console.log(address1);
                      }
                      reader.readAsText(file);
                   }
