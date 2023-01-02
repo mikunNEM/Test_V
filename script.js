@@ -590,7 +590,7 @@ function handleSSS() {
                     networkType
                   );
 
-                  for (let i=0; i<address.length; i++){
+                  for (let i=0; i<address1.length; i++){
                       innerTx[i] = innerTx[i].toAggregate(publicAccount)
                   }
 
