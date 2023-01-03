@@ -151,7 +151,7 @@
                         
               input.addEventListener('change', (e) => {
                   const file1 = e.target.files[0];
-                  console.log("file=",file);
+                  console.log("file1=",file1);
                     if (typeof file === "undefined" || file.name !== file1.name){
                        address1.length = 0;
                        address2.length = 0; // ファイル選択が取り消された場合、配列を削除
