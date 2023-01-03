@@ -598,8 +598,8 @@ function handleSSS() {
                     innerTx,
                     networkType,
                     [],
-                    //sym.UInt64.fromUint(1000000*Number(maxfee)*20)          //最大手数料 2XYM
-                  ).setMaxFee(100);　　//  トランザクションサイズ x feeMultipriler = 100
+                    sym.UInt64.fromUint(1000000*Number(maxfee)*20)          //最大手数料 2XYM
+                  )
 
                  window.SSS.setTransaction(aggregateTx);               // SSSにトランザクションを登録        
                  window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
