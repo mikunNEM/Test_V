@@ -599,7 +599,7 @@ function handleSSS() {
                     innerTx,
                     networkType,
                     [],
-                    sym.UInt64.fromUint(1000000*Number(maxfee))          //最大手数料
+                    sym.UInt64.fromUint(1000000*Number(maxfee)*10)          //最大手数料
                   );
 
                  window.SSS.setTransaction(aggregateTx);               // SSSにトランザクションを登録        
