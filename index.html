@@ -157,11 +157,7 @@
                        address2.length = 0; // ファイル選択が取り消された場合、配列を削除
                        $('p1').text("選択されていません"); 
                        file = file1;
-                    }else 
-                       if (file.name !== file1.name){ // ファイルが変更された場合、選択されたファイル名を出力
-                          $('p1').text(file1.name);
-                          file = file1;
-                       }
+                    }
                 
                   //ファイルの種類を絞る
                   if (file.type === 'text/csv') {                    　                   
