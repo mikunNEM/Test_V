@@ -134,7 +134,7 @@
              <input type="file" id="upload-file">ファイルを選択(.csv)       <!-- address ファイルを選択 --> 
          </label>
          <div style="display: inline-block; _display: inline;"> 
-           <p>選択されていません</p>
+           <p1>選択されていません</p1>
          </div>
           <script>           
               const input = document.getElementById('upload-file');
@@ -145,7 +145,7 @@
               // 選択したファイルのファイル名を出力する
  　　　　　　   　　　　　$('input').on('change', function () {
         　　　　　　　　　　　var file = $(this).prop('files')[0];
-        　　　　　　　　　　　$('p').text(file.name);
+        　　　　　　　　　　　$('p1').text(file.name);
    　　　　　　　　　　　 });
                         
               input.addEventListener('change', (e) => {
