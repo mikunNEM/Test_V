@@ -141,7 +141,9 @@
                   const file = e.target.files[0];
                   console.log("file=",file);
                     if (file === "undefined"){
+                       console.log("undefined通ってる？")
                        address1.length = 0; // ファイル選択が取り消された場合、配列を削除
+                       console.log(address1.length)
                     }      
                   //ファイルの種類を絞る
                   if (file.type === 'text/csv') {
