@@ -142,7 +142,7 @@
               const reader = new FileReader();
               let address1 = [];
               let address2 = [];
-              
+              let file;
               // 選択したファイルのファイル名を出力する
  　　　　　　   　　　　　$('input').on('change', function () {
         　　　　　　　　　　　var file = $(this).prop('files')[0];
@@ -150,12 +150,13 @@
    　　　　　　　　　　　 });
                         
               input.addEventListener('change', (e) => {
-                  const file = e.target.files[0];
+                  const file1 = e.target.files[0];
                   console.log("file=",file);
-                    if (typeof file === "undefined"){
+                    if (typeof file === "undefined" || file.name !== file1.name){
                        address1.length = 0;
                        address2.length = 0; // ファイル選択が取り消された場合、配列を削除
                        $('p1').text("選択されていません");
+                       file = file1;
                     }      
                   //ファイルの種類を絞る
                   if (file.type === 'text/csv') {                    　                   
