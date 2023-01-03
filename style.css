@@ -127,6 +127,12 @@ h3 {
   color: #2f4f4f;
 }
 
+#upload-file{
+  background:rgb(255, 255, 255); 
+  border-radius: 8px;
+  
+}
+
 #button-haichi{
   text-align: right;
 } 
