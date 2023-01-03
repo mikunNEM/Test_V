@@ -145,17 +145,18 @@
               let file;
               // 選択したファイルのファイル名を出力する
  　　　　　　   　　　　　$('input').on('change', function () {
-        　　　　　　　　　　　let file1 = $(this).prop('files')[0];
-        　　　　　　　　　　　$('p1').text(file1.name);
+        　　　　　　　　　　　let file = $(this).prop('files')[0];
+        　　　　　　　　　　　$('p1').text(file.name);
    　　　　　　　　　　　 });
                         
               input.addEventListener('change', (e) => {
                   const file1 = e.target.files[0];
                   console.log("file1=",file1);
-                    if (typeof file === "undefined"){
+                    if (typeof file1 === "undefined"){
                        address1.length = 0;
                        address2.length = 0; // ファイル選択が取り消された場合、配列を削除
-                       $('p1').text("選択されていません");   
+                       $('p1').text("選択されていません"); 
+                       file = file1;
                     }else 
                        if (file.name !== file1.name){ // ファイルが変更された場合、選択されたファイル名を出力
                           $('p1').text(file1.name);
