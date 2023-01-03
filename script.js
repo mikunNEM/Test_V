@@ -581,9 +581,8 @@ function handleSSS() {
                               ],
                               sym.PlainMessage.create(message),
                               networkType
-                         );
+                         ).setMaxFee(100);  //  トランザクションサイズ x feeMultipriler = 100
                   }
-
 
                   publicAccount = sym.PublicAccount.createFromPublicKey(
                     window.SSS.activePublicKey,
@@ -599,7 +598,7 @@ function handleSSS() {
                     innerTx,
                     networkType,
                     [],
-                    sym.UInt64.fromUint(1000000*Number(maxfee)*20)          //最大手数料 2XYM
+                    //sym.UInt64.fromUint(1000000*Number(maxfee)*20)          //最大手数料 2XYM
                   );
 
                  window.SSS.setTransaction(aggregateTx);               // SSSにトランザクションを登録        
