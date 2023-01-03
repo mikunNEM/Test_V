@@ -895,8 +895,10 @@ function Onclick_Decryption(PubKey,encryptedMessage){
     window.SSS.requestSignDecription().then((data) => {
             console.log(data);
 	    
-	    swal(`${encryptedMessage}
+	    swal(`Encrypted Message(暗号化メッセージ)
+	    ${encryptedMessage}
 	    
+	    Decrypted Message(復号化メッセージ)
 	    -- >>　${data}`); // ポップアップで表示
     })		
 }
