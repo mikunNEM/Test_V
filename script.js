@@ -576,7 +576,7 @@ function handleSSS() {
                               [
                                   new sym.Mosaic(
                                       new sym.MosaicId(mosaic_ID),
-                                      sym.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
+                                      sym.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用  
                                       )
                               ],
                               sym.PlainMessage.create(message),
@@ -599,7 +599,7 @@ function handleSSS() {
                     innerTx,
                     networkType,
                     [],
-                    sym.UInt64.fromUint(1000000*Number(maxfee)*10)          //最大手数料
+                    sym.UInt64.fromUint(1000000*Number(maxfee)*20)          //最大手数料 2XYM
                   );
 
                  window.SSS.setTransaction(aggregateTx);               // SSSにトランザクションを登録        
