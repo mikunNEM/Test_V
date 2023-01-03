@@ -128,8 +128,10 @@ h3 {
 }
 
 label {
+    padding: 3px;
     color: #ffffff;
     background-color: #384878;
+    border-radius: 5px;
     cursor: pointer;
 }
 
