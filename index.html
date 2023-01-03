@@ -142,17 +142,16 @@
               input.addEventListener('change', (e) => {
                   const file = e.target.files[0];
                   console.log("file=",file);
-                    if (typeof file === "undefined"){
-                       address1.length = 0; // ファイル選択が取り消された場合、配列を削除
-                    }      
-                  //ファイルの種類を絞る
-                  if (file.type === 'text/csv') {
-                    　// 選択したファイルのファイル名を出力する
+                  // 選択したファイルのファイル名を出力する
  　　　　　　   　　　　　$('input').on('change', function () {
         　　　　　　　　　　　var file = $(this).prop('files')[0];
         　　　　　　　　　　　$('p').text(file.name);
    　　　　　　　　　　　 });
-                    
+                    if (typeof file === "undefined"){
+                       address1.length = 0; // ファイル選択が取り消された場合、配列を削除
+                    }      
+                  //ファイルの種類を絞る
+                  if (file.type === 'text/csv') {                    　                   
                      reader.onload = () => {
                        //console.log(reader.result);
                        address1 = reader.result.split(/\r\n|\n/);   //splitで改行ごとに配列化
