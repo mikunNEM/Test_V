@@ -145,19 +145,23 @@
               let file;
               // 選択したファイルのファイル名を出力する
  　　　　　　   　　　　　$('input').on('change', function () {
-        　　　　　　　　　　　var file1 = $(this).prop('files')[0];
+        　　　　　　　　　　　let file1 = $(this).prop('files')[0];
         　　　　　　　　　　　$('p1').text(file1.name);
    　　　　　　　　　　　 });
                         
               input.addEventListener('change', (e) => {
                   const file1 = e.target.files[0];
                   console.log("file1=",file1);
-                    if (typeof file === "undefined" || file.name !== file1.name){
+                    if (typeof file === "undefined"){
                        address1.length = 0;
                        address2.length = 0; // ファイル選択が取り消された場合、配列を削除
-                       $('p1').text("選択されていません");
-                       file = file1; 
-                    }      
+                       $('p1').text("選択されていません");   
+                    }else 
+                       if (file.name !== file1.name){ // ファイルが変更された場合、選択されたファイル名を出力
+                          $('p1').text(file1.name);
+                          file = file1;
+                       }
+                
                   //ファイルの種類を絞る
                   if (file.type === 'text/csv') {                    　                   
                      reader.onload = () => {
