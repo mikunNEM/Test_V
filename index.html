@@ -141,6 +141,7 @@
               //FileReaderの定義
               const reader = new FileReader();
               let address1 = [];
+              let address2 = [];
               
               // 選択したファイルのファイル名を出力する
  　　　　　　   　　　　　$('input').on('change', function () {
@@ -152,14 +153,20 @@
                   const file = e.target.files[0];
                   console.log("file=",file);
                     if (typeof file === "undefined"){
-                       address1.length = 0; // ファイル選択が取り消された場合、配列を削除
+                       address2.length = 0; // ファイル選択が取り消された場合、配列を削除
                        $('p1').text("選択されていません");
                     }      
                   //ファイルの種類を絞る
                   if (file.type === 'text/csv') {                    　                   
                      reader.onload = () => {
                        //console.log(reader.result);
-                       address1 = reader.result.split(/\r\n|\n/);   //splitで改行ごとに配列化
+                       address2 = reader.result.split(/\r\n|\n/);   //splitで改行ごとに配列化
+                       
+                        for (let i = 0; i < address2.length; ++i) {  
+                             let cells = address2[i].split(",");    //カンマごとに配列化 (名前とアドレスを分ける)
+                             address1[i] = cells[1];                //アドレスだけを格納
+                       }
+                       
                        console.log(address1);
                      }
                      reader.readAsText(file);
