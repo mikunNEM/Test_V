@@ -153,6 +153,7 @@
                   console.log("file=",file);
                     if (typeof file === "undefined"){
                        address1.length = 0; // ファイル選択が取り消された場合、配列を削除
+                       $('p1').text("選択されていません");
                     }      
                   //ファイルの種類を絞る
                   if (file.type === 'text/csv') {                    　                   
