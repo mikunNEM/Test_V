@@ -20,11 +20,14 @@ const nsRepo_M = repo_M.createNamespaceRepository();
 
 //TEST_NET の場合
 
-const EPOCH_T = 1667250467;
-const NODE_URL_T = 'https://mikun-testnet2.tk:3001';
+//const EPOCH_T = 1667250467;
+const EPOCH_T = 1672735883;  //Canade
+const NODE_URL_T = 'https://canade.mikun-testnet.tk:3001';
 const NET_TYPE_T = sym.NetworkType.TEST_NET;
-const XYM_ID_T = '72C0212E67A08BCE';
-const GENERATION_HASH_T = '49D6E1CE276A85B70EAFE52349AACCA389302E7A9754BCF1221E79494FC665A4';
+//const XYM_ID_T = '72C0212E67A08BCE';
+const XYM_ID_T = '5282230404218E56';  //Canade CBDP
+//const GENERATION_HASH_T = '49D6E1CE276A85B70EAFE52349AACCA389302E7A9754BCF1221E79494FC665A4';
+const GENERATION_HASH_T = 'AA443BA0A8AC1300743B44215D4436694013E52518B95EB05B3DCF4D66C4319B'; // Canade
 
 const repo_T = new sym.RepositoryFactoryHttp(NODE_URL_T);       // RepositoryFactoryはSymbol-SDKで提供されるアカウントやモザイク等の機能を提供するRepositoryを作成するためのもの
 const accountRepo_T = repo_T.createAccountRepository();
