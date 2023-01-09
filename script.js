@@ -645,7 +645,7 @@ popupSetting();
 /////////////////////// セレクトボックスの Page No を変更した時にトランザクション履歴を再読み込みする //////////////////////////////////////////////////////////////////
   
 
-function selectboxChange() {
+function select_Page() {
 
  const address = sym.Address.createFromRawAddress(window.SSS.activeAddress);
   
