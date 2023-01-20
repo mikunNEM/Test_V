@@ -219,7 +219,7 @@ accountRepo.getAccountInfo(address)
   embedded: true,
 };*/
 
-const searchCriteria = {
+const searchCriteria: sym.TransactionSearchCriteria = {
   group: sym.TransactionGroup.Confirmed,
   //signerPublicKey: "ここに送信者の公開鍵",
   address,
