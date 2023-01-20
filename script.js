@@ -226,7 +226,7 @@ const searchCriteria = {
   type: 16724,
   pageNumber: 1,
   pageSize: 50,
-  order: Order.Desc,
+  order: sym.Order.Desc,
   embedded: true,
 };
 	
