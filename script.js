@@ -223,7 +223,7 @@ const searchCriteria = {
   group: sym.TransactionGroup.Confirmed,
   //signerPublicKey: "ここに送信者の公開鍵",
   address,
-  type: [TransactionType.TRANSFER],
+  type: 16724,
   pageNumber: 1,
   pageSize: 50,
   order: Order.Desc,
