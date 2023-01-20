@@ -219,8 +219,8 @@ accountRepo.getAccountInfo(address)
   embedded: true,
 };*/
 
-const searchCriteria: TransactionSearchCriteria = {
-  group: TransactionGroup.Confirmed,
+const searchCriteria = {
+  group: sym.TransactionGroup.Confirmed,
   //signerPublicKey: "ここに送信者の公開鍵",
   address,
   type: [TransactionType.TRANSFER],
