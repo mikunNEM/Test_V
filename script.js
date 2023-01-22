@@ -210,16 +210,16 @@ accountRepo.getAccountInfo(address)
 //////////////////////////////////////  トランザクション履歴を取得する  //////////////////////////////////////////////////////////////////////////////
                                 
   
-/*const searchCriteria = {                                   
+const searchCriteria = {                                   
   group: sym.TransactionGroup.Confirmed,
   address,
   pageNumber: 1,
   pageSize: 50,
   order: sym.Order.Desc,
   embedded: true,
-};*/
+};
 
-const searchCriteria: sym.TransactionSearchCriteria = {
+/*const searchCriteria: sym.TransactionSearchCriteria = {
   group: sym.TransactionGroup.Confirmed,
   //signerPublicKey: "ここに送信者の公開鍵",
   address,
@@ -228,7 +228,7 @@ const searchCriteria: sym.TransactionSearchCriteria = {
   pageSize: 50,
   order: sym.Order.Desc,
   embedded: true,
-};
+};*/
 	
          
 console.log("searchCriteria=",searchCriteria);  //////////////////
