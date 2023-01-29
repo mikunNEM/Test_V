@@ -216,7 +216,7 @@ const searchCriteria = {
   pageNumber: 1,
   pageSize: 50,
   order: sym.Order.Desc,
-  embedded: true,
+  embedded: false,
 };
 
 /*const searchCriteria: sym.TransactionSearchCriteria = {
