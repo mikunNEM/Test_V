@@ -409,8 +409,8 @@ txRepo
 	      dom_tx.appendChild(dom_namespace);               // namespaceをdom_txに追加
 		  
               ////////////////////////////////////////////　　  　timestamp to Date 　　　　　/////////////////////////
-      　　　   const timestamp = epochAdjustment + (parseInt(tx.transactionInfo.timestamp.toHex(), 16)/1000) + (parseInt(tx.duration.toHex(), 16)*30/1000);   /////////////// Unit64 を 16進数に　変換したあと10進数に変換　
-      　　　   const date = new Date(timestamp * 1000);
+      　　　   const timestamp = epochAdjustment + (parseInt(tx.transactionInfo.timestamp.toHex(), 16)/1000);   /////////////// Unit64 を 16進数に　変換したあと10進数に変換　
+      　　　   const date = new Date(timestamp * 1000  + (parseInt(tx.duration.toHex(), 16)*30);  // ネームスペースの有効期間をプラスする
       
      　　　    const yyyy = `${date.getFullYear()}`;
       　　　   // .slice(-2)で文字列中の末尾の2文字を取得する
