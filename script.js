@@ -404,7 +404,7 @@ txRepo
 	  
 	    
 	  if (tx.type === 16718){       // tx.type が 'NAMESPACE_REGISTRATION' の場合	  
-	      dom_namespace.innerHTML = `<font color="#FF0000">Namespace :　<big><strong>${tx.namespaceName}</strong></big></font>`; 
+	      dom_namespace.innerHTML = `<font color="#FF00FF">Namespace :　<big><strong>${tx.namespaceName}</strong></big></font>`; 
 	      dom_tx.appendChild(dom_namespace);               // namespaceをdom_txに追加 
 	  }
                                                                           
@@ -892,7 +892,7 @@ txRepo
           } // tx.type が 'TRANSFER' の場合
 	    
 	  if (tx.type === 16718){       // tx.type が 'NAMESPACE_REGISTRATION' の場合	  
-	      dom_namespace.innerHTML = `<font color="#FF0000">Namespace :　<big><strong>${tx.namespaceName}</strong></big></font>`; 
+	      dom_namespace.innerHTML = `<font color="#FF00FF">Namespace :　<big><strong>${tx.namespaceName}</strong></big></font>`; 
 	      dom_tx.appendChild(dom_namespace);               // namespaceをdom_txに追加 
 	  }
 	    
