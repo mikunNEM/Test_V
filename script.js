@@ -215,7 +215,7 @@ const searchCriteria = {
   address,
   pageNumber: 1,
   pageSize: 50,
-  order: sym.Order.Asc,
+  order: sym.Order.Desc,
   embedded: true,
 };
 
