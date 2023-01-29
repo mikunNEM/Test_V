@@ -769,7 +769,7 @@ txRepo
       const dom_enc = document.createElement('div');
       const dom_message = document.createElement('div');
       const dom_namespace = document.createElement('div');
-     
+      const dom_date_namespace = document.createElement('div');
 
       dom_txType.innerHTML = `<p style="text-align: right; line-height:100%;&"><font color="#0000ff">< ${getTransactionType(tx.type)} ></font></p>`;        //　文字列の結合 　Tx タイプ
       
@@ -916,7 +916,28 @@ txRepo
 	    
 	  if (tx.type === 16718){       // tx.type が 'NAMESPACE_REGISTRATION' の場合	  
 	      dom_namespace.innerHTML = `<font color="#FF00FF">Namespace :　<big><strong>${tx.namespaceName}</strong></big></font>`; 
-	      dom_tx.appendChild(dom_namespace);               // namespaceをdom_txに追加 
+	      dom_tx.appendChild(dom_namespace);               // namespaceをdom_txに追加
+          
+	      ////////////////////////////////////////////　　  　timestamp to Date 　　　　　/////////////////////////
+      　　　   const timestamp = epochAdjustment + (parseInt(tx.transactionInfo.timestamp.toHex(), 16)/1000);   /////////////// Unit64 を 16進数に　変換したあと10進数に変換　
+      　　　   const date = new Date((timestamp + parseInt(tx.duration.toHex(), 16)*30) * 1000);  // ネームスペースの有効期間をプラスする
+      
+     　　　    const yyyy = `${date.getFullYear()}`;
+      　　　   // .slice(-2)で文字列中の末尾の2文字を取得する
+      　　　   // `0${date.getHoge()}`.slice(-2) と書くことで０埋めをする
+      　　　   const MM = `0${date.getMonth() + 1}`.slice(-2); // getMonth()の返り値は0が基点
+      　　　   const dd = `0${date.getDate()}`.slice(-2);
+      　　　   const HH = `0${date.getHours()}`.slice(-2);
+      　　　   const mm = `0${date.getMinutes()}`.slice(-2);
+      　　　   const ss = `0${date.getSeconds()}`.slice(-2);
+
+   　　　      const ymdhms = `${yyyy}-${MM}-${dd} ${HH}:${mm}:${ss}`;
+      
+     　　   　 //console.log(ymdhms);  // 日時を表示
+      
+     　　   　 dom_date_namespace.innerHTML = `<font color="#FF00FF">有効期限 :　　${ymdhms}</p></font>`;    //　日付  右寄せ
+              dom_tx.appendChild(dom_date_namespace);
+              //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	  }
 	    
                                                                           
