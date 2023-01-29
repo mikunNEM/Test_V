@@ -258,6 +258,7 @@ txRepo
       const dom_enc = document.createElement('div');
       const dom_message = document.createElement('div');
       const dom_PubKey = document.createElement('div');
+      const dom_namespace = document.createElement('div');
 
       dom_txType.innerHTML = `<p style="text-align: right; line-height:100%;&"><font color="#0000ff">< ${getTransactionType(tx.type)} ></font></p>`;        //　文字列の結合 　Tx タイプ
       
@@ -739,6 +740,7 @@ txRepo
       
       const dom_enc = document.createElement('div');
       const dom_message = document.createElement('div');
+      const dom_namespace = document.createElement('div');
      
 
       dom_txType.innerHTML = `<p style="text-align: right; line-height:100%;&"><font color="#0000ff">< ${getTransactionType(tx.type)} ></font></p>`;        //　文字列の結合 　Tx タイプ
