@@ -218,19 +218,7 @@ const searchCriteria = {
   order: sym.Order.Desc,
   embedded: false,
 };
-
-/*const searchCriteria: sym.TransactionSearchCriteria = {
-  group: sym.TransactionGroup.Confirmed,
-  //signerPublicKey: "ここに送信者の公開鍵",
-  address,
-  type: 16724,
-  pageNumber: 1,
-  pageSize: 50,
-  order: sym.Order.Desc,
-  embedded: true,
-};*/
-	
-         
+	         
 console.log("searchCriteria=",searchCriteria);  //////////////////
 console.log("txRepo=",txRepo);   //////////////////
 
