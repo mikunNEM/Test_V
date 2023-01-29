@@ -257,7 +257,6 @@ txRepo
       
       const dom_enc = document.createElement('div');
       const dom_message = document.createElement('div');
-      const dom_PubKey = document.createElement('div');
       const dom_namespace = document.createElement('div');
 
       dom_txType.innerHTML = `<p style="text-align: right; line-height:100%;&"><font color="#0000ff">< ${getTransactionType(tx.type)} ></font></p>`;        //　文字列の結合 　Tx タイプ
@@ -402,6 +401,12 @@ txRepo
             }
 	   
           } // tx.type が 'TRANSFER' の場合
+	  
+	    
+	  if (tx.type === 16718){       // tx.type が 'NAMESPACE_REGISTRATION' の場合	  
+	      dom_namespace.innerHTML = `<font color="#FF0000">Namespace :　<big><strong>${tx.namespaceName}</strong></big></font>`; 
+	      dom_tx.appendChild(dom_namespace);               // namespaceをdom_txに追加 
+	  }
                                                                           
             dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加
             dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く
@@ -885,6 +890,12 @@ txRepo
             }
 	   
           } // tx.type が 'TRANSFER' の場合
+	    
+	  if (tx.type === 16718){       // tx.type が 'NAMESPACE_REGISTRATION' の場合	  
+	      dom_namespace.innerHTML = `<font color="#FF0000">Namespace :　<big><strong>${tx.namespaceName}</strong></big></font>`; 
+	      dom_tx.appendChild(dom_namespace);               // namespaceをdom_txに追加 
+	  }
+	    
                                                                           
             dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加
             dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く
