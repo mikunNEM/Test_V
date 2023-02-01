@@ -399,9 +399,7 @@ txRepo
 	  if  (tx.type === 16705 || tx.type === 16961){      // tx.type が 'AGGREGATE_BONDED'　または 'AGGREGATE_COMPLETE' の場合
               (async() => { 	  
                      const aggTx = await txRepo.getTransactionsById([tx.transactionInfo.hash],sym.TransactionGroup.Confirmed).toPromise();
-	             console.log(aggTx[0].innerTransactions[0].message.payload);
-		     console.log("innerTx=",aggTx[0].innerTransactions.length);
-		     dom_message.innerHTML = `<font color="#4169e1">aggTx(${aggTx[0].innerTransactions.length})</br></br>< Message ></br>${aggTx[0].innerTransactions[0].message.payload}</font>`;     // 　メッセージ              
+		     dom_message.innerHTML = `<font color="#4169e1">aggTx(${aggTx[0].innerTransactions.length})</br></br>< Message (1) ></br>${aggTx[0].innerTransactions[0].message.payload}</font>`;     // 　メッセージ              
 	      })();
 	  }	    
 	    
@@ -891,6 +889,13 @@ txRepo
 	      dom_namespace.innerHTML = `<font color="#FF00FF">Namespace 登録 :　<big><strong>${tx.namespaceName}</strong></big></font>`; 
 	      dom_tx.appendChild(dom_namespace);               // namespaceをdom_txに追加	
 	  }
+	    
+	  if  (tx.type === 16705 || tx.type === 16961){      // tx.type が 'AGGREGATE_BONDED'　または 'AGGREGATE_COMPLETE' の場合
+              (async() => { 	  
+                     const aggTx = await txRepo.getTransactionsById([tx.transactionInfo.hash],sym.TransactionGroup.Confirmed).toPromise();
+		     dom_message.innerHTML = `<font color="#4169e1">aggTx(${aggTx[0].innerTransactions.length})</br></br>< Message (1) ></br>${aggTx[0].innerTransactions[0].message.payload}</font>`;     // 　メッセージ              
+	      })();
+	  }	  
 	                                                                             
             dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加
             dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く
