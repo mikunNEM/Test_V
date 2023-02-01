@@ -397,8 +397,10 @@ txRepo
 	  }
 	    
 	  if  (tx.type === 16705 || tx.type === 16961){      // tx.type が 'AGGREGATE_BONDED'　または 'AGGREGATE_COMPLETE' の場合
-               const aggTx = await txRepo.getTransactionsById([tx.transactionInfo.hash],sym.TransactionGroup.Confirmed).toPromise();
-	       console.log(aggTx);
+              (async() => { 	  
+                     const aggTx = await txRepo.getTransactionsById([tx.transactionInfo.hash],sym.TransactionGroup.Confirmed).toPromise();
+	             console.log(aggTx);
+              })();
 	  }	    
                                                                           
             dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加
