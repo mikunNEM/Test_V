@@ -400,6 +400,7 @@ txRepo
               (async() => { 	  
                      const aggTx = await txRepo.getTransactionsById([tx.transactionInfo.hash],sym.TransactionGroup.Confirmed).toPromise();
 	             console.log(aggTx[0].innerTransactions[0].message.payload);
+		     dom_message.innerHTML = `<font color="#4169e1"></br>< Message ></br>${aggTx[0].innerTransactions[0].message.payload}</font>`;     // 　メッセージ  
               })();
 	  }	    
                                                                           
