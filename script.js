@@ -399,7 +399,7 @@ txRepo
 	  if  (tx.type === 16705 || tx.type === 16961){      // tx.type が 'AGGREGATE_BONDED'　または 'AGGREGATE_COMPLETE' の場合
               (async() => { 	  
                      const aggTx = await txRepo.getTransactionsById([tx.transactionInfo.hash],sym.TransactionGroup.Confirmed).toPromise();
-		     dom_message.innerHTML = `<font color="#4169e1">aggTx(${aggTx[0].innerTransactions.length})</br></br>< Message (1) ></br>${aggTx[0].innerTransactions[0].message.payload}</font>`;     // 　メッセージ              
+		     dom_message.innerHTML = `<font color="#4169e1">aggTx(${aggTx[0].innerTransactions.length})</br></br>< Message ></br>${aggTx[0].innerTransactions[0].message.payload}</font>`;     // 　メッセージ              
 	      })();
 	  }	    
 	    
@@ -893,7 +893,7 @@ txRepo
 	  if  (tx.type === 16705 || tx.type === 16961){      // tx.type が 'AGGREGATE_BONDED'　または 'AGGREGATE_COMPLETE' の場合
               (async() => { 	  
                      const aggTx = await txRepo.getTransactionsById([tx.transactionInfo.hash],sym.TransactionGroup.Confirmed).toPromise();
-		     dom_message.innerHTML = `<font color="#4169e1">aggTx(${aggTx[0].innerTransactions.length})</br></br>< Message (1) ></br>${aggTx[0].innerTransactions[0].message.payload}</font>`;     // 　メッセージ              
+		     dom_message.innerHTML = `<font color="#4169e1">aggTx(${aggTx[0].innerTransactions.length})</br></br>< Message ></br>${aggTx[0].innerTransactions[0].message.payload}</font>`;     // 　メッセージ              
 	      })();
 	  }	  
 	                                                                             
