@@ -393,9 +393,13 @@ txRepo
 	    
 	  if (tx.type === 16718){       // tx.type が 'NAMESPACE_REGISTRATION' の場合	  
 	      dom_namespace.innerHTML = `<font color="#FF00FF">Namespace 登録 :　<big><strong>${tx.namespaceName}</strong></big></font>`; 
-	      dom_tx.appendChild(dom_namespace);               // namespaceをdom_txに追加          	  		  		  
-		  
+	      dom_tx.appendChild(dom_namespace);               // namespaceをdom_txに追加          	  		  		  	  
 	  }
+	    
+	  if  (tx.type === 16705 || tx.type === 16961){      // tx.type が 'AGGREGATE_BONDED'　または 'AGGREGATE_COMPLETE' の場合
+               const aggTx = await txRepo.getTransactionsById([tx.transactionInfo.hash],sym.TransactionGroup.Confirmed).toPromise();
+	       console.log(aggTx);
+	  }	    
                                                                           
             dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加
             dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く
