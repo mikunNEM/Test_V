@@ -428,7 +428,7 @@ txRepo
                            dom_amount.innerHTML = `<font color="#008000" size="+1">💰➡️😊 :　<i><big><strong> ${(parseInt(aggTx[0].innerTransactions[0].mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;    // 　数量
                        }
 		      // console.log("%ci モザイクが空では無い場合の処理　iだよ　",'color: red',i);
-              // })(); // async() 
+               })(); // async() 
                
                 dom_tx.appendChild(dom_mosaic);                    // dom_mosaic をdom_txに追加 
                 dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
@@ -449,11 +449,11 @@ txRepo
                   　dom_tx.appendChild(dom_mosaic);                    // dom_mosaic をdom_txに追加 
                 　　dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
              } /////////////////////////////////////////////////////////////////////////////////////////////////////       
-		      
-		      
+             (async() => {      		      
                      const aggTx = await txRepo.getTransactionsById([tx.transactionInfo.hash],sym.TransactionGroup.Confirmed).toPromise();
 		     dom_message.innerHTML = `<font color="#4169e1">aggTx(${aggTx[0].innerTransactions.length})</br></br>< Message ></br>${aggTx[0].innerTransactions[0].message.payload}</font>`;     // 　メッセージ              
-	      })();
+
+	     })(); // async()
 	  }	    
 	    
             dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加                                                              
