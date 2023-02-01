@@ -441,7 +441,7 @@ txRepo
              
 	})(); // async() 	      
 	       
-             if (tx.mosaics.length === 0){   // モザイクが空の場合  //////////////　モザイクがある場合はこの if 文はスルーされる
+             if (aggTx[0].innerTransactions[0].mosaics.length === 0){   // モザイクが空の場合  //////////////　モザイクがある場合はこの if 文はスルーされる
                   const dom_mosaic = document.createElement('div');
               　　 const dom_amount = document.createElement('div');
                   
