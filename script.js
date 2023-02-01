@@ -385,7 +385,8 @@ txRepo
 	            }); //公開鍵を取得
 		     
 	     }else{          // 平文の場合
-                 dom_message.innerHTML = `<font color="#4169e1"></br>< Message ></br>${tx.message.payload}</font>`;     // 　メッセージ  
+                 dom_message.innerHTML = `<font color="#4169e1"></br>< Message ></br>${tx.message.payload}</font>`;     // 　メッセージ
+		 dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加
             }
 	   
           } // tx.type が 'TRANSFER' の場合
@@ -401,10 +402,10 @@ txRepo
                      const aggTx = await txRepo.getTransactionsById([tx.transactionInfo.hash],sym.TransactionGroup.Confirmed).toPromise();
 	             console.log(aggTx[0].innerTransactions[0].message.payload);
 		     dom_message.innerHTML = `<font color="#4169e1"></br>< Message ></br>${aggTx[0].innerTransactions[0].message.payload}</font>`;     // 　メッセージ  
-              })();
+                     dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加
+	      })();
 	  }	    
                                                                           
-            dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加
             dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く
             dom_txInfo.appendChild(dom_tx);                    // トランザクション情報を追加
 	    t = ++t;
