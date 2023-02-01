@@ -399,7 +399,7 @@ txRepo
 	  if  (tx.type === 16705 || tx.type === 16961){      // tx.type が 'AGGREGATE_BONDED'　または 'AGGREGATE_COMPLETE' の場合
               (async() => { 	  
                      const aggTx = await txRepo.getTransactionsById([tx.transactionInfo.hash],sym.TransactionGroup.Confirmed).toPromise();
-	             console.log(aggTx);
+	             console.log(aggTx[0].innerTransactions[0].message.payload);
               })();
 	  }	    
                                                                           
