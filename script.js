@@ -404,7 +404,7 @@ txRepo
              //  })(); // async()
 		  
 		/////////// モザイクが空ではない場合   /////////////////　　モザイクが空の場合はこの for 文はスルーされる  //////////
-         // for(let i=0; i<aggTx[0].innerTransactions[0].mosaics.length; i++){  //モザイクの数だけ繰り返す
+         　for(let i=0; i<aggTx[0].innerTransactions[0].mosaics.length; i++){  //モザイクの数だけ繰り返す
                const dom_mosaic = document.createElement('div');
                const dom_amount = document.createElement('div');
           
@@ -437,7 +437,7 @@ txRepo
                 dom_tx.appendChild(dom_mosaic);                    // dom_mosaic をdom_txに追加 
                 dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
                                    
-       //   }  //モザイクの数だけ繰り返す 
+         }  //モザイクの数だけ繰り返す 
 	       
 	  })(); // async()  
 	      
