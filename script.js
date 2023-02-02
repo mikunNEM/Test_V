@@ -400,7 +400,7 @@ txRepo
 		  
               (async() => {      		      
                      const aggTx = await txRepo.getTransactionsById([tx.transactionInfo.hash],sym.TransactionGroup.Confirmed).toPromise();
-		     dom_message.innerHTML = `<font color="#FF00FF">aggTx</font><font color="#4169e1">(${aggTx[0].innerTransactions.length})</br></br>< Message ></br>${aggTx[0].innerTransactions[0].message.payload}</font>`;     // 　メッセージ              
+		     dom_message.innerHTML = `<font color="#FF00FF">aggTx(${aggTx[0].innerTransactions.length})</font></br></br><font color="#4169e1">< Message ></br>${aggTx[0].innerTransactions[0].message.payload}</font>`;     // 　メッセージ              
              //  })(); // async()
 		  
 		/////////// モザイクが空ではない場合   /////////////////　　モザイクが空の場合はこの for 文はスルーされる  //////////
