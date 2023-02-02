@@ -409,7 +409,7 @@ txRepo
                const dom_mosaic = document.createElement('div');
                const dom_amount = document.createElement('div');
           
-              (async() => {
+             // (async() => {
                   let mosaicNames = await nsRepo.getMosaicsNames([new sym.MosaicId(aggTx[0].innerTransactions[0].mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
      
                   mosaicInfo = await mosaicRepo.getMosaic(aggTx[0].innerTransactions[0].mosaics[i].id.id).toPromise();// 可分性の情報を取得する                     
