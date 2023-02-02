@@ -397,18 +397,19 @@ txRepo
 	  }
 	    
 	  if  (tx.type === 16705 || tx.type === 16961){      // tx.type が 'AGGREGATE_BONDED'　または 'AGGREGATE_COMPLETE' の場合
-              
+          const aggTx;
+		  
               (async() => {      		      
-                     const aggTx = await txRepo.getTransactionsById([tx.transactionInfo.hash],sym.TransactionGroup.Confirmed).toPromise();
+                     aggTx = await txRepo.getTransactionsById([tx.transactionInfo.hash],sym.TransactionGroup.Confirmed).toPromise();
 		     dom_message.innerHTML = `<font color="#4169e1">aggTx(${aggTx[0].innerTransactions.length})</br></br>< Message ></br>${aggTx[0].innerTransactions[0].message.payload}</font>`;     // 　メッセージ              
-               
+               })(); // async()
 		  
 		/////////// モザイクが空ではない場合   /////////////////　　モザイクが空の場合はこの for 文はスルーされる  //////////
           for(let i=0; i<aggTx[0].innerTransactions[0].mosaics.length; i++){  //モザイクの数だけ繰り返す
                const dom_mosaic = document.createElement('div');
                const dom_amount = document.createElement('div');
           
-             // (async() => {
+              (async() => {
                   let mosaicNames = await nsRepo.getMosaicsNames([new sym.MosaicId(aggTx[0].innerTransactions[0].mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
      
                   mosaicInfo = await mosaicRepo.getMosaic(aggTx[0].innerTransactions[0].mosaics[i].id.id).toPromise();// 可分性の情報を取得する                     
@@ -439,7 +440,7 @@ txRepo
                                    
           }  //モザイクの数だけ繰り返す          		      
 	     
-	  // })(); // async()     
+	      
             /* if (aggTx[0].innerTransactions[0].mosaics.length === 0){   // モザイクが空の場合  //////////////　モザイクがある場合はこの if 文はスルーされる
                   const dom_mosaic = document.createElement('div');
               　　 const dom_amount = document.createElement('div');
