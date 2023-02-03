@@ -279,10 +279,9 @@ txRepo
      　　　 dom_date.innerHTML = `<font color="#7E00FF"><p style="text-align: right">${ymdhms}</p></font>`;    //　日付  右寄せ
       //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
          
-     　　　 dom_tx.appendChild(dom_date);                     //　dom_date　をdom_txに追加
-        
-           dom_tx.appendChild(dom_txType);                    // dom_txType をdom_txに追加 
-           dom_tx.appendChild(dom_hash);                      // dom_hash をdom_txに追加
+     　　　 dom_tx.appendChild(dom_date);                     //　dom_date　をdom_txに追加           
+	   dom_tx.appendChild(dom_hash);                      // dom_hash をdom_txに追加
+           dom_tx.appendChild(dom_txType);                    // dom_txType をdom_txに追加         
            dom_tx.appendChild(dom_signer_address);            // dom_signer_address をdom_txに追加  
       
  
@@ -830,9 +829,9 @@ txRepo
      　　　 dom_date.innerHTML = `<font color="#7E00FF"><p style="text-align: right">${ymdhms}</p></font>`;    //　日付  右寄せ
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
          
-     　　　 dom_tx.appendChild(dom_date);                     //　dom_date　をdom_txに追加        
+     　　　 dom_tx.appendChild(dom_date);                     //　dom_date　をdom_txに追加
+	   dom_tx.appendChild(dom_hash);                      // dom_hash をdom_txに追加
            dom_tx.appendChild(dom_txType);                    // dom_txType をdom_txに追加 
-           dom_tx.appendChild(dom_hash);                      // dom_hash をdom_txに追加
            dom_tx.appendChild(dom_signer_address);            // dom_signer_address をdom_txに追加  
       
  
