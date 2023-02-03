@@ -293,7 +293,7 @@ txRepo
 	             let namespacesNames = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();
 		     let Namejson =JSON.stringify(namespacesNames);
 		      console.log("Namejson=",Namejson); 
-		     dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${namespacesNames.[0].name}</font>`; //  文字列の結合　   宛先
+		     dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${Namejson}</font>`; //  文字列の結合　   宛先
                 })(); // async() 
 	    }else{   
                    dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${tx.recipientAddress.address}</font>`; //  文字列の結合　   宛先
