@@ -291,8 +291,8 @@ txRepo
 	    if (tx.recipientAddress.address === undefined){
                (async() => {
 	             let namespacesNames = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();
-		      console.log("namespacesNames=",[namespacesNames]); 
-		     dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${[namespacesNames]}</font>`; //  文字列の結合　   宛先
+		      console.log("namespacesNames=",namespacesNames); 
+		     dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${namespacesNames}</font>`; //  文字列の結合　   宛先
                 })(); // async() 
 	    }else{   
                    dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${tx.recipientAddress.address}</font>`; //  文字列の結合　   宛先
@@ -308,7 +308,7 @@ txRepo
           
                (async() => {
                   let mosaicNames = await nsRepo.getMosaicsNames([new sym.MosaicId(tx.mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
-                      console.log("mosaicNames=",[mosaicNames])
+                      console.log("mosaicNames=",mosaicNames)
 		       
                   mosaicInfo = await mosaicRepo.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する                     
                   let div = mosaicInfo.divisibility; // 可分性      
