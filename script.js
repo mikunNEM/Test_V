@@ -308,10 +308,11 @@ txRepo
           
                (async() => {
                   let mosaicNames = await nsRepo.getMosaicsNames([new sym.MosaicId(tx.mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
-     
+                      console.log("mosaicNames=",[mosaicNames])
+		       
                   mosaicInfo = await mosaicRepo.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する                     
-                  let div = mosaicInfo.divisibility; // 可分性
-                             
+                  let div = mosaicInfo.divisibility; // 可分性      
+		       
                        if(tx.recipientAddress.address !== address.address) {  // 受け取りアドレスとウォレットのアドレスが違う場合　
                       
                           if ([mosaicNames][0][0].names.length !==0){  // ネームスペースがある場合
