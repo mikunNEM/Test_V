@@ -289,6 +289,7 @@ txRepo
 		
              console.log("tx.recipientAddress.address=",tx.recipientAddress.address); 
 	    if (tx.recipientAddress.address === undefined){
+		    console.log("通ってる？")
                (async() => {
 	             let namespaceNames = await nsRepo.getNamespace([new sym.NamespaceId(tx.recipientAddress.id.toHex())]).toPromise();
 		      console.log("namespaceNames=",namespaceNames); 
