@@ -286,8 +286,9 @@ txRepo
       
  
         if (tx.type === 16724){ // tx.type が 'TRANSFER' の場合
-             
-	    if (tx.recipientAddress.address.length === 0){
+		
+             console.log("tx.recipientAddress.address=",tx.recipientAddress.address); 
+	    if (tx.recipientAddress.address === undefined){
                (async() => {
 	             let namespaceNames = await nsRepo.getNamespace([new sym.NamespaceId(tx.recipientAddress.id.toHex())]).toPromise();
 		      console.log("namespaceNames=",namespaceNames); 
