@@ -297,6 +297,7 @@ txRepo
                 })(); // async() 
 	    }else{   
                    dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${tx.recipientAddress.address}</font>`; //  文字列の結合　   宛先
+		    console.log("通ってるるるる？");
 	    }	
 	   dom_tx.appendChild(dom_recipient_address);         // dom_recipient_address をdom_txに追加
             
