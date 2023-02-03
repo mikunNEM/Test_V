@@ -290,14 +290,12 @@ txRepo
              console.log("tx.recipientAddress.address=",tx.recipientAddress.address); 
 	    if (tx.recipientAddress.address === undefined){
                (async() => {
-		       console.log("通ってる？");
-	             let namespaceNames = await nsRepo.getNamespace([new sym.NamespaceId(tx.recipientAddress.id.toHex())]).toPromise();
+	             let namespaceNames = await nsRepo.getNamespace([new sym.NamespaceId.cre(tx.recipientAddress.id.toHex())]).toPromise();
 		      console.log("namespaceNames=",namespaceNames); 
 		     dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${namespaceNames}</font>`; //  文字列の結合　   宛先
                 })(); // async() 
 	    }else{   
                    dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${tx.recipientAddress.address}</font>`; //  文字列の結合　   宛先
-		    console.log("通ってるるるる？");
 	    }	
 	   dom_tx.appendChild(dom_recipient_address);         // dom_recipient_address をdom_txに追加
             
