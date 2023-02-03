@@ -290,7 +290,7 @@ txRepo
              console.log("tx.recipientAddress.address=",tx.recipientAddress.address); 
 	    if (tx.recipientAddress.address === undefined){
                (async() => {
-	             let namespaceNames = await nsRepo.getNamespaceNames([new sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();
+	             let namespaceNames = await nsRepo.getNamespaceNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();
 		      console.log("namespaceNames=",namespaceNames); 
 		     dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${namespaceNames}</font>`; //  文字列の結合　   宛先
                 })(); // async() 
