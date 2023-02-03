@@ -287,8 +287,16 @@ txRepo
  
         if (tx.type === 16724){ // tx.type が 'TRANSFER' の場合
              
-           dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${tx.recipientAddress.address}</font>`; //  文字列の結合　   宛先
-           dom_tx.appendChild(dom_recipient_address);         // dom_recipient_address をdom_txに追加
+	    if (tx.recipientAddress.address === "undefined"){
+               (async() => {
+	             let namespaceNames = await nsRepo.getNamespace([new sym.NamespaceId(tx.recipientAddress.id.toHex())]).toPromise();
+		      console.log("namespaceNames=",namespaceNames); 
+		     dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${namespaceNames}</font>`; //  文字列の結合　   宛先
+                })(); // async() 
+	    }else{   
+                   dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${tx.recipientAddress.address}</font>`; //  文字列の結合　   宛先
+	    }	
+	   dom_tx.appendChild(dom_recipient_address);         // dom_recipient_address をdom_txに追加
             
           //console.log('Tx_Mosaics =',tx.mosaics.length);  ///  モザイクの数を表示 ///////////////////////////////////////////
                   
