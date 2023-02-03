@@ -291,8 +291,8 @@ txRepo
 	    if (tx.recipientAddress.address === undefined){
                (async() => {
 	             let namespacesNames = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();
-		      console.log("namespaceNames=",[namespacesNames][0]); 
-		     dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${[namespacesNames][0].name}</font>`; //  文字列の結合　   宛先
+		      console.log("namespacesNames=",[namespacesNames][0].name[0]); 
+		     dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${[namespacesNames][0].name[0]}</font>`; //  文字列の結合　   宛先
                 })(); // async() 
 	    }else{   
                    dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${tx.recipientAddress.address}</font>`; //  文字列の結合　   宛先
