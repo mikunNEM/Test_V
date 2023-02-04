@@ -292,6 +292,9 @@ txRepo
                (async() => {  
 	             let namespacesNames = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();
 		     dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　　: ${[namespacesNames][0][0].name}</font>`; //  文字列の結合　   宛先
+		       
+		  <a href="https://symbol.fyi/transactions/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer"><i>⛓ Transaction Info ⛓</i></a></p>`;
+		       
                 })(); // async() 
 	    }else{   // Nから始まるの39文字のアドレスの場合はそのままアドレスを表示
                    dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　　:   ${tx.recipientAddress.address}</font>`; //  文字列の結合　   宛先
@@ -307,7 +310,6 @@ txRepo
           
                (async() => {
                   let mosaicNames = await nsRepo.getMosaicsNames([new sym.MosaicId(tx.mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
-                      console.log("mosaicNames=",mosaicNames)
 		       
                   mosaicInfo = await mosaicRepo.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する                     
                   let div = mosaicInfo.divisibility; // 可分性      
