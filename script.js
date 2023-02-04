@@ -291,10 +291,7 @@ txRepo
 	    if (tx.recipientAddress.address === undefined){  // 宛先が Namespace の場合 NamespaceId から取得し表示する
                (async() => {  
 	             let namespacesNames = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();
-		     dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　　: ${[namespacesNames][0][0].name}</font>`; //  文字列の結合　   宛先
-		       
-		  <a href="https://symbol.fyi/transactions/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer"><i>⛓ Transaction Info ⛓</i></a></p>`;
-		       
+		     dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　　: <a href="https://symbol.fyi/transactions/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a></font>`; //  文字列の結合　   宛先		       
                 })(); // async() 
 	    }else{   // Nから始まるの39文字のアドレスの場合はそのままアドレスを表示
                    dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　　:   ${tx.recipientAddress.address}</font>`; //  文字列の結合　   宛先
