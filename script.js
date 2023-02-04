@@ -256,7 +256,7 @@ txRepo
            dom_hash.innerHTML = `<p style="text-align: right; font-weight:bold; line-height:100%;&"><a href="https://testnet.symbol.fyi/transactions/${tx.transactionInfo.hash}" target="_blank" rel="noopener noreferrer"><i>⛓ Transaction Info ⛓</i></a></p>`; //Tx hash          
        }
          
-      dom_signer_address.innerHTML = `<font color="#2f4f4f">From : ${tx.signer.address.address}</font>`;    //  文字列の結合　送信者
+      dom_signer_address.innerHTML = `<font color="#2f4f4f">From　: ${tx.signer.address.address}</font>`;    //  文字列の結合　送信者
       
           
       ////////////////////////////////////////////　　  　timestamp to Date 　　　　　/////////////////////////
