@@ -288,14 +288,13 @@ txRepo
         if (tx.type === 16724){ // tx.type が 'TRANSFER' の場合
 		
              console.log("tx.recipientAddress.address=",tx.recipientAddress.address); 
-	    if (tx.recipientAddress.address === undefined){
-               (async() => {
+	    if (tx.recipientAddress.address === undefined){  // 宛先が Namespace の場合 NamespaceId から取得し表示する
+               (async() => {  
 	             let namespacesNames = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();
-		      console.log("namespacesNames=",[namespacesNames][0][0].name); 
-		     dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${[namespacesNames][0][0].name}</font>`; //  文字列の結合　   宛先
+		     dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　　 : ${[namespacesNames][0][0].name}</font>`; //  文字列の結合　   宛先
                 })(); // async() 
-	    }else{   
-                   dom_recipient_address.innerHTML = `<font color="#2f4f4f">To :   ${tx.recipientAddress.address}</font>`; //  文字列の結合　   宛先
+	    }else{   // Nから始まるの39文字のアドレスの場合はそのままアドレスを表示
+                   dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　　 :   ${tx.recipientAddress.address}</font>`; //  文字列の結合　   宛先
 	    }	
 	   dom_tx.appendChild(dom_recipient_address);         // dom_recipient_address をdom_txに追加
             
