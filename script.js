@@ -256,7 +256,7 @@ txRepo
            dom_hash.innerHTML = `<p style="text-align: right; font-weight:bold; line-height:100%;&"><a href="https://testnet.symbol.fyi/transactions/${tx.transactionInfo.hash}" target="_blank" rel="noopener noreferrer"><i>⛓ Transaction Info ⛓</i></a></p>`; //Tx hash          
        }
          
-      dom_signer_address.innerHTML = `<font color="#2f4f4f">From　: ${tx.signer.address.address}</font>`;    //  文字列の結合　送信者
+      dom_signer_address.innerHTML = `<font color="#2f4f4f">From : ${tx.signer.address.address}</font>`;    //  文字列の結合　送信者
       
           
       ////////////////////////////////////////////　　  　timestamp to Date 　　　　　/////////////////////////
@@ -291,7 +291,7 @@ txRepo
 	    if (tx.recipientAddress.address === undefined){  // 宛先が Namespace の場合 NamespaceId から取得し表示する
                (async() => {  
 	             let namespacesNames = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();
-		     dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　　: <a href="https://symbol.fyi/transactions/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a></font>`; //  文字列の結合　   宛先		       
+		     dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　　: <a href="https://symbol.fyi/namespaces/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a></font>`; //  文字列の結合　   宛先		       
                 })(); // async() 
 	    }else{   // Nから始まるの39文字のアドレスの場合はそのままアドレスを表示
                    dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　　:   ${tx.recipientAddress.address}</font>`; //  文字列の結合　   宛先
