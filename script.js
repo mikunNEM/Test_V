@@ -284,13 +284,12 @@ txRepo
            dom_tx.appendChild(dom_txType);                    // dom_txType をdom_txに追加         
            dom_tx.appendChild(dom_signer_address);            // dom_signer_address をdom_txに追加  
 	    
-           let namespacesAddress;
  
         if (tx.type === 16724){ // tx.type が 'TRANSFER' の場合           
 	    if (tx.recipientAddress.address === undefined){  // 宛先が Namespace の場合 NamespaceId から取得し表示する
                (async() => {  
 	             let namespacesNames = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();
-		         namespacesAddress = await nsRepo.getLinkedAddress([namespacesNames][0][0].namespaceId.id).toPromise();	       
+		     let namespacesAddress = await nsRepo.getLinkedAddress([namespacesNames][0][0].namespaceId.id).toPromise();	       
 		     dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　　: <a href="https://symbol.fyi/namespaces/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a></font>`; //  文字列の結合　   宛先		       
                 })(); // async() 
 	    }else{   // Nから始まるの39文字のアドレスの場合はそのままアドレスを表示
@@ -310,8 +309,10 @@ txRepo
 		       
                   mosaicInfo = await mosaicRepo.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する                     
                   let div = mosaicInfo.divisibility; // 可分性      
+		       	             
+		       let namespacesNames = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();  
+		       let namespacesAddress = await nsRepo.getLinkedAddress([namespacesNames][0][0].namespaceId.id).toPromise();
 		       
-		       console.log("ーーーーーnamespace addressやでーーーーーー",namespacesAddress)
                        if(tx.recipientAddress.address !== address.address || namespacesAddress.address !== address.address) {  // 受け取りアドレスとウォレットのアドレスが違う場合　
                       
                           if ([mosaicNames][0][0].names.length !==0){  // ネームスペースがある場合
