@@ -260,26 +260,26 @@ txRepo
       
           
       ////////////////////////////////////////////　　  　timestamp to Date 　　　　　/////////////////////////
-      　　　const timestamp = epochAdjustment + (parseInt(tx.transactionInfo.timestamp.toHex(), 16)/1000);   /////////////// Unit64 を 16進数に　変換したあと10進数に変換　
-      　　　const date = new Date(timestamp * 1000);
+           const timestamp = epochAdjustment + (parseInt(tx.transactionInfo.timestamp.toHex(), 16)/1000);   /////////////// Unit64 を 16進数に　変換したあと10進数に変換　
+           const date = new Date(timestamp * 1000);
       
-     　　　 const yyyy = `${date.getFullYear()}`;
+           const yyyy = `${date.getFullYear()}`;
       　　　// .slice(-2)で文字列中の末尾の2文字を取得する
       　　　// `0${date.getHoge()}`.slice(-2) と書くことで０埋めをする
-      　　　const MM = `0${date.getMonth() + 1}`.slice(-2); // getMonth()の返り値は0が基点
-      　　　const dd = `0${date.getDate()}`.slice(-2);
-      　　　const HH = `0${date.getHours()}`.slice(-2);
-      　　　const mm = `0${date.getMinutes()}`.slice(-2);
-      　　　const ss = `0${date.getSeconds()}`.slice(-2);
+           const MM = `0${date.getMonth() + 1}`.slice(-2); // getMonth()の返り値は0が基点
+           const dd = `0${date.getDate()}`.slice(-2);
+           const HH = `0${date.getHours()}`.slice(-2);
+           const mm = `0${date.getMinutes()}`.slice(-2);
+           const ss = `0${date.getSeconds()}`.slice(-2);
 
-　　　      const ymdhms = `${yyyy}-${MM}-${dd} ${HH}:${mm}:${ss}`;
+           const ymdhms = `${yyyy}-${MM}-${dd} ${HH}:${mm}:${ss}`;
       
-     　　　 //console.log(ymdhms);  // 日時を表示
+           //console.log(ymdhms);  // 日時を表示
       
      　　　 dom_date.innerHTML = `<font color="#7E00FF"><p style="text-align: right">${ymdhms}</p></font>`;    //　日付  右寄せ
       //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
          
-     　　　 dom_tx.appendChild(dom_date);                     //　dom_date　をdom_txに追加           
+           dom_tx.appendChild(dom_date);                     //　dom_date　をdom_txに追加           
 	   dom_tx.appendChild(dom_hash);                      // dom_hash をdom_txに追加
            dom_tx.appendChild(dom_txType);                    // dom_txType をdom_txに追加         
            dom_tx.appendChild(dom_signer_address);            // dom_signer_address をdom_txに追加  
