@@ -264,8 +264,8 @@ txRepo
            const date = new Date(timestamp * 1000);
       
            const yyyy = `${date.getFullYear()}`;
-      　　　// .slice(-2)で文字列中の末尾の2文字を取得する
-      　　　// `0${date.getHoge()}`.slice(-2) と書くことで０埋めをする
+           // .slice(-2)で文字列中の末尾の2文字を取得する
+           // `0${date.getHoge()}`.slice(-2) と書くことで０埋めをする
            const MM = `0${date.getMonth() + 1}`.slice(-2); // getMonth()の返り値は0が基点
            const dd = `0${date.getDate()}`.slice(-2);
            const HH = `0${date.getHours()}`.slice(-2);
@@ -276,7 +276,7 @@ txRepo
       
            //console.log(ymdhms);  // 日時を表示
       
-     　　　 dom_date.innerHTML = `<font color="#7E00FF"><p style="text-align: right">${ymdhms}</p></font>`;    //　日付  右寄せ
+          dom_date.innerHTML = `<font color="#7E00FF"><p style="text-align: right">${ymdhms}</p></font>`;    //　日付  右寄せ
       //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
          
            dom_tx.appendChild(dom_date);                     //　dom_date　をdom_txに追加           
@@ -340,17 +340,17 @@ txRepo
 	
              if (tx.mosaics.length === 0){   // モザイクが空の場合  //////////////　モザイクがある場合はこの if 文はスルーされる
                   const dom_mosaic = document.createElement('div');
-              　　 const dom_amount = document.createElement('div');
+                  const dom_amount = document.createElement('div');
                   
                    if(tx.recipientAddress.address !== address.address) {  // 受け取りアドレスとウォレットのアドレスが違う場合
                        dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic : No mosaic</font>`;     // No mosaic
                        dom_amount.innerHTML = `<font color="#FF0000">💁‍♀️➡️💰 : </font>`;     // 　数量
                    }else{          //  受け取りアドレスとウォレットアドレスが同じ場合
-         　            　 dom_mosaic.innerHTML = `<font color="#008000">Mosaic : No mosaic</font>`;     // No mosaic
+                         dom_mosaic.innerHTML = `<font color="#008000">Mosaic : No mosaic</font>`;     // No mosaic
                          dom_amount.innerHTML = `<font color="#008000">💰➡️😊 : </font>`;     // 　数量        
                    } 
-                  　dom_tx.appendChild(dom_mosaic);                    // dom_mosaic をdom_txに追加 
-                　　dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
+                   dom_tx.appendChild(dom_mosaic);                    // dom_mosaic をdom_txに追加 
+		   dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
              } /////////////////////////////////////////////////////////////////////////////////////////////////////    
              
              
@@ -415,7 +415,7 @@ txRepo
 		   
 		      
 		/////////// モザイクが空ではない場合   /////////////////　　モザイクが空の場合はこの for 文はスルーされる  //////////
-         　for(let i=0; i<aggTx[0].innerTransactions[0].mosaics.length; i++){  //モザイクの数だけ繰り返す
+           for(let i=0; i<aggTx[0].innerTransactions[0].mosaics.length; i++){  //モザイクの数だけ繰り返す
                const dom_mosaic = document.createElement('div');
                const dom_amount = document.createElement('div');
           
@@ -429,7 +429,7 @@ txRepo
                       
                           if ([mosaicNames][0][0].names.length !==0){  // ネームスペースがある場合
                               dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic :　<big><strong>${[mosaicNames][0][0].names[0].name}</strong></big></font>`; 
-                          }else{   　　　　　　　　　　　　　　　　　　　　　 //　ネームスペースがない場合
+                          }else{                                       //　ネームスペースがない場合
                                dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic :　<strong>${aggTx[0].innerTransactions[0].mosaics[i].id.id.toHex()}</strong></font>`;
                           }    
                           dom_amount.innerHTML = `<font color="#FF0000" size="+1">💁‍♀️➡️💰 :　<i><big><strong> ${(parseInt(aggTx[0].innerTransactions[0].mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;    // 　数量
@@ -437,7 +437,7 @@ txRepo
                        }else{     //  受け取りアドレスとウォレットアドレスが同じ場合
                            if ([mosaicNames][0][0].names.length !==0){ // ネームスペースがある場合                         
                                 dom_mosaic.innerHTML = `<font color="#008000">Mosaic :　<big><strong>${[mosaicNames][0][0].names[0].name}</strong></big></font>`;
-                           }else{ 　　　　　　　　　　　　　　　　　　　　　  // ネームスペースがない場合
+                           }else{                                      // ネームスペースがない場合
                                  dom_mosaic.innerHTML = `<font color="#008000">Mosaic :　<strong>${aggTx[0].innerTransactions[0].mosaics[i].id.id.toHex()}</strong></font>`;
                            }
                            dom_amount.innerHTML = `<font color="#008000" size="+1">💰➡️😊 :　<i><big><strong> ${(parseInt(aggTx[0].innerTransactions[0].mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;    // 　数量
@@ -482,86 +482,86 @@ txRepo
 
 function getTransactionType (type) { // https://symbol.github.io/symbol-sdk-typescript-javascript/1.0.3/enums/TransactionType.html
   switch(type){
-  　case 16720:
-    　return 'ACCOUNT_ADDRESS_RESTRICTION';
-    　break;
-  　case 16716:
-    　return 'ACCOUNT_KEY_LINK';
-    　break;  
+    case 16720:
+      return 'ACCOUNT_ADDRESS_RESTRICTION';
+      break;
+    case 16716:
+      return 'ACCOUNT_KEY_LINK';
+      break;  
     case 16708:
-    　return 'ACCOUNT_METADATA';
-    　break;
+      return 'ACCOUNT_METADATA';
+      break;
     case 16976:
-    　return 'ACCOUNT_MOSAIC_RESTRICTION';
-    　break;
+      return 'ACCOUNT_MOSAIC_RESTRICTION';
+      break;
     case 17232:
-    　return 'ACCOUNT_OPERATION_RESTRICTION';
-    　break;
+      return 'ACCOUNT_OPERATION_RESTRICTION';
+      break;
     case 16974:
-    　return 'ADDRESS_ALIAS';
-    　break;
+      return 'ADDRESS_ALIAS';
+      break;
     case 16961:
-    　return 'AGGREGATE_BONDED';
-    　break;
+      return 'AGGREGATE_BONDED';
+      break;
     case 16705:
-    　return 'AGGREGATE_COMPLETE';
-    　break;
+      return 'AGGREGATE_COMPLETE';
+      break;
     case 16712:
-    　return 'HASH_LOCK';
-    　break;
+      return 'HASH_LOCK';
+      break;
     case 16977:
-    　return 'MOSAIC_ADDRESS_RESTRICTION';
-    　break;
+      return 'MOSAIC_ADDRESS_RESTRICTION';
+      break;
     case 17230:
-    　return 'MOSAIC_ALIAS';
-    　break;
+      return 'MOSAIC_ALIAS';
+      break;
     case 16717:
-    　return 'MOSAIC_DEFINITION';
-    　break;
+      return 'MOSAIC_DEFINITION';
+      break;
     case 16721:
-    　return 'MOSAIC_GLOBAL_RESTRICTION';
-    　break;
+      return 'MOSAIC_GLOBAL_RESTRICTION';
+      break;
     case 16964:
-    　return 'MOSAIC_METADATA';
-    　break;
+      return 'MOSAIC_METADATA';
+      break;
     case 16973:
-    　return 'MOSAIC_SUPPLY_CHANGE';
-    　break;
+      return 'MOSAIC_SUPPLY_CHANGE';
+      break;
     case 17229:
-    　return 'MOSAIC_SUPPLY_REVOCATION';
-    　break;
+      return 'MOSAIC_SUPPLY_REVOCATION';
+      break;
     case 16725:
-    　return 'MULTISIG_ACCOUNT_MODIFICATION';
-    　break;
+      return 'MULTISIG_ACCOUNT_MODIFICATION';
+      break;
     case 17220:
-    　return 'NAMESPACE_METADATA';
-    　break;
+      return 'NAMESPACE_METADATA';
+      break;
     case 16718:
-    　return 'NAMESPACE_REGISTRATION';
-    　break;
+      return 'NAMESPACE_REGISTRATION';
+      break;
     case 16972:
-    　return 'NODE_KEY_LINK';
-    　break;
+      return 'NODE_KEY_LINK';
+      break;
     case 0:
-    　return 'RESERVED';
-    　break;
+      return 'RESERVED';
+      break;
     case 16722:
-    　return 'SECRET_LOCK';
-    　break;
+      return 'SECRET_LOCK';
+      break;
     case 16978:
-    　return 'SECRET_PROOF';
-    　break;
+      return 'SECRET_PROOF';
+      break;
     case 16724:
-    　return 'TRANSFER';
-    　break;
+      return 'TRANSFER';
+      break;
     case 16707:
-    　return 'VOTING_KEY_LINK';
-    　break;
+      return 'VOTING_KEY_LINK';
+      break;
     case 16963:
-    　return 'VRF_KEY_LINK';
-    　break;  
+      return 'VRF_KEY_LINK';
+      break;  
     default:
-  　　return 'Other';
+  　  return 'Other';
   }
 }
 
@@ -595,10 +595,10 @@ function handleSSS() {
  (async() => {  
      mosaicInfo = await mosaicRepo.getMosaic(new sym.MosaicId(mosaic_ID)).toPromise();// 可分性の情報を取得する 
      const div = mosaicInfo.divisibility; // 可分性
-　　
+
    if (address1.length === 0){ // アグリゲートTxの配列が空の場合    < transfer>
      if (enc === "0"){                      //////////////// メッセージが平文の場合 ////////////////////////////////////
-    　 const tx = sym.TransferTransaction.create(        // トランザクションを生成
+       const tx = sym.TransferTransaction.create(        // トランザクションを生成
        sym.Deadline.create(epochAdjustment),
        sym.Address.createFromRawAddress(addr),
        [
@@ -786,9 +786,9 @@ txRepo
     const dom_txInfo = document.getElementById('wallet-transactions');
   
     if (dom_txInfo !== null){ // null じゃなければ子ノードを全て削除  
-       　while(dom_txInfo.firstChild){
-  　　　　dom_txInfo.removeChild(dom_txInfo.firstChild);
-　　　　　}
+         while(dom_txInfo.firstChild){
+           dom_txInfo.removeChild(dom_txInfo.firstChild);
+         }
     }
 	
     let t=0;
@@ -822,26 +822,26 @@ txRepo
       
           
       ////////////////////////////////////////////　　  　timestamp to Date 　　　　　/////////////////////////
-      　　　const timestamp = epochAdjustment + (parseInt(tx.transactionInfo.timestamp.toHex(), 16)/1000);   /////////////// Unit64 を 16進数に　変換したあと10進数に変換　
-      　　　const date = new Date(timestamp * 1000);
+           const timestamp = epochAdjustment + (parseInt(tx.transactionInfo.timestamp.toHex(), 16)/1000);   /////////////// Unit64 を 16進数に　変換したあと10進数に変換　
+           const date = new Date(timestamp * 1000);
       
-     　　　 const yyyy = `${date.getFullYear()}`;
-      　　　// .slice(-2)で文字列中の末尾の2文字を取得する
-      　　　// `0${date.getHoge()}`.slice(-2) と書くことで０埋めをする
-      　　　const MM = `0${date.getMonth() + 1}`.slice(-2); // getMonth()の返り値は0が基点
-      　　　const dd = `0${date.getDate()}`.slice(-2);
-      　　　const HH = `0${date.getHours()}`.slice(-2);
-      　　　const mm = `0${date.getMinutes()}`.slice(-2);
-      　　　const ss = `0${date.getSeconds()}`.slice(-2);
+           const yyyy = `${date.getFullYear()}`;
+           // .slice(-2)で文字列中の末尾の2文字を取得する
+           // `0${date.getHoge()}`.slice(-2) と書くことで０埋めをする
+           const MM = `0${date.getMonth() + 1}`.slice(-2); // getMonth()の返り値は0が基点
+           const dd = `0${date.getDate()}`.slice(-2);
+           const HH = `0${date.getHours()}`.slice(-2);
+           const mm = `0${date.getMinutes()}`.slice(-2);
+           const ss = `0${date.getSeconds()}`.slice(-2);
 
-　　　      const ymdhms = `${yyyy}-${MM}-${dd} ${HH}:${mm}:${ss}`;
+           const ymdhms = `${yyyy}-${MM}-${dd} ${HH}:${mm}:${ss}`;
       
-     　　//　 console.log(ymdhms);  // 日付を表示
+           //　 console.log(ymdhms);  // 日付を表示
       
-     　　　 dom_date.innerHTML = `<font color="#7E00FF"><p style="text-align: right">${ymdhms}</p></font>`;    //　日付  右寄せ
+           dom_date.innerHTML = `<font color="#7E00FF"><p style="text-align: right">${ymdhms}</p></font>`;    //　日付  右寄せ
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
          
-     　　　 dom_tx.appendChild(dom_date);                     //　dom_date　をdom_txに追加
+           dom_tx.appendChild(dom_date);                     //　dom_date　をdom_txに追加
 	   dom_tx.appendChild(dom_hash);                      // dom_hash をdom_txに追加
            dom_tx.appendChild(dom_txType);                    // dom_txType をdom_txに追加 
            dom_tx.appendChild(dom_signer_address);            // dom_signer_address をdom_txに追加  
@@ -891,17 +891,17 @@ txRepo
              
              if (tx.mosaics.length === 0){   // モザイクが空の場合  //////////////　モザイクがある場合はこの if 文はスルーされる
                   const dom_mosaic = document.createElement('div');
-              　　 const dom_amount = document.createElement('div');
+                  const dom_amount = document.createElement('div');
                   
                    if(tx.recipientAddress.address !== address.address) {  // 受け取りアドレスとウォレットのアドレスが違う場合
                        dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic : No mosaic</font>`;     // No mosaic
                        dom_amount.innerHTML = `<font color="#FF0000">💁‍♀️➡️💰 : </font>`;     // 　数量
                    }else{          //  受け取りアドレスとウォレットアドレスが同じ場合
-         　            　 dom_mosaic.innerHTML = `<font color="#008000">Mosaic : No mosaic</font>`;     // No mosaic
+                         dom_mosaic.innerHTML = `<font color="#008000">Mosaic : No mosaic</font>`;     // No mosaic
                          dom_amount.innerHTML = `<font color="#008000">💰➡️😊 : </font>`;     // 　数量        
                    } 
-                  　dom_tx.appendChild(dom_mosaic);                    // dom_mosaic をdom_txに追加 
-                　　dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
+                   dom_tx.appendChild(dom_mosaic);                    // dom_mosaic をdom_txに追加 
+                   dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
              } /////////////////////////////////////////////////////////////////////////////////////////////////////    
              
              
