@@ -290,7 +290,7 @@ txRepo
                (async() => {  
 	             let namespacesNames = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();       
 		     dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　　: <a href="https://symbol.fyi/namespaces/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a></font>`; //  文字列の結合　   宛先		       
-                })(); // async() 
+              //  })(); // async() 
 	    }else{   // Nから始まるの39文字のアドレスの場合はそのままアドレスを表示
                    dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　　:   ${tx.recipientAddress.address}</font>`; //  文字列の結合　   宛先
 	    }	
@@ -303,14 +303,14 @@ txRepo
                const dom_mosaic = document.createElement('div');
                const dom_amount = document.createElement('div');
           
-               (async() => {
+             //  (async() => {
                   let mosaicNames = await nsRepo.getMosaicsNames([new sym.MosaicId(tx.mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
 		       
                   mosaicInfo = await mosaicRepo.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する                     
                   let div = mosaicInfo.divisibility; // 可分性      
 		       	             
-		       let namespacesNames1 = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();  
-		       let namespacesAddress = await nsRepo.getLinkedAddress([namespacesNames1][0][0].namespaceId.id).toPromise();
+		     //  let namespacesNames1 = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();  
+		       let namespacesAddress = await nsRepo.getLinkedAddress([namespacesNames][0][0].namespaceId.id).toPromise();
 		       
                        if(tx.recipientAddress.address !== address.address || namespacesAddress.address !== address.address) {  // 受け取りアドレスとウォレットのアドレスが違う場合　
                       
@@ -330,13 +330,14 @@ txRepo
                            dom_amount.innerHTML = `<font color="#008000" size="+1">💰➡️😊 :　<i><big><strong> ${(parseInt(tx.mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;    // 　数量
                        }
 		      // console.log("%ci モザイクが空では無い場合の処理　iだよ　",'color: red',i);
-               })(); // async() 
+             //  })(); // async() 
                
                 dom_tx.appendChild(dom_mosaic);                    // dom_mosaic をdom_txに追加 
                 dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加
                                    
           }  //モザイクの数だけ繰り返す
-             
+         })(); // async() 
+	
              if (tx.mosaics.length === 0){   // モザイクが空の場合  //////////////　モザイクがある場合はこの if 文はスルーされる
                   const dom_mosaic = document.createElement('div');
               　　 const dom_amount = document.createElement('div');
