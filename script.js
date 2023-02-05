@@ -410,7 +410,7 @@ txRepo
                      const aggTx = await txRepo.getTransactionsById([tx.transactionInfo.hash],sym.TransactionGroup.Confirmed).toPromise();
 		     console.log("aggTx=",aggTx[0]);
 		     dom_message.innerHTML = `<font color="#FF00FF">aggTx(${aggTx[0].innerTransactions.length})</font></br></br><font color="#4169e1">< Message ></br>${aggTx[0].innerTransactions[0].message.payload}</font>`;     // 　メッセージ              
-              })(); // async()
+              //})(); // async()
 		   
 		      
 		/////////// モザイクが空ではない場合   /////////////////　　モザイクが空の場合はこの for 文はスルーされる  //////////
@@ -418,7 +418,7 @@ txRepo
                const dom_mosaic = document.createElement('div');
                const dom_amount = document.createElement('div');
           
-              (async() => {
+             // (async() => {
                   let mosaicNames = await nsRepo.getMosaicsNames([new sym.MosaicId(aggTx[0].innerTransactions[0].mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
      
                   mosaicInfo = await mosaicRepo.getMosaic(aggTx[0].innerTransactions[0].mosaics[i].id.id).toPromise();// 可分性の情報を取得する                     
