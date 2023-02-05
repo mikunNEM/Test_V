@@ -310,7 +310,7 @@ txRepo
                   let div = mosaicInfo.divisibility; // 可分性      
 		       	             
 		     //  let namespacesNames = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();  
-		     //  let namespacesAddress = await nsRepo.getLinkedAddress([namespacesNames][0][0].namespaceId.id).toPromise();
+		       let namespacesAddress = await nsRepo.getLinkedAddress([namespacesNames][0][0].namespaceId.id).toPromise();
 		       
                        if(tx.recipientAddress.address !== address.address || namespacesAddress.address !== address.address) {  // 受け取りアドレスとウォレットのアドレスが違う場合　
                       
