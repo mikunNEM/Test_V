@@ -287,11 +287,11 @@ txRepo
  
         if (tx.type === 16724){ // tx.type が 'TRANSFER' の場合
 		
+            let namespacesAddress;
 	    if (tx.recipientAddress.address === undefined){  // 宛先が Namespace の場合 NamespaceId から取得し表示する
                (async() => {  
 	             let namespacesNames = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();
-		     let namespacesAddress = await nsRepo.getLinkedAddress([namespacesNames][0][0].namespaceId.id).toPromise();
-		       
+		         namespacesAddress = await nsRepo.getLinkedAddress([namespacesNames][0][0].namespaceId.id).toPromise();	       
 		     dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　　: <a href="https://symbol.fyi/namespaces/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a></font>`; //  文字列の結合　   宛先		       
                 })(); // async() 
 	    }else{   // Nから始まるの39文字のアドレスの場合はそのままアドレスを表示
