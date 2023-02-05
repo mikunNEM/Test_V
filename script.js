@@ -309,8 +309,8 @@ txRepo
                   mosaicInfo = await mosaicRepo.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する                     
                   let div = mosaicInfo.divisibility; // 可分性      
 		       	             
-		     //  let namespacesNames = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();  
-		       let namespacesAddress = await nsRepo.getLinkedAddress([namespacesNames][0][0].namespaceId.id).toPromise();
+		       let namespacesNames1 = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();  
+		       let namespacesAddress = await nsRepo.getLinkedAddress([namespacesNames1][0][0].namespaceId.id).toPromise();
 		       
                        if(tx.recipientAddress.address !== address.address || namespacesAddress.address !== address.address) {  // 受け取りアドレスとウォレットのアドレスが違う場合　
                       
