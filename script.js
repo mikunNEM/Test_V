@@ -214,7 +214,7 @@ const searchCriteria = {
   group: sym.TransactionGroup.Confirmed,
   address,
   pageNumber: 1,
-  pageSize: 20,
+  pageSize: 50,
   order: sym.Order.Desc,
   embedded: false,
 };
@@ -773,7 +773,7 @@ const searchCriteria = {
   group: sym.TransactionGroup.Confirmed,
   address,
   pageNumber: page_num,
-  pageSize: 20,
+  pageSize: 50,
   order: sym.Order.Desc,
   embedded: true,
 };
