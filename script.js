@@ -415,10 +415,10 @@ txRepo
                      const aggTx = await txRepo.getTransactionsById([tx.transactionInfo.hash],sym.TransactionGroup.Confirmed).toPromise();
 		                 console.log("aggTx=",aggTx[0]);
 		                 
-		                  if (aggTx[0].innerTransactions[0].message.length !== 0){
+		                  if (aggTx[0].innerTransactions[0].message !== undefined){
 		                      dom_message.innerHTML = `<font color="#FF00FF">aggTx(${aggTx[0].innerTransactions.length})</font></br></br><font color="#4169e1">< Message ></br>${aggTx[0].innerTransactions[0].message.payload}</font>`;     // 　メッセージ              
 				  }else
-                                     if(aggTx[0].innerTransactions[1].message.length !== 0){
+                                     if(aggTx[0].innerTransactions[1].message !== undefined){
 		                        dom_message.innerHTML = `<font color="#FF00FF">aggTx(${aggTx[0].innerTransactions.length})</font></br></br><font color="#4169e1">< Message ></br>${aggTx[0].innerTransactions[1].message.payload}</font>`;     // メッセージ
 				     }
 					  
