@@ -417,7 +417,7 @@ txRepo
 		                 
 		                  if (aggTx[0].innerTransactions[0].message.length !== 0){
 		                      dom_message.innerHTML = `<font color="#FF00FF">aggTx(${aggTx[0].innerTransactions.length})</font></br></br><font color="#4169e1">< Message ></br>${aggTx[0].innerTransactions[0].message.payload}</font>`;     // 　メッセージ              
-                                  else
+				  }else
                                      if(aggTx[0].innerTransactions[1].message.length !== 0){
 		                        dom_message.innerHTML = `<font color="#FF00FF">aggTx(${aggTx[0].innerTransactions.length})</font></br></br><font color="#4169e1">< Message ></br>${aggTx[0].innerTransactions[1].message.payload}</font>`;     // メッセージ
 				     }
