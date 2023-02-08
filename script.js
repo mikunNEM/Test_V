@@ -426,6 +426,7 @@ txRepo
 		   
 		      
 		            /////////// モザイクが空ではない場合   /////////////////　　モザイクが空の場合はこの for 文はスルーされる  //////////
+		      console.log("aggTx[0].innerTransactions[0].mosaics.length ===",aggTx[0].innerTransactions[0].mosaics.length);
               for(let i=0; i<aggTx[0].innerTransactions[0].mosaics.length; i++){  //モザイクの数だけ繰り返す
 		      console.log("aggTx mosaic for文 (i=)",i);
                  const dom_mosaic = document.createElement('div');
