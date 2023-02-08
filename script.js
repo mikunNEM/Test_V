@@ -414,28 +414,29 @@ txRepo
             (async() => {      		      
                      const aggTx = await txRepo.getTransactionsById([tx.transactionInfo.hash],sym.TransactionGroup.Confirmed).toPromise();
 		                 console.log("aggTx=",aggTx[0]);
-		                 
-		                  if (aggTx[0].innerTransactions[0].message !== undefined){
-		                      dom_message.innerHTML = `<font color="#FF00FF">aggTx(${aggTx[0].innerTransactions.length})</font></br></br><font color="#4169e1">< Message ></br>${aggTx[0].innerTransactions[0].message.payload}</font>`;     // 　メッセージ              
-				  }else
-                                     if(aggTx[0].innerTransactions[1].message !== undefined){
-		                        dom_message.innerHTML = `<font color="#FF00FF">aggTx(${aggTx[0].innerTransactions.length})</font></br></br><font color="#4169e1">< Message ></br>${aggTx[0].innerTransactions[1].message.payload}</font>`;     // メッセージ
-				     }
-					  
-		    // })(); // async()
+
+		                 if (aggTx[0].innerTransactions[0].message !== undefined){
+                         dom_message.innerHTML = `<font color="#FF00FF">aggTx(${aggTx[0].innerTransactions.length})　${getTransactionType(aggTx[0].innerTransactions[0].type)}</font></br></br><font color="#4169e1">< Message ></br>${aggTx[0].innerTransactions[0].message.payload}</font>`;     // 　メッセージ              
+                     }else
+                        if (aggTx[0].innerTransactions[1].message !== undefined){
+                          dom_message.innerHTML = `<font color="#FF00FF">aggTx(${aggTx[0].innerTransactions.length})　${getTransactionType(aggTx[0].innerTransactions[0].type)}</font></br></br><font color="#4169e1">< Message ></br>${aggTx[0].innerTransactions[1].message.payload}</font>`;     // メッセージ
+                     }             
+             // })(); // async()
 		   
-		      
+             
+              //let mosaic_num = aggTx[0].innerTransactions[0].mosaics.length;
+                let mosaic_num = 1;
+
 		            /////////// モザイクが空ではない場合   /////////////////　　モザイクが空の場合はこの for 文はスルーされる  //////////
-		      console.log("aggTx[0].innerTransactions[0].mosaics.length ===",aggTx[0].innerTransactions[0].mosaics.length);
-              for(let i=0; i<aggTx[0].innerTransactions[0].mosaics.length; i++){  //モザイクの数だけ繰り返す
-		      console.log("aggTx mosaic for文 (i=)",i);
+              for(let i=0; i<mosaic_num; i++){  //モザイクの数だけ繰り返す
+                console.log("aggTx mosaic for文 (i=)",i);
                  const dom_mosaic = document.createElement('div');
                  const dom_amount = document.createElement('div');
           
                // (async() => {
-                  let mosaicNames = await nsRepo.getMosaicsNames([new sym.MosaicId(aggTx[0].innerTransactions[0].mosaics[i].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
+                  let mosaicNames = await nsRepo.getMosaicsNames([new sym.MosaicId(aggTx[0].innerTransactions[0].mosaics[0].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
      
-                  mosaicInfo = await mosaicRepo.getMosaic(aggTx[0].innerTransactions[0].mosaics[i].id.id).toPromise();// 可分性の情報を取得する                     
+                  mosaicInfo = await mosaicRepo.getMosaic(aggTx[0].innerTransactions[0].mosaics[0].id.id).toPromise();// 可分性の情報を取得する                     
                   let div = mosaicInfo.divisibility; // 可分性
                              
                        if(aggTx[0].innerTransactions[0].recipientAddress.address !== address.address) {  // 受け取りアドレスとウォレットのアドレスが違う場合　
@@ -443,17 +444,17 @@ txRepo
                           if ([mosaicNames][0][0].names.length !==0){  // ネームスペースがある場合
                               dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic :　<big><strong>${[mosaicNames][0][0].names[0].name}</strong></big></font>`; 
                           }else{                                       //　ネームスペースがない場合
-                               dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic :　<strong>${aggTx[0].innerTransactions[0].mosaics[i].id.id.toHex()}</strong></font>`;
+                               dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic :　<strong>${aggTx[0].innerTransactions[0].mosaics[0].id.id.toHex()}</strong></font>`;
                           }    
-                          dom_amount.innerHTML = `<font color="#FF0000" size="+1">💁‍♀️➡️💰 :　<i><big><strong> ${(parseInt(aggTx[0].innerTransactions[0].mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;    // 　数量
+                          dom_amount.innerHTML = `<font color="#FF0000" size="+1">💁‍♀️➡️💰 :　<i><big><strong> ${(parseInt(aggTx[0].innerTransactions[0].mosaics[0].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;    // 　数量
 
                        }else{     //  受け取りアドレスとウォレットアドレスが同じ場合
                            if ([mosaicNames][0][0].names.length !==0){ // ネームスペースがある場合                         
                                 dom_mosaic.innerHTML = `<font color="#008000">Mosaic :　<big><strong>${[mosaicNames][0][0].names[0].name}</strong></big></font>`;
                            }else{                                      // ネームスペースがない場合
-                                 dom_mosaic.innerHTML = `<font color="#008000">Mosaic :　<strong>${aggTx[0].innerTransactions[0].mosaics[i].id.id.toHex()}</strong></font>`;
+                                 dom_mosaic.innerHTML = `<font color="#008000">Mosaic :　<strong>${aggTx[0].innerTransactions[0].mosaics[0].id.id.toHex()}</strong></font>`;
                            }
-                           dom_amount.innerHTML = `<font color="#008000" size="+1">💰➡️😊 :　<i><big><strong> ${(parseInt(aggTx[0].innerTransactions[0].mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;    // 　数量
+                           dom_amount.innerHTML = `<font color="#008000" size="+1">💰➡️😊 :　<i><big><strong> ${(parseInt(aggTx[0].innerTransactions[0].mosaics[0].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;    // 　数量
                        }
 		           // console.log("%ci モザイクが空では無い場合の処理　iだよ　",'color: red',i);
                //  })(); // async()  
