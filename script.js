@@ -289,10 +289,10 @@ txRepo
           if (tx.type === 16724){ // tx.type が 'TRANSFER' の場合 
                        
 	            if (tx.recipientAddress.address === undefined){  // 宛先が Namespace の場合 NamespaceId から取得し表示する
-                (async() => {    
+                        (async() => {    
 	                      let namespacesNames = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();       
-		                    dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　: <a href="https://symbol.fyi/namespaces/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a></font>`; //  文字列の結合　   宛先		       
-                })(); // async() 
+		              dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　: <a href="https://symbol.fyi/namespaces/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a></font>`; //  文字列の結合　   宛先		       
+                         })(); // async() 
 	            }else{   // Nから始まるの39文字のアドレスの場合はそのままアドレスを表示
                    dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　:   ${tx.recipientAddress.address}</font>`; //  文字列の結合　   宛先
 	            }	
@@ -310,9 +310,6 @@ txRepo
 		       
                   mosaicInfo = await mosaicRepo.getMosaic(tx.mosaics[i].id.id).toPromise();// 可分性の情報を取得する                     
                   let div = mosaicInfo.divisibility; // 可分性      
-		       	             
-		             // let namespacesNames = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();  
-		             // let namespacesAddress = await nsRepo.getLinkedAddress([namespacesNames][0][0].namespaceId.id).toPromise();
 		       
                        if(tx.signer.address.address === address.address) {  // 署名アドレスとウォレットのアドレスが同じ場合　 
                       
@@ -356,38 +353,38 @@ txRepo
              }     /////////////////////////////////////////////////////////////////////////////////////////////////////    
                      
              if (tx.message.type === 1){   // メッセージが暗号文の時          
-	              let alice;
-		            let PubKey;
-                let enc_message1 = {};
+	         let alice;
+		 let PubKey;
+                 let enc_message1 = {};
                  dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption">暗号化メッセージ</strong>　< Encrypted Message ></font>`;     // 暗号化メッセージの場合
 		     
                  dom_tx.appendChild(dom_enc);
 		     
-		             if (tx.recipientAddress.address !== tx.signer.address.address){    // 送信先アドレスと、送信元アドレスが異なる場合
-                     if (tx.signer.address.address === address.address){
+		     if (tx.recipientAddress.address !== tx.signer.address.address){    // 送信先アドレスと、送信元アドレスが異なる場合
+			     if (tx.signer.address.address === address.address){
                                 //console.log("%csigner と wallet address が同じ時",'color: blue')
-				                alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
+			     alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
 				
-			               }else
-                        if (tx.recipientAddress.address === address.address){ 
-                                //console.log("%crecipient と wallet address が同じ時",'color: blue')
-			                      alice = sym.Address.createFromRawAddress(tx.signer.address.address);   //アドレスクラスの生成			
-			                  } 
+			     }else
+                       　　　　　 if (tx.recipientAddress.address === address.address){ 
+                               　　　 //console.log("%crecipient と wallet address が同じ時",'color: blue')
+			             alice = sym.Address.createFromRawAddress(tx.signer.address.address);   //アドレスクラスの生成			
+			   　　  } 
 			 			 
 		             }else{    // 送信先アドレスと、ウォレットアドレスが同じ場合
 			             //console.log("%c送信アドレス と 送信元アドレスが同じ",'color: green')
-			                alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
+			          alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
 		                  PubKey = window.SSS.activePublicKey;
 		             }
 		       		     
 		                   accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => { //  アドレスから公開鍵を取得する
-                           PubKey = accountInfo.publicKey;  
+			               PubKey = accountInfo.publicKey;  
 		                       enc_message1.message = tx.message.payload;
 		                       enc_message1.PubKey = PubKey;	     	      		       
 		                       en[t] = enc_message1; 
 		                       // console.table(en);
 		       		       
-	                         dom_message.innerHTML = `<input type="button" id="${PubKey}" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div>`;     // 　メッセージ
+	                   dom_message.innerHTML = `<input type="button" id="${PubKey}" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div>`;     // 　メッセージ
                            dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加                                                              
                            dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く    
                
