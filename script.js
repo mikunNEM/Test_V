@@ -314,7 +314,7 @@ txRepo
 		             // let namespacesNames = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();  
 		             // let namespacesAddress = await nsRepo.getLinkedAddress([namespacesNames][0][0].namespaceId.id).toPromise();
 		       
-                       if(tx.recipientAddress.address !== address.address) {  // 受け取りアドレスとウォレットのアドレスが違う場合　//  || namespacesAddress.address !== address.address 
+                       if(tx.signer.address.address === address.address) {  // 署名アドレスとウォレットのアドレスが同じ場合　 
                       
                           if ([mosaicNames][0][0].names.length !==0){  // ネームスペースがある場合
                               dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic :　<big><strong>${[mosaicNames][0][0].names[0].name}</strong></big></font>`; 
@@ -323,7 +323,7 @@ txRepo
                           }    
                           dom_amount.innerHTML = `<font color="#FF0000" size="+1">💁‍♀️➡️💰 :　<i><big><strong> ${(parseInt(tx.mosaics[i].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;    // 　数量
 
-                       }else{     //  受け取りアドレスとウォレットアドレスが同じ場合
+                       }else{     //  署名アドレスとウォレットアドレスが違う場合
                            if ([mosaicNames][0][0].names.length !==0){ // ネームスペースがある場合                         
                                 dom_mosaic.innerHTML = `<font color="#008000">Mosaic :　<big><strong>${[mosaicNames][0][0].names[0].name}</strong></big></font>`;
                            }else{ 　　　　　　　　　　　　　　　　　　　　　  // ネームスペースがない場合
@@ -344,10 +344,10 @@ txRepo
                   const dom_mosaic = document.createElement('div');
                   const dom_amount = document.createElement('div');
                   
-                   if(tx.recipientAddress.address !== address.address) {  // 受け取りアドレスとウォレットのアドレスが違う場合
+                   if(tx.signer.address.address === address.address) {  // 署名アドレスとウォレットのアドレスが同じ場合
                        dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic : No mosaic</font>`;     // No mosaic
                        dom_amount.innerHTML = `<font color="#FF0000">💁‍♀️➡️💰 : </font>`;     // 　数量
-                   }else{          //  受け取りアドレスとウォレットアドレスが同じ場合
+                   }else{          //  署名アドレスとウォレットアドレスが違う場合
                          dom_mosaic.innerHTML = `<font color="#008000">Mosaic : No mosaic</font>`;     // No mosaic
                          dom_amount.innerHTML = `<font color="#008000">💰➡️😊 : </font>`;     // 　数量        
                    } 
@@ -441,7 +441,7 @@ txRepo
                   mosaicInfo = await mosaicRepo.getMosaic(aggTx[0].innerTransactions[0].mosaics[0].id.id).toPromise();// 可分性の情報を取得する                     
                   let div = mosaicInfo.divisibility; // 可分性
                              
-                       if (aggTx[0].innerTransactions[0].recipientAddress.address !== address.address){  // 受け取りアドレスとウォレットのアドレスが違う場合　
+                       if (aggTx[0].innerTransactions[0].signer.address.address === address.address){  // 署名アドレスとウォレットのアドレスが同じ場合　
                       
                           if ([mosaicNames][0][0].names.length !==0){  // ネームスペースがある場合
                               dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic :　<big><strong>${[mosaicNames][0][0].names[0].name}</strong></big></font>`; 
@@ -450,7 +450,7 @@ txRepo
                           }    
                           dom_amount.innerHTML = `<font color="#FF0000" size="+1">💁‍♀️➡️💰 :　<i><big><strong> ${(parseInt(aggTx[0].innerTransactions[0].mosaics[0].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;    // 　数量
 
-                       }else{     //  受け取りアドレスとウォレットアドレスが同じ場合
+                       }else{     //  署名アドレスとウォレットアドレスが違う場合
                            if ([mosaicNames][0][0].names.length !==0){ // ネームスペースがある場合                         
                                 dom_mosaic.innerHTML = `<font color="#008000">Mosaic :　<big><strong>${[mosaicNames][0][0].names[0].name}</strong></big></font>`;
                            }else{                                      // ネームスペースがない場合
@@ -464,7 +464,7 @@ txRepo
                        mosaicInfo = await mosaicRepo.getMosaic(aggTx[0].innerTransactions[0].mosaic.id.id).toPromise();// 可分性の情報を取得する                     
                        let div = mosaicInfo.divisibility; // 可分性
                              
-                       if(aggTx[0].innerTransactions[0].recipientAddress.address !== address.address) {  // 受け取りアドレスとウォレットのアドレスが違う場合　
+                       if(aggTx[0].innerTransactions[0].signer.address.address === address.address) {  // 署名アドレスとウォレットのアドレスが同じ場合　
                       
                           if ([mosaicNames][0][0].names.length !==0){  // ネームスペースがある場合
                               dom_mosaic.innerHTML = `<font color="#FF0000">Mosaic :　<big><strong>${[mosaicNames][0][0].names[0].name}</strong></big></font>`; 
@@ -473,7 +473,7 @@ txRepo
                           }    
                           dom_amount.innerHTML = `<font color="#FF0000" size="+1">💁‍♀️➡️💰 :　<i><big><strong> ${(parseInt(aggTx[0].innerTransactions[0].mosaic.amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;    // 　数量
 
-                       }else{     //  受け取りアドレスとウォレットアドレスが同じ場合
+                       }else{     //  署名アドレスとウォレットアドレスが違う場合
                            if ([mosaicNames][0][0].names.length !==0){ // ネームスペースがある場合                         
                                 dom_mosaic.innerHTML = `<font color="#008000">Mosaic :　<big><strong>${[mosaicNames][0][0].names[0].name}</strong></big></font>`;
                            }else{                                      // ネームスペースがない場合
