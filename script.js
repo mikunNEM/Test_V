@@ -429,7 +429,7 @@ txRepo
 
 		            /////////// モザイクが空ではない場合   /////////////////　　モザイクが空の場合はこの for 文はスルーされる  //////////
              // for(let i=0; i<mosaic_num; i++){  //モザイクの数だけ繰り返す
-                console.log("aggTx mosaic for文 (i=)",i);
+                //console.log("aggTx mosaic for文 (i=)",i);
                  const dom_mosaic = document.createElement('div');
                  const dom_amount = document.createElement('div');
           
