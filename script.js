@@ -435,7 +435,7 @@ txRepo
           
                // (async() => {
 		    
-		 if (getTransactionType(aggTx[0].innerTransactions[0].type === 16724){  // TRANSFER の場合   
+		 if (aggTx[0].innerTransactions[0].type === 16724){  // TRANSFER の場合   
                   let mosaicNames = await nsRepo.getMosaicsNames([new sym.MosaicId(aggTx[0].innerTransactions[0].mosaics[0].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
      
                   mosaicInfo = await mosaicRepo.getMosaic(aggTx[0].innerTransactions[0].mosaics[0].id.id).toPromise();// 可分性の情報を取得する                     
