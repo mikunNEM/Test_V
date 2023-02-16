@@ -286,12 +286,11 @@ txRepo
            dom_tx.appendChild(dom_signer_address);            // dom_signer_address(送信者アドレス) をdom_txに追加  
 	    
  
-          if (tx.type === 16724){ // tx.type が 'TRANSFER' の場合 
-                       
+          if (tx.type === 16724){ // tx.type が 'TRANSFER' の場合          
 	            if (tx.recipientAddress.address === undefined){  // 宛先が Namespace の場合 NamespaceId から取得し表示する
                         (async() => {    
-	                      let namespacesNames = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();       
-		              dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　: <a href="https://symbol.fyi/namespaces/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a></font>`; //  文字列の結合　   宛先		       
+	                      let namespacesNames = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise();     
+		                    dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　: <a href="https://symbol.fyi/namespaces/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a></font>`; //  文字列の結合　   宛先		       
                          })(); // async() 
 	            }else{   // Nから始まるの39文字のアドレスの場合はそのままアドレスを表示
                    dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　:   ${tx.recipientAddress.address}</font>`; //  文字列の結合　   宛先
@@ -359,43 +358,67 @@ txRepo
                  dom_enc.innerHTML = `<font color="#ff00ff"><strong></br><ul class="decryption">暗号化メッセージ</strong>　< Encrypted Message ></font>`;     // 暗号化メッセージの場合
 		     
                  dom_tx.appendChild(dom_enc);
-		     
-		     if (tx.recipientAddress.address !== tx.signer.address.address){    // 送信先アドレスと、送信元アドレスが異なる場合
-			     if (tx.signer.address.address === address.address){
-                                //console.log("%csigner と wallet address が同じ時",'color: blue')
-			     alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
+
+               (async() => { 
+
+                if (tx.recipientAddress.address !== undefined){ //39文字のアドレスの場合
+
+                   if (tx.recipientAddress.address !== tx.signer.address.address){    // 送信先アドレスと、送信元アドレスが異なる場合  ///////////////////////////////
+                     if (tx.signer.address.address === address.address){   // 署名アドレスと、ウォレットアドレスが同じ場合
+                                     //console.log("%csigner と wallet address が同じ時",'color: blue')
+                     alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
+      
+                     }else
+                        if (tx.recipientAddress.address === address.address){ // 送信先アドレスと、ウォレットアドレスが同じ場合
+                            //console.log("%crecipient と wallet address が同じ時",'color: blue')
+                             alice = sym.Address.createFromRawAddress(tx.signer.address.address);   //アドレスクラスの生成			
+                        } 
+            
+                   }else{    // 送信先アドレスと、ウォレットアドレスが同じ場合
+                              //console.log("%c送信アドレス と 送信元アドレスが同じ",'color: green')
+                              alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
+                              PubKey = window.SSS.activePublicKey;
+                   }
+
+                }else{  //送信先のアドレスがネームスペースの場合
+                   const to_address = await nsRepo.getLinkedAddress(tx.recipientAddress.id).toPromise();
+
+		               if (to_address.address !== tx.signer.address.address){    // 送信先アドレスと、送信元アドレスが異なる場合  ///////////////////////////////
+			               if (tx.signer.address.address === address.address){   // 署名アドレスと、ウォレットアドレスが同じ場合
+                                     //console.log("%csigner と wallet address が同じ時",'color: blue')
+			               alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
 				
-			     }else
-                       　　　　　 if (tx.recipientAddress.address === address.address){ 
-                               　　　 //console.log("%crecipient と wallet address が同じ時",'color: blue')
-			             alice = sym.Address.createFromRawAddress(tx.signer.address.address);   //アドレスクラスの生成			
-			       } 
+			               }else
+                        if (to_address.address === address.address){ // 送信先アドレスと、ウォレットアドレスが同じ場合
+                            //console.log("%crecipient と wallet address が同じ時",'color: blue')
+			                       alice = sym.Address.createFromRawAddress(tx.signer.address.address);   //アドレスクラスの生成			
+			                  } 
 			 			 
-		             }else{    // 送信先アドレスと、ウォレットアドレスが同じ場合
-			             //console.log("%c送信アドレス と 送信元アドレスが同じ",'color: green')
-			          alice = sym.Address.createFromRawAddress(tx.recipientAddress.address);   //アドレスクラスの生成
-		                  PubKey = window.SSS.activePublicKey;
-		             }
-		       		     
-		                   accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => { //  アドレスから公開鍵を取得する
-			               PubKey = accountInfo.publicKey;  
+		               }else{    // 送信先アドレスと、ウォレットアドレスが同じ場合
+			                        //console.log("%c送信アドレス と 送信元アドレスが同じ",'color: green')
+			                        alice = sym.Address.createFromRawAddress(to_address.address);   //アドレスクラスの生成
+		                          PubKey = window.SSS.activePublicKey;
+		               } 
+                                                                       //////////////////////////////////////////////////////////////////////////////////////
+                }   
+		                       accountRepo.getAccountInfo(alice).toPromise().then((accountInfo) => { //  アドレスから公開鍵を取得する
+			                     PubKey = accountInfo.publicKey;  
 		                       enc_message1.message = tx.message.payload;
 		                       enc_message1.PubKey = PubKey;	     	      		       
 		                       en[t] = enc_message1; 
 		                       // console.table(en);
 		       		       
-	                   dom_message.innerHTML = `<input type="button" id="${PubKey}" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div>`;     // 　メッセージ
+	                         dom_message.innerHTML = `<input type="button" id="${PubKey}" value="${tx.message.payload}" onclick="Onclick_Decryption(this.id, this.value);" class="button-decrypted"/></div>`;     // 　メッセージ
                            dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加                                                              
                            dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く    
                
 	                     }); //公開鍵を取得
-		     
+               })(); // async() 
 	           }else{          // 平文の場合
                  dom_message.innerHTML = `<font color="#4169e1"></br>< Message ></br>${tx.message.payload}</font>`;     // 　メッセージ
                  dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加                                                              
                  dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く
-             }
-	   
+             }	   
           } // tx.type が 'TRANSFER' の場合
 
 
@@ -432,7 +455,7 @@ txRepo
           
                // (async() => {
 		    
-		 if (aggTx[0].innerTransactions[0].type === 16724){  // TRANSFER の場合   
+		       if (aggTx[0].innerTransactions[0].type === 16724){  // TRANSFER の場合   
                   let mosaicNames = await nsRepo.getMosaicsNames([new sym.MosaicId(aggTx[0].innerTransactions[0].mosaics[0].id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
      
                   mosaicInfo = await mosaicRepo.getMosaic(aggTx[0].innerTransactions[0].mosaics[0].id.id).toPromise();// 可分性の情報を取得する                     
@@ -454,7 +477,7 @@ txRepo
                                  dom_mosaic.innerHTML = `<font color="#008000">Mosaic :　<strong>${aggTx[0].innerTransactions[0].mosaics[0].id.id.toHex()}</strong></font>`;
                            }
                            dom_amount.innerHTML = `<font color="#008000" size="+1">💰➡️😊 :　<i><big><strong> ${(parseInt(aggTx[0].innerTransactions[0].mosaics[0].amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;    // 　数量
-		       }
+		                   }
 	         }else{ // TRANSFER 以外の場合
 	               let mosaicNames = await nsRepo.getMosaicsNames([new sym.MosaicId(aggTx[0].innerTransactions[0].mosaic.id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
      
@@ -656,9 +679,8 @@ function handleSSS() {
         console.log('signedTx', signedTx);
         txRepo.announce(signedTx);
         })
-       }else{ // 文字数が39以外の場合
+       }else{ // 文字数が39以外の場合　(ネームスペース)
         const namespaceId = new sym.NamespaceId(addr);
-        console.log("namespaceId=",namespaceId);
         const tx = sym.TransferTransaction.create(        // トランザクションを生成
           sym.Deadline.create(epochAdjustment),
           namespaceId,
@@ -680,6 +702,7 @@ function handleSSS() {
         } 
      }else
         if (enc === "1"){                ////////////// メッセージが暗号の場合 /////////////////////////////////////////////////
+          if (addr.length === 39){  //文字数が39文字の場合
              const alice = sym.Address.createFromRawAddress(addr);   //アドレスクラスの生成
              accountInfo = await accountRepo.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する
              console.log("accontInfo=",accountInfo);
@@ -708,7 +731,40 @@ function handleSSS() {
                    txRepo.announce(signedTx);    
                    })
                  }, 1000)      
+             });  
+            }else{ // 文字数が39以外の場合 (ネームスペース)
+             const namespaceId = new sym.NamespaceId(addr);
+             const address = await nsRepo.getLinkedAddress(namespaceId).toPromise();
+             const alice = sym.Address.createFromRawAddress(address.address);   //アドレスクラスの生成
+             accountInfo = await accountRepo.getAccountInfo(alice).toPromise();  //　送信先アドレスの公開鍵を取得する
+             console.log("accontInfo=",accountInfo);
+             
+             const pubkey = accountInfo.publicKey;
+             window.SSS.setMessage(message, pubkey);
+             window.SSS.requestSignEncription().then((msg) => {
+                 setTimeout(() => {
+                   console.log({ msg });
+                   const tx = sym.TransferTransaction.create(        // トランザクションを生成
+                   sym.Deadline.create(epochAdjustment),
+                   namespaceId,
+                   [
+                     new sym.Mosaic(
+                       new sym.MosaicId(mosaic_ID),
+                       sym.UInt64.fromUint(Number(amount)*10**div) // div 可分性を適用
+                     )
+                   ],
+                   msg,
+                   networkType,
+                   sym.UInt64.fromUint(1000000*Number(maxfee))          // MaxFee 設定  
+                   )
+                   window.SSS.setTransaction(tx);               // SSSにトランザクションを登録
+                   window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求                   
+                   console.log('signedTx', signedTx);
+                   txRepo.announce(signedTx);    
+                   })
+                 }, 1000)      
              });               
+            }
       }
    }else{            //////////    aggregate Tx   //////////////
                   innerTx = [];
