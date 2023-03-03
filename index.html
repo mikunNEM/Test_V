@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <title>Test Ventus Wallet(ウェンタスウォレット)</title>
+  <title>Ventus Wallet(ウェンタスウォレット)</title>
   <link rel="stylesheet" href="./css/BGimg_ventus.css" type="text/css" media="all" id="switchCSS" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
   <link rel="stylesheet" href="style.css" type="text/css">
   <meta http-equiv="content-type" charset="UTF-8">
-  <!-- <meta name="viewport" content="width=device-width,initial-scale=1"> -->
-   
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  
+  
   <script src="js/jquery-3.6.3.min.js"></script>
   <script src="js/js.cookie.js"></script>
   <script>
@@ -70,10 +72,10 @@
            <option value="ventus">Ventus</option>
            <option value="cyberpunk">CyberPunk</option>
            <option value="sea">Sea</option>
-　     </select>
+       </select>
   </div> 
   
-  <h1>Test Ventus Wallet</h1>
+  <h1>Ventus Wallet</h1>
   <h3><div id="netType"></div></h3>  
   <div class="wrapper">
       <div class="left">
@@ -91,7 +93,7 @@
         <div class="sender-card">
           <h2>Send</h2>
           <hr>
-          <br>
+          <a href="https://bit.ly/41uG3VR" target="_blank"><p style="text-align:right"><b>📖SYMBOLタウンリスト　</b></p></a>
           <div class="textfiled-wrapper">
             <div>宛　　先　(To:)</div>
             <input type="text" id="form-addr" class="textfiled" />
@@ -121,7 +123,7 @@
           </div>
           
           <div class="textfiled-wrapper">
-            <div>最大手数料 / maxFee / aggregateTx = (x20)</div>
+            <div>最大手数料 / maxFee / aggregateTx (x20)</div>
             <select id="form-maxfee">
               <option value="0.02">0.02 xym (slow)</option>
               <option value="0.04">0.04 xym</option>
@@ -144,12 +146,12 @@
               let address2 = [];
               let file;
               // 選択したファイルのファイル名を出力する
- 　　　　　　   　　　　　$('input').on('change', function () {
-        　　　　　　　　　　　let file = $(this).prop('files')[0];
-        　　　　　　　　　　　$('p1').text(file.name);
+                       $('input').on('change', function () {
+                          let file = $(this).prop('files')[0];
+                          $('p1').text(file.name);
                           address1.length = 0;
                           address2.length = 0; 
-   　　　　　　　　　　　 });
+                       });
                         
               input.addEventListener('change', (e) => {
                   const file1 = e.target.files[0];
@@ -172,7 +174,7 @@
                              address1[i] = cells[1];                //アドレスだけを格納
                        }
                        
-                       console.log(address1);
+                       console.log("address1=",address1);
                      }
                      reader.readAsText(file1);
                   }
@@ -215,15 +217,35 @@
       </div>
   </div>
 
+  <!--   popup  ユニコーン       -->
 　 <div id="popup" class="popup">
     <div class="popup-inner">
       <div class="img"><img src="unicorn2.gif" alt="ポップアップ画像"></div>
     </div><!-- .popup-inner -->
     <div id="bg-black" class="bg-black"></div>
   </div><!-- #popup -->
+
+  <!--   ポップアップ　ダイアログ      -->
+  <section class="modal container">
+    <button class="modal__button" id="open-modal">モザイク作成</button>
+    <div class="modal__container" id="modal-container">
+        <div class="modal__content">
+            <div class="modal__close close-modal" title="Close">
+                <i class='bx bx-x'></i>
+            </div>
+            <img src="img/star-trophy.png" alt="" class="modal__img">
+            <h3 class="modal__title">ポップアップ</h3>
+            <p class="modal__description">PCでは画面中央に表示<br>スマホでは画面下部に表示</p>
+
+            <button class="modal__button modal__button-width close-modal">閉じる</button>
+
+        </div>
+    </div>
+</section>
  
   <script type="text/javascript" src="https://xembook.github.io/nem2-browserify/symbol-sdk-pack-2.0.3.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+  <script type="text/javascript" src="modal.js"></script>
   <script type="text/javascript" src="script.js"></script>
 </body>
 </html>

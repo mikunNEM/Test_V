@@ -1,5 +1,5 @@
 const dom_version = document.getElementById('version');
-dom_version.innerText = 'v1.0.8　|　Powered by SYMBOL';
+dom_version.innerText = 'v1.0.9　|　Powered by SYMBOL';
 
 const sym = require('/node_modules/symbol-sdk');
 const op  = require("/node_modules/rxjs/operators");
@@ -153,7 +153,7 @@ accountRepo.getAccountInfo(address)
            //select要素にoption要素を追加する
            selectMosaic.appendChild(option1);
 	      
-	     //  nftdrive(m);
+	      // nftdrive(m);
       }    
 	   
     })(); // async() 
@@ -721,6 +721,13 @@ function handleSSS() {
         })
        }else{ // 文字数が39以外の場合　(ネームスペース)
         const namespaceId = new sym.NamespaceId(addr);
+        //const address = await nsRepo.getLinkedAddress(namespaceId).toPromise();
+        const address = await nsRepo.getNamespace(namespaceId).toPromise();
+        console.log("725 address")
+        if (address !== undefined ){
+          alert("NameSpace Error !!")
+        }
+
         const tx = sym.TransferTransaction.create(        // トランザクションを生成
           sym.Deadline.create(epochAdjustment),
           namespaceId,
@@ -806,10 +813,10 @@ function handleSSS() {
              });               
             }
       }
-   }else{            //////////    aggregate Tx   //////////////
+   }else{            //////////    aggregate Tx   /////////////////////////////////////////////
                   innerTx = [];
                   for (let i=0; i<address1.length; i++){
-			  innerTx[i] = sym.TransferTransaction.create(
+			                        innerTx[i] = sym.TransferTransaction.create(
                               undefined, //Deadline
                               sym.Address.createFromRawAddress(address1[i]), //送信先
                               [
@@ -1322,6 +1329,33 @@ function Onclick_Decryption(PubKey,encryptedMessage){
     })		
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                              // モザイク作成 //
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function Onclick_mosaic(){
+
+supplyMutable = true; //供給量変更の可否
+transferable = false; //第三者への譲渡可否
+restrictable = true; //制限設定の可否
+revokable = true; //発行者からの還収可否
+
+//モザイク定義
+nonce = sym.MosaicNonce.createRandom();
+mosaicDefTx = sym.MosaicDefinitionTransaction.create(
+  undefined,
+  nonce,
+  sym.MosaicId.createFromNonce(nonce, alice.address), //モザイクID
+  sym.MosaicFlags.create(supplyMutable, transferable, restrictable, revokable),
+  2, //divisibility:可分性
+  sym.UInt64.fromUint(0), //duration:有効期限
+  networkType
+
+  );
+
+
+
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                               //  NFTをデコードして表示する //
@@ -1413,5 +1447,4 @@ function nftdrive(mosaic){
 		}
 	});
 }
-
 */
