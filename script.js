@@ -139,16 +139,16 @@ accountRepo.getAccountInfo(address)
          if ([mosaicNamesA][0][0].names.length !== 0) {  //  ネームスペースがある場合
         
             option1.value =   m.id.id.toHex();  // セレクトボックスvalue
-            option1.textContent = `${[mosaicNamesA][0][0].names[0].name} : ${(parseInt(m.amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })}`;  // セレクトボックスtext
+            option1.textContent = ` ${[mosaicNamesA][0][0].names[0].name} :　${(parseInt(m.amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })}`;  // セレクトボックスtext
                        
          }else{   //ネームスペースがない場合
               
                option1.value =   m.id.id.toHex();  // セレクトボックスvalue
-               option1.textContent = `${m.id.id.toHex()} : ${(parseInt(m.amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })}`; // セレクトボックスtext        
+               option1.textContent = ` ${m.id.id.toHex()} :　${(parseInt(m.amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })}`; // セレクトボックスtext        
          }             
         if (m.id.id.toHex() === XYM_ID) {
            const dom_xym = document.getElementById('wallet-xym')
-           dom_xym.innerHTML = `<i>XYM Balance : ${(parseInt(m.amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })}</i>`
+           dom_xym.innerHTML = `<i>XYM Balance : ${(parseInt(m.amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })}　</i>`
         }
            //select要素にoption要素を追加する
            selectMosaic.appendChild(option1);
@@ -1356,6 +1356,7 @@ mosaicDefTx = sym.MosaicDefinitionTransaction.create(
 
 
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                               //  NFTをデコードして表示する //

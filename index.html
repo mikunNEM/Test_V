@@ -4,7 +4,7 @@
   <title>Ventus Wallet(ウェンタスウォレット)</title>
   <link rel="stylesheet" href="./css/BGimg_ventus.css" type="text/css" media="all" id="switchCSS" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"> -->
   <link rel="stylesheet" href="style.css" type="text/css">
   <meta http-equiv="content-type" charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -96,7 +96,7 @@
           <a href="https://bit.ly/41uG3VR" target="_blank"><p style="text-align:right"><b>📖SYMBOLタウンリスト　</b></p></a>
           <div class="textfiled-wrapper">
             <div>宛　　先　(To:)</div>
-            <input type="text" id="form-addr" class="textfiled" />
+            <input type="text" id="form-addr" class="textfiled" placeholder="　　　　 address  or  alias / namespace"/>
           </div>
           
           <div class="textfiled-wrapper">
@@ -187,7 +187,7 @@
         </div>
     
          <div id="version"></div>
-         
+         <button id="js-show-popup">モザイク作成</button>
       </div>
       <div class="right">
         <div class="tx-card">
@@ -218,14 +218,128 @@
   </div>
 
   <!--   popup  ユニコーン       -->
-　 <div id="popup" class="popup">
+  <div id="popup" class="popup">
     <div class="popup-inner">
       <div class="img"><img src="unicorn2.gif" alt="ポップアップ画像"></div>
     </div><!-- .popup-inner -->
     <div id="bg-black" class="bg-black"></div>
   </div><!-- #popup -->
 
-  <!--   ポップアップ　ダイアログ      -->
+<!--    popup  モザイク作成   -->
+  <div id="js-popup2" class="popup2">
+    <div class="popup2-inner">
+      <div class="close-btn" id="js-close-btn"><i class="fas fa-times"></i></div>
+      <div class="Form">
+        <h4>Mosaic Parameter</h4>
+        <div class="Form-Item">
+          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">発行量</span>(Supply Amount)</p>
+          <input type="text" class="Form-Item-Input" placeholder="　1 〜 8999999999000000">
+        </div>
+        <div class="Form-Item">
+          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">有効期限</span>(Duration)</br>　　　　　　　1Blockは約30秒</p>
+          <input type="text" class="Form-Item-Input" placeholder=" 　0 〜 315360000 (Block)">
+        </div>
+        <div class="Form-Item">
+          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">可分性</span>(Divisibility)</br>　　　　　　　小数点以下の桁数</p>
+         <!-- <input type="email" class="Form-Item-Input" placeholder="　　　　　0 〜 6"> -->
+         <div class="Form-Item-Input" style="text-align: center">
+          <select class="Divisibility">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select></div>
+        </div>
+        <div class="Form-Item">
+          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">発行量可変</span>(Supply Mutable)</p>
+          <div class="toggle">
+            <input type="checkbox" name="check" value="Supply_M" id="Supply_M" />
+          </div>
+        </div>
+        <div class="Form-Item">  
+          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">転送可</span>(Transferable)</p>
+          <div class="toggle">
+            <input type="checkbox" name="check" value="Transferable" id="Transferable" />
+          </div>
+        </div>
+        <div class="Form-Item">
+          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">制限可</span>(Restrictable)</p>
+          <div class="toggle">
+            <input type="checkbox" name="check" value="Restrictable" id="Restrictable"/>
+          </div>
+        </div>
+        <div class="Form-Item">  
+          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">回収可</span>(Revokable)</p>
+          <div class="toggle">
+            <input type="checkbox" name="check" value="Revokable" id="Revokable"/>
+          </div>
+        </div>
+        <input type="submit" class="Form-Btn" value="作成">
+      </div>
+    </div>
+    <div class="black-background" id="js-black-bg"></div>
+  </div>
+  
+<!-- -----------------------------------------   -->
+
+<script>
+  function popupImage() {
+  var popup = document.getElementById('js-popup2');
+  if(!popup) return;
+  var blackBg = document.getElementById('js-black-bg');
+  var closeBtn = document.getElementById('js-close-btn');
+  var showBtn = document.getElementById('js-show-popup');
+
+  closePopUp(blackBg);
+  closePopUp(closeBtn);
+  closePopUp(showBtn);
+  function closePopUp(elem) {
+    if(!elem) return;
+    elem.addEventListener('click', function() {
+      popup.classList.toggle('is-show');
+    });
+  }
+}
+popupImage();
+
+//トグルスイッチ
+$(".toggle").on("click", function() {
+  $(".toggle").toggleClass("checked");
+  if(!$('input[name="check"]').prop("checked")) {
+    $(".toggle input").prop("checked", true);
+  } else {
+    $(".toggle input").prop("checked", false);
+  }
+ /* if(!$('input[name="check2"]').prop("checked")) {
+    console.log("check2");
+    $(".toggle input").prop("checked", true);
+  } else {
+    $(".toggle input").prop("checked", false);
+  }
+  if(!$('input[name="check3"]').prop("checked")) {
+    console.log("check3");
+    $(".toggle input").prop("checked", true);
+  } else {
+    $(".toggle input").prop("checked", false);
+  }
+  if(!$('input[name="check4"]').prop("checked")) {
+    console.log("check4");
+    $(".toggle input").prop("checked", true);
+  } else {
+    $(".toggle input").prop("checked", false);
+  }*/
+});
+
+</script>
+
+
+
+
+
+  <!--   ポップアップ　ダイアログ      
   <section class="modal container">
     <button class="modal__button" id="open-modal">モザイク作成</button>
     <div class="modal__container" id="modal-container">
@@ -241,11 +355,11 @@
 
         </div>
     </div>
-</section>
+</section>   -->
  
   <script type="text/javascript" src="https://xembook.github.io/nem2-browserify/symbol-sdk-pack-2.0.3.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-  <script type="text/javascript" src="modal.js"></script>
+ <!-- <script type="text/javascript" src="modal.js"></script> -->
   <script type="text/javascript" src="script.js"></script>
 </body>
 </html>
