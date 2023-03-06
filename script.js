@@ -814,7 +814,7 @@ function handleSSS() {
             }
       }
    }else{            //////////    aggregate Tx   /////////////////////////////////////////////
-                  innerTx = [];
+                  let innerTx = [];
                   for (let i=0; i<address1.length; i++){
 			                        innerTx[i] = sym.TransferTransaction.create(
                               undefined, //Deadline
@@ -830,7 +830,7 @@ function handleSSS() {
                          );
                   }
 
-                  publicAccount = sym.PublicAccount.createFromPublicKey(
+                  const publicAccount = sym.PublicAccount.createFromPublicKey(
                     window.SSS.activePublicKey,
                     networkType
                   );
@@ -839,7 +839,7 @@ function handleSSS() {
                       innerTx[i] = innerTx[i].toAggregate(publicAccount)
                   }
 
-                  aggregateTx = sym.AggregateTransaction.createComplete(
+                  const aggregateTx = sym.AggregateTransaction.createComplete(
                     sym.Deadline.create(epochAdjustment),  //Deadline
                     innerTx,
                     networkType,
@@ -1334,26 +1334,70 @@ function Onclick_Decryption(PubKey,encryptedMessage){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function Onclick_mosaic(){
+  
+  const supplyAmount = document.getElementById("SupplyAmount").value;
+  const duration = document.getElementById("Duration").value;
+  const divisibility = document.getElementById("Divisibility").value;
+  const supplyMutable = document.getElementById("Supply_M").checked;
+  const transferable = document.getElementById("Transferable").checked;
+  const restrictable = document.getElementById("Restrictable").checked;
+  const revokable = document.getElementById("Revokable").checked;
 
-supplyMutable = true; //供給量変更の可否
-transferable = false; //第三者への譲渡可否
-restrictable = true; //制限設定の可否
-revokable = true; //発行者からの還収可否
+  console.log("supplyMutable=",supplyMutable);
+  console.log("transferable=",transferable);
+  console.log("restrictable=",restrictable);
+  console.log("revokable=",revokable);
 
-//モザイク定義
-nonce = sym.MosaicNonce.createRandom();
-mosaicDefTx = sym.MosaicDefinitionTransaction.create(
-  undefined,
-  nonce,
-  sym.MosaicId.createFromNonce(nonce, alice.address), //モザイクID
-  sym.MosaicFlags.create(supplyMutable, transferable, restrictable, revokable),
-  2, //divisibility:可分性
-  sym.UInt64.fromUint(0), //duration:有効期限
-  networkType
+//supplyMutable = true; //供給量変更の可否
+//transferable = true; //第三者への譲渡可否
+//restrictable = true; //制限設定の可否
+//revokable = true; //発行者からの還収可否
 
+  const address = sym.Address.createFromRawAddress(window.SSS.activeAddress); //アカウントのアドレスを取得
+
+  const publicAccount = sym.PublicAccount.createFromPublicKey(                //アカウントの公開鍵を取得
+    window.SSS.activePublicKey,
+    networkType
   );
 
+//モザイク定義
+  const nonce = sym.MosaicNonce.createRandom();
+  const mosaicDefTx = sym.MosaicDefinitionTransaction.create(
+            undefined,
+            nonce,
+            sym.MosaicId.createFromNonce(nonce, address), //モザイクID
+            sym.MosaicFlags.create(supplyMutable, transferable, restrictable, revokable),
+            divisibility, //divisibility:可分性
+            sym.UInt64.fromUint(duration), //duration:有効期限
+            networkType
+        );
+  
+    console.log(mosaicDefTx);
 
+  const  mosaicChangeTx = sym.MosaicSupplyChangeTransaction.create(
+             undefined,
+             mosaicDefTx.mosaicId,
+             sym.MosaicSupplyChangeAction.Increase,
+             sym.UInt64.fromUint(supplyAmount), //数量
+             networkType
+        );
+
+        console.log(mosaicChangeTx);
+
+  const aggregateTx = sym.AggregateTransaction.createComplete(
+          sym.Deadline.create(epochAdjustment),
+          [
+            mosaicDefTx.toAggregate(publicAccount),
+            mosaicChangeTx.toAggregate(publicAccount),
+          ],
+          networkType,[],
+      ).setMaxFeeForAggregate(100, 0); 
+  
+      window.SSS.setTransaction(aggregateTx);               // SSSにトランザクションを登録        
+      window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
+      console.log('signedTx', signedTx);
+      txRepo.announce(signedTx);
+      })  
 
 }
 

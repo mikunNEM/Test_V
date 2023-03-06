@@ -233,17 +233,16 @@
         <h4>Mosaic Parameter</h4>
         <div class="Form-Item">
           <p class="Form-Item-Label"><span class="Form-Item-Label-Required">発行量</span>(Supply Amount)</p>
-          <input type="text" class="Form-Item-Input" placeholder="　1 〜 8999999999000000">
+          <input type="text" class="Form-Item-Input" id="SupplyAmount" placeholder="　1 〜 8999999999000000">
         </div>
         <div class="Form-Item">
           <p class="Form-Item-Label"><span class="Form-Item-Label-Required">有効期限</span>(Duration)</br>　　　　　　　1Blockは約30秒</p>
-          <input type="text" class="Form-Item-Input" placeholder=" 　0 〜 315360000 (Block)">
+          <input type="text" class="Form-Item-Input" id="Duration" placeholder=" 　0 〜 315360000 (Block)">
         </div>
         <div class="Form-Item">
           <p class="Form-Item-Label"><span class="Form-Item-Label-Required">可分性</span>(Divisibility)</br>　　　　　　　小数点以下の桁数</p>
-         <!-- <input type="email" class="Form-Item-Input" placeholder="　　　　　0 〜 6"> -->
          <div class="Form-Item-Input" style="text-align: center">
-          <select class="Divisibility">
+          <select class="divisibility" id="Divisibility">
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -254,41 +253,41 @@
           </select></div>
         </div>
         <div class="Form-Item">
+          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">制限可</span>(Restrictable)</p>
+          <div class="toggle3">
+            <input type="checkbox" name="check3" value="Restrictable"  id="Restrictable" />
+          </div>
+        </div>
+        <div class="Form-Item">
           <p class="Form-Item-Label"><span class="Form-Item-Label-Required">発行量可変</span>(Supply Mutable)</p>
-          <div class="toggle">
-            <input type="checkbox" name="check" value="Supply_M" id="Supply_M" />
+          <div class="toggle1">
+            <input type="checkbox" name="check1" value="Supply_M" id="Supply_M" />
           </div>
         </div>
         <div class="Form-Item">  
           <p class="Form-Item-Label"><span class="Form-Item-Label-Required">転送可</span>(Transferable)</p>
-          <div class="toggle">
-            <input type="checkbox" name="check" value="Transferable" id="Transferable" />
-          </div>
-        </div>
-        <div class="Form-Item">
-          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">制限可</span>(Restrictable)</p>
-          <div class="toggle">
-            <input type="checkbox" name="check" value="Restrictable" id="Restrictable"/>
+          <div class="toggle2">
+            <input type="checkbox" name="check2" value="Transferable" id="Transferable" />
           </div>
         </div>
         <div class="Form-Item">  
           <p class="Form-Item-Label"><span class="Form-Item-Label-Required">回収可</span>(Revokable)</p>
-          <div class="toggle">
-            <input type="checkbox" name="check" value="Revokable" id="Revokable"/>
+          <div class="toggle4">
+            <input type="checkbox" name="check4" value="Revokable" id="Revokable" />
           </div>
         </div>
-        <input type="submit" class="Form-Btn" value="作成">
+        <input type="button" onclick="Onclick_mosaic();" class="Form-Btn" id="js-popup2" value="作成"/><i class="fas fa-times"></i>
       </div>
     </div>
     <div class="black-background" id="js-black-bg"></div>
   </div>
-  
+
 <!-- -----------------------------------------   -->
 
 <script>
   function popupImage() {
-  var popup = document.getElementById('js-popup2');
-  if(!popup) return;
+  var popup2 = document.getElementById('js-popup2');
+  if(!popup2) return;
   var blackBg = document.getElementById('js-black-bg');
   var closeBtn = document.getElementById('js-close-btn');
   var showBtn = document.getElementById('js-show-popup');
@@ -299,63 +298,48 @@
   function closePopUp(elem) {
     if(!elem) return;
     elem.addEventListener('click', function() {
-      popup.classList.toggle('is-show');
+      popup2.classList.toggle('is-show');
     });
   }
 }
 popupImage();
 
 //トグルスイッチ
-$(".toggle").on("click", function() {
-  $(".toggle").toggleClass("checked");
-  if(!$('input[name="check"]').prop("checked")) {
-    $(".toggle input").prop("checked", true);
+$(".toggle1").on("click", function() {
+  $(".toggle1").toggleClass("checked");
+  if(!$('input[name="check1"]').prop("checked")) {
+    $(".toggle1 input").prop("checked", true);
   } else {
-    $(".toggle input").prop("checked", false);
+    $(".toggle1 input").prop("checked", false);
   }
- /* if(!$('input[name="check2"]').prop("checked")) {
-    console.log("check2");
-    $(".toggle input").prop("checked", true);
+});
+$(".toggle2").on("click", function() {
+  $(".toggle2").toggleClass("checked");
+  if(!$('input[name="check2"]').prop("checked")) {
+    $(".toggle2 input").prop("checked", true);
   } else {
-    $(".toggle input").prop("checked", false);
+    $(".toggle2 input").prop("checked", false);
   }
+});
+$(".toggle3").on("click", function() {
+  $(".toggle3").toggleClass("checked");
   if(!$('input[name="check3"]').prop("checked")) {
-    console.log("check3");
-    $(".toggle input").prop("checked", true);
+    $(".toggle3 input").prop("checked", true);
   } else {
-    $(".toggle input").prop("checked", false);
+    $(".toggle3 input").prop("checked", false);
   }
+});
+$(".toggle4").on("click", function() {
+  $(".toggle4").toggleClass("checked");
   if(!$('input[name="check4"]').prop("checked")) {
-    console.log("check4");
-    $(".toggle input").prop("checked", true);
+    $(".toggle4 input").prop("checked", true);
   } else {
-    $(".toggle input").prop("checked", false);
-  }*/
+    $(".toggle4 input").prop("checked", false);
+  }
 });
 
 </script>
 
-
-
-
-
-  <!--   ポップアップ　ダイアログ      
-  <section class="modal container">
-    <button class="modal__button" id="open-modal">モザイク作成</button>
-    <div class="modal__container" id="modal-container">
-        <div class="modal__content">
-            <div class="modal__close close-modal" title="Close">
-                <i class='bx bx-x'></i>
-            </div>
-            <img src="img/star-trophy.png" alt="" class="modal__img">
-            <h3 class="modal__title">ポップアップ</h3>
-            <p class="modal__description">PCでは画面中央に表示<br>スマホでは画面下部に表示</p>
-
-            <button class="modal__button modal__button-width close-modal">閉じる</button>
-
-        </div>
-    </div>
-</section>   -->
  
   <script type="text/javascript" src="https://xembook.github.io/nem2-browserify/symbol-sdk-pack-2.0.3.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>

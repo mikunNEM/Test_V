@@ -57,7 +57,7 @@
   max-width: 600px;
   padding: 50px;
   background-color: #fff;
-  z-index: 2;
+  z-index: 1000;
 }
 .popup-inner img {
   width: 100%;
@@ -69,7 +69,7 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,.8);
-  z-index: 1;
+  z-index: 999;
   cursor: pointer;
 }
 /********************************************/
@@ -238,7 +238,8 @@ hr {
 }
 
 /******** iOS風トグルスイッチ　**************************/
-.toggle {
+/* 1 */
+.toggle1 {
   position: relative;
   width: 50px;
   height: 30px;
@@ -247,10 +248,10 @@ hr {
   overflow: hidden;
   cursor: pointer;
 }
-.toggle input[type=checkbox] {
+.toggle1 input[type=checkbox] {
   display: none;
 }
-.toggle:before {
+.toggle1:before {
   content: "";
   position: absolute;
   top: 0;
@@ -262,7 +263,7 @@ hr {
   -webkit-transition: 0.2s ease-out;
   transition: 0.2s ease-out;
 }
-.toggle:after {
+.toggle1:after {
   content: "";
   position: absolute;
   top: 3px;
@@ -276,10 +277,151 @@ hr {
   -webkit-transition: 0.2s ease-out;
   transition: 0.2s ease-out;
 }
-.toggle.checked:before {
+.toggle1.checked:before {
   background: #35c759;
 }
-.toggle.checked:after {
+.toggle1.checked:after {
+  left: 23px;
+  box-shadow: 0 9px 28px -6px rgba(0, 0, 0, 0.5);
+}
+
+/** 2 **/
+.toggle2 {
+  position: relative;
+  width: 50px;
+  height: 30px;
+  margin: 0px 150px;
+  border-radius: 50px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.toggle2 input[type=checkbox] {
+  display: none;
+}
+.toggle2:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #e9e9eb;
+  -webkit-transition: 0.2s ease-out;
+  transition: 0.2s ease-out;
+}
+.toggle2:after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  display: block;
+  border-radius: 50px;
+  background: #fff;
+  box-shadow: 0 9px 28px -6px rgba(0, 0, 0, 0.3);
+  -webkit-transition: 0.2s ease-out;
+  transition: 0.2s ease-out;
+}
+.toggle2.checked:before {
+  background: #35c759;
+}
+.toggle2.checked:after {
+  left: 23px;
+  box-shadow: 0 9px 28px -6px rgba(0, 0, 0, 0.5);
+}
+
+/** 3 **/
+.toggle3 {
+  position: relative;
+  width: 50px;
+  height: 30px;
+  margin: 0px 150px;
+  border-radius: 50px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.toggle3 input[type=checkbox] {
+  display: none;
+}
+.toggle3:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #e9e9eb;
+  -webkit-transition: 0.2s ease-out;
+  transition: 0.2s ease-out;
+}
+.toggle3:after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  display: block;
+  border-radius: 50px;
+  background: #fff;
+  box-shadow: 0 9px 28px -6px rgba(0, 0, 0, 0.3);
+  -webkit-transition: 0.2s ease-out;
+  transition: 0.2s ease-out;
+}
+.toggle3.checked:before {
+  background: #35c759;
+}
+.toggle3.checked:after {
+  left: 23px;
+  box-shadow: 0 9px 28px -6px rgba(0, 0, 0, 0.5);
+}
+
+/** 4 **/
+.toggle4 {
+  position: relative;
+  width: 50px;
+  height: 30px;
+  margin: 0px 150px;
+  border-radius: 50px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.toggle4 input[type=checkbox] {
+  display: none;
+}
+.toggle4:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #e9e9eb;
+  -webkit-transition: 0.2s ease-out;
+  transition: 0.2s ease-out;
+}
+.toggle4:after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  display: block;
+  border-radius: 50px;
+  background: #fff;
+  box-shadow: 0 9px 28px -6px rgba(0, 0, 0, 0.3);
+  -webkit-transition: 0.2s ease-out;
+  transition: 0.2s ease-out;
+}
+.toggle4.checked:before {
+  background: #35c759;
+}
+.toggle4.checked:after {
   left: 23px;
   box-shadow: 0 9px 28px -6px rgba(0, 0, 0, 0.5);
 }
@@ -293,12 +435,12 @@ hr {
   top: 0;
   width: 100%;
   height: 100%;
-  z-index: 9999;
+  z-index: 998;
   opacity: 0;
   visibility: hidden;
   transition: .6s;
   display: flex;
-    align-items: center;
+  align-items: center;
 }
 .popup2.is-show {
   opacity: 1;
@@ -346,7 +488,7 @@ hr {
   cursor: pointer;
 }
 
-/* 問い合わせフォーム */
+/* Mosaic Parameter */
 .Form {
   margin-left: auto;
   margin-right: auto;
@@ -388,14 +530,14 @@ hr {
   font-size: 15px;
   }
   }
- .Divisibility {
+ .divisibility {
   width: 200px;
   height: 30px;
   margin-top: 8px;
   margin-bottom: auto;
   }
   @media screen and (max-width: 480px) {
-  .Divisibility {
+  .divisibility {
  /* margin-top: 8px;*/
   }
   }
@@ -442,7 +584,7 @@ hr {
   font-size: 15px;
   }
   }
-  .Form-Item-Textarea {
+/*  .Form-Item-Textarea {
   border: 1px solid #ddd;
   border-radius: 6px;
   margin-left: 40px;
@@ -454,7 +596,7 @@ hr {
   max-width: 410px;
   background: #eaedf2;
   font-size: 18px;
-  }
+  }*/
   @media screen and (max-width: 480px) {
   .Divisibility {
   margin-top: 18px;
