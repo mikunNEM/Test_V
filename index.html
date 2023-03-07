@@ -236,11 +236,11 @@
           <input type="text" class="Form-Item-Input" id="SupplyAmount" placeholder="　1 〜 8999999999000000">
         </div>
         <div class="Form-Item">
-          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">有効期限</span>(Duration)</br><small>　　　1Block=約30秒 / 無期限の場合 0 </small></p>
+          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">有効期限</span><small>&nbsp;&nbsp;　約30秒 = 1 (Block)</br>　&nbsp;(Duration)　　　　無期限 = 0</small></p>
           <input type="text" class="Form-Item-Input" id="Duration" placeholder=" 　0 〜 315360000 (Block)">
         </div>
         <div class="Form-Item">
-          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">可分性</span>(Divisibility)</br><small>　　　　　　　小数点以下の桁数</small></p>
+          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">可分性</span></br><small>　(Divisibility)　　　小数点以下の桁数</small></p>
          <div class="Form-Item-Input" style="text-align: center">
           <select class="divisibility" id="Divisibility">
             <option value="0">0</option>
@@ -253,7 +253,7 @@
           </select></div>
         </div>
         <div class="Form-Item">
-          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">制限可</span></br><small>(Restrictable)</small></p>
+          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">制限可</span></br><small>&nbsp;(Restrictable)</small></p>
           <div class="toggle3">
             <input type="checkbox" name="check3" value="Restrictable"  id="Restrictable" />
           </div>
@@ -265,13 +265,13 @@
           </div>
         </div>
         <div class="Form-Item">  
-          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">転送可</span></br><small>(Transferable)</small></p>
+          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">転送可</span></br><small>&nbsp;(Transferable)</small></p>
           <div class="toggle2">
             <input type="checkbox" name="check2" value="Transferable" id="Transferable" />
           </div>
         </div>
         <div class="Form-Item">  
-          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">回収可</span></br><small>(Revokable)</small></p>
+          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">回収可</span></br><small>　(Revokable)</small></p>
           <div class="toggle4">
             <input type="checkbox" name="check4" value="Revokable" id="Revokable" />
           </div>
@@ -341,9 +341,8 @@ $(".toggle4").on("click", function() {
 </script>
 
  
-  <script type="text/javascript" src="https://xembook.github.io/nem2-browserify/symbol-sdk-pack-2.0.3.js"></script>
+  <script type="text/javascript" src="https://xembook.github.io/nem2-browserify/symbol-sdk-pack-2.0.4.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
- <!-- <script type="text/javascript" src="modal.js"></script> -->
   <script type="text/javascript" src="script.js"></script>
 </body>
 </html>
