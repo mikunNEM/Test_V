@@ -431,7 +431,8 @@ hr {
 
 
 /**********************************************************/
-/* モーダルウィンドウ */
+/* モーダルウィンドウ Mosaic  */
+/**********************************************************/
 .popup2 {
   position: absolute;
   left: 0;
@@ -587,19 +588,204 @@ hr {
   font-size: 15px;
   }
   }
-/*  .Form-Item-Textarea {
+  @media screen and (max-width: 480px) {
+  .Divisibility {
+  margin-top: 18px;
+  margin-left: 0;
+  height: 200px;
+  flex: inherit;
+  font-size: 15px;
+  }
+  }
+  .Form-Btn {
+  border-radius: 6px;
+  margin-top: 32px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 280px;
+  display: block;
+  letter-spacing: 0.05em;
+  background: #5bc8ac;
+  color: #fff;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  }
+  .Form-Btn:hover{
+    opacity: 0.6;
+  }
+  @media screen and (max-width: 480px) {
+  .Form-Btn {
+  margin-top: 24px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  width: 160px;
+  font-size: 16px;
+  }
+  }
+
+
+/**********************************************************/
+/* モーダルウィンドウ Namespace  */
+/**********************************************************/
+.popup3 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 997;
+  opacity: 0;
+  visibility: hidden;
+  transition: .6s;
+  display: flex;
+  align-items: center;
+}
+.popup3.is-show {
+  opacity: 1;
+  visibility: visible;
+}
+.popup3-inner {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  height: 50%;
+  max-width: 1000px;
+  background-color: #fff;
+  z-index: 2;
+}
+@media screen and (max-width: 480px) {
+  .popup3-inner {
+    height: 100%;
+  }
+}
+.popup3-inner img {
+  width: 100%;
+}
+.close-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  cursor: pointer;
+}
+.close-btn i {
+  font-size: 20px;
+  color: #333;
+}
+.black-background {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.8);
+  z-index: -1;
+  cursor: pointer;
+}
+
+/* Mosaic Parameter */
+.Form {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 4%;
+  max-width: 720px;
+  height: 100%;
+  }
+  
+  .Form-Item {
+  border-top: 1px solid #ddd;
+  padding-top: 12px;
+  /*padding-bottom: 12px;*/
+  width: 100%;
+  display: flex;
+  align-items: center;
+  }
+  @media screen and (max-width: 480px) {
+    .Form-Item {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    flex-wrap: wrap;
+    }
+  }
+  .Form-Item:nth-child(5) {
+  border-bottom: 1px solid #ddd;
+  }
+  .Form-Item-Label {
+  width: 100%;
+  max-width: 290px;
+  letter-spacing: 0.05em;
+  /*font-weight: bold;*/
+  font-size: 18px;
+  }
+  @media screen and (max-width: 480px) {
+  .Form-Item-Label {
+  max-width: inherit;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  }
+  }
+ .divisibility {
+  width: 220px;
+  height: 35px;
+  margin-top: 5px;
+  margin-bottom: auto;
+  }
+  @media screen and (max-width: 480px) {
+  .divisibility {
+ /* margin-top: 8px;*/
+  }
+  }
+  .Form-Item-Label-Required {
+  border-radius: 6px;
+  margin-right: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  width: 120px;
+  display: inline-block;
+  text-align: center;
+  background: #5bc8ac;
+  color: #fff;
+  font-size: 18px;
+  }
+  @media screen and (max-width: 480px) {
+  .Form-Item-Label-Required {
+  border-radius: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  width: 32px;
+  font-size: 10px;
+  }
+  }
+  .Form-Item-Input_N {
   border: 1px solid #ddd;
   border-radius: 6px;
   margin-left: 40px;
   padding-left: 1em;
   padding-right: 1em;
-  height: 216px;
+  height: 48px;
   flex: 1;
   width: 100%;
   max-width: 410px;
   background: #eaedf2;
   font-size: 18px;
-  }*/
+  }
+  @media screen and (max-width: 480px) {
+  .Form-Item-Input_N {
+  margin-left: 0;
+  margin-top: 18px;
+  height: 40px;
+  flex: inherit;
+  font-size: 15px;
+  }
+  }
   @media screen and (max-width: 480px) {
   .Divisibility {
   margin-top: 18px;

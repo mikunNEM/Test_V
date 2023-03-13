@@ -17,6 +17,7 @@ const accountRepo_M = repo_M.createAccountRepository();
 const txRepo_M = repo_M.createTransactionRepository();
 const mosaicRepo_M = repo_M.createMosaicRepository();
 const nsRepo_M = repo_M.createNamespaceRepository();
+const nwRepo_M = repo_M.createNetworkRepository();
 
 //TEST_NET の場合
 
@@ -34,6 +35,7 @@ const accountRepo_T = repo_T.createAccountRepository();
 const txRepo_T = repo_T.createTransactionRepository();
 const mosaicRepo_T = repo_T.createMosaicRepository();
 const nsRepo_T = repo_T.createNamespaceRepository();
+const nwRepo_T = repo_T.createNetworkRepository();
 
 let epochAdjustment;
 let generationHash;
@@ -45,6 +47,7 @@ let accountRepo;
 let txRepo;
 let mosaicRepo;
 let nsRepo;
+let nwRepo;
 
 setTimeout(() => {  //////////////////  指定した時間後に実行する  ////////////////////////////////////////////////
   
@@ -69,6 +72,7 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
        txRepo = txRepo_M;
        mosaicRepo = mosaicRepo_M;
        nsRepo = nsRepo_M;
+       nwRepo = nwRepo_M;
        
       console.log("MAIN_NET");
    }else 
@@ -76,7 +80,7 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
           epochAdjustment = EPOCH_T;
           NODE = NODE_URL_T;
           networkType = NET_TYPE_T;
-	  generationHash = GENERATION_HASH_T;
+          generationHash = GENERATION_HASH_T;
           XYM_ID = XYM_ID_T;
         
           repo = repo_T;
@@ -84,6 +88,7 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
           txRepo = txRepo_T;
           mosaicRepo = mosaicRepo_T;
           nsRepo = nsRepo_T;
+          nwRepo = nwRepo_T;
         
           console.log("TEST_NET");
       }
@@ -139,12 +144,12 @@ accountRepo.getAccountInfo(address)
          if ([mosaicNamesA][0][0].names.length !== 0) {  //  ネームスペースがある場合
         
             option1.value =   m.id.id.toHex();  // セレクトボックスvalue
-            option1.textContent = ` ${[mosaicNamesA][0][0].names[0].name} :　${(parseInt(m.amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })}`;  // セレクトボックスtext
+            option1.textContent = `${[mosaicNamesA][0][0].names[0].name} :　${(parseInt(m.amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })}`;  // セレクトボックスtext
                        
          }else{   //ネームスペースがない場合
               
                option1.value =   m.id.id.toHex();  // セレクトボックスvalue
-               option1.textContent = ` ${m.id.id.toHex()} :　${(parseInt(m.amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })}`; // セレクトボックスtext        
+               option1.textContent = `${m.id.id.toHex()} :　${(parseInt(m.amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })}`; // セレクトボックスtext        
          }             
         if (m.id.id.toHex() === XYM_ID) {
            const dom_xym = document.getElementById('wallet-xym')
@@ -1336,13 +1341,14 @@ function Onclick_Decryption(PubKey,encryptedMessage){
 function Onclick_mosaic(){
   
   const supplyAmount = document.getElementById("SupplyAmount").value;
-  const duration = document.getElementById("Duration").value;
+  const duration = document.getElementById("Duration1").value;
   const divisibility = document.getElementById("Divisibility").value;
   const supplyMutable = document.getElementById("Supply_M").checked;
   const transferable = document.getElementById("Transferable").checked;
   const restrictable = document.getElementById("Restrictable").checked;
   const revokable = document.getElementById("Revokable").checked;
 
+  console.log("duration=",duration);
   console.log("supplyMutable=",supplyMutable);
   console.log("transferable=",transferable);
   console.log("restrictable=",restrictable);
@@ -1398,6 +1404,40 @@ function Onclick_mosaic(){
       console.log('signedTx', signedTx);
       txRepo.announce(signedTx);
       })  
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                              // Namespace 作成 //
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function Onclick_Namespace(){
+  
+  const Namespace = document.getElementById("Namespace").value;
+  const duration = document.getElementById("Duration2").value;
+  
+
+  console.log("Namespace=",Namespace);
+  console.log("Duration=",duration);
+  
+
+  // ルートネームスペースをレンタルする
+  setTimeout(() => {
+      const tx = sym.NamespaceRegistrationTransaction.createRootNamespace(
+          sym.Deadline.create(epochAdjustment),
+          Namespace,
+          sym.UInt64.fromUint(duration),
+          networkType,
+      ).setMaxFee(100);
+
+      console.log("tx=",tx);
+
+      window.SSS.setTransaction(tx);               // SSSにトランザクションを登録        
+      window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
+      console.log('signedTx', signedTx);
+      txRepo.announce(signedTx);
+      })
+  }, 1000)   
 
 }
 

@@ -59,7 +59,8 @@
   </script>
 </head>
 <body> 
-  
+
+ 
   <div class="SSS_link">
        <a href="./Terms_of_use.html" target="_blank">利用規約</a>
        <a href="https://note.com/mikun_nem/n/n5c21f4af8930/" target="_blank">/ 使い方</a>
@@ -74,6 +75,7 @@
            <option value="sea">Sea</option>
        </select>
   </div> 
+
   
   <h1>Ventus Wallet</h1>
   <h3><div id="netType"></div></h3>  
@@ -187,7 +189,8 @@
         </div>
     
          <div id="version"></div>
-         <button id="js-show-popup">モザイク作成</button>
+         <button id="js-show-popup">Mosaic</button>
+         <button id="js-show-popup2">Namespace</button>
       </div>
       <div class="right">
         <div class="tx-card">
@@ -237,7 +240,7 @@
         </div>
         <div class="Form-Item">
           <p class="Form-Item-Label"><span class="Form-Item-Label-Required">有効期限</span><small>&nbsp;&nbsp;　約30秒 = 1 (Block)</br>　&nbsp;(Duration)　　　　無期限 = 0</small></p>
-          <input type="text" class="Form-Item-Input" id="Duration" placeholder=" 　0 〜 315360000 (Block)">
+          <input type="text" class="Form-Item-Input" id="Duration1" placeholder=" 　0 〜 315360000 (Block)">
         </div>
         <div class="Form-Item">
           <p class="Form-Item-Label"><span class="Form-Item-Label-Required">可分性</span></br><small>　(Divisibility)　　　小数点以下の桁数</small></p>
@@ -279,16 +282,42 @@
         <input type="button" onclick="Onclick_mosaic();" class="Form-Btn" id="js-popup2" value="作成"/><i class="fas fa-times"></i>
       </div>
     </div>
-    <div class="black-background" id="js-black-bg"></div>
+    <div class="black-background" id="js-black-bg1"></div>
   </div>
 
 <!-- -----------------------------------------   -->
 
+<!--    popup  namespace 作成   -->
+<div id="js-popup3" class="popup3">
+  <div class="popup3-inner">
+    <div class="close-btn" id="js-close-btn"><i class="fas fa-times"></i></div>
+    <div class="Form">
+      <h4>Namespace</h4>
+      <div class="Form-Item">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required">取得ネームスーペース</span></br></p>
+        <input type="text" class="Form-Item-Input_N" id="Namespace" placeholder="">
+      </div>
+      <div class="Form-Item">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required">有効期限</span><small></br>　&nbsp;(Duration)&nbsp;&nbsp;　約30秒 = 1 (Block)</small></p>
+        <input type="text" class="Form-Item-Input_N" id="Duration2" placeholder=" 　86400 〜 5256000 (Block)">
+      </div>
+     
+      
+      <input type="button" onclick="Onclick_Namespace();" class="Form-Btn" id="js-popup3" value="作成"/><i class="fas fa-times"></i>
+    </div>
+  </div>
+  <div class="black-background" id="js-black-bg2"></div>
+</div>
+
+<!-- -----------------------------------------   -->
+
+
 <script>
-  function popupImage() {
+
+  function popupImage() {  //  モザイク　ポップアップ
   var popup2 = document.getElementById('js-popup2');
   if(!popup2) return;
-  var blackBg = document.getElementById('js-black-bg');
+  var blackBg = document.getElementById('js-black-bg1');
   var closeBtn = document.getElementById('js-close-btn');
   var showBtn = document.getElementById('js-show-popup');
 
@@ -303,6 +332,28 @@
   }
 }
 popupImage();
+
+
+
+function popupImage3() {  //  Namespace　ポップアップ
+  var popup3 = document.getElementById('js-popup3');
+  if(!popup3) return;
+  var blackBg = document.getElementById('js-black-bg2');
+  var closeBtn = document.getElementById('js-close-btn');
+  var showBtn = document.getElementById('js-show-popup2');
+
+  closePopUp(blackBg);
+  closePopUp(closeBtn);
+  closePopUp(showBtn);
+  function closePopUp(elem) {
+    if(!elem) return;
+    elem.addEventListener('click', function() {
+      popup3.classList.toggle('is-show');
+    });
+  }
+}
+popupImage3();
+
 
 //トグルスイッチ
 $(".toggle1").on("click", function() {
