@@ -263,8 +263,8 @@ txRepo
                 dom_hash.innerHTML = `<p style="text-align: right; font-weight:bold; line-height:100%;&"><a href="https://testnet.symbol.fyi/transactions/${tx.transactionInfo.hash}" target="_blank" rel="noopener noreferrer"><i>⛓ Transaction Info ⛓</i></a></p>`; //Tx hash          
             }
          
-           dom_signer_address.innerHTML = `<font color="#2f4f4f">From : ${tx.signer.address.address}</font>`;    //  送信者 アドレス
-      
+           dom_signer_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">From : ${tx.signer.address.address}</font><small><input type="button" address="${tx.signer.address.address}" value="Copy" onclick="Onclick_Copy(this.address);" class="copy_bt" /></small></div>`;    //  送信者 アドレス
+               
           
            ////////////////////////////////////////////　　  　timestamp to Date 　　　　　/////////////////////////
            const timestamp = epochAdjustment + (parseInt(tx.transactionInfo.timestamp.toHex(), 16)/1000);   /////////////// Unit64 を 16進数に　変換したあと10進数に変換　
@@ -1333,6 +1333,28 @@ function Onclick_Decryption(PubKey,encryptedMessage){
 	    >>${data}`); // ポップアップで表示
     })		
 }
+
+///////////////////////////////////////////
+          // Copyボタンをクリックして、クリップボードにコピー
+//////////////////////////////////////////
+
+function Onclick_Copy(address){
+
+  const COPY_BT = document.querySelector('.copy_bt');
+  const COPY_COMPLETE = document.createElement('div');
+  COPY_COMPLETE.innerHTML = '<strong style="color: green;">Copied!</strong>';
+  
+  COPY_BT.addEventListener('click', () => {
+    navigator.clipboard.writeText(address);
+    COPY_BT.replaceWith(COPY_COMPLETE);
+    
+    setTimeout( () => {
+      COPY_COMPLETE.replaceWith(COPY_BT);
+    },1500);
+  });
+ 
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                               // モザイク作成 //

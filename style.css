@@ -169,7 +169,7 @@ input[type="file"] {
 .tx-card {
   background: rgb(255, 255, 255,0.8);
   border-radius: 16px;
-  width: 600px;
+  width: 650px;
   margin-left: 750px;
   padding: 32px;
 }
@@ -238,6 +238,19 @@ hr {
  margin: 0px auto 0px 16px;
  /*background: rgb(255, 255, 255,0.8);*/
  filter: drop-shadow(2px 2px 0px #838383);
+}
+
+/********* ボタンクリックでクリップボードへコピー  *********/
+
+.copy_container {
+  display: flex;
+  column-gap: 20px;
+  align-items: center;
+}
+.copy_bt {
+  padding: 0px 5px;
+  position: relative;
+  border-radius: 5px;
 }
 
 /******** iOS風トグルスイッチ　**************************/
@@ -458,6 +471,7 @@ hr {
   max-width: 1000px;
   background-color: #fff;
   z-index: 2;
+  border-radius: 16px;
 }
 @media screen and (max-width: 480px) {
   .popup2-inner {
@@ -656,6 +670,7 @@ hr {
   max-width: 1000px;
   background-color: #fff;
   z-index: 2;
+  border-radius: 16px;
 }
 @media screen and (max-width: 480px) {
   .popup3-inner {
