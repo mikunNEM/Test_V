@@ -58,6 +58,7 @@
   padding: 50px;
   background-color: #fff;
   z-index: 1000;
+  border-radius: 16px;
 }
 .popup-inner img {
   width: 100%;
