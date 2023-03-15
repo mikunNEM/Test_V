@@ -254,6 +254,11 @@ hr {
   border-radius: 5px;
 }
 
+.active {
+  background-color: green;
+  color: white;
+}
+
 /******** iOS風トグルスイッチ　**************************/
 /* 1 */
 .toggle1 {
