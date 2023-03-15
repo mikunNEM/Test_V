@@ -1341,13 +1341,13 @@ function Onclick_Decryption(PubKey,encryptedMessage){
 function Onclick_Copy(copy_address){
 
   console.log("Copy_address=",copy_address);       // 正しいアドレスが表示されている
-  let COPY_BT = document.querySelectorall('.copy_bt');
+  let COPY_BT = document.querySelectorAll('.copy_bt');
   console.log("COPY_BT=",COPY_BT);
   let COPY_COMPLETE = document.createElement('div');
   COPY_COMPLETE.innerHTML = '<strong style="color: green;">Copied!</strong>';
   
  // COPY_BT.addEventListener('click', () => {
-    console.log("クリック");
+    console.log("クリック")
     navigator.clipboard.writeText(copy_address);
     COPY_BT.replaceWith(COPY_COMPLETE);
     
