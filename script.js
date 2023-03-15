@@ -263,7 +263,7 @@ txRepo
                 dom_hash.innerHTML = `<p style="text-align: right; font-weight:bold; line-height:100%;&"><a href="https://testnet.symbol.fyi/transactions/${tx.transactionInfo.hash}" target="_blank" rel="noopener noreferrer"><i>⛓ Transaction Info ⛓</i></a></p>`; //Tx hash          
             }
          
-           dom_signer_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">From : ${tx.signer.address.address}</font><small><input type="button" id="${tx.signer.address.address}" value="Copy" onclick="Onclick_Copy(this.id);" class="copy_bt" /></small></div>`;    //  送信者 アドレス
+           dom_signer_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">From : ${tx.signer.address.address}</font><small><input type="button" class="copy_bt" id="${tx.signer.address.address}" value="Copy" onclick="Onclick_Copy(this.id);"/></small></div>`;    //  送信者 アドレス
                
           
            ////////////////////////////////////////////　　  　timestamp to Date 　　　　　/////////////////////////
