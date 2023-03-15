@@ -1349,7 +1349,8 @@ function Onclick_Copy(copy_address){
  // COPY_BT.addEventListener('click', () => {
     console.log("クリック");
     navigator.clipboard.writeText(copy_address);
-    COPY_BT.replaceWith(COPY_COMPLETE);
+    //COPY_BT.replaceWith(COPY_COMPLETE);
+    alert(COPY_COMPLETE);
     
     setTimeout( () => {
       COPY_COMPLETE.replaceWith(COPY_BT);
