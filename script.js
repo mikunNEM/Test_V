@@ -263,7 +263,7 @@ txRepo
                 dom_hash.innerHTML = `<p style="text-align: right; font-weight:bold; line-height:100%;&"><a href="https://testnet.symbol.fyi/transactions/${tx.transactionInfo.hash}" target="_blank" rel="noopener noreferrer"><i>⛓ Transaction Info ⛓</i></a></p>`; //Tx hash          
             }
            
-           dom_signer_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">From : ${tx.signer.address.address}</font><small><input type="button" id="${tx.signer.address.address}" value="Copy" onclick="Onclick_Copy(this.id);" class="copy_bt" /></small></div>`;    //  送信者 アドレス
+           dom_signer_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">From : ${tx.signer.address.address}</font><small><input type="image" src="src/copy.png" height="30px" id="${tx.signer.address.address}" onclick="Onclick_Copy(this.id);" class="copy_bt" /></small></div>`;    //  送信者 アドレス
                
           
            ////////////////////////////////////////////　　  　timestamp to Date 　　　　　/////////////////////////
@@ -1349,12 +1349,19 @@ function Onclick_Copy(copy_address){
 
   for (i = 0; i < aaaaa.length; i++) {
     aaaaa[i].addEventListener("click", function() {
-	    
-	    this.classList.toggle('active');
+
+      let COPY_COMPLETE = document.createElement('div');
+      COPY_COMPLETE.innerHTML = '<strong style="color: green;">Copied!</strong>';
+      
+      let COPY_BT = document.querySelector('.copy_bt');
+      //     this.classList.toggle('active');
+      COPY_BT.replaceWith(COPY_COMPLETE);
+      //console.log(COPY_BT);
 
       setTimeout( () => {
-           this.classList.toggle('active');
-      },1500);
+         COPY_COMPLETE.replaceWith(COPY_BT);
+      //     this.classList.toggle('active');
+      },1000);
       }
     )};
   
