@@ -1354,13 +1354,14 @@ function Onclick_Copy(copy_address){
       COPY_COMPLETE.innerHTML = '<strong style="color: green;">Copied!</strong>';
       
       let COPY_BT = document.querySelector('.copy_bt');
-      this.classList.toggle('active');
+           this.classList.toggle('active');
       //COPY_BT.replaceWith(COPY_COMPLETE);
       //console.log(COPY_BT);
 
-    //  setTimeout( () => {
-    //    COPY_COMPLETE.replaceWith(COPY_BT);
-    //  },1500);
+      setTimeout( () => {
+      //    COPY_COMPLETE.replaceWith(COPY_BT);
+           this.classList.toggle('active');
+      },1500);
       }
     )};
   
