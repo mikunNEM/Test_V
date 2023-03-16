@@ -1348,11 +1348,9 @@ function Onclick_Copy(copy_address){
   
 
   for (i = 0; i < aaaaa.length; i++) {
-    aaaaa[i].addEventListener(() => {
-
-   // "click", function()
+    aaaaa[i].addEventListener("click", function() {
 	    
-           this.classList.toggle('active');
+	    this.classList.toggle('active');
 
       setTimeout( () => {
            this.classList.toggle('active');
