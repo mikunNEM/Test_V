@@ -1350,10 +1350,10 @@ function Onclick_Copy(copy_address){
   for (i = 0; i < aaaaa.length; i++) {
     aaaaa[i].addEventListener("click", function() {
 
-      let COPY_COMPLETE = document.createElement('div');
-      COPY_COMPLETE.innerHTML = '<strong style="color: green;">Copied!</strong>';
+    //  let COPY_COMPLETE = document.createElement('div');
+    //  COPY_COMPLETE.innerHTML = '<strong style="color: green;">Copied!</strong>';
       
-      let COPY_BT = document.querySelector('.copy_bt');
+    //  let COPY_BT = document.querySelector('.copy_bt');
            this.classList.toggle('active');
       //COPY_BT.replaceWith(COPY_COMPLETE);
       //console.log(COPY_BT);
