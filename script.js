@@ -988,7 +988,7 @@ txRepo
                 dom_hash.innerHTML = `<p style="text-align: right; font-weight:bold; line-height:100%;&"><a href="https://testnet.symbol.fyi/transactions/${tx.transactionInfo.hash}" target="_blank" rel="noopener noreferrer"><i>⛓ Transaction Info ⛓</i></a></p>`; //Tx hash          
             }
          
-           dom_signer_address.innerHTML = `<font color="#2f4f4f">From : ${tx.signer.address.address}</font>`;    //  送信者 アドレス
+           dom_signer_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">From : ${tx.signer.address.address}</font><small><input type="image" src="src/copy.png" height="30px" id="${tx.signer.address.address}" onclick="Onclick_Copy(this.id);" class="copy_bt" /></small></div>`;    //  送信者 アドレ
       
           
            ////////////////////////////////////////////　　  　timestamp to Date 　　　　　/////////////////////////
