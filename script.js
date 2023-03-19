@@ -1,5 +1,5 @@
 const dom_version = document.getElementById('version');
-dom_version.innerText = 'v1.0.9　|　Powered by SYMBOL';
+dom_version.innerHTML = 'v1.0.9　|　Powered by SYMBOL';
 
 const sym = require('/node_modules/symbol-sdk');
 const op  = require("/node_modules/rxjs/operators");
@@ -106,8 +106,8 @@ const dom_netType = document.getElementById('netType');  // network Type を表�
      
 const dom_addr = document.getElementById('wallet-addr');
 //dom_addr.innerText = address.pretty();                         // address.pretty() アドレスがハイフンで区切られた文字列で表示される
-dom_addr.innerText = address.address;                            // ハイフン無しでアドレスを表示
- 
+dom_addr.innerHTML = `<div class="copy_container"> ${address.address}<input type="image" src="src/copy.png" class="copy_bt" height="30px" id="${address.address}" onclick="Onclick_Copy(this.id);" /></div>`;          // ハイフン無しでアドレスを表示 　& 　コピーボタンを設置
+
 console.log("address= wallet-addr",address);//////////////////////////////////////////////////////////////////////////////////////////////////  
      
 const dom_explorer = document.getElementById('explorer');  // Wallet 右上のExplorerリンク
@@ -263,7 +263,7 @@ txRepo
                 dom_hash.innerHTML = `<p style="text-align: right; font-weight:bold; line-height:100%;&"><a href="https://testnet.symbol.fyi/transactions/${tx.transactionInfo.hash}" target="_blank" rel="noopener noreferrer"><i>⛓ Transaction Info ⛓</i></a></p>`; //Tx hash          
             }
            
-           dom_signer_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">From : ${tx.signer.address.address}</font><small><input type="image" src="src/copy.png" height="20px" id="${tx.signer.address.address}" onclick="Onclick_Copy(this.id);" class="copy_bt" /></small></div>`;    //  送信者 アドレス
+           dom_signer_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">From : ${tx.signer.address.address}</font><input type="image" src="src/copy.png" class="copy_bt" height="20px" id="${tx.signer.address.address}" onclick="Onclick_Copy(this.id);" /></div>`;    //  送信者 アドレス
                
           
            ////////////////////////////////////////////　　  　timestamp to Date 　　　　　/////////////////////////
@@ -297,14 +297,14 @@ txRepo
                       (async() => {    
 	                      let namespacesNames = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise(); 
                         if (check_netType === 'N'){   // MAINNET の場合
-		                        dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　: <a href="https://symbol.fyi/namespaces/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a></font>`; //  文字列の結合　   宛先		       
+		                        dom_recipient_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">To　: <a href="https://symbol.fyi/namespaces/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a><input type="image" src="src/copy.png" class="copy_bt" height="20px" id="${[namespacesNames][0][0].name}" onclick="Onclick_Copy(this.id);" /></div></font>`; //  文字列の結合　   宛先                       
                         }else
                            if (check_netType === 'T'){ // TESTNET の場合 
-                            dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　: <a href="https://testnet.symbol.fyi/namespaces/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a></font>`; //  文字列の結合　   宛先		                
+                            dom_recipient_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">To　: <a href="https://testnet.symbol.fyi/namespaces/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a><input type="image" src="src/copy.png" class="copy_bt" height="20px" id="${[namespacesNames][0][0].name}" onclick="Onclick_Copy(this.id);" /></div></font>`; //  文字列の結合　   宛先		                
                         }
                       })(); // async() 
 	            }else{   // Nから始まるの39文字のアドレスの場合はそのままアドレスを表示
-                   dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　:   ${tx.recipientAddress.address}</font>`; //  文字列の結合　   宛先
+                   dom_recipient_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">To　:   ${tx.recipientAddress.address}</font><input type="image" src="src/copy.png" class="copy_bt" height="20px" id="${tx.recipientAddress.address}" onclick="Onclick_Copy(this.id);" /></div>`; //  文字列の結合　   宛先
 	            }	
 	            dom_tx.appendChild(dom_recipient_address);         // dom_recipient_address をdom_txに追加
             
@@ -988,7 +988,7 @@ txRepo
                 dom_hash.innerHTML = `<p style="text-align: right; font-weight:bold; line-height:100%;&"><a href="https://testnet.symbol.fyi/transactions/${tx.transactionInfo.hash}" target="_blank" rel="noopener noreferrer"><i>⛓ Transaction Info ⛓</i></a></p>`; //Tx hash          
             }
          
-           dom_signer_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">From : ${tx.signer.address.address}</font><small><input type="image" src="src/copy.png" height="20px" id="${tx.signer.address.address}" onclick="Onclick_Copy(this.id);" class="copy_bt" /></small></div>`;    //  送信者 アドレ
+            dom_signer_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">From : ${tx.signer.address.address}</font><input type="image" src="src/copy.png" class="copy_bt" height="20px" id="${tx.signer.address.address}" onclick="Onclick_Copy(this.id);" /></div>`;    //  送信者 アドレス
       
           
            ////////////////////////////////////////////　　  　timestamp to Date 　　　　　/////////////////////////
@@ -1022,14 +1022,14 @@ txRepo
                       (async() => {    
 	                      let namespacesNames = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise(); 
                         if (check_netType === 'N'){   // MAINNET の場合
-		                        dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　: <a href="https://symbol.fyi/namespaces/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a></font>`; //  文字列の結合　   宛先		       
+                           dom_recipient_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">To　: <a href="https://symbol.fyi/namespaces/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a><input type="image" src="src/copy.png" class="copy_bt" height="20px" id="${[namespacesNames][0][0].name}" onclick="Onclick_Copy(this.id);" /></div></font>`; //  文字列の結合　   宛先                         
                         }else
                            if (check_netType === 'T'){ // TESTNET の場合 
-                            dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　: <a href="https://testnet.symbol.fyi/namespaces/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a></font>`; //  文字列の結合　   宛先		                
-                        }
+                              dom_recipient_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">To　: <a href="https://testnet.symbol.fyi/namespaces/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a><input type="image" src="src/copy.png" class="copy_bt" height="20px" id="${[namespacesNames][0][0].name}" onclick="Onclick_Copy(this.id);" /></div></font>`; //  文字列の結合　   宛先		                
+                           }
                       })(); // async() 
 	            }else{   // Nから始まるの39文字のアドレスの場合はそのままアドレスを表示
-                   dom_recipient_address.innerHTML = `<font color="#2f4f4f">To　:   ${tx.recipientAddress.address}</font>`; //  文字列の結合　   宛先
+                dom_recipient_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">To　:   ${tx.recipientAddress.address}</font><input type="image" src="src/copy.png" class="copy_bt" height="20px" id="${tx.recipientAddress.address}" onclick="Onclick_Copy(this.id);" /></div>`; //  文字列の結合　   宛先
 	            }	
 	            dom_tx.appendChild(dom_recipient_address);         // dom_recipient_address をdom_txに追加
             
@@ -1338,34 +1338,26 @@ function Onclick_Decryption(PubKey,encryptedMessage){
           // Copyボタンをクリックして、クリップボードにコピー
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
 function Onclick_Copy(copy_address){
 
   console.log("Copy_address=",copy_address);       // 正しいアドレスが表示されている
-
-  let aaaaa = document.getElementsByClassName('copy_bt');
-  //console.log("aaaaa=",aaaaa);
+  console.log("コピーボタンが押されたよ");
 
   
-
-  for (i = 0; i < aaaaa.length; i++) {
-    aaaaa[i].addEventListener("click", function() {
-
       let COPY_COMPLETE = document.createElement('div');
-      COPY_COMPLETE.innerHTML = '<strong style="color: green;">Copied!</strong>';
-      
-      let COPY_BT = document.querySelector('.copy_bt');
-      //     this.classList.toggle('active');
-      COPY_BT.replaceWith(COPY_COMPLETE);
-      //console.log(COPY_BT);
-
-      setTimeout( () => {
-         COPY_COMPLETE.replaceWith(COPY_BT);
-      //     this.classList.toggle('active');
-      },1000);
-      }
-    )};
+      COPY_COMPLETE.innerHTML = '　　　　<strong style="color: green;"><font size="6">Copied!</font></strong>';
   
-    console.log(aaaaa);
+     
+      const COPY_BT = document.querySelector('h2');
+      console.log(COPY_BT);
+        
+      COPY_BT.replaceWith(COPY_COMPLETE);
+      setTimeout( () => {
+          COPY_COMPLETE.replaceWith(COPY_BT);
+      },700); 
+        
+  
     navigator.clipboard.writeText(copy_address);
  
 }

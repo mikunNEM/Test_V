@@ -231,7 +231,7 @@
 <!--    popup  モザイク作成   -->
   <div id="js-popup2" class="popup2">
     <div class="popup2-inner">
-      <div class="close-btn" id="js-close-btn"><i class="fas fa-times"></i></div>
+      <div class="close-btn" id="js-close-btn2"><i class="fas fa-times"></i></div>
       <div class="Form">
         <h4>Mosaic Parameter</h4>
         <div class="Form-Item">
@@ -318,7 +318,7 @@
   var popup2 = document.getElementById('js-popup2');
   if(!popup2) return;
   var blackBg = document.getElementById('js-black-bg1');
-  var closeBtn = document.getElementById('js-close-btn');
+  var closeBtn = document.getElementById('js-close-btn2');
   var showBtn = document.getElementById('js-show-popup');
 
   closePopUp(blackBg);
@@ -388,6 +388,31 @@ $(".toggle4").on("click", function() {
     $(".toggle4 input").prop("checked", false);
   }
 });
+
+///////////////////   コピーボタン /////////////////////
+/*
+let aaaaa = document.getElementsByClassName('copy_bt');
+  console.log("aaaaa=",aaaaa); 
+
+  let COPY_BT = document.querySelector('.copy_bt');
+  for (i = 0; i < aaaaa.length; i++) {
+    aaaaa[i].addEventListener("click", function() {
+     console.log("i=",i);
+      let COPY_COMPLETE = document.createElement('div');
+      COPY_COMPLETE.innerHTML = '<strong style="color: green;">Copied!</strong>';
+      
+      
+      COPY_BT.replaceWith(COPY_COMPLETE);
+
+      setTimeout( () => {
+         COPY_COMPLETE.replaceWith(COPY_BT);
+      },1000);
+      }
+    )};
+  
+  */
+   // console.log(aaaaa);
+    //navigator.clipboard.writeText(copy_address);
 
 </script>
 
