@@ -194,7 +194,7 @@ accountRepo.getAccountInfo(address)
 		const ns_table2 = document.createElement('div');
                 
                    ns_table.innerHTML = '<table><tr><th>Id</th> <th>名前</th> <th>有効期限</th> <th>期限切れ</th> <th>エイリアスタイプ</th> <th>エイリアス</th> </tr></table>';
-		   ns_table2.innerHTML ='<tr><td>さとう</td> <td>19</td> <td>A型</td> <td>のざわ</td> <td>24</td> <td>O型</td></tr>';
+		   ns_table2.innerHTML ='<table><tr><td>00000</td> <td>abc.coin</td> <td>23-5-12</td> <td>false</td> <td>Mosaic</td> <td>aaa</td></tr></table>';
 
                    ns_table.appendChild(ns_table2);
 		      
