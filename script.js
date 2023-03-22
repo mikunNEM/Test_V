@@ -191,13 +191,13 @@ accountRepo.getAccountInfo(address)
                 }
                 console.log("namespace_data",ns.data);
                 const ns_table = document.getElementById('ns_table');    // NameSpace テーブル 
-		const ns_table2 = document.createElement('div');
+                const ns_table2 = document.createElement('div');
                 
-                   ns_table.innerHTML = '<table><tr><th>Id</th> <th>名前</th> <th>有効期限</th> <th>期限切れ</th> <th>エイリアスタイプ</th> <th>エイリアス</th> </tr></table>';
-		   ns_table2.innerHTML ='<table><tr><td>00000</td> <td>abc.coin</td> <td>23-5-12</td> <td>false</td> <td>Mosaic</td> <td>aaa</td></tr></table>';
+                   ns_table.innerHTML = '<tr><th>Id</th> <th>名前</th> <th>有効期限</th> <th>期限切れ</th> <th>エイリアスタイプ</th> <th>エイリアス</th> </tr>';
+		               ns_table2.innerHTML ='<tr><td>00000</td> <td>abc.coin</td> <td>23-5-12</td> <td>false</td> <td>Mosaic</td> <td>aaa</td></tr>';
 
                    ns_table.appendChild(ns_table2);
-		      
+ 
                 if(ddNamespace !== ""){
                   $("#account_append_info").append('<dt>ルートネームスペース</dt>'+ ddNamespace);
                 }
