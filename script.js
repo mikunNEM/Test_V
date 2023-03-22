@@ -3,6 +3,7 @@ dom_version.innerHTML = 'v1.0.9　|　Powered by SYMBOL';
 
 const sym = require('/node_modules/symbol-sdk');
 const op  = require("/node_modules/rxjs/operators");
+const rxjs = require("/node_modules/rxjs");
 
 //MAIN_NET の場合
 
@@ -18,6 +19,9 @@ const txRepo_M = repo_M.createTransactionRepository();
 const mosaicRepo_M = repo_M.createMosaicRepository();
 const nsRepo_M = repo_M.createNamespaceRepository();
 const nwRepo_M = repo_M.createNetworkRepository();
+const chainRepo_M = repo_M.createChainRepository();
+const blockRepo1_M = repo_M.createBlockRepository();
+const EXPLORER_M = "https://symbol.fyi";
 
 //TEST_NET の場合
 
@@ -36,6 +40,9 @@ const txRepo_T = repo_T.createTransactionRepository();
 const mosaicRepo_T = repo_T.createMosaicRepository();
 const nsRepo_T = repo_T.createNamespaceRepository();
 const nwRepo_T = repo_T.createNetworkRepository();
+const chainRepo_T = repo_T.createChainRepository();
+const blockRepo1_T = repo_T.createBlockRepository();
+const EXPLORER_T = "https://testnet.symbol.fyi";
 
 let epochAdjustment;
 let generationHash;
@@ -48,6 +55,9 @@ let txRepo;
 let mosaicRepo;
 let nsRepo;
 let nwRepo;
+let chainRepo;
+let blockRepo1;
+let EXPLORER;
 
 setTimeout(() => {  //////////////////  指定した時間後に実行する  ////////////////////////////////////////////////
   
@@ -73,6 +83,9 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
        mosaicRepo = mosaicRepo_M;
        nsRepo = nsRepo_M;
        nwRepo = nwRepo_M;
+       chainRepo = chainRepo_M;
+       blockRepo1 = blockRepo1_M;
+       EXPLORER = EXPLORER_M;
        
       console.log("MAIN_NET");
    }else 
@@ -89,6 +102,9 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
           mosaicRepo = mosaicRepo_T;
           nsRepo = nsRepo_T;
           nwRepo = nwRepo_T;
+          chainRepo = chainRepo_T;
+          blockRepo1 = blockRepo1_T;
+          EXPLORER = EXPLORER_T;
         
           console.log("TEST_NET");
       }
@@ -111,12 +127,9 @@ dom_addr.innerHTML = `<div class="copy_container"> ${address.address}<input type
 console.log("address= wallet-addr",address);//////////////////////////////////////////////////////////////////////////////////////////////////  
      
 const dom_explorer = document.getElementById('explorer');  // Wallet 右上のExplorerリンク
-if (networkType === NET_TYPE_T){     
-    dom_explorer.innerHTML = `<a href="https://testnet.symbol.fyi/accounts/${address.address}" target="_blank" rel="noopener noreferrer">/ Explorer </a>`; 
-   }else
-      if (networkType = NET_TYPE_M){
-         dom_explorer.innerHTML = `<a href="https://symbol.fyi/accounts/${address.address}" target="_blank" rel="noopener noreferrer">/ Explorer </a>`;      
-      }
+    
+      dom_explorer.innerHTML = `<a href="${EXPLORER}/accounts/${address.address}" target="_blank" rel="noopener noreferrer">/ Explorer </a>`; 
+
      
       
 	
@@ -127,6 +140,69 @@ accountRepo.getAccountInfo(address)
   .then((accountInfo) => {
         console.log("accountInfo=",accountInfo)     
         console.log("account_Mosaics =",accountInfo.mosaics.length);
+
+     ////
+
+         //ブロック
+          chainRepo.getChainInfo().subscribe(chain=>{  //////////   
+
+            rxjs.zip(
+              blockRepo1.getBlockByHeight(chain.height),
+              blockRepo1.getBlockByHeight(chain.latestFinalizedBlock.height),
+            ).subscribe(zip => {
+
+              $("#chain_height").html(    //  最新ブロック
+                "[ <a target='_blank' href='" + EXPLORER + "/blocks/" + zip[0].height.compact() + "'>" + zip[0].height.compact() + "</a> ]　日時: " + dispTimeStamp(Number(zip[0].timestamp.toString()),epochAdjustment)
+              );
+              $("#finalized_chain_height").html(   //  確定ブロック
+                "[ <a target='_blank' href='" + EXPLORER + "/blocks/" + zip[1].height.compact() + "'>" + zip[1].height.compact() + "</a> ]　日時: " + dispTimeStamp(Number(zip[1].timestamp.toString()),epochAdjustment)
+              );
+
+              //ネームスペース
+              nsRepo.search({ownerAddress:accountInfo.address}) /////    保有ネームスペース
+              .subscribe(async ns=>{
+
+                
+                var ddNamespace = "";
+                for(const nsInfo of ns.data){                  
+                  if(nsInfo.levels.length == 1){
+
+                    const Nnames = await nsRepo.getNamespacesNames([nsInfo.levels[nsInfo.levels.length - 1]]).toPromise();
+        
+                    const namespaceInfo = await nsRepo.getNamespace(new sym.NamespaceId(Nnames[0].name)).toPromise();
+                    console.log(namespaceInfo);
+                   
+                    console.log("保有names=",Nnames[0].name);////
+
+                    var namespace = "";
+                    for(const namespaceName of Nnames){
+                      if(namespace != ""){
+                        namespace = "." + namespace;
+                      }
+                      namespace = namespaceName.name + namespace;
+                    }
+
+                    var remainHeight = nsInfo.endHeight.compact() - zip[0].height.compact();
+                    t = dispTimeStamp(zip[0].timestamp.compact() + (remainHeight * 30000),epochAdjustment)
+                 // t = dispTimeStamp(nsInfo.endHeight.compact() * 30000,epochAdjustment);
+                    ddNamespace += '<dd>' + namespace + ' [期限: ' + t + ']</dd>';
+                  } 
+
+                }
+                console.log("namespace_data",ns.data);
+                const ns_table = document.getElementById('ns_table');    // NameSpace テーブル 
+                
+                   ns_table.innerHTML = '<table><tr><th>Id</th> <th>名前</th> <th>有効期限</th> <th>期限切れ</th> <th>エイリアスタイプ</th> <th>エイリアス</th> </tr><tr><td>さとう</td> <td>19</td> <td>A型</td> <td>のざわ</td> <td>24</td> <td>O型</td></tr></table>';
+
+ 
+                if(ddNamespace !== ""){
+                  $("#account_append_info").append('<dt>ルートネームスペース</dt>'+ ddNamespace);
+                }
+                console.log("ddNamespace=",ddNamespace);/////
+              });
+            })
+          });
+     ////
      
           //select要素を取得する
           const selectMosaic = document.getElementById('form-mosaic_ID'); 
@@ -163,6 +239,8 @@ accountRepo.getAccountInfo(address)
 	   
     })(); // async() 
   })
+
+
       
 //////////////////////////////////////　リスナーでトランザクションを検知し、音を鳴らす //////////////////////////////////////////////////
   
@@ -254,16 +332,10 @@ txRepo
          const dom_mosaicID = document.createElement('div');
 	    
          dom_txType.innerHTML = `<p style="text-align: right; line-height:100%;&"><font color="#0000ff">< ${getTransactionType(tx.type)} ></font></p>`;        //　 　Tx Type
-         
-         /////  エクスプローラー　URLの変更  ////
-         if (check_netType === 'N'){   // MAINNET の場合          
-             dom_hash.innerHTML = `<p style="text-align: right; font-weight:bold; line-height:100%;&"><a href="https://symbol.fyi/transactions/${tx.transactionInfo.hash}" target="_blank" rel="noopener noreferrer"><i>⛓ Transaction Info ⛓</i></a></p>`; //Tx hash
-         }else
-            if (check_netType === 'T'){ // TESTNET の場合             
-                dom_hash.innerHTML = `<p style="text-align: right; font-weight:bold; line-height:100%;&"><a href="https://testnet.symbol.fyi/transactions/${tx.transactionInfo.hash}" target="_blank" rel="noopener noreferrer"><i>⛓ Transaction Info ⛓</i></a></p>`; //Tx hash          
-            }
+                 
+         dom_hash.innerHTML = `<p style="text-align: right; font-weight:bold; line-height:100%;&"><a href="${EXPLORER}/transactions/${tx.transactionInfo.hash}" target="_blank" rel="noopener noreferrer"><i>⛓ Transaction Info ⛓</i></a></p>`; //Tx hash
            
-           dom_signer_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">From : ${tx.signer.address.address}</font><input type="image" src="src/copy.png" class="copy_bt" height="20px" id="${tx.signer.address.address}" onclick="Onclick_Copy(this.id);" /></div>`;    //  送信者 アドレス
+         dom_signer_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">From : ${tx.signer.address.address}</font><input type="image" src="src/copy.png" class="copy_bt" height="20px" id="${tx.signer.address.address}" onclick="Onclick_Copy(this.id);" /></div>`;    //  送信者 アドレス
                
           
            ////////////////////////////////////////////　　  　timestamp to Date 　　　　　/////////////////////////
@@ -296,12 +368,7 @@ txRepo
 	            if (tx.recipientAddress.address === undefined){  // 宛先が Namespace の場合 NamespaceId から取得し表示する
                       (async() => {    
 	                      let namespacesNames = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise(); 
-                        if (check_netType === 'N'){   // MAINNET の場合
-		                        dom_recipient_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">To　: <a href="https://symbol.fyi/namespaces/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a><input type="image" src="src/copy.png" class="copy_bt" height="20px" id="${[namespacesNames][0][0].name}" onclick="Onclick_Copy(this.id);" /></div></font>`; //  文字列の結合　   宛先                       
-                        }else
-                           if (check_netType === 'T'){ // TESTNET の場合 
-                            dom_recipient_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">To　: <a href="https://testnet.symbol.fyi/namespaces/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a><input type="image" src="src/copy.png" class="copy_bt" height="20px" id="${[namespacesNames][0][0].name}" onclick="Onclick_Copy(this.id);" /></div></font>`; //  文字列の結合　   宛先		                
-                        }
+		                        dom_recipient_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">To　: <a href="${EXPLORER}/namespaces/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a><input type="image" src="src/copy.png" class="copy_bt" height="20px" id="${[namespacesNames][0][0].name}" onclick="Onclick_Copy(this.id);" /></div></font>`; //  文字列の結合　   宛先                       
                       })(); // async() 
 	            }else{   // Nから始まるの39文字のアドレスの場合はそのままアドレスを表示
                    dom_recipient_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">To　:   ${tx.recipientAddress.address}</font><input type="image" src="src/copy.png" class="copy_bt" height="20px" id="${tx.recipientAddress.address}" onclick="Onclick_Copy(this.id);" /></div>`; //  文字列の結合　   宛先
@@ -726,12 +793,13 @@ function handleSSS() {
         })
        }else{ // 文字数が39以外の場合　(ネームスペース)
         const namespaceId = new sym.NamespaceId(addr);
-        //const address = await nsRepo.getLinkedAddress(namespaceId).toPromise();
-        const address = await nsRepo.getNamespace(namespaceId).toPromise();
-        console.log("725 address")
-        if (address === undefined ){
-          alert("NameSpace Error !!")
-        }
+      
+      //const address = await nsRepo.getLinkedAddress(namespaceId).toPromise();
+      //  const address = await nsRepo.getNamespace(namespaceId).toPromise();
+      //  console.log("725 address")
+      //  if (address === undefined ){
+      //    alert("NameSpace Error !!")
+      //  }
 
         const tx = sym.TransferTransaction.create(        // トランザクションを生成
           sym.Deadline.create(epochAdjustment),
@@ -1021,15 +1089,10 @@ txRepo
 	            if (tx.recipientAddress.address === undefined){  // 宛先が Namespace の場合 NamespaceId から取得し表示する
                       (async() => {    
 	                      let namespacesNames = await nsRepo.getNamespacesNames([sym.NamespaceId.createFromEncoded(tx.recipientAddress.id.toHex())]).toPromise(); 
-                        if (check_netType === 'N'){   // MAINNET の場合
-                           dom_recipient_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">To　: <a href="https://symbol.fyi/namespaces/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a><input type="image" src="src/copy.png" class="copy_bt" height="20px" id="${[namespacesNames][0][0].name}" onclick="Onclick_Copy(this.id);" /></div></font>`; //  文字列の結合　   宛先                         
-                        }else
-                           if (check_netType === 'T'){ // TESTNET の場合 
-                              dom_recipient_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">To　: <a href="https://testnet.symbol.fyi/namespaces/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a><input type="image" src="src/copy.png" class="copy_bt" height="20px" id="${[namespacesNames][0][0].name}" onclick="Onclick_Copy(this.id);" /></div></font>`; //  文字列の結合　   宛先		                
-                           }
+                            dom_recipient_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">To　: <a href="${EXPLORER}/namespaces/${[namespacesNames][0][0].name}" target="_blank" rel="noopener noreferrer">${[namespacesNames][0][0].name}</a><input type="image" src="src/copy.png" class="copy_bt" height="20px" id="${[namespacesNames][0][0].name}" onclick="Onclick_Copy(this.id);" /></div></font>`; //  文字列の結合　   宛先                                 
                       })(); // async() 
 	            }else{   // Nから始まるの39文字のアドレスの場合はそのままアドレスを表示
-                dom_recipient_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">To　:   ${tx.recipientAddress.address}</font><input type="image" src="src/copy.png" class="copy_bt" height="20px" id="${tx.recipientAddress.address}" onclick="Onclick_Copy(this.id);" /></div>`; //  文字列の結合　   宛先
+                   dom_recipient_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">To　:   ${tx.recipientAddress.address}</font><input type="image" src="src/copy.png" class="copy_bt" height="20px" id="${tx.recipientAddress.address}" onclick="Onclick_Copy(this.id);" /></div>`; //  文字列の結合　   宛先
 	            }	
 	            dom_tx.appendChild(dom_recipient_address);         // dom_recipient_address をdom_txに追加
             
@@ -1333,6 +1396,32 @@ function Onclick_Decryption(PubKey,encryptedMessage){
 	    >>${data}`); // ポップアップで表示
     })		
 }
+
+///////////// /  タイムスタンプ  ////////////////////////////////////////////
+function dispTimeStamp(timeStamp,epoch){
+
+	const d = new Date(timeStamp + epoch * 1000)
+	const strDate = d.getFullYear()%100
+		+ "-" + paddingDate0( d.getMonth() + 1 )
+		+ '-' + paddingDate0( d.getDate() )
+		+ ' ' + paddingDate0( d.getHours() )
+		+ ':' + paddingDate0( d.getMinutes() ) ;
+	return 	strDate;
+}
+
+function getDateId(timeStamp,epoch){
+	const d = new Date(timeStamp + epoch * 1000)
+	const dateId = d.getFullYear()
+		+ paddingDate0( d.getMonth() + 1 )
+		+ paddingDate0( d.getDate() );
+	return 	dateId;
+
+}
+
+function paddingDate0(num) {
+	return ( num < 10 ) ? '0' + num  : '' + num;
+};
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           // Copyボタンをクリックして、クリップボードにコピー

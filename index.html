@@ -4,6 +4,7 @@
   <title>Ventus Wallet(ウェンタスウォレット)</title>
   <link rel="stylesheet" href="./css/BGimg_ventus.css" type="text/css" media="all" id="switchCSS" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"> -->
   <link rel="stylesheet" href="style.css" type="text/css">
   <meta http-equiv="content-type" charset="UTF-8">
@@ -228,6 +229,7 @@
     <div id="bg-black" class="bg-black"></div>
   </div><!-- #popup -->
 
+
 <!--    popup  モザイク作成   -->
   <div id="js-popup2" class="popup2">
     <div class="popup2-inner">
@@ -279,7 +281,9 @@
             <input type="checkbox" name="check4" value="Revokable" id="Revokable" />
           </div>
         </div>
-        <input type="button" onclick="Onclick_mosaic();" class="Form-Btn" id="js-popup2" value="作成"/><i class="fas fa-times"></i>
+        <input type="button" onclick="Onclick_mosaic();" class="Form-Btn" id="js-popup2" value="作成"/>
+        <br>
+        <div style="text-align:center">推定レンタル手数料&nbsp; 50 XYM</div>
       </div>
     </div>
     <div class="black-background" id="js-black-bg1"></div>
@@ -291,19 +295,22 @@
 <div id="js-popup3" class="popup3">
   <div class="popup3-inner">
     <div class="close-btn" id="js-close-btn"><i class="fas fa-times"></i></div>
-    <div class="Form">
+    <div class="Form2">
       <h4>Namespace</h4>
-      <div class="Form-Item">
-        <p class="Form-Item-Label"><span class="Form-Item-Label-Required">取得ネームスーペース</span></br></p>
+      <div class="Form-Item2">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required2">取得ネームスーペース</span></br></p>
         <input type="text" class="Form-Item-Input_N" id="Namespace" placeholder="">
       </div>
-      <div class="Form-Item">
-        <p class="Form-Item-Label"><span class="Form-Item-Label-Required">有効期限</span><small></br>　&nbsp;(Duration)&nbsp;&nbsp;　約30秒 = 1 (Block)</small></p>
+      <div class="Form-Item2">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required2">有効期限</span><small></br>　&nbsp;(Duration)&nbsp;&nbsp;　約30秒 = 1 (Block)</small></p>
         <input type="text" class="Form-Item-Input_N" id="Duration2" placeholder=" 　86400 〜 5256000 (Block)">
       </div>
-     
-      
-      <input type="button" onclick="Onclick_Namespace();" class="Form-Btn" id="js-popup3" value="作成"/><i class="fas fa-times"></i>
+      <input type="button" onclick="Onclick_Namespace();" class="Form-Btn" id="js-popup3" value="作成"/>
+        <br>
+        <br>
+        <div id="ns_table"></div>
+        <br>
+      <dl id="account_append_info"></dl>
     </div>
   </div>
   <div class="black-background" id="js-black-bg2"></div>
@@ -389,30 +396,6 @@ $(".toggle4").on("click", function() {
   }
 });
 
-///////////////////   コピーボタン /////////////////////
-/*
-let aaaaa = document.getElementsByClassName('copy_bt');
-  console.log("aaaaa=",aaaaa); 
-
-  let COPY_BT = document.querySelector('.copy_bt');
-  for (i = 0; i < aaaaa.length; i++) {
-    aaaaa[i].addEventListener("click", function() {
-     console.log("i=",i);
-      let COPY_COMPLETE = document.createElement('div');
-      COPY_COMPLETE.innerHTML = '<strong style="color: green;">Copied!</strong>';
-      
-      
-      COPY_BT.replaceWith(COPY_COMPLETE);
-
-      setTimeout( () => {
-         COPY_COMPLETE.replaceWith(COPY_BT);
-      },1000);
-      }
-    )};
-  
-  */
-   // console.log(aaaaa);
-    //navigator.clipboard.writeText(copy_address);
 
 </script>
 
