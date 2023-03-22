@@ -190,13 +190,70 @@ accountRepo.getAccountInfo(address)
 
                 }
                 console.log("namespace_data",ns.data);
-                const ns_table = document.getElementById('ns_table');    // NameSpace テーブル 
+
+                console.log("ネームスペースの数",ns.data.length);
+
+              /*  const ns_table1 = document.getElementById('ns_table');    // NameSpace テーブル 
                 const ns_table2 = document.createElement('div');
                 
-                   ns_table.innerHTML = '<tr><th>Id</th> <th>名前</th> <th>有効期限</th> <th>期限切れ</th> <th>エイリアスタイプ</th> <th>エイリアス</th> </tr>';
-		               ns_table2.innerHTML ='<tr><td>00000</td> <td>abc.coin</td> <td>23-5-12</td> <td>false</td> <td>Mosaic</td> <td>aaa</td></tr>';
+                  // ns_table.innerHTML = '';
+		               ns_table2.innerHTML ='<tr class="ns_table"><td>00000</td> <td>abc.coin</td> <td>23-5-12</td> <td>false</td> <td>Mosaic</td> <td>aaa</td></tr>';
 
-                   ns_table.appendChild(ns_table2);
+                   ns_table1.appendChild(ns_table2);  */
+
+                   var body = document.getElementById("ns_table");
+
+                   // <table> 要素と <tbody> 要素を作成
+                   var tbl = document.createElement("table");
+                   var tblBody = document.createElement("tbody");
+                 
+                   // すべてのセルを作成
+                   for (var i = 0; i < ns.data.length; i++) {  // ネームスペースの数だけ繰り返す
+                     // 表の行を作成
+                     var row = document.createElement("tr");
+                 
+                     for (var j = 0; j < 6; j++) {
+                       // <td> 要素とテキストノードを作成し、テキストノードを
+                       // <td> の内容として、その <td> を表の行の末尾に追加
+                       var cell = document.createElement("td");
+                                                      
+                          switch(j){
+                            case 0:
+                              var cellText = document.createTextNode("Id");
+                              break;
+                            case 1:
+                              var cellText = document.createTextNode("名前");
+                              break;  
+                            case 2:
+                              var cellText = document.createTextNode("有効期限");
+                              break; 
+                            case 3:
+                              var cellText = document.createTextNode("期限切れ");
+                              break; 
+                            case 4:
+                              var cellText = document.createTextNode("エイリアスタイプ");
+                              break;
+                            case 5:
+                              var cellText = document.createTextNode("エイリアス");
+                              break;    
+                            }  
+
+                       cell.appendChild(cellText);
+                       row.appendChild(cell);
+                     }
+                 
+                     // 表の本体の末尾に行を追加
+                     tblBody.appendChild(row);
+                   }
+                 
+                   // <tbody> を <table> の中に追加
+                   tbl.appendChild(tblBody);
+                   // <table> を <body> の中に追加
+                   body.appendChild(tbl);
+                   // tbl の border 属性を 2 に設定
+                   tbl.setAttribute("border", "1");
+
+
  
                 if(ddNamespace !== ""){
                   $("#account_append_info").append('<dt>ルートネームスペース</dt>'+ ddNamespace);

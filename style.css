@@ -827,22 +827,26 @@ hr {
 */
 
 /***********************************/
-
+/*
 #ns_table{
   padding-top:12px;
 }
+*/
 
-table{
+#ns_table{
   border-top: 1px solid #ddd;
   padding-top: 12px;
   width: 100%;
+  border: 1px solid #bbb;
 }
 
 /*
 th{
-  width: 10%;
+  width: 1%;
 }
 
+
 td{
-  width: 50%;
-}*/
+  width: 16%;
+}
+*/
