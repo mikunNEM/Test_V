@@ -833,20 +833,34 @@ hr {
 }
 */
 
+/*
 #ns_table{
   border-top: 1px solid #ddd;
   padding-top: 12px;
   width: 100%;
   border: 1px solid #bbb;
-}
-
+}*/
 /*
-th{
-  width: 1%;
+th,td {
+  border: solid 1px;          /* 枠線指定 
 }
 
-
-td{
-  width: 16%;
+table {
+ /* border-collapse:  collapse; /* セルの線を重ねる 
+  border-collapse: separate;  /* 表の線と線の間を空ける 
+  width:  100%;               /* 幅指定 
+  table-layout: fixed;        /* セルの幅計算指定 
 }
 */
+
+table {
+  border-collapse:  collapse; /* セルの線を重ねる */
+}
+
+tr:nth-child(odd) {
+  background-color:  rgb(181, 255, 255);    /* 背景色指定 */
+}
+
+th,td {
+  padding: 5px 10px;          /* 余白指定 */
+}

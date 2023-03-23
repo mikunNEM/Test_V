@@ -162,17 +162,14 @@ accountRepo.getAccountInfo(address)
               nsRepo.search({ownerAddress:accountInfo.address}) /////    保有ネームスペース
               .subscribe(async ns=>{
 
-                
-                var ddNamespace = "";
-                for(const nsInfo of ns.data){                  
-                  if(nsInfo.levels.length == 1){
+                var Nnames1 = new Array(ns.data.length);
+                var i=0;
+                var ddNamespace = new Array(ns.data.length);
+                for(const nsInfo of ns.data){  
+                  if(nsInfo.levels.length == 1){ //ルートネームスペース
 
                     const Nnames = await nsRepo.getNamespacesNames([nsInfo.levels[nsInfo.levels.length - 1]]).toPromise();
-        
-                    const namespaceInfo = await nsRepo.getNamespace(new sym.NamespaceId(Nnames[0].name)).toPromise();
-                    console.log(namespaceInfo);
-                   
-                    console.log("保有names=",Nnames[0].name);////
+                          Nnames1[i] = Nnames[0].name;       
 
                     var namespace = "";
                     for(const namespaceName of Nnames){
@@ -185,25 +182,25 @@ accountRepo.getAccountInfo(address)
                     var remainHeight = nsInfo.endHeight.compact() - zip[0].height.compact();
                     t = dispTimeStamp(zip[0].timestamp.compact() + (remainHeight * 30000),epochAdjustment)
                  // t = dispTimeStamp(nsInfo.endHeight.compact() * 30000,epochAdjustment);
-                    ddNamespace += '<dd>' + namespace + ' [期限: ' + t + ']</dd>';
+                 // ddNamespace += '<dd>' + namespace + ' [期限: ' + t + ']</dd>';
+                    ddNamespace[i] = t;
                   } 
-
+      
+                  if(nsInfo.levels.length == 2){ //サブネームスペース                
+                    const Nnames = await nsRepo.getNamespacesNames([nsInfo.levels[nsInfo.levels.length - 1]]).toPromise();
+                    Nnames1[i] = Nnames[1].name + "." + Nnames[0].name ;
+                    ddNamespace[i] = t; 
+                  }
+                  i=++i;
                 }
-                console.log("namespace_data",ns.data);
+                
+                console.log("ns_data=",ns.data);
 
                 console.log("ネームスペースの数",ns.data.length);
 
-              /*  const ns_table1 = document.getElementById('ns_table');    // NameSpace テーブル 
-                const ns_table2 = document.createElement('div');
-                
-                  // ns_table.innerHTML = '';
-		               ns_table2.innerHTML ='<tr class="ns_table"><td>00000</td> <td>abc.coin</td> <td>23-5-12</td> <td>false</td> <td>Mosaic</td> <td>aaa</td></tr>';
-
-                   ns_table1.appendChild(ns_table2);  */
-
                    var body = document.getElementById("ns_table");
 
-                   // <table> 要素と <tbody> 要素を作成
+                   // <table> 要素と <tbody> 要素を作成　/////////////////////////////////////////////////////
                    var tbl = document.createElement("table");
                    var tblBody = document.createElement("tbody");
                  
@@ -211,33 +208,52 @@ accountRepo.getAccountInfo(address)
                    for (var i = 0; i < ns.data.length; i++) {  // ネームスペースの数だけ繰り返す
                      // 表の行を作成
                      var row = document.createElement("tr");
-                 
+
                      for (var j = 0; j < 6; j++) {
                        // <td> 要素とテキストノードを作成し、テキストノードを
                        // <td> の内容として、その <td> を表の行の末尾に追加
-                       var cell = document.createElement("td");
-                                                      
+                       var cell = document.createElement("td");                                                   
                           switch(j){
-                            case 0:
-                              var cellText = document.createTextNode("Id");
+                            case 0:   //ネームスペースID
+                             if (ns.data[i].registrationType === 0){ //　ルートネームスペースの時
+                                 var cellText = document.createTextNode(ns.data[i].levels[0].id.toHex());
+                             }else
+                                if (ns.data[i].registrationType === 1){ //  サブネームスペースの時
+                                    var cellText = document.createTextNode(ns.data[i].levels[1].id.toHex());
+                                }
                               break;
-                            case 1:
-                              var cellText = document.createTextNode("名前");
+                            case 1:   //ネームスペース名
+                              var cellText = document.createTextNode(Nnames1[i]); 
                               break;  
-                            case 2:
-                              var cellText = document.createTextNode("有効期限");
+                            case 2:   // 有効期限
+                              var cellText = document.createTextNode(ddNamespace[i]); 
                               break; 
-                            case 3:
+                            case 3:                             
                               var cellText = document.createTextNode("期限切れ");
                               break; 
-                            case 4:
-                              var cellText = document.createTextNode("エイリアスタイプ");
+                            case 4:   // エイリアスタイプ
+                              if (ns.data[i].alias.type === 0){ 
+                                  var cellText = document.createTextNode("--------");
+                              }else
+                                 if (ns.data[i].alias.type === 1){
+                                  var cellText = document.createTextNode("Mosaic");
+                                 }else
+                                    if (ns.data[i].alias.type === 2){
+                                        var cellText = document.createTextNode("Address");
+                                    }
                               break;
-                            case 5:
-                              var cellText = document.createTextNode("エイリアス");
+                            case 5:   // エイリアス
+                              if (ns.data[i].alias.type === 0){ 
+                                var cellText = document.createTextNode("--------");
+                              }else
+                                 if (ns.data[i].alias.type === 1){
+                                     var cellText = document.createTextNode(ns.data[i].alias.mosaicId.id.toHex());
+                                 }else
+                                    if (ns.data[i].alias.type === 2){
+                                        var cellText = document.createTextNode(ns.data[i].alias.address.address);
+                                    }
                               break;    
                             }  
-
                        cell.appendChild(cellText);
                        row.appendChild(cell);
                      }
@@ -255,10 +271,10 @@ accountRepo.getAccountInfo(address)
 
 
  
-                if(ddNamespace !== ""){
-                  $("#account_append_info").append('<dt>ルートネームスペース</dt>'+ ddNamespace);
-                }
-                console.log("ddNamespace=",ddNamespace);/////
+              //  if(ddNamespace !== ""){
+              //    $("#account_append_info").append('<dt>ルートネームスペース</dt>'+ ddNamespace);
+              //  }
+               // console.log("ddNamespace=",ddNamespace);/////
               });
             })
           });

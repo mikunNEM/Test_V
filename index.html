@@ -136,10 +136,10 @@
           </div> 
    
          <label>
-             <input type="file" id="upload-file">ファイルを選択(.csv)       <!-- address ファイルを選択 --> 
+             <input type="file" id="upload-file">Address List (.csv)       <!-- address ファイルを選択 --> 
          </label>
          <div style="display: inline-block; _display: inline;"> 
-           <p1>選択されていません</p1>
+           <p1>not selected</p1>
          </div>
           <script>           
               const input = document.getElementById('upload-file');
@@ -162,7 +162,7 @@
                     if (typeof file1 === "undefined"){
                        address1.length = 0;
                        address2.length = 0; // ファイル選択が取り消された場合、配列を削除
-                       $('p1').text("選択されていません"); 
+                       $('p1').text("not selected"); 
                        file = file1;
                     }
                 
@@ -283,7 +283,7 @@
         </div>
         <input type="button" onclick="Onclick_mosaic();" class="Form-Btn" id="js-popup2" value="作成"/>
         <br>
-        <div style="text-align:center">推定レンタル手数料&nbsp; 50 XYM</div>
+        <div style="text-align:center">レンタル手数料&nbsp; 50 XYM</div>
       </div>
     </div>
     <div class="black-background" id="js-black-bg1"></div>
@@ -308,13 +308,12 @@
       <input type="button" onclick="Onclick_Namespace();" class="Form-Btn" id="js-popup3" value="作成"/>
         <br>
         <br>
-        <table id="ns_table">
-          
-         <!-- <tr><th>Id</th> <th>名前</th> <th>有効期限</th> <th>期限切れ</th> <th>エイリアスタイプ</th> <th>エイリアス</th> </tr> -->
-
+        <table>
+           <tr><th>ネームスペースID</th><th>　　　名前</th><th>　　　　有効期限</th><th>　　期限切れ</th><th>エイリアスタイプ</th><th>　　　　　エイリアス</th></tr>
         </table>
+        <table id="ns_table"></table>
         <br>
-      <dl id="account_append_info"></dl>
+     <!-- <dl id="account_append_info"></dl> -->
     </div>
   </div>
   <div class="black-background" id="js-black-bg2"></div>
