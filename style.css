@@ -853,11 +853,12 @@ table {
 }
 */
 
+
 table {
   border-collapse:  collapse; /* セルの線を重ねる */
 }
 
-tr:nth-child(odd) {
+tr:nth-child(even) {
   background-color:  rgb(181, 255, 255);    /* 背景色指定 */
 }
 
