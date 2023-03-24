@@ -236,7 +236,7 @@ accountRepo.getAccountInfo(address)
                                   var cellText = document.createTextNode("--------");
                               }else
                                  if (ns.data[i].alias.type === 1){
-                                  var cellText = document.createTextNode("Mosaic");
+                                  var cellText = document.createTextNode("　　　Mosaic　　　");
                                  }else
                                     if (ns.data[i].alias.type === 2){
                                         var cellText = document.createTextNode("Address");
