@@ -673,7 +673,9 @@ hr {
 }
 .popup3-inner {
   position: relative;
-  margin: 0 auto;
+  /*margin: 0 auto;*/
+  margin: 100px auto auto auto; 
+  padding-bottom: 50px;
   width: 100%;
   height: auto;
   max-width: 1500px;
@@ -704,12 +706,12 @@ hr {
   font-size: 40px;
   color: #333;
 }
-.black-background {
+.black-background2 {
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
-  height: 100%;
+  height: 200%;
   background-color: rgba(0,0,0,.8);
   z-index: -1;
   cursor: pointer;
@@ -856,6 +858,7 @@ table {
 
 table {
   border-collapse:  collapse; /* セルの線を重ねる */
+  width: 100%;
 }
 
 tr:nth-child(even) {

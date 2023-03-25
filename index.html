@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <title>Ventus Wallet(ウェンタスウォレット)</title>
+  <title>Ventus Wallet (ウェンタスウォレット)</title>
   <link rel="stylesheet" href="./css/BGimg_ventus.css" type="text/css" media="all" id="switchCSS" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -235,7 +235,7 @@
     <div class="popup2-inner">
       <div class="close-btn" id="js-close-btn2"><i class="fas fa-times"></i></div>
       <div class="Form">
-        <h4>Mosaic Parameter</h4>
+        <h4>Mosaic</h4>
         <div class="Form-Item">
           <p class="Form-Item-Label"><span class="Form-Item-Label-Required">発行量</span></br><small>(Supply Amount)</small></p>
           <input type="text" class="Form-Item-Input" id="SupplyAmount" placeholder="　1 〜 8999999999000000">
@@ -284,6 +284,9 @@
         <input type="button" onclick="Onclick_mosaic();" class="Form-Btn" id="js-popup2" value="作成"/>
         <br>
         <div style="text-align:center">レンタル手数料&nbsp; 50 XYM</div>
+        <br>
+        <br>
+        <table id="ms_table"></table>
       </div>
     </div>
     <div class="black-background" id="js-black-bg1"></div>
@@ -298,25 +301,26 @@
     <div class="Form2">
       <h4>Namespace</h4>
       <div class="Form-Item2">
-        <p class="Form-Item-Label"><span class="Form-Item-Label-Required2">取得ネームスーペース</span></br></p>
-        <input type="text" class="Form-Item-Input_N" id="Namespace" placeholder="">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required2">ネームスーペース</span></br></p>
+        <input type="text" class="Form-Item-Input_N" id="Namespace" placeholder="" onchange="ns_check();">
       </div>
       <div class="Form-Item2">
-        <p class="Form-Item-Label"><span class="Form-Item-Label-Required2">有効期限</span><small></br>　&nbsp;(Duration)&nbsp;&nbsp;　約30秒 = 1 (Block)</small></p>
-        <input type="text" class="Form-Item-Input_N" id="Duration2" placeholder=" 　86400 〜 5256000 (Block)">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required2">有効期限</span><small></br>　&nbsp;(Duration)&nbsp;&nbsp;　約30日 = 86,400</br>　　　　　　　　約1年 = 1,051,200</br>　　　　　　　　約5年 = 5,256,000</small></p>
+        <input type="text" class="Form-Item-Input_N" id="Duration2" placeholder=" 　86400 〜 5256000 (Block)" onchange="feeCalc();">
       </div>
-      <input type="button" onclick="Onclick_Namespace();" class="Form-Btn" id="js-popup3" value="作成"/>
+      <div id="ns_fee" style="text-align:right"></div>
+      <input type="button" onclick="Onclick_Namespace();" class="Form-Btn" id="js-popup3" value="作成 / 更新"/>
         <br>
         <br>
-        <table>
-           <tr><th>ネームスペースID</th><th>　　　名前</th><th>　　　　有効期限</th><th>　　期限切れ</th><th>エイリアスタイプ</th><th>　　　　　エイリアス</th></tr>
-        </table>
+        <div style="text-align:center"><i><b><big>所有ネームスペース</big></b></i></div>
+        <br>
         <table id="ns_table"></table>
         <br>
+        <div>※ 期限が切れた後、30日間(86400ブロック)更新の猶予期間があります。テストネットの場合は 1日(2880ブロック)</div>
      <!-- <dl id="account_append_info"></dl> -->
     </div>
   </div>
-  <div class="black-background" id="js-black-bg2"></div>
+  <div class="black-background2" id="js-black-bg2"></div>
 </div>
 
 <!-- -----------------------------------------   -->

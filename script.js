@@ -1,5 +1,5 @@
 const dom_version = document.getElementById('version');
-dom_version.innerHTML = 'v1.0.9　|　Powered by SYMBOL';
+dom_version.innerHTML = `v1.0.10　|　Powered by SYMBOL`;
 
 const sym = require('/node_modules/symbol-sdk');
 const op  = require("/node_modules/rxjs/operators");
@@ -58,6 +58,7 @@ let nwRepo;
 let chainRepo;
 let blockRepo1;
 let EXPLORER;
+let grace_block;
 
 setTimeout(() => {  //////////////////  指定した時間後に実行する  ////////////////////////////////////////////////
   
@@ -86,7 +87,8 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
        chainRepo = chainRepo_M;
        blockRepo1 = blockRepo1_M;
        EXPLORER = EXPLORER_M;
-       
+       grace_block = 86400;
+
       console.log("MAIN_NET");
    }else 
       if (check_netType === 'T'){      // テストネット
@@ -105,6 +107,7 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
           chainRepo = chainRepo_T;
           blockRepo1 = blockRepo1_T;
           EXPLORER = EXPLORER_T;
+          grace_block = 2880;
         
           console.log("TEST_NET");
       }
@@ -114,10 +117,10 @@ const check_netType = address.address.charAt(0);     // 1文字目を抽出
 const dom_netType = document.getElementById('netType');  // network Type を表示　
      
   if (networkType === NET_TYPE_M){   
-     dom_netType.innerHTML = '<font color="#ff00ff">< MAIN_NET ></font>'
+     dom_netType.innerHTML = `<font color="#ff00ff">< MAIN_NET ></font>`
   }else
      if (networkType === NET_TYPE_T){
-        dom_netType.innerHTML = '<font color="ff8c00">< TEST_NET ></font>'
+        dom_netType.innerHTML = `<font color="ff8c00">< TEST_NET ></font>`
   }    
      
 const dom_addr = document.getElementById('wallet-addr');
@@ -157,6 +160,8 @@ accountRepo.getAccountInfo(address)
               $("#finalized_chain_height").html(   //  確定ブロック
                 "[ <a target='_blank' href='" + EXPLORER + "/blocks/" + zip[1].height.compact() + "'>" + zip[1].height.compact() + "</a> ]　日時: " + dispTimeStamp(Number(zip[1].timestamp.toString()),epochAdjustment)
               );
+              console.log("ブロック高=",zip[0].height.compact());
+              console.log("ファイナライズブロック=",zip[1].height.compact());
 
               //ネームスペース
               nsRepo.search({ownerAddress:accountInfo.address}) /////    保有ネームスペース
@@ -180,6 +185,8 @@ accountRepo.getAccountInfo(address)
                     }
 
                     var remainHeight = nsInfo.endHeight.compact() - zip[0].height.compact();
+                      //  console.log("期限が終了するブロック: " + nsInfo.endHeight.compact());  
+                      //  console.log("あと残りのブロック: " + remainHeight);
                     t = dispTimeStamp(zip[0].timestamp.compact() + (remainHeight * 30000),epochAdjustment)
                  // t = dispTimeStamp(nsInfo.endHeight.compact() * 30000,epochAdjustment);
                  // ddNamespace += '<dd>' + namespace + ' [期限: ' + t + ']</dd>';
@@ -205,7 +212,7 @@ accountRepo.getAccountInfo(address)
                    var tblBody = document.createElement("tbody");
                  
                    // すべてのセルを作成
-                   for (var i = 0; i < ns.data.length; i++) {  // ネームスペースの数だけ繰り返す
+                   for (var i = -1; i < ns.data.length; i++) {  // ネームスペースの数だけ繰り返す
                      // 表の行を作成
                      var row = document.createElement("tr");
 
@@ -215,23 +222,48 @@ accountRepo.getAccountInfo(address)
                        var cell = document.createElement("td");                                                   
                           switch(j){
                             case 0:   //ネームスペースID
-                             if (ns.data[i].registrationType === 0){ //　ルートネームスペースの時
-                                 var cellText = document.createTextNode(ns.data[i].levels[0].id.toHex());
-                             }else
-                                if (ns.data[i].registrationType === 1){ //  サブネームスペースの時
-                                    var cellText = document.createTextNode(ns.data[i].levels[1].id.toHex());
-                                }
-                              break;
-                            case 1:   //ネームスペース名
+                              if (i === -1){
+                                  var cellText = document.createTextNode("ネームスペース名");
+                                  break;
+                              }                        
                               var cellText = document.createTextNode(Nnames1[i]); 
-                              break;  
+                              break;                     
+                            case 1:   //ネームスペース名
+                              if (i === -1){
+                                  var cellText = document.createTextNode("ネームスペースID");
+                                  break;
+                              }                            
+                              if (ns.data[i].registrationType === 0){ //　ルートネームスペースの時
+                                  var cellText = document.createTextNode(ns.data[i].levels[0].id.toHex());
+                              }else
+                                 if (ns.data[i].registrationType === 1){ //  サブネームスペースの時
+                                     var cellText = document.createTextNode(ns.data[i].levels[1].id.toHex());
+                                 }
+                                 break;  
                             case 2:   // 有効期限
+                              if (i === -1){
+                                  var cellText = document.createTextNode("更新期限");
+                                  break;
+                              }
                               var cellText = document.createTextNode(ddNamespace[i]); 
                               break; 
-                            case 3:                             
-                              var cellText = document.createTextNode("期限切れ");
-                              break; 
+                            case 3: 
+                              if (i === -1){
+                                  var cellText = document.createTextNode("ステータス");
+                                  break;
+                              }                         
+                              if (zip[0].height.compact() > ns.data[i].endHeight.compact() - grace_block){
+                                  var cellText = document.createTextNode("　　❌");
+                              }else
+                                 if (zip[0].height.compact() < ns.data[i].endHeight.compact() - grace_block){
+                                     var cellText = document.createTextNode("　　🟢");
+                                 }
+                              break;
                             case 4:   // エイリアスタイプ
+                              if (i === -1){
+                                  var cellText = document.createTextNode("タイプ");
+                                  break;
+                              }
                               if (ns.data[i].alias.type === 0){ 
                                   var cellText = document.createTextNode("--------");
                               }else
@@ -243,8 +275,12 @@ accountRepo.getAccountInfo(address)
                                     }
                               break;
                             case 5:   // エイリアス
+                              if (i === -1){
+                                  var cellText = document.createTextNode("🔗リンク🔗");
+                                  break;
+                              }
                               if (ns.data[i].alias.type === 0){ 
-                                var cellText = document.createTextNode("--------");
+                                var cellText = document.createTextNode("--------------------------------------------------------");
                               }else
                                  if (ns.data[i].alias.type === 1){
                                      var cellText = document.createTextNode(ns.data[i].alias.mosaicId.id.toHex());
@@ -257,7 +293,8 @@ accountRepo.getAccountInfo(address)
                        cell.appendChild(cellText);
                        row.appendChild(cell);
                      }
-                 
+                       row.setAttribute("tr","background-color: red;");
+                       
                      // 表の本体の末尾に行を追加
                      tblBody.appendChild(row);
                    }
@@ -270,7 +307,6 @@ accountRepo.getAccountInfo(address)
                    tbl.setAttribute("border", "1");
 
 
- 
               //  if(ddNamespace !== ""){
               //    $("#account_append_info").append('<dt>ルートネームスペース</dt>'+ ddNamespace);
               //  }
@@ -1511,7 +1547,7 @@ function Onclick_Copy(copy_address){
 
   
       let COPY_COMPLETE = document.createElement('div');
-      COPY_COMPLETE.innerHTML = '　　　　<strong style="color: green;"><font size="6">Copied!</font></strong>';
+      COPY_COMPLETE.innerHTML = `　　　　<strong style="color: green;"><font size="6">Copied!</font></strong>`;
   
      
       const COPY_BT = document.querySelector('h2');
@@ -1633,6 +1669,39 @@ function Onclick_Namespace(){
       })
   }, 1000)   
 
+}
+
+/////////////////////////////////////////////////////////////////////////////////
+//    ネームスペースチェック
+/////////////////////////////////////////////////////////////////////////////////
+
+async function ns_check(){
+  const ns = document.getElementById('Namespace').value;  ///////// ネームスペースを取得  ///////////////////////
+  console.log("ns=: ",ns);
+
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////
+//     ネームスペース　手数料計算
+//////////////////////////////////////////////////////////////////////////////////
+
+
+async function feeCalc(){
+    const rentalBlock = document.getElementById('Duration2').value;  ///////// 有効期限を取得  ///////////////////////
+    console.log("レンタルブロック: "+rentalBlock);
+    rentalFees = await nwRepo.getRentalFees().toPromise();
+    rootNsperBlock = rentalFees.effectiveRootNamespaceRentalFeePerBlock.compact();
+    rootNsRenatalFeeTotal = rentalBlock * rootNsperBlock;
+    rootNsRenatalFeeTotal = rootNsRenatalFeeTotal / 1000000;
+    console.log("rentalBlock:" + rentalBlock);
+    console.log("rootNsRenatalFeeTotal:" + rootNsRenatalFeeTotal);
+    console.log("ネームスペース作成手数料: "+rootNsRenatalFeeTotal);
+      
+    const ns_fee1 = document.getElementById("ns_fee");
+    ns_fee1.innerHTML =`<p style="font-size:25px;color:blue">レンタル手数料　 ${rootNsRenatalFeeTotal} XYM</p>`
+    return;
+  
 }
 
 
