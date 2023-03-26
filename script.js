@@ -328,12 +328,12 @@ accountRepo.getAccountInfo(address)
                                   break;
                               }
                               if (mosaic.data[i].duration.compact() === 0){
-                                  var cellText = document.createTextNode(" ✍️");
+                                  var cellText = document.createTextNode("");
                               }else
                                  if (mosaic.data[i].duration.compact() > 0){
                                      var endHeight = mosaic.data[i].startHeight.compact() + mosaic.data[i].duration.compact()
                                      if (endHeight - zip[0].height.compact() > 0){
-                                         var cellText = document.createTextNode(" ✍️");
+                                         var cellText = document.createTextNode("");
                                      }else{
                                           var cellText = document.createTextNode("");
                                      }
