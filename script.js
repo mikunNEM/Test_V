@@ -163,9 +163,206 @@ accountRepo.getAccountInfo(address)
               console.log("ブロック高=",zip[0].height.compact());
               console.log("ファイナライズブロック=",zip[1].height.compact());
 
-              //ネームスペース
+
+              //// モザイク　//////////////////
+
+              mosaicRepo.search({ownerAddress:accountInfo.address})
+              .subscribe(async mosaic=>{
+              
+                console.log("mosaic_data=",mosaic.data);
+
+                console.log("モザイクの数",mosaic.data.length);
+
+
+                   var body = document.getElementById("ms_table");
+
+                   // <table> 要素と <tbody> 要素を作成　/////////////////////////////////////////////////////
+                   var tbl = document.createElement("table");
+                   var tblBody = document.createElement("tbody");
+                   let mosaicNames;
+                   // すべてのセルを作成
+                   for (var i = -1; i < mosaic.data.length; i++) {  // ネームスペースの数だけ繰り返す
+                        if (i > -1){
+                            mosaicNames = await nsRepo.getMosaicsNames([new sym.MosaicId(mosaic.data[i].id.id.toHex())]).toPromise(); // モザイクIDからNamespaceの情報を取得する
+                        }
+                     // 表の行を作成
+                     var row = document.createElement("tr");
+
+                     for (var j = 0; j < 12; j++) {
+                       // <td> 要素とテキストノードを作成し、テキストノードを
+                       // <td> の内容として、その <td> を表の行の末尾に追加
+                       var cell = document.createElement("td");                                                   
+                          switch(j){
+                            case 0:   //モザイク名
+                              if (i === -1){
+                                  var cellText = document.createTextNode("ネームスペース名");
+                                  break;
+                              } 
+                              if ([mosaicNames][0][0].names.length !==0){  // ネームスペースがある場合                       
+                                  var cellText = document.createTextNode([mosaicNames][0][0].names[0].name);
+                              }else{   // ネームスペースが無い場合
+                                  var cellText = document.createTextNode("N/A"); 
+                              }
+                              break;                     
+                            case 1:   //モザイクID
+                              if (i === -1){
+                                  var cellText = document.createTextNode("モザイクID");
+                                  break;
+                              }                             
+                                  var cellText = document.createTextNode(mosaic.data[i].id.id.toHex());                           
+                                  break;  
+                            case 2:   // 供給量
+                              if (i === -1){
+                                  var cellText = document.createTextNode("供給量");
+                                  break;
+                              }
+                             var supply1 = mosaic.data[i].supply.compact()/(10 ** mosaic.data[i].divisibility);
+                                 supply1 = supply1.toLocaleString();
+
+                              var cellText = document.createTextNode(supply1); 
+                              break; 
+                            case 3:   //残高
+                              if (i === -1){
+                                  var cellText = document.createTextNode("残高");
+                                  break;
+                              }                             
+                              for (var k = 0; k < accountInfo.mosaics.length; k++){ 
+                                if (accountInfo.mosaics[k].id.id.toHex() === mosaic.data[i].id.id.toHex()){ // accountInfoのamount データを探す
+                                   var balance = accountInfo.mosaics[k].amount.compact();
+                                }
+                              }
+                              balance = balance/(10 ** mosaic.data[i].divisibility);   // 可分性を考慮
+                              balance = balance.toLocaleString();
+
+                              var cellText = document.createTextNode(balance);
+                              break;
+                            case 4:   //有効期限
+                              if (i === -1){
+                                  var cellText = document.createTextNode("有効期限");
+                                  break;
+                              }
+                              if (mosaic.data[i].duration.compact() === 0){
+                                  var cellText = document.createTextNode("----------------");
+                              }else{
+                                   var endHeight = mosaic.data[i].startHeight.compact() + mosaic.data[i].duration.compact()   
+                                   var remainHeight = endHeight - zip[0].height.compact();    
+                                        t = dispTimeStamp(zip[0].timestamp.compact() + (remainHeight * 30000),epochAdjustment)                  
+                                   var cellText = document.createTextNode(t);
+                              }
+                              break;
+                            case 5:   // ステータス
+                              if (i === -1){
+                                  var cellText = document.createTextNode("ステータス");
+                                  break;
+                              }
+                              if (mosaic.data[i].duration.compact() === 0){
+                                  var cellText = document.createTextNode("　無期限");
+                              }else
+                                 if (mosaic.data[i].duration.compact() > 0){
+                                     var endHeight = mosaic.data[i].startHeight.compact() + mosaic.data[i].duration.compact()
+                                     if (endHeight - zip[0].height.compact() > 0){
+                                       var cellText = document.createTextNode("　　🟢");
+                                     }else{
+                                      var cellText = document.createTextNode("　　❌");
+                                     }
+                                 }
+                              break;
+                            case 6:   // 可分性
+                              if (i === -1){
+                                  var cellText = document.createTextNode("可分性");
+                                  break;
+                              }
+                                  var cellText = document.createTextNode(`　${mosaic.data[i].divisibility}`);
+                              break;
+                            case 7:   //　制限可
+                              if (i === -1){
+                                  var cellText = document.createTextNode("制限可");
+                                  break;
+                              }
+                              if (mosaic.data[i].flags.restrictable === true){
+                                  var cellText = document.createTextNode("　🟢");
+                              }else
+                                 if (mosaic.data[i].flags.restrictable === false){
+                                     var cellText = document.createTextNode("　❌");
+                                 }                           
+                              break;                                  
+                            case 8:  // 供給量可変
+                              if (i === -1){
+                                  var cellText = document.createTextNode("供給量可変");
+                                  break;
+                              }
+                              if (mosaic.data[i].flags.supplyMutable === true){
+                                  var cellText = document.createTextNode("　　🟢");
+                              }else
+                                 if (mosaic.data[i].flags.supplyMutable === false){
+                                     var cellText = document.createTextNode("　　❌");
+                                 }                              
+                              break;      
+                            case 9:   // 転送可
+                              if (i === -1){
+                                  var cellText = document.createTextNode("転送可");                                  
+                                  break;
+                              }
+                              if (mosaic.data[i].flags.transferable === true){
+                                  var cellText = document.createTextNode("　🟢");
+                              }else
+                                 if (mosaic.data[i].flags.transferable === false){
+                                     var cellText = document.createTextNode("　❌");
+                                 }                                                    
+                              break;      
+                            case 10:   // 回収可
+                              if (i === -1){
+                                  var cellText = document.createTextNode("回収可");
+                                  break;
+                              }
+                              if (mosaic.data[i].flags.revokable === true){
+                                  var cellText = document.createTextNode("　🟢");
+                              }else
+                                 if (mosaic.data[i].flags.revokable === false){
+                                     var cellText = document.createTextNode("　❌");
+                                 }                           
+                              break;      
+                            case 11:   // 編集
+                              if (i === -1){
+                                  var cellText = document.createTextNode("");
+                                  break;
+                              }
+                              if (mosaic.data[i].duration.compact() === 0){
+                                  var cellText = document.createTextNode(" ✍️");
+                              }else
+                                 if (mosaic.data[i].duration.compact() > 0){
+                                     var endHeight = mosaic.data[i].startHeight.compact() + mosaic.data[i].duration.compact()
+                                     if (endHeight - zip[0].height.compact() > 0){
+                                         var cellText = document.createTextNode(" ✍️");
+                                     }else{
+                                          var cellText = document.createTextNode("");
+                                     }
+                              }
+                              break;    
+                            }      
+                       cell.appendChild(cellText);
+                       row.appendChild(cell);
+                     }
+                       
+                     // 表の本体の末尾に行を追加
+                     tblBody.appendChild(row);
+                   }
+                 
+                   // <tbody> を <table> の中に追加
+                   tbl.appendChild(tblBody);
+                   // <table> を <body> の中に追加
+                   body.appendChild(tbl);
+                   // tbl の border 属性を 2 に設定
+                   tbl.setAttribute("border", "1");    
+
+              });
+
+
+              //// ネームスペース //////////////
               nsRepo.search({ownerAddress:accountInfo.address}) /////    保有ネームスペース
               .subscribe(async ns=>{
+
+                console.log("{ownerAddress:accountInfo.address}: ",{ownerAddress:accountInfo.address});
 
                 var Nnames1 = new Array(ns.data.length);
                 var i=0;
@@ -195,7 +392,7 @@ accountRepo.getAccountInfo(address)
       
                   if(nsInfo.levels.length == 2){ //サブネームスペース                
                     const Nnames = await nsRepo.getNamespacesNames([nsInfo.levels[nsInfo.levels.length - 1]]).toPromise();
-                    Nnames1[i] = Nnames[1].name + "." + Nnames[0].name ;
+                    Nnames1[i] = Nnames[1].name + "." + Nnames[0].name;
                     ddNamespace[i] = t; 
                   }
                   i=++i;
@@ -293,7 +490,6 @@ accountRepo.getAccountInfo(address)
                        cell.appendChild(cellText);
                        row.appendChild(cell);
                      }
-                       row.setAttribute("tr","background-color: red;");
                        
                      // 表の本体の末尾に行を追加
                      tblBody.appendChild(row);
@@ -863,6 +1059,8 @@ function handleSSS() {
   const message = document.getElementById('form-message').value;
   const enc = document.getElementById('form-enc').value;
   const maxfee = document.getElementById('form-maxfee').value;
+
+  console.log("1063 misaic_ID: ",mosaic_ID);
      
      if (addr.charAt(0) === 'N'){  // MAINNET の場合 
          epochAdjustment = EPOCH_M; 
@@ -1637,6 +1835,40 @@ function Onclick_mosaic(){
 
 }
 
+//////////////////////////////////////////////////////////////////////////
+//                   モザイク回収
+/////////////////////////////////////////////////////////////////////////
+
+async function revoke_mosaic(){
+
+  const holderAddress = document.getElementById("holderAddress").value;
+  const mosaic_ID = document.getElementById("re_mosaic_ID").value;
+  const amount = document.getElementById("re_amount").value;
+  const maxFee = document.getElementById("re_maxFee").value;
+
+
+  const mosaicInfo = await mosaicRepo.getMosaic(new sym.MosaicId(mosaic_ID)).toPromise();// 可分性の情報を取得する 
+  const div = mosaicInfo.divisibility; // 可分性
+
+  const revoke_tx = sym.MosaicSupplyRevocationTransaction.create(
+    sym.Deadline.create(epochAdjustment),
+    sym.Address.createFromRawAddress(holderAddress),
+    new sym.Mosaic(
+      new sym.MosaicId(mosaic_ID),     // mosice ID 16進数　
+      sym.UInt64.fromUint(Number(amount)*10**div)),      // mosaic 数量  可分性を適用する                                  
+    networkType,
+    maxFee
+  )
+
+  window.SSS.setTransaction(revoke_tx);               // SSSにトランザクションを登録        
+  window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
+  console.log('signedTx', signedTx);
+  txRepo.announce(signedTx);
+  }) 
+
+
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                               // Namespace 作成 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1699,11 +1931,64 @@ async function feeCalc(){
     console.log("ネームスペース作成手数料: "+rootNsRenatalFeeTotal);
       
     const ns_fee1 = document.getElementById("ns_fee");
-    ns_fee1.innerHTML =`<p style="font-size:25px;color:blue">レンタル手数料　 ${rootNsRenatalFeeTotal} XYM</p>`
+    ns_fee1.innerHTML =`<p style="font-size:20px;color:blue;">レンタル手数料　 ${rootNsRenatalFeeTotal} XYM</p>`
     return;
   
 }
 
+//////////////////////////////////////////////////////////////////////////////////
+//     モザイク有効期限計算
+//////////////////////////////////////////////////////////////////////////////////
+
+function ex_date1(){
+    const rentalBlock = document.getElementById('Duration1').value;  ///////// 有効期限を取得  ///////////////////////
+    console.log("レンタルブロック: "+rentalBlock);
+    chainRepo.getChainInfo().subscribe(chain=>{  //////////   
+
+      rxjs.zip(
+        blockRepo1.getBlockByHeight(chain.height),
+        blockRepo1.getBlockByHeight(chain.latestFinalizedBlock.height),
+      ).subscribe(zip => {
+          
+        if (rentalBlock === "0"){
+           t = "無期限 ∞";
+        }else{
+           t = dispTimeStamp(zip[0].timestamp.compact() + (rentalBlock * 30000),epochAdjustment)
+        }
+          console.log("有効期限=: ",t);
+    
+          const ex_date1 = document.getElementById("ex_date1");
+          ex_date1.innerHTML =`<p style="font-size:20px;color:blue">　　有効期限　 ${t}</p>`
+
+      })
+    })
+    return;
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+//     ネームスペース有効期限計算
+//////////////////////////////////////////////////////////////////////////////////
+
+function ex_date2(){
+  const rentalBlock = document.getElementById('Duration2').value;  ///////// 有効期限を取得  ///////////////////////
+  console.log("レンタルブロック: "+rentalBlock);
+  chainRepo.getChainInfo().subscribe(chain=>{  //////////   
+
+    rxjs.zip(
+      blockRepo1.getBlockByHeight(chain.height),
+      blockRepo1.getBlockByHeight(chain.latestFinalizedBlock.height),
+    ).subscribe(zip => {
+  
+        t = dispTimeStamp(zip[0].timestamp.compact() + (rentalBlock * 30000),epochAdjustment)
+        console.log("有効期限=: ",t);
+  
+        const ex_date2 = document.getElementById("ex_date2");
+        ex_date2.innerHTML =`<p style="font-size:20px;color:blue">　　有効期限　 ${t}</p>`
+
+    })
+  })
+  return;
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                               //  NFTをデコードして表示する //

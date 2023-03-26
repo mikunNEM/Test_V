@@ -190,8 +190,8 @@
         </div>
     
          <div id="version"></div>
-         <button id="js-show-popup">Mosaic</button>
-         <button id="js-show-popup2">Namespace</button>
+         <button id="js-show-popup_m">Mosaic</button>
+         <button id="js-show-popup_n">Namespace</button>
       </div>
       <div class="right">
         <div class="tx-card">
@@ -221,7 +221,7 @@
       </div>
   </div>
 
-  <!--   popup  ユニコーン       -->
+  <!--   popup  ユニコーン   ----------------------------------->
   <div id="popup" class="popup">
     <div class="popup-inner">
       <div class="img"><img src="unicorn2.gif" alt="ポップアップ画像"></div>
@@ -230,10 +230,10 @@
   </div><!-- #popup -->
 
 
-<!--    popup  モザイク作成   -->
-  <div id="js-popup2" class="popup2">
-    <div class="popup2-inner">
-      <div class="close-btn" id="js-close-btn2"><i class="fas fa-times"></i></div>
+<!--    popup  モザイク作成   ------------------------------------>
+  <div id="js-popup_m" class="popup_m">
+    <div class="popup_m-inner">
+      <div class="close-btn" id="js-close-btn_m"><i class="fas fa-times"></i></div>
       <div class="Form">
         <h4>Mosaic</h4>
         <div class="Form-Item">
@@ -242,7 +242,8 @@
         </div>
         <div class="Form-Item">
           <p class="Form-Item-Label"><span class="Form-Item-Label-Required">有効期限</span><small>&nbsp;&nbsp;　約30秒 = 1 (Block)</br>　&nbsp;(Duration)　　　　無期限 = 0</small></p>
-          <input type="text" class="Form-Item-Input" id="Duration1" placeholder=" 　0 〜 315360000 (Block)">
+          <input type="text" class="Form-Item-Input" id="Duration1" placeholder=" 　0 〜 315360000 (Block)" onchange="ex_date1();"/>
+          <div id="ex_date1" style="text-align:right"></div>
         </div>
         <div class="Form-Item">
           <p class="Form-Item-Label"><span class="Form-Item-Label-Required">可分性</span></br><small>　(Divisibility)　　　小数点以下の桁数</small></p>
@@ -264,7 +265,7 @@
           </div>
         </div>
         <div class="Form-Item">
-          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">発行量可変</span></br><small>(Supply Mutable)</small></p>
+          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">供給量可変</span></br><small>(Supply Mutable)</small></p>
           <div class="toggle1">
             <input type="checkbox" name="check1" value="Supply_M" id="Supply_M" />
           </div>
@@ -281,59 +282,137 @@
             <input type="checkbox" name="check4" value="Revokable" id="Revokable" />
           </div>
         </div>
-        <input type="button" onclick="Onclick_mosaic();" class="Form-Btn" id="js-popup2" value="作成"/>
+        <input type="button" onclick="Onclick_mosaic();" class="Form-Btn" id="js-popup_m" value="作成"/>
         <br>
         <div style="text-align:center">レンタル手数料&nbsp; 50 XYM</div>
         <br>
+        <button style="text-align:right" id="js-show-popup_r">モザイク回収</button>
+        <br>
+        <div style="text-align:center"><i><b><big>発行したモザイク</big></b></i></div>
         <br>
         <table id="ms_table"></table>
       </div>
     </div>
-    <div class="black-background" id="js-black-bg1"></div>
+    <div class="black-background_m" id="js-black-bg_m"></div>
   </div>
 
-<!-- -----------------------------------------   -->
+<!-- ------------------------------------------->
 
 <!--    popup  namespace 作成   -->
-<div id="js-popup3" class="popup3">
-  <div class="popup3-inner">
-    <div class="close-btn" id="js-close-btn"><i class="fas fa-times"></i></div>
+<div id="js-popup_n" class="popup_n">
+  <div class="popup_n-inner">
+    <div class="close-btn" id="js-close-btn_n"><i class="fas fa-times"></i></div>
     <div class="Form2">
       <h4>Namespace</h4>
       <div class="Form-Item2">
-        <p class="Form-Item-Label"><span class="Form-Item-Label-Required2">ネームスーペース</span></br></p>
-        <input type="text" class="Form-Item-Input_N" id="Namespace" placeholder="" onchange="ns_check();">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required2">有効期限</span><small></br>　&nbsp;(Duration)&nbsp;&nbsp;　約30日 = 86,400</br>　　　　　　　　約1年 = 1,051,200</br>　　　　　　　　約5年 = 5,256,000</small></p>
+        <input type="text" class="Form-Item-Input_N" id="Duration2" placeholder=" 　86400 〜 5256000 (Block)" onchange="ex_date2();feeCalc();"/>
+        <div id="ex_date2" style="text-align:right"></div>
       </div>
       <div class="Form-Item2">
-        <p class="Form-Item-Label"><span class="Form-Item-Label-Required2">有効期限</span><small></br>　&nbsp;(Duration)&nbsp;&nbsp;　約30日 = 86,400</br>　　　　　　　　約1年 = 1,051,200</br>　　　　　　　　約5年 = 5,256,000</small></p>
-        <input type="text" class="Form-Item-Input_N" id="Duration2" placeholder=" 　86400 〜 5256000 (Block)" onchange="feeCalc();">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required2">ネームスーペース</span></br></p>
+        <input type="text" class="Form-Item-Input_N" id="Namespace" placeholder="" onchange="ns_check();"/>
       </div>
-      <div id="ns_fee" style="text-align:right"></div>
-      <input type="button" onclick="Onclick_Namespace();" class="Form-Btn" id="js-popup3" value="作成 / 更新"/>
+      <div id="ns_fee" style="text-align:center"></div>
+      <input type="button" onclick="Onclick_Namespace();" class="Form-Btn" id="js-popup_n" value="作成 / 更新"/>
         <br>
         <br>
         <div style="text-align:center"><i><b><big>所有ネームスペース</big></b></i></div>
         <br>
         <table id="ns_table"></table>
         <br>
-        <div>※ 期限が切れた後、30日間(86400ブロック)更新の猶予期間があります。テストネットの場合は 1日(2880ブロック)</div>
+        <div>※ 期限が切れた後、ネームスペース更新期限まで30日間(86400ブロック)の猶予期間があります。テストネットの場合は 1日(2880ブロック)</div>
      <!-- <dl id="account_append_info"></dl> -->
     </div>
   </div>
-  <div class="black-background2" id="js-black-bg2"></div>
+  <div class="black-background_n" id="js-black-bg_n"></div>
 </div>
 
-<!-- -----------------------------------------   -->
+<!-- ------- popup revokable mosaic ---------------->
 
+<div id="js-popup_r" class="popup_r">
+  <div class="popup_r-inner">
+    <div class="close-btn" id="js-close-btn_r"><i class="fas fa-times"></i></div>
+    <div class="Form_r">
+      <h4>モザイク回収</h4>
+      <div class="Form-Item_r">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_r">ホルダーアドレス</span></p>
+        <input type="text" class="Form-Item-Input_r" id="holderAddress"/>
+      </div>
+      <div class="Form-Item_r">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_r">モザイクID</span></br></p>
+        <input type="text" class="Form-Item-Input_r" id="re_mosaic_ID"/>
+      </div>
+      <div class="Form-Item_r">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_r">数量</span></br></p>
+        <input type="text" class="Form-Item-Input_r" id="re_amount"/>
+      </div>
+      <div class="Form-Item_r">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_r">最大手数料</span></br></p>
+       <!-- <input type="text" class="Form-Item-Input_r" id="re_maxFee"/>  -->
+        <div class="Form-Item-Input" style="text-align: center">
+          <select class="re_maxFee" id="re_maxFee">
+            <option value="0.02">0.02 xym (slow)</option>
+            <option value="0.04">0.04 xym</option>
+            <option value="0.07">0.07 xym</option>
+            <option value="0.1">0.1 xym (fast)</option>
+          </select></div>
+      </div>
+      <input type="button" onclick="revoke_mosaic();" class="Form-Btn" id="js-popup_r" value="回収"/>
+              
+    </div>
+  </div>
+  <div class="black-background_r" id="js-black-bg_r"></div>
+</div>
+
+<!-- ------- popup エイリアスリンク ---------------->
+
+<div id="js-popup_L" class="popup_L">
+  <div class="popup_L-inner">
+    <div class="close-btn" id="js-close-btn_L"><i class="fas fa-times"></i></div>
+    <div class="Form_L">
+      <h4>エイリアスリンク</h4>
+      <div class="Form-Item_L">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_L">ホルダーアドレス</span></p>
+        <input type="text" class="Form-Item-Input_L" id="holderAddress"/>
+      </div>
+      <div class="Form-Item_L">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_L">モザイクID</span></br></p>
+        <input type="text" class="Form-Item-Input_L" id="re_mosaic_ID"/>
+      </div>
+      <div class="Form-Item_L">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_L">数量</span></br></p>
+        <input type="text" class="Form-Item-Input_L" id="re_amount"/>
+      </div>
+      <div class="Form-Item_L">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_L">最大手数料</span></br></p>
+       <!-- <input type="text" class="Form-Item-Input_r" id="re_maxFee"/>  -->
+        <div class="Form-Item-Input" style="text-align: center">
+          <select class="re_maxFee" id="re_maxFee">
+            <option value="0.02">0.02 xym (slow)</option>
+            <option value="0.04">0.04 xym</option>
+            <option value="0.07">0.07 xym</option>
+            <option value="0.1">0.1 xym (fast)</option>
+          </select></div>
+      </div>
+      <input type="button" onclick="alias_Link();" class="Form-Btn" id="js-popup_L" value="リンク / アンリンク"/>
+              
+    </div>
+  </div>
+  <div class="black-background_L" id="js-black-bg_L"></div>
+</div>
+
+
+<!-- -------------------------------------------------->
 
 <script>
 
-  function popupImage() {  //  モザイク　ポップアップ
-  var popup2 = document.getElementById('js-popup2');
-  if(!popup2) return;
-  var blackBg = document.getElementById('js-black-bg1');
-  var closeBtn = document.getElementById('js-close-btn2');
-  var showBtn = document.getElementById('js-show-popup');
+  function popupImage_m() {  //  モザイク　ポップアップ
+  var popup_m = document.getElementById('js-popup_m');
+  if(!popup_m) return;
+  var blackBg = document.getElementById('js-black-bg_m');
+  var closeBtn = document.getElementById('js-close-btn_m');
+  var showBtn = document.getElementById('js-show-popup_m');
 
   closePopUp(blackBg);
   closePopUp(closeBtn);
@@ -341,20 +420,20 @@
   function closePopUp(elem) {
     if(!elem) return;
     elem.addEventListener('click', function() {
-      popup2.classList.toggle('is-show');
+      popup_m.classList.toggle('is-show');
     });
   }
 }
-popupImage();
+popupImage_m();
 
+////////////////////////////////////////////////
 
-
-function popupImage3() {  //  Namespace　ポップアップ
-  var popup3 = document.getElementById('js-popup3');
-  if(!popup3) return;
-  var blackBg = document.getElementById('js-black-bg2');
-  var closeBtn = document.getElementById('js-close-btn');
-  var showBtn = document.getElementById('js-show-popup2');
+function popupImage_n() {  //  Namespace　ポップアップ
+  var popup_n = document.getElementById('js-popup_n');
+  if(!popup_n) return;
+  var blackBg = document.getElementById('js-black-bg_n');
+  var closeBtn = document.getElementById('js-close-btn_n');
+  var showBtn = document.getElementById('js-show-popup_n');
 
   closePopUp(blackBg);
   closePopUp(closeBtn);
@@ -362,11 +441,54 @@ function popupImage3() {  //  Namespace　ポップアップ
   function closePopUp(elem) {
     if(!elem) return;
     elem.addEventListener('click', function() {
-      popup3.classList.toggle('is-show');
+      popup_n.classList.toggle('is-show');
     });
   }
 }
-popupImage3();
+popupImage_n();
+
+////////////////////////////////////////////////
+
+function popupImage_r() {  //  回収
+  var popup_r = document.getElementById('js-popup_r');
+  if(!popup_r) return;
+  var blackBg = document.getElementById('js-black-bg_r');
+  var closeBtn = document.getElementById('js-close-btn_r');
+  var showBtn = document.getElementById('js-show-popup_r');
+
+  closePopUp(blackBg);
+  closePopUp(closeBtn);
+  closePopUp(showBtn);
+  function closePopUp(elem) {
+    if(!elem) return;
+    elem.addEventListener('click', function() {
+      popup_r.classList.toggle('is-show');
+    });
+  }
+}
+popupImage_r();
+
+////////////////////////////////////////////////
+
+function popupImage_L() {  //  エイリアスリンク
+  var popup_L = document.getElementById('js-popup_L');
+  if(!popup_L) return;
+  var blackBg = document.getElementById('js-black-bg_L');
+  var closeBtn = document.getElementById('js-close-btn_L');
+  var showBtn = document.getElementById('js-show-popup_L');
+
+  closePopUp(blackBg);
+  closePopUp(closeBtn);
+  closePopUp(showBtn);
+  function closePopUp(elem) {
+    if(!elem) return;
+    elem.addEventListener('click', function() {
+      popup_L.classList.toggle('is-show');
+    });
+  }
+}
+popupImage_L();
+
 
 
 //トグルスイッチ
