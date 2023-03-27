@@ -815,6 +815,31 @@ txRepo
               dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く          	  		  		  	  
 	        }
 
+          if (tx.type === 17229){       // tx.type が 'MOSAIC_SUPPLY_REVOCATION' の場合	  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            const dom_mosaic = document.createElement('div');
+            const dom_amount = document.createElement('div');
+    
+           (async() => {
+              let mosaicNames = await nsRepo.getMosaicsNames([new sym.MosaicId(tx.mosaic.id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
+     
+              mosaicInfo = await mosaicRepo.getMosaic(tx.mosaic.id.id).toPromise();// 可分性の情報を取得する                     
+              let div = mosaicInfo.divisibility; // 可分性      
+               
+                       if ([mosaicNames][0][0].names.length !==0){ // ネームスペースがある場合                         
+                            dom_mosaic.innerHTML = `<font color="#3399FF">Mosaic :　<big><strong>${[mosaicNames][0][0].names[0].name}</strong></big></font>`;
+                       }else{ 　　　　　　　　　　　　　　　　　　　　　  // ネームスペースがない場合
+                             dom_mosaic.innerHTML = `<font color="#3399FF">Mosaic :　<strong>${tx.mosaic.id.id.toHex()}</strong></font>`;
+                       }
+                       dom_amount.innerHTML = `<font color="#3399FF" size="+1">💰➡️😊 :　<i><big><strong> ${(parseInt(tx.mosaic.amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;    // 　数量                
+           })(); // async() 
+         
+            dom_recipient_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">回収先 :　${tx.sourceAddress.address}</font><input type="image" src="src/copy.png" class="copy_bt" height="20px" id="${tx.sourceAddress.address}" onclick="Onclick_Copy(this.id);" /></div>`;
+            dom_tx.appendChild(dom_recipient_address);
+            dom_tx.appendChild(dom_mosaic);                    // dom_mosaic をdom_txに追加 
+            dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加                                                           
+            dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く          	  		  		  	  
+        }
+
           if (tx.type === 16974){       // tx.type が 'ADDRESS_ALIAS' の場合   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
             (async() => {
               let alias_Action; 
@@ -1538,6 +1563,31 @@ txRepo
               dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く          	  		  		  	  
 	        }
 
+          if (tx.type === 17229){       // tx.type が 'MOSAIC_SUPPLY_REVOCATION' の場合	  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            const dom_mosaic = document.createElement('div');
+            const dom_amount = document.createElement('div');
+    
+           (async() => {
+              let mosaicNames = await nsRepo.getMosaicsNames([new sym.MosaicId(tx.mosaic.id.id.toHex())]).toPromise(); // Namespaceの情報を取得する
+     
+              mosaicInfo = await mosaicRepo.getMosaic(tx.mosaic.id.id).toPromise();// 可分性の情報を取得する                     
+              let div = mosaicInfo.divisibility; // 可分性      
+               
+                       if ([mosaicNames][0][0].names.length !==0){ // ネームスペースがある場合                         
+                            dom_mosaic.innerHTML = `<font color="#3399FF">Mosaic :　<big><strong>${[mosaicNames][0][0].names[0].name}</strong></big></font>`;
+                       }else{ 　　　　　　　　　　　　　　　　　　　　　  // ネームスペースがない場合
+                             dom_mosaic.innerHTML = `<font color="#3399FF">Mosaic :　<strong>${tx.mosaic.id.id.toHex()}</strong></font>`;
+                       }
+                       dom_amount.innerHTML = `<font color="#3399FF" size="+1">💰➡️😊 :　<i><big><strong> ${(parseInt(tx.mosaic.amount.toHex(), 16)/(10**div)).toLocaleString(undefined, { maximumFractionDigits: 6 })} </big></strong><i></font>`;    // 　数量                
+           })(); // async() 
+         
+            dom_recipient_address.innerHTML = `<div class="copy_container"><font color="#2f4f4f">回収先 :　${tx.sourceAddress.address}</font><input type="image" src="src/copy.png" class="copy_bt" height="20px" id="${tx.sourceAddress.address}" onclick="Onclick_Copy(this.id);" /></div>`;
+            dom_tx.appendChild(dom_recipient_address);
+            dom_tx.appendChild(dom_mosaic);                    // dom_mosaic をdom_txに追加 
+            dom_tx.appendChild(dom_amount);                    // dom_amount をdom_txに追加                                                           
+            dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く          	  		  		  	  
+          }
+
           if (tx.type === 16974){       // tx.type が 'ADDRESS_ALIAS' の場合   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
             (async() => {
               let alias_Action; 
@@ -1776,6 +1826,7 @@ function Onclick_mosaic(){
   const transferable = document.getElementById("Transferable").checked;
   const restrictable = document.getElementById("Restrictable").checked;
   const revokable = document.getElementById("Revokable").checked;
+  const maxFee = document.getElementById("re_maxFee").value;
 
   console.log("duration=",duration);
   console.log("supplyMutable=",supplyMutable);
@@ -1826,7 +1877,10 @@ function Onclick_mosaic(){
             mosaicChangeTx.toAggregate(publicAccount),
           ],
           networkType,[],
-      ).setMaxFeeForAggregate(100, 0); 
+          sym.UInt64.fromUint(1000000*Number(maxFee)) 
+      )
+      
+      //.setMaxFeeForAggregate(100, 0); 
   
       window.SSS.setTransaction(aggregateTx);               // SSSにトランザクションを登録        
       window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
@@ -1858,7 +1912,7 @@ async function revoke_mosaic(){
       new sym.MosaicId(mosaic_ID),     // mosice ID 16進数　
       sym.UInt64.fromUint(Number(amount)*10**div)),      // mosaic 数量  可分性を適用する                                  
     networkType,
-    sym.UInt64.fromUint(1000000*Number(maxFee))  
+    sym.UInt64.fromUint(1000000*Number(maxFee)) 
   )
 
   window.SSS.setTransaction(revoke_tx);               // SSSにトランザクションを登録        
@@ -1878,6 +1932,7 @@ function Onclick_Namespace(){
   
   const Namespace = document.getElementById("Namespace").value;
   const duration = document.getElementById("Duration2").value;
+  const maxFee = document.getElementById("re_maxFee").value;
   
 
   console.log("Namespace=",Namespace);
@@ -1891,7 +1946,8 @@ function Onclick_Namespace(){
           Namespace,
           sym.UInt64.fromUint(duration),
           networkType,
-      ).setMaxFee(1000);
+          sym.UInt64.fromUint(1000000*Number(maxFee))   
+      )
 
       console.log("tx=",tx);
 
@@ -1903,6 +1959,110 @@ function Onclick_Namespace(){
   }, 1000)   
 
 }
+
+///////////////////////////////////////////////////////////////////////////////
+//                 エイリアスリンク　　
+///////////////////////////////////////////////////////////////////////////////
+
+function alias_Link(){
+
+  const Namespace = document.getElementById("Link_Namespace").value;
+  const Address_Mosaic = document.getElementById("Link_Address").value;
+  //const Mosaic_ID = document.getElementById("Link_Mosaic_ID").value;
+  const maxFee = document.getElementById("re_maxFee").value;
+  const alias_type = document.getElementById("alias_type").value;
+
+  console.log("Namespace=",Namespace);
+  console.log("Address_Mosaic=",Address_Mosaic)
+  console.log("maxFee=",maxFee);
+  console.log("alias_type=",alias_type);
+
+  //アカウントへリンク  /////////////////////////////
+  if (alias_type === "0"){
+    const namespaceId = new sym.NamespaceId(Namespace);
+    const address = sym.Address.createFromRawAddress(Address_Mosaic);
+
+    tx = sym.AliasTransaction.createForAddress(
+       sym.Deadline.create(epochAdjustment),
+       sym.AliasAction.Link,
+       namespaceId,
+       address,
+       networkType,
+       sym.UInt64.fromUint(1000000*Number(maxFee)) 
+    )
+   
+        window.SSS.setTransaction(tx);               // SSSにトランザクションを登録        
+        window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
+        console.log('signedTx', signedTx);
+        txRepo.announce(signedTx);
+        })
+  }
+
+  // モザイクへリンク  /////////////////////////////
+  if (alias_type === "1"){
+    const namespaceId = new sym.NamespaceId(Namespace);
+    const mosaicId = new sym.MosaicId(Address_Mosaic);
+  
+    tx = sym.AliasTransaction.createForMosaic(
+       sym.Deadline.create(epochAdjustment),
+       sym.AliasAction.Link,
+       namespaceId,
+       mosaicId,
+       networkType,
+       sym.UInt64.fromUint(1000000*Number(maxFee)) 
+    )
+
+        window.SSS.setTransaction(tx);               // SSSにトランザクションを登録        
+        window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
+        console.log('signedTx', signedTx);
+        txRepo.announce(signedTx);
+        })    
+  }
+
+  //アカウントからリンク解除  ////////////////////////
+  if (alias_type === "2"){
+    const namespaceId = new sym.NamespaceId(Namespace);
+    const address = sym.Address.createFromRawAddress(Address_Mosaic);
+
+    tx = sym.AliasTransaction.createForAddress(
+       sym.Deadline.create(epochAdjustment),
+       sym.AliasAction.Unlink,
+       namespaceId,
+       address,
+       networkType,
+       sym.UInt64.fromUint(1000000*Number(maxFee)) 
+    )
+   
+        window.SSS.setTransaction(tx);               // SSSにトランザクションを登録        
+        window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
+        console.log('signedTx', signedTx);
+        txRepo.announce(signedTx);
+        })
+  }
+
+  // モザイクからリンク解除 ////////////////////////////
+  if (alias_type === "3"){
+    const namespaceId = new sym.NamespaceId(Namespace);
+    const mosaicId = new sym.MosaicId(Address_Mosaic);
+  
+    tx = sym.AliasTransaction.createForMosaic(
+       sym.Deadline.create(epochAdjustment),
+       sym.AliasAction.Unlink,
+       namespaceId,
+       mosaicId,
+       networkType,
+       sym.UInt64.fromUint(1000000*Number(maxFee)) 
+    )
+
+        window.SSS.setTransaction(tx);               // SSSにトランザクションを登録        
+        window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
+        console.log('signedTx', signedTx);
+        txRepo.announce(signedTx);
+        })    
+  }
+}
+
+
 
 /////////////////////////////////////////////////////////////////////////////////
 //    ネームスペースチェック

@@ -122,14 +122,14 @@ h4 {
   background: rgb(255, 255, 255,0.8);
   border-radius: 16px;
   margin: 0px 16px 16px 16px;
-  padding: 32px 18px 18px 18px;
+  padding: 16px 18px 18px 18px;
 }
 
 .sender-card {
   background: rgb(255, 255, 255,0.8);
   border-radius: 16px;
   margin: 16px 16px 0px 16px;
-  padding: 32px 36px 36px 36px;
+  padding: 16px 36px 36px 36px;
   color: #2f4f4f;
 }
 
@@ -173,7 +173,7 @@ input[type="file"] {
   border-radius: 16px;
   width: 650px;
   margin-left: 750px;
-  padding: 32px;
+  padding: 32px 32px 32px 32px;
 }
 
 .textfiled-wrapper {
@@ -814,6 +814,18 @@ hr {
     }
     }
  
+    .alias_type {
+      width: 220px;
+      height: 35px;
+      margin-top: 5px;
+      margin-bottom: auto;
+      }
+      @media screen and (max-width: 480px) {
+      .alias_type {
+     /* margin-top: 8px;*/
+      }
+      }
+
 
 /**********************************************************/
 /* モーダルウィンドウ   Revoke  モザイク回収  */

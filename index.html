@@ -68,7 +68,6 @@
        <div style="display: inline-block; _display: inline;" id="explorer"></div>
        <a href="https://docs.sss-symbol.com/ja/" target="_blank">/ SSS_Extension /</a>
        <a href="https://note.com/mahorobart/n/nd5f226887c2a" target="_blank">Ventusについて</a>
-       <a href="https://github.com/mikunNEM/Ventus_Wallet" target="_blank">/ GitHub </a> 
        <a href="https://symbol-community.com" target="_blank">/ Symbol_Community_Web /</a>
        <select id="selectCSS">
            <option value="ventus">Ventus</option>
@@ -190,8 +189,8 @@
         </div>
     
          <div id="version"></div>
-         <div style="text-align: left">　　<button id="js-show-popup_m" style="background-color: aquamarine;">Mosaic</button>
-         <button id="js-show-popup_n" style="background-color: aquamarine;">Namespace</button></div>
+         <div style="text-align: left">　　<button id="js-show-popup_m" style="background-color: aquamarine;border-radius: 10px;">Mosaic</button>
+         <button id="js-show-popup_n" style="background-color: aquamarine;border-radius: 10px;">Namespace</button></div>
       </div>
       <div class="right">
         <div class="tx-card">
@@ -282,12 +281,21 @@
             <input type="checkbox" name="check4" value="Revokable" id="Revokable" />
           </div>
         </div>
+        <div class="Form-Item">
+          <p class="Form-Item-Label"><span class="Form-Item-Label-Required">最大手数料</span></p>
+          <div class="Form-Item-Input" style="text-align: center">
+            <select class="re_maxFee" id="re_maxFee">
+              <option value="0.04">0.04 xym (slow)</option>
+              <option value="0.05">0.05 xym</option>
+              <option value="0.07">0.07 xym</option>
+              <option value="0.1">0.1 xym (fast)</option>
+            </select></div>
+        </div>
         <input type="button" onclick="Onclick_mosaic();" class="Form-Btn" id="js-popup_m" value="作成"/>
         <br>
         <div style="text-align:center">レンタル手数料&nbsp; 50 XYM</div>
         <br>
-        <div style="text-align:right"><button id="js-show-popup_r" style="background-color: aquamarine;">モザイク回収</button></div>
-        <br>
+        <div style="text-align:right"><button id="js-show-popup_r" style="background-color: aquamarine;border-radius: 10px;">モザイク回収</button></div>
         <div style="text-align:center"><i><b><big>発行したモザイク</big></b></i></div>
         <br>
         <table id="ms_table"></table>
@@ -313,16 +321,27 @@
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required2">ネームスーペース</span></br></p>
         <input type="text" class="Form-Item-Input_N" id="Namespace" placeholder="" onchange="ns_check();"/>
       </div>
+      <div class="Form-Item2">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required2">最大手数料</span></p>
+        <div class="Form-Item-Input" style="text-align: center">
+          <select class="re_maxFee" id="re_maxFee">
+            <option value="0.02">0.02 xym (slow)</option>
+            <option value="0.04">0.04 xym</option>
+            <option value="0.07">0.07 xym</option>
+            <option value="0.1">0.1 xym (fast)</option>
+          </select></div>
+      </div>
+
       <div id="ns_fee" style="text-align:center"></div>
       <input type="button" onclick="Onclick_Namespace();" class="Form-Btn" id="js-popup_n" value="作成 / 更新"/>
         <br>
         <br>
-        <div style="text-align:right"><button id="js-show-popup_L" style="background-color: aquamarine;">エイリアスリンク</button></div>
+        <div style="text-align:right"><button id="js-show-popup_L" style="background-color: aquamarine;border-radius: 10px;">エイリアスリンク</button></div>
         <div style="text-align:center"><i><b><big>所有ネームスペース</big></b></i></div>
         <br>
         <table id="ns_table"></table>
         <br>
-        <div>※ 期限が切れた後、ネームスペース更新期限まで30日間(86400ブロック)の猶予期間があります。テストネットの場合は 1日(2880ブロック)</div>
+        <div>※ 期限が切れた後、ネームスペース更新期限まで30日間(86400ブロック)の猶予期間があります。テストネットは、猶予期間 1日(2880ブロック)です。</div>
      <!-- <dl id="account_append_info"></dl> -->
     </div>
   </div>
@@ -374,20 +393,33 @@
     <div class="Form_L">
       <h4>エイリアスリンク</h4>
       <div class="Form-Item_L">
-        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_L">ホルダーアドレス</span></p>
-        <input type="text" class="Form-Item-Input_L" id="holderAddress"/>
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_L">ネームスペース</span></p>
+        <input type="text" class="Form-Item-Input_L" id="Link_Namespace"/>
       </div>
+
       <div class="Form-Item_L">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_L">エイリアスタイプ</span></br></p>
+        <div class="Form-Item-Input" style="text-align: center">
+          <select class="alias_type" id="alias_type">
+            <option value="0">アドレスにリンク</option>
+            <option value="1">モザイクにリンク</option>
+            <option value="2">アドレスからリンク解除</option>
+            <option value="3">モザイクからリンク解除</option>
+          </select></div>
+      </div>
+
+      <div class="Form-Item_L">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_L">アドレス / モザイクID</span></br></p>
+        <input type="text" class="Form-Item-Input_L" id="Link_Address"/>
+      </div>
+
+      <!-- <div class="Form-Item_L">
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required_L">モザイクID</span></br></p>
-        <input type="text" class="Form-Item-Input_L" id="re_mosaic_ID"/>
-      </div>
-      <div class="Form-Item_L">
-        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_L">数量</span></br></p>
-        <input type="text" class="Form-Item-Input_L" id="re_amount"/>
-      </div>
+        <input type="text" class="Form-Item-Input_L" id="Link_Mosaic_ID"/>
+      </div>  -->
+
       <div class="Form-Item_L">
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required_L">最大手数料</span></br></p>
-       <!-- <input type="text" class="Form-Item-Input_r" id="re_maxFee"/>  -->
         <div class="Form-Item-Input" style="text-align: center">
           <select class="re_maxFee" id="re_maxFee">
             <option value="0.02">0.02 xym (slow)</option>
@@ -396,7 +428,8 @@
             <option value="0.1">0.1 xym (fast)</option>
           </select></div>
       </div>
-      <input type="button" onclick="alias_Link();" class="Form-Btn" id="js-popup_L" value="リンク / アンリンク"/>
+
+      <input type="button" onclick="alias_Link();" class="Form-Btn" id="js-popup_L" value="リンク / リンク解除"/>
               
     </div>
   </div>
