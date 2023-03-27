@@ -1858,7 +1858,8 @@ async function revoke_mosaic(){
       new sym.MosaicId(mosaic_ID),     // mosice ID 16進数　
       sym.UInt64.fromUint(Number(amount)*10**div)),      // mosaic 数量  可分性を適用する                                  
     networkType
-  ).setMaxFee(1000)
+    sym.UInt64.fromUint(1000000*Number(maxFee))  
+  )
 
   window.SSS.setTransaction(revoke_tx);               // SSSにトランザクションを登録        
   window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
