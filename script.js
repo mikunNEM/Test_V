@@ -1858,24 +1858,7 @@ async function revoke_mosaic(){
       new sym.MosaicId(mosaic_ID),     // mosice ID 16進数　
       sym.UInt64.fromUint(Number(amount)*10**div)),      // mosaic 数量  可分性を適用する                                  
     networkType
-  ).setMaxFee(2000000)
-
-  //export const createMosaicSupplyRevocation = () => {
-  //const addr = holderAddress;
-  //const mosaic = mosaic_ID;
-  //return MosaicSupplyRevocationTransaction.create(
-  //  Deadline.create(epochAdjustment),
-  //  Address.createFromRawAddress(addr),
-  //  new Mosaic(
-  //    new MosaicId(mosaic), // mosice ID 16進数
-  //    UInt64.fromUint(Number(10) * 10)
-  //  ),
-  //  NetworkType
- // ).setMaxFee(2000000)
- //}
-
-
-
+  ).setMaxFee(1000)
 
   window.SSS.setTransaction(revoke_tx);               // SSSにトランザクションを登録        
   window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
@@ -1907,7 +1890,7 @@ function Onclick_Namespace(){
           Namespace,
           sym.UInt64.fromUint(duration),
           networkType,
-      ).setMaxFee(100);
+      ).setMaxFee(1000);
 
       console.log("tx=",tx);
 
