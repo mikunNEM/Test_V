@@ -188,7 +188,7 @@ accountRepo.getAccountInfo(address)
                      // 表の行を作成
                      var row = document.createElement("tr");
 
-                     for (var j = 0; j < 12; j++) {
+                     for (var j = 0; j < 11; j++) {
                        // <td> 要素とテキストノードを作成し、テキストノードを
                        // <td> の内容として、その <td> を表の行の末尾に追加
                        var cell = document.createElement("td");                                                   
@@ -323,6 +323,7 @@ accountRepo.getAccountInfo(address)
                                  }                           
                               break;      
                             case 11:   // 編集
+                              /////////////////////////////  保留  //////////
                               if (i === -1){
                                   var cellText = document.createTextNode("");
                                   break;
@@ -1859,6 +1860,23 @@ async function revoke_mosaic(){
     networkType,
     maxFee
   )
+
+  //export const createMosaicSupplyRevocation = () => {
+  //const addr = holderAddress;
+  //const mosaic = mosaic_ID;
+  //return MosaicSupplyRevocationTransaction.create(
+  //  Deadline.create(epochAdjustment),
+  //  Address.createFromRawAddress(addr),
+  //  new Mosaic(
+  //    new MosaicId(mosaic), // mosice ID 16進数
+  //    UInt64.fromUint(Number(10) * 10)
+  //  ),
+  //  NetworkType
+ // ).setMaxFee(2000000)
+ //}
+
+
+
 
   window.SSS.setTransaction(revoke_tx);               // SSSにトランザクションを登録        
   window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
