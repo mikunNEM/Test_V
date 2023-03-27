@@ -1857,9 +1857,8 @@ async function revoke_mosaic(){
     new sym.Mosaic(
       new sym.MosaicId(mosaic_ID),     // mosice ID 16進数　
       sym.UInt64.fromUint(Number(amount)*10**div)),      // mosaic 数量  可分性を適用する                                  
-    networkType,
-    maxFee
-  )
+    networkType
+  ).setMaxFee(2000000)
 
   //export const createMosaicSupplyRevocation = () => {
   //const addr = holderAddress;
