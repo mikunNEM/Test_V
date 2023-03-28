@@ -130,7 +130,8 @@ h4 {
 .account-card #m_ns_button {
   position: relative;
   z-index: 10;
-  margin-top: 0;
+  top: 0px; 
+  right: 0px;
 }
 
 .sender-card {
