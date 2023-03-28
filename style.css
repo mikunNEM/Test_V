@@ -124,6 +124,7 @@ h4 {
   margin: 0px 16px 16px 16px;
   padding: 16px 18px 18px 18px;
   position: relative;
+  z-index: 5;
 }
 
 .account-card #m_ns_button {
