@@ -123,6 +123,7 @@ h4 {
   border-radius: 16px;
   margin: 0px 16px 16px 16px;
   padding: 16px 18px 18px 18px;
+  position: relative;
 }
 
 .sender-card {
