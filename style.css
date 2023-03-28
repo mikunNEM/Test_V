@@ -128,7 +128,7 @@ h4 {
 }
 
 .account-card #m_ns_button {
-  position: relative;
+  position: absolute;
   z-index: 10;
   top: 0px; 
   right: 0px;
