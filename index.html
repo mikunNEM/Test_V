@@ -83,8 +83,8 @@
       <div class="left">
         <div class="account-card">
             <h2>Account Info</h2>
-          　 <div id="m_ns_button" style="text-align: right"><button id="js-show-popup_m" style="background-color: aquamarine;border-radius: 10px;">Mosaic</button>
-        　　 <button id="js-show-popup_n" style="background-color: aquamarine;border-radius: 10px;">Namespace</button></div>
+            <div id="m_ns_button" style="text-align: left">　　<button id="js-show-popup_m" style="background-color: aquamarine;border-radius: 10px;">Mosaic</button>
+              <button id="js-show-popup_n" style="background-color: aquamarine;border-radius: 10px;">Namespace</button></div>
             <hr>
           <div class="container" style="color:#2f4f4f">   
             <div id="wallet-addr"></div>
@@ -336,17 +336,53 @@
       <input type="button" onclick="Onclick_Namespace();" class="Form-Btn" id="js-popup_n" value="作成 / 更新"/>
         <br>
         <br>
-        <div style="text-align:right"><button id="js-show-popup_L" style="background-color: aquamarine;border-radius: 10px;">エイリアスリンク</button></div>
+        <div style="text-align:right"><button id="js-show-popup_L" style="background-color: aquamarine;border-radius: 10px;">エイリアスリンク</button></div></br>
+        <div style="text-align:right"><button id="js-show-popup_sn" style="background-color: aquamarine;border-radius: 10px;">サブネームスペース</button></div>
         <div style="text-align:center"><i><b><big>所有ネームスペース</big></b></i></div>
         <br>
         <table id="ns_table"></table>
         <br>
         <div>※ 期限が切れた後、ネームスペース更新期限まで30日間(86400ブロック)の猶予期間があります。テストネットは、猶予期間 1日(2880ブロック)です。</div>
-     <!-- <dl id="account_append_info"></dl> -->
     </div>
   </div>
   <div class="black-background_n" id="js-black-bg_n"></div>
 </div>
+
+<!--    popup  sub namespace 作成   ------>
+<div id="js-popup_sn" class="popup_sn">
+  <div class="popup_sn-inner">
+    <div class="close-btn" id="js-close-btn_sn"><i class="fas fa-times"></i></div>
+    <div class="Form_sn">
+      <h4>Sub Namespace</h4>
+      <div class="Form-Item_sn">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_sn">ルートネームスペース</span></p>
+        <input type="text" class="Form-Item-Input_sn" id="rootNamespace"/>
+      </div>
+      <div class="Form-Item_sn">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_sn">サブネームスーペース</span></br></p>
+        <input type="text" class="Form-Item-Input_sn" id="subNamespace" placeholder=""/>
+      </div>
+      <div class="Form-Item_sn">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_sn">最大手数料</span></p>
+        <div class="Form-Item-Input" style="text-align: center">
+          <select class="re_maxFee" id="re_maxFee">
+            <option value="0.02">0.02 xym (slow)</option>
+            <option value="0.04">0.04 xym</option>
+            <option value="0.07">0.07 xym</option>
+            <option value="0.1">0.1 xym (fast)</option>
+          </select></div>
+      </div>
+      <input type="button" onclick="Onclick_subNamespace();" class="Form-Btn" id="js-popup_sn" value="作成"/>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div>※ ルートネームスペースをレンタルしている限り、サブネームスペースは使用できます。</div>
+    </div>
+  </div>
+  <div class="black-background_sn" id="js-black-bg_sn"></div>
+</div>
+
 
 <!-- ------- popup revokable mosaic ---------------->
 
@@ -480,6 +516,27 @@ function popupImage_n() {  //  Namespace　ポップアップ
   }
 }
 popupImage_n();
+
+////////////////////////////////////////////////
+
+function popupImage_sn() {  //  subNamespace　ポップアップ
+  var popup_sn = document.getElementById('js-popup_sn');
+  if(!popup_sn) return;
+  var blackBg = document.getElementById('js-black-bg_sn');
+  var closeBtn = document.getElementById('js-close-btn_sn');
+  var showBtn = document.getElementById('js-show-popup_sn');
+
+  closePopUp(blackBg);
+  closePopUp(closeBtn);
+  closePopUp(showBtn);
+  function closePopUp(elem) {
+    if(!elem) return;
+    elem.addEventListener('click', function() {
+      popup_sn.classList.toggle('is-show');
+    });
+  }
+}
+popupImage_sn();
 
 ////////////////////////////////////////////////
 

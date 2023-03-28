@@ -354,10 +354,9 @@ accountRepo.getAccountInfo(address)
                    // <table> を <body> の中に追加
                    body.appendChild(tbl);
                    // tbl の border 属性を 2 に設定
-                   tbl.setAttribute("border", "1");    
-
+                   tbl.setAttribute("border", "1"); 
               });
-
+                          
 
               //// ネームスペース //////////////
               nsRepo.search({ownerAddress:accountInfo.address}) /////    保有ネームスペース
@@ -502,12 +501,6 @@ accountRepo.getAccountInfo(address)
                    body.appendChild(tbl);
                    // tbl の border 属性を 2 に設定
                    tbl.setAttribute("border", "1");
-
-
-              //  if(ddNamespace !== ""){
-              //    $("#account_append_info").append('<dt>ルートネームスペース</dt>'+ ddNamespace);
-              //  }
-               // console.log("ddNamespace=",ddNamespace);/////
               });
             })
           });
@@ -809,7 +802,12 @@ txRepo
 
 
 	        if (tx.type === 16718){       // tx.type が 'NAMESPACE_REGISTRATION' の場合	  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	            dom_namespace.innerHTML = `<font color="#008b8b">Namespace 登録 :　<big><strong>${tx.namespaceName}</strong></big></font>`; 
+	           if (tx.registrationType === 0){
+              dom_namespace.innerHTML = `<font color="#008b8b">root Namespace 登録 :　<big><strong>${tx.namespaceName}</strong></big></font>`; 
+             }else
+                if (tx.registrationType === 1){
+              dom_namespace.innerHTML = `<font color="#008b8b">sub Namespace 登録 :　<big><strong>${tx.namespaceName}</strong></big></font>`; 
+             }
 	            dom_tx.appendChild(dom_namespace);                 // namespaceをdom_txに追加
               dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加                                                              
               dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く          	  		  		  	  
@@ -1557,11 +1555,16 @@ txRepo
 
 
 	        if (tx.type === 16718){       // tx.type が 'NAMESPACE_REGISTRATION' の場合	  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	            dom_namespace.innerHTML = `<font color="#008b8b">Namespace 登録 :　<big><strong>${tx.namespaceName}</strong></big></font>`; 
-	            dom_tx.appendChild(dom_namespace);                 // namespaceをdom_txに追加
-              dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加                                                              
-              dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く          	  		  		  	  
-	        }
+            if (tx.registrationType === 0){
+             dom_namespace.innerHTML = `<font color="#008b8b">root Namespace 登録 :　<big><strong>${tx.namespaceName}</strong></big></font>`; 
+            }else
+               if (tx.registrationType === 1){
+             dom_namespace.innerHTML = `<font color="#008b8b">sub Namespace 登録 :　<big><strong>${tx.namespaceName}</strong></big></font>`; 
+            }
+             dom_tx.appendChild(dom_namespace);                 // namespaceをdom_txに追加
+             dom_tx.appendChild(dom_message);                   // dom_message をdom_txに追加                                                              
+             dom_tx.appendChild(document.createElement('hr'));  // 水平線を引く          	  		  		  	  
+          }
 
           if (tx.type === 17229){       // tx.type が 'MOSAIC_SUPPLY_REVOCATION' の場合	  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             const dom_mosaic = document.createElement('div');
@@ -1940,7 +1943,6 @@ function Onclick_Namespace(){
   
 
   // ルートネームスペースをレンタルする
-  setTimeout(() => {
       const tx = sym.NamespaceRegistrationTransaction.createRootNamespace(
           sym.Deadline.create(epochAdjustment),
           Namespace,
@@ -1949,16 +1951,44 @@ function Onclick_Namespace(){
           sym.UInt64.fromUint(1000000*Number(maxFee))   
       )
 
-      console.log("tx=",tx);
+      window.SSS.setTransaction(tx);               // SSSにトランザクションを登録        
+      window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
+      console.log('signedTx', signedTx);
+      txRepo.announce(signedTx);
+      }) 
+
+}
+
+
+//  サブネームスペースを取得する /////////////////////////////////////////////////////////////
+function Onclick_subNamespace(){
+  
+  const rootNamespace = document.getElementById("rootNamespace").value;
+  const subNamespace = document.getElementById("subNamespace").value;
+  const maxFee = document.getElementById("re_maxFee").value;
+  
+  console.log("rootNamespace=",rootNamespace);
+  console.log("subNamespace=",subNamespace);
+  
+
+      const tx = sym.NamespaceRegistrationTransaction.createSubNamespace(
+          sym.Deadline.create(epochAdjustment),
+          subNamespace,
+          rootNamespace,
+          networkType,
+          sym.UInt64.fromUint(1000000*Number(maxFee))   
+      )
 
       window.SSS.setTransaction(tx);               // SSSにトランザクションを登録        
       window.SSS.requestSign().then(signedTx => {   // SSSを用いた署名をユーザーに要求
       console.log('signedTx', signedTx);
       txRepo.announce(signedTx);
-      })
-  }, 1000)   
+      }) 
 
 }
+
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //                 エイリアスリンク　　
