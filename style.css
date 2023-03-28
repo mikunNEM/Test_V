@@ -126,6 +126,11 @@ h4 {
   position: relative;
 }
 
+.account-card #m_ns_button {
+  position: relative;
+  padding: 0 0 auto auto;
+}
+
 .sender-card {
   background: rgb(255, 255, 255,0.8);
   border-radius: 16px;
