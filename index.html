@@ -18,6 +18,7 @@
     var defaulturl= './css/BGimg_ventus.css'
     var cyberpunkurl= './css/BGimg_cyberpunk.css';
     var seaurl= './css/BGimg_sea.css';
+    var shevaurl= './css/BGimg_sheva.css';
 // 画面表示時のCSSの読み込み設定
     $(document).ready(
         function() {
@@ -35,6 +36,9 @@
             } else if (Cookies.get('cookieCSS') == 'sea') {
                     $("#selectCSS").val("sea");
                     $("#switchCSS").attr("href" , seaurl);
+            } else if (Cookies.get('cookieCSS') == 'sheva') {
+                    $("#selectCSS").val("sheva");
+                    $("#switchCSS").attr("href" , shevaurl);
             }
         }
     );
@@ -50,7 +54,9 @@
                     cssurl = cyberpunkurl;
                 } else if  (val == "sea") {
                      cssurl = seaurl;
-                }         
+                } else if  (val == "sheva") {
+                     cssurl = shevaurl;
+                }          
             // 選択結果をクッキーに登録する
                 Cookies.set('cookieCSS', val);
             // CSSを読み込む
@@ -73,6 +79,7 @@
            <option value="ventus">Ventus</option>
            <option value="cyberpunk">CyberPunk</option>
            <option value="sea">Sea</option>
+           <option value="sheva">Sheva</option>
        </select>
   </div> 
 
@@ -83,8 +90,9 @@
       <div class="left">
         <div class="account-card">
             <h2>Account Info</h2>
-            <div id="m_ns_button" style="text-align: left">　　<button id="js-show-popup_m" style="background-color: aquamarine;border-radius: 10px;">Mosaic</button>
-              <button id="js-show-popup_n" style="background-color: aquamarine;border-radius: 10px;">Namespace</button></div>
+            <div id="m_ns_button" style="text-align: left">　　<button id="js-show-popup_m" class="btn-gradient-radius">Mosaic</button>
+              <button id="js-show-popup_n" class="btn-gradient-radius">Namespace</button>
+              <button id="js-show-popup_Meta" class="btn-gradient-radius">Metadata</button></div>
             <hr>
           <div class="container" style="color:#2f4f4f">   
             <div id="wallet-addr"></div>
@@ -284,7 +292,7 @@
         <div class="Form-Item">
           <p class="Form-Item-Label"><span class="Form-Item-Label-Required">最大手数料</span></p>
           <div class="Form-Item-Input" style="text-align: center">
-            <select class="re_maxFee" id="re_maxFee">
+            <select class="re_maxFee" id="re_maxFee_m">
               <option value="0.04">0.04 xym (slow)</option>
               <option value="0.05">0.05 xym</option>
               <option value="0.07">0.07 xym</option>
@@ -318,7 +326,7 @@
         <div id="ex_date2" style="text-align:right"></div>
       </div>
       <div class="Form-Item2">
-        <p class="Form-Item-Label"><span class="Form-Item-Label-Required2">ネームスーペース</span></br></p>
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required2">ネームスペース</span></br></p>
         <input type="text" class="Form-Item-Input_N" id="Namespace" placeholder="" onchange="ns_check();"/>
       </div>
       <div class="Form-Item2">
@@ -354,10 +362,13 @@
     <div class="close-btn" id="js-close-btn_sn"><i class="fas fa-times"></i></div>
     <div class="Form_sn">
       <h4>Sub Namespace</h4>
+      
       <div class="Form-Item_sn">
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required_sn">ルートネームスペース</span></p>
         <input type="text" class="Form-Item-Input_sn" id="rootNamespace"/>
       </div>
+
+
       <div class="Form-Item_sn">
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required_sn">サブネームスーペース</span></br></p>
         <input type="text" class="Form-Item-Input_sn" id="subNamespace" placeholder=""/>
@@ -377,7 +388,7 @@
         <br>
         <br>
         <br>
-        <div>※ ルートネームスペースをレンタルしている限り、サブネームスペースは使用できます。</div>
+        <div>※ ルートネームスペースのレンタル有効期限が切れると、サブネームスペースも期限が切れます。</div>
     </div>
   </div>
   <div class="black-background_sn" id="js-black-bg_sn"></div>
@@ -397,7 +408,9 @@
       </div>
       <div class="Form-Item_r">
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required_r">モザイクID</span></br></p>
-        <input type="text" class="Form-Item-Input_r" id="re_mosaic_ID"/>
+        <div class="Form-Item-Input" style="text-align: center">
+          <div class="revoke_select"></div>
+        </div>
       </div>
       <div class="Form-Item_r">
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required_r">数量</span></br></p>
@@ -427,15 +440,16 @@
   <div class="popup_L-inner">
     <div class="close-btn" id="js-close-btn_L"><i class="fas fa-times"></i></div>
     <div class="Form_L">
-      <h4>エイリアスリンク</h4>
+      <h4>エイリアスリンク</h4>   
       <div class="Form-Item_L">
-        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_L">ネームスペース</span></p>
-        <input type="text" class="Form-Item-Input_L" id="Link_Namespace"/>
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_L">ネームスペース</span></br></p>
+        <div class="Form-Item-Input_L" style="text-align: center">
+          <div class="Namespace_select"></div>
+        </div>
       </div>
-
       <div class="Form-Item_L">
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required_L">エイリアスタイプ</span></br></p>
-        <div class="Form-Item-Input" style="text-align: center">
+        <div class="Form-Item-Input_L" style="text-align: center">
           <select class="alias_type" id="alias_type">
             <option value="0">アドレスにリンク</option>
             <option value="1">モザイクにリンク</option>
@@ -456,7 +470,7 @@
 
       <div class="Form-Item_L">
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required_L">最大手数料</span></br></p>
-        <div class="Form-Item-Input" style="text-align: center">
+        <div class="Form-Item-Input_L" style="text-align: center">
           <select class="re_maxFee" id="re_maxFee">
             <option value="0.02">0.02 xym (slow)</option>
             <option value="0.04">0.04 xym</option>
@@ -472,6 +486,57 @@
   <div class="black-background_L" id="js-black-bg_L"></div>
 </div>
 
+<!-- ------- popup Metadata  ---------------->
+
+<div id="js-popup_Meta" class="popup_Meta">
+  <div class="popup_Meta-inner">
+    <div class="close-btn" id="js-close-btn_Meta"><i class="fas fa-times"></i></div>
+    <div class="Form_Meta">
+      <h4>Metadata</h4>
+      <div class="Form-Item_Meta">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_Meta">Metadata登録</span></br></p>
+        <div class="Form-Item-Input_Meta" style="text-align: center">
+          <select class="Meta_type" id="Meta_type">
+            <option value="0">アカウントに登録</option>
+            <option value="1">モザイクに登録</option>
+            <option value="2">ネームスペースに登録</option>
+          </select></div>
+      </div>
+      <div class="Form-Item_Meta">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_Meta">Address / Mosaic ID / Namespace</span></p>
+        <input type="text" class="Form-Item-Input_Meta" id="Meta_to"/>
+      </div>
+      <div class="Form-Item_Meta">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_Meta">Metadata Key</span></br></p>
+        <div class="Form-Item-Input_Meta" style="text-align: center">
+        <div class="Meta_select"></div>
+        </div>
+      </div>  
+      <div class="Form-Item_Meta">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_Meta">value</span></br></p>
+        <input type="text" class="Form-Item-Input_Meta" id="Meta_value"/>
+      </div>
+      <div class="Form-Item_Meta">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_Meta">最大手数料</span></br></p>
+        <div class="Form-Item-Input" style="text-align: center">
+          <select class="re_maxFee" id="re_maxFee">
+            <option value="0.02">0.02 xym (slow)</option>
+            <option value="0.04">0.04 xym</option>
+            <option value="0.07">0.07 xym</option>
+            <option value="0.1">0.1 xym (fast)</option>
+          </select></div>
+      </div>
+      <input type="button" onclick="Metadata();" class="Form-Btn" id="js-popup_Meta" value="登録 / 更新"/>
+      <br>
+      <br>
+      <br>
+      <div style="text-align:center"><i><b><big>メタデータ エントリー</big></b></i></div>
+      <br>      
+        <table id="Meta_table"></table>        
+    </div>
+  </div>
+  <div class="black-background_Meta" id="js-black-bg_Meta"></div>
+</div>
 
 <!-- -------------------------------------------------->
 
@@ -540,7 +605,7 @@ popupImage_sn();
 
 ////////////////////////////////////////////////
 
-function popupImage_r() {  //  回収
+function popupImage_r() {  //  モザイク回収　ポップアップ
   var popup_r = document.getElementById('js-popup_r');
   if(!popup_r) return;
   var blackBg = document.getElementById('js-black-bg_r');
@@ -558,6 +623,27 @@ function popupImage_r() {  //  回収
   }
 }
 popupImage_r();
+
+////////////////////////////////////////////////
+
+function popupImage_Meta() {  //  Metadata　ポップアップ
+  var popup_Meta = document.getElementById('js-popup_Meta');
+  if(!popup_Meta) return;
+  var blackBg = document.getElementById('js-black-bg_Meta');
+  var closeBtn = document.getElementById('js-close-btn_Meta');
+  var showBtn = document.getElementById('js-show-popup_Meta');
+
+  closePopUp(blackBg);
+  closePopUp(closeBtn);
+  closePopUp(showBtn);
+  function closePopUp(elem) {
+    if(!elem) return;
+    elem.addEventListener('click', function() {
+      popup_Meta.classList.toggle('is-show');
+    });
+  }
+}
+popupImage_Meta();
 
 ////////////////////////////////////////////////
 
