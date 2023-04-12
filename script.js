@@ -667,7 +667,8 @@ accountRepo.getAccountInfo(address)
                                  var cellText = document.createTextNode("Value");
                                  break;
                              }                    
-                                 var cellText = document.createTextNode(data.data[i].metadataEntry.value);                   
+                                 var cellText = document.createTextNode(data.data[i].metadataEntry.value); 
+                                 console.log("%cメタデータエントリー中身","color: red",data.data[i]);                  
                                  break;    
                            }  
                       cell.appendChild(cellText);
@@ -1138,9 +1139,10 @@ txRepo
                       dom_tx.appendChild(dom_account);
                  }else  
                     if (aggTx[0].innerTransactions[0].type === 16964){ // MOSAIC_METADATA の場合
-                      dom_mosaic.innerHTML = `<font color="#008b8b">Mosaic METADATA登録 :　<big><strong>${aggTx[0].innerTransactions[0].value}</strong></big></font>`; 
+                      dom_mosaic.innerHTML = `<font color="#008b8b">Mosaic METADATA登録 :　<big><strong>${sym.Convert.uint8ToUtf8(aggTx[0].innerTransactions[0].value)}</strong></big></font>`;
+                      console.log("%cモザイクメタデータ中身　アグリ=","color: red",sym.Convert.uint8ToUtf8(aggTx[0].innerTransactions[0].value));
                       dom_tx.appendChild(dom_mosaic);                  // dom_mosaicをdom_txに追加      
-                      console.log("%c////// モザイク Metadata //////","color: red");
+                      //console.log("%c////// モザイク Metadata //////","color: red");
 
                     }else   
                        if (aggTx[0].innerTransactions[0].type === 17220){ // NAMESPACE_METADATA 
@@ -2362,9 +2364,11 @@ async function Metadata(){
              key = key.id;
          }
 
-      value = Meta_value;
+      //var value1 = Meta_value;   
+      value = sym.Convert.utf8ToUint8(Meta_value);         //                  
 
       console.log("key=",key);
+      console.log("Meta_value=",Meta_value);
       console.log("value=",value);
     
       tx = await metaService
@@ -2378,6 +2382,8 @@ async function Metadata(){
           address
         )
         .toPromise();
+
+        console.log("%c txの中身＝＝＝＝＝","color: red",tx.value);
     
       aggregateTx = sym.AggregateTransaction.createComplete(
         sym.Deadline.create(epochAdjustment),
