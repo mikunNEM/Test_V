@@ -79,7 +79,7 @@
            <option value="ventus">Ventus</option>
            <option value="cyberpunk">CyberPunk</option>
            <option value="sea">Sea</option>
-           <option value="sheva">Sheva</option>
+        <!--   <option value="sheva">Sheva</option>  -->
        </select>
   </div> 
 
@@ -144,7 +144,7 @@
             </select>
           </div> 
    
-         <label>
+         <label class="Address_List">
              <input type="file" id="upload-file">Address List (.csv)       <!-- address ファイルを選択 --> 
          </label>
          <div style="display: inline-block; _display: inline;"> 
@@ -303,7 +303,7 @@
         <br>
         <div style="text-align:center">レンタル手数料&nbsp; 50 XYM</div>
         <br>
-        <div style="text-align:right"><button id="js-show-popup_r" style="background-color: aquamarine;border-radius: 10px;">モザイク回収</button></div>
+        <div style="text-align:right"><button id="js-show-popup_r" class="popup_sub_button">モザイク回収</button></div>
         <div style="text-align:center"><i><b><big>発行したモザイク</big></b></i></div>
         <br>
         <table id="ms_table"></table>
@@ -332,7 +332,7 @@
       <div class="Form-Item2">
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required2">最大手数料</span></p>
         <div class="Form-Item-Input" style="text-align: center">
-          <select class="re_maxFee" id="re_maxFee">
+          <select class="re_maxFee" id="re_maxFee_n">
             <option value="0.02">0.02 xym (slow)</option>
             <option value="0.04">0.04 xym</option>
             <option value="0.07">0.07 xym</option>
@@ -344,8 +344,8 @@
       <input type="button" onclick="Onclick_Namespace();" class="Form-Btn" id="js-popup_n" value="作成 / 更新"/>
         <br>
         <br>
-        <div style="text-align:right"><button id="js-show-popup_L" style="background-color: aquamarine;border-radius: 10px;">エイリアスリンク</button></div></br>
-        <div style="text-align:right"><button id="js-show-popup_sn" style="background-color: aquamarine;border-radius: 10px;">サブネームスペース</button></div>
+        <div style="text-align:right"><button id="js-show-popup_L" class="popup_sub_button">エイリアスリンク</button></div></br>
+        <div style="text-align:right"><button id="js-show-popup_sn" class="popup_sub_button">サブネームスペース</button></div>
         <div style="text-align:center"><i><b><big>所有ネームスペース</big></b></i></div>
         <br>
         <table id="ns_table"></table>
@@ -376,7 +376,7 @@
       <div class="Form-Item_sn">
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required_sn">最大手数料</span></p>
         <div class="Form-Item-Input" style="text-align: center">
-          <select class="re_maxFee" id="re_maxFee">
+          <select class="re_maxFee" id="re_maxFee_sn">
             <option value="0.02">0.02 xym (slow)</option>
             <option value="0.04">0.04 xym</option>
             <option value="0.07">0.07 xym</option>
@@ -420,7 +420,7 @@
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required_r">最大手数料</span></br></p>
        <!-- <input type="text" class="Form-Item-Input_r" id="re_maxFee"/>  -->
         <div class="Form-Item-Input" style="text-align: center">
-          <select class="re_maxFee" id="re_maxFee">
+          <select class="re_maxFee" id="re_maxFee_r">
             <option value="0.02">0.02 xym (slow)</option>
             <option value="0.04">0.04 xym</option>
             <option value="0.07">0.07 xym</option>
@@ -471,7 +471,7 @@
       <div class="Form-Item_L">
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required_L">最大手数料</span></br></p>
         <div class="Form-Item-Input_L" style="text-align: center">
-          <select class="re_maxFee" id="re_maxFee">
+          <select class="re_maxFee" id="re_maxFee_L">
             <option value="0.02">0.02 xym (slow)</option>
             <option value="0.04">0.04 xym</option>
             <option value="0.07">0.07 xym</option>
@@ -494,9 +494,10 @@
     <div class="Form_Meta">
       <h4>Metadata</h4>
       <div class="Form-Item_Meta">
-        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_Meta">Metadata →</span></br></p>
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_Meta">Type</span></br></p>
         <div class="Form-Item-Input_Meta" style="text-align: center">
-          <select class="Meta_type" id="Meta_type">
+          <select class="Meta_type" id="Meta_type" onchange="MetaKey_select();">
+            <option value="-1">--- Select ---</option>
             <option value="0">Account</option>
             <option value="1">Mosaic</option>
             <option value="2">Namespace</option>
@@ -509,8 +510,10 @@
         </div>
       </div>  
       <div class="Form-Item_Meta">
-        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_Meta">Address / Mosaic ID / Namespace</span></p>
-        <input type="text" class="Form-Item-Input_Meta" id="Meta_to"/>
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_Meta">Address<br>Mosaic ID<br>Namespace</span></p>
+        <div class="Form-Item-Input_Meta" style="text-align: center">
+        <div class="Namespace_select_M" id="Meta_to"></div>
+        </div>
       </div>      
       <div class="Form-Item_Meta">
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required_Meta">value</span></br></p>
@@ -519,8 +522,8 @@
       <div class="Form-Item_Meta">
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required_Meta">最大手数料</span></br></p>
         <div class="Form-Item-Input" style="text-align: center">
-          <select class="re_maxFee" id="re_maxFee">
-            <option value="0.02">0.02 xym (slow)</option>
+          <select class="re_maxFee" id="re_maxFee_Meta">
+            <option value="0.03">0.03 xym (slow)</option>
             <option value="0.04">0.04 xym</option>
             <option value="0.07">0.07 xym</option>
             <option value="0.1">0.1 xym (fast)</option>

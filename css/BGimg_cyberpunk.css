@@ -1,5 +1,5 @@
 body {
-  background-image:url("https://github.com/mikunNEM/Test_V/raw/main/src/cyberpunk.jpg");
+  background-image:url("../src/cyberpunk.jpg");
   background-size: cover;
   background-attachment: fixed;
 }
