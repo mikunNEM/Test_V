@@ -401,7 +401,7 @@ accountRepo.getAccountInfo(address)
                    const jsSelectBox_mosaicID = document.querySelector('.select_mosaicID');
                    const select_mo = document.createElement('select');
 
-                   select.classList.add('select_mo');
+                   select_mo.classList.add('select_mo');
                    select_mosaicID.forEach((v) => {
                      const option = document.createElement('option');
                      option.value = v.value;
