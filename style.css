@@ -940,10 +940,34 @@ hr {
               margin-bottom: auto;
               }
               @media screen and (max-width: 480px) {
-              .Meta_select {
+              .select_Meta {
               margin-top: 8px;
               }
               }
+          
+.select_mo {
+                width: 240px;
+                height: 35px;
+                margin-top: 5px;
+                margin-bottom: auto;
+                }
+                @media screen and (max-width: 480px) {
+                .select_mo {
+                margin-top: 8px;
+                }
+                }  
+                
+.select_N {
+                  width: 240px;
+                  height: 35px;
+                  margin-top: 5px;
+                  margin-bottom: auto;
+                  }
+                  @media screen and (max-width: 480px) {
+                  .select_N {
+                  margin-top: 8px;
+                  }
+                  }                
 
 /**********************************************************/
 /* モーダルウィンドウ  sub Namespace  */

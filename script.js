@@ -208,6 +208,7 @@ accountRepo.getAccountInfo(address)
                             case 0:   //モザイクID
                               if (i === -1){
                                   var cellText = document.createTextNode("モザイクID");
+                                  select_mosaicID.push({value:"--- Select ---",name:"--- Select ---"}); //セレクトボックス用の連想配列を作る
                               break;
                               }                             
                                  var cellText = document.createTextNode(mosaic.data[i].id.id.toHex());
@@ -395,6 +396,20 @@ accountRepo.getAccountInfo(address)
                    });
                    jsSelectBox_rev.appendChild(select);
 
+                   ////    select_mosaicID  (Metadata用)    ///////////////////////////////////////
+
+                   const jsSelectBox_mosaicID = document.querySelector('.select_mosaicID');
+                   const select_mo = document.createElement('select');
+
+                   select.classList.add('select_mo');
+                   select_mosaicID.forEach((v) => {
+                     const option = document.createElement('option');
+                     option.value = v.value;
+                     option.textContent = v.name;
+                     select_mo.appendChild(option);
+                   });
+                   jsSelectBox_mosaicID.appendChild(select_mo);
+
               });
                           
 
@@ -470,12 +485,13 @@ accountRepo.getAccountInfo(address)
                             case 0:   //ネームスペースID
                               if (i === -1){
                                   var cellText = document.createTextNode("ネームスペース名");
+                                  select_ns .push({value:"--- Select ---",name:"--- Select ---"}); //セレクトボックス用の連想配列を作る
                                   break;
                               }                        
                               var cellText = document.createTextNode(Nnames1[i]);
-                               
-                                  select_ns.push({value:Nnames1[i],name:Nnames1[i]}); //セレクトボックス用の連想配列を作る                              
-                                    
+                                 if (zip[0].height.compact() < ns.data[i].endHeight.compact() - grace_block){  // ステータスが無効なネームスペースを排除
+                                    select_ns .push({value:Nnames1[i],name:Nnames1[i]}); //セレクトボックス用の連想配列を作る                              
+                                 }    
                                   break;
                             case 1:   //ネームスペース名
                               if (i === -1){
@@ -567,21 +583,22 @@ accountRepo.getAccountInfo(address)
                    });
                    jsSelectBox.appendChild(select);
 
-                   /////   Namespace  2つ目のセレクトボックス
 
-                   const jsSelectBox_M = document.querySelector('.Namespace_select_M');
-                    select = document.createElement('select');
+                   /////   Namespace セレクトボックス  (Metadata用）
 
-                   select.classList.add('select1');
+                   const jsSelectBox_N = document.querySelector('.Namespace_select_N');
+                   const select_N = document.createElement('select');
+
+                   select_N.classList.add('select_N');
                    select_ns.forEach((v) => {
                      const option = document.createElement('option');
                      option.value = v.value;
                      option.textContent = v.name;
-                     select.appendChild(option);
+                     select_N.appendChild(option);
                    });
-                   jsSelectBox_M.appendChild(select);                   
-
-
+                   jsSelectBox_N.appendChild(select_N);
+                
+                                 
               });
             })
           });
@@ -716,8 +733,8 @@ accountRepo.getAccountInfo(address)
                     option.textContent = v.name;
                     select.appendChild(option);
                   });
-                  jsSelectBox.appendChild(select);                
-                
+                  jsSelectBox.appendChild(select);       
+                                    
                 });  
                 
   
@@ -2258,7 +2275,7 @@ function Onclick_subNamespace(){
 
 function alias_Link(){
 
-  const Namespace = document.querySelector(".select1").value;
+  const Namespace = document.querySelector("select1").value;
   const Address_Mosaic = document.getElementById("Link_Address").value;
   //const Mosaic_ID = document.getElementById("Link_Mosaic_ID").value;
   const maxFee = document.getElementById("re_maxFee_L").value;
@@ -2362,13 +2379,15 @@ async function Metadata(){
 
   const Meta_type = document.getElementById("Meta_type").value;   // Metadata登録先
   const Meta_key = document.querySelector(".select_Meta").value;     // Metadata Key
-  const Meta_to = document.getElementById("Meta_to").value;       // Address / MosaicID / NamespaceID
+  //const Meta_to = document.querySelector(".Meta_to").value;       // Address / MosaicID / Namespace
+  const mosaicID = document.querySelector(".select_mosaicID").value;   //  MosaicID
+  const Namespace = document.querySelector(".Namespace_select_N").value;  // Namespace
   const Meta_value = document.getElementById("Meta_value").value; // value値
   const maxFee = document.getElementById("re_maxFee_Meta").value; //  maxFee値
   const address = sym.Address.createFromRawAddress(window.SSS.activeAddress);
 
   console.log("Meta_type===",Meta_type);
-  console.log("Meta_to===",Meta_to);
+ // console.log("Meta_to===",Meta_to);
   console.log("Meta_key===",Meta_key);
   console.log("Meta_value===",Meta_value);
   console.log("maxFee===",maxFee);
@@ -2419,7 +2438,7 @@ async function Metadata(){
 
   }
   if (Meta_type === "1"){ // モザイクに登録 ///////////////////////////
-      const mosaicId = new sym.MosaicId(Meta_to);
+      const mosaicId = new sym.MosaicId(mosaicID);
       const mosaicInfo = await mosaicRepo.getMosaic(mosaicId).toPromise();           
     
       tx = await metaService
@@ -2450,7 +2469,7 @@ async function Metadata(){
 
   }
   if (Meta_type === "2"){ // ネームスペースに登録 /////////////////////////
-      const namespaceId = new sym.NamespaceId(Meta_to);
+      const namespaceId = new sym.NamespaceId(Namespace);
       console.log("namespaceId===",namespaceId);
       const namespaceInfo = await nsRepo.getNamespace(namespaceId).toPromise(); 
     
@@ -2576,7 +2595,7 @@ function ex_date2(){
 
 function MetaKey_select(){
   const Meta_type = document.getElementById('Meta_type').value;    // Metadata Typeを取得  //
-  
+  const Meta_to = document.getElementById('Meta_to');
   const Meta_table = document.getElementById('Meta_table');
   const select_Meta = document.querySelector('.select_Meta');
 

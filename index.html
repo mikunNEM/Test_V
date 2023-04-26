@@ -494,34 +494,46 @@
     <div class="Form_Meta">
       <h4>Metadata</h4>
       <div class="Form-Item_Meta">
-        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_Meta">Type</span></br></p>
-        <div class="Form-Item-Input_Meta" style="text-align: center">
-          <select class="Meta_type" id="Meta_type" onchange="MetaKey_select();">
-            <option value="-1">--- Select ---</option>
-            <option value="0">Account</option>
-            <option value="1">Mosaic</option>
-            <option value="2">Namespace</option>
-          </select></div>
-      </div>
-      <div class="Form-Item_Meta">
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required_Meta">Metadata Key</span></br></p>
         <div class="Form-Item-Input_Meta" style="text-align: center">
         <div class="Meta_select"></div>
         </div>
       </div>  
       <div class="Form-Item_Meta">
-        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_Meta">Address<br>Mosaic ID<br>Namespace</span></p>
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_Meta">Type</span></br></p>
         <div class="Form-Item-Input_Meta" style="text-align: center">
-        <div class="Namespace_select_M" id="Meta_to"></div>
+          <select class="Meta_type" id="Meta_type" onchange="MetaKey_select();">
+            <option value="-1">--- Select ---</option>
+            <option value="0">Account (Address)</option>
+            <option value="1">Mosaic</option>
+            <option value="2">Namespace</option>
+          </select></div>
+      </div>
+
+      <div id="Meta_to"></div>
+      
+      <div class="Form-Item_Meta">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_Meta">Mosaic ID</span></p>
+        <div class="Form-Item-Input_Meta" style="text-align: center">
+          <div class="select_mosaicID"></div>
         </div>
-      </div>      
+      </div>
+
+      <div class="Form-Item_Meta">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required_Meta">Namespace</span></p>
+        <div class="Form-Item-Input_Meta" style="text-align: center">
+          <div class="Namespace_select_N"></div>
+        </div>
+      </div>
+      
+      
       <div class="Form-Item_Meta">
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required_Meta">value</span></br></p>
         <input type="text" class="Form-Item-Input_Meta" id="Meta_value"/>
       </div>
       <div class="Form-Item_Meta">
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required_Meta">最大手数料</span></br></p>
-        <div class="Form-Item-Input" style="text-align: center">
+        <div class="Form-Item-Input_Meta" style="text-align: center">
           <select class="re_maxFee" id="re_maxFee_Meta">
             <option value="0.03">0.03 xym (slow)</option>
             <option value="0.04">0.04 xym</option>
