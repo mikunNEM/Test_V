@@ -2380,8 +2380,8 @@ async function Metadata(){
   const Meta_type = document.getElementById("Meta_type").value;   // Metadata登録先
   const Meta_key = document.querySelector(".select_Meta").value;     // Metadata Key
   //const Meta_to = document.querySelector(".Meta_to").value;       // Address / MosaicID / Namespace
-  const mosaicID = document.querySelector(".select_mosaicID").value;   //  MosaicID
-  const Namespace = document.querySelector(".Namespace_select_N").value;  // Namespace
+  const mosaicID = document.querySelector(".select_mo").value;   //  MosaicID
+  const Namespace = document.querySelector(".select_N").value;  // Namespace
   const Meta_value = document.getElementById("Meta_value").value; // value値
   const maxFee = document.getElementById("re_maxFee_Meta").value; //  maxFee値
   const address = sym.Address.createFromRawAddress(window.SSS.activeAddress);
@@ -2392,6 +2392,8 @@ async function Metadata(){
   console.log("Meta_value===",Meta_value);
   console.log("maxFee===",maxFee);
   console.log("Meta_address===",address);
+  console.log("mosaicID===",mosaicID);
+  console.log("Namespace===",Namespace);
 
   const publicAccount = sym.PublicAccount.createFromPublicKey(                //アカウントの公開鍵を取得
     window.SSS.activePublicKey,
